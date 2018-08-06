@@ -10,26 +10,26 @@ namespace Nucleus.Core.Roles
         {
             return new List<Role>
             {
-                AdminRole,
-                MemberRole
+                Admin,
+                Member
             };
         }
 
-        public static readonly Role AdminRole = new Role
+        public static readonly Role Admin = new Role
         {
             Id = new Guid("F22BCE18-06EC-474A-B9AF-A9DE2A7B8263"),
-            Name = Admin,
-            NormalizedName = Admin.ToUpper(CultureInfo.InvariantCulture)
+            Name = AdminRoleName,
+            NormalizedName = AdminRoleName.ToUpper(CultureInfo.InvariantCulture)
         };
 
-        public static readonly Role MemberRole = new Role
+        public static readonly Role Member = new Role
         {
             Id = new Guid("11D14A89-3A93-4D39-A94F-82B823F0D4CE"),
-            Name = Member,
-            NormalizedName = Member.ToUpper(CultureInfo.InvariantCulture)
+            Name = MemberRoleName,
+            NormalizedName = MemberRoleName.ToUpper(CultureInfo.InvariantCulture)
         };
 
-        private const string Admin = "Admin";
-        private const string Member = "Member";
+        private const string AdminRoleName = "Admin";
+        private const string MemberRoleName = "Member";
     }
 }

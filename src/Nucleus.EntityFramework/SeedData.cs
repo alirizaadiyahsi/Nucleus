@@ -24,13 +24,13 @@ namespace Nucleus.EntityFramework
             {
                 new UserRole
                 {
-                    RoleId = DefaultRoles.AdminRole.Id,
-                    UserId = DefaultUsers.AdminUser.Id
+                    RoleId = DefaultRoles.Admin.Id,
+                    UserId = DefaultUsers.Admin.Id
                 },
                 new UserRole
                 {
                     RoleId = DefaultRoles.Member.Id,
-                    UserId = DefaultUsers.ApiUser.Id
+                    UserId = DefaultUsers.Member.Id
                 }
             };
         }
@@ -46,12 +46,12 @@ namespace Nucleus.EntityFramework
                 new RolePermission
                 {
                     PermissionId = p.Id,
-                    RoleId = DefaultRoles.AdminRole.Id
+                    RoleId = DefaultRoles.Admin.Id
                 }).ToList();
 
             rolePermissions.Add(new RolePermission
             {
-                PermissionId = DefaultPermissions.ApiAccess.Id,
+                PermissionId = DefaultPermissions.MemberAccess.Id,
                 RoleId = DefaultRoles.Member.Id
             });
 
