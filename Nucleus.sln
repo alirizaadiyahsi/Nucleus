@@ -9,17 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CBE903BE-AD0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{47DBDDFE-C870-4057-8312-219461BA268C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Application", "src\Nucleus.Application\Nucleus.Application.csproj", "{788EBFEF-7A50-4AB7-807A-4147D49E237E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Application", "src\Nucleus.Application\Nucleus.Application.csproj", "{788EBFEF-7A50-4AB7-807A-4147D49E237E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.EntityFramework", "src\Nucleus.EntityFramework\Nucleus.EntityFramework.csproj", "{73195EBE-BDE4-428C-865D-E7F589F3DD52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.EntityFramework", "src\Nucleus.EntityFramework\Nucleus.EntityFramework.csproj", "{73195EBE-BDE4-428C-865D-E7F589F3DD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Utilities", "src\Nucleus.Utilities\Nucleus.Utilities.csproj", "{12016ADA-4C14-4D82-88A9-2A2A65A8F869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Utilities", "src\Nucleus.Utilities\Nucleus.Utilities.csproj", "{12016ADA-4C14-4D82-88A9-2A2A65A8F869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Web.Core", "src\Nucleus.Web.Core\Nucleus.Web.Core.csproj", "{FFDC2C0F-1B2A-4311-85F9-CE9716696F50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Web.Core", "src\Nucleus.Web.Core\Nucleus.Web.Core.csproj", "{FFDC2C0F-1B2A-4311-85F9-CE9716696F50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Core", "src\Nucleus.Core\Nucleus.Core.csproj", "{4BBE5781-7BF2-4F9C-8FBC-8C9FD5F03FE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Core", "src\Nucleus.Core\Nucleus.Core.csproj", "{4BBE5781-7BF2-4F9C-8FBC-8C9FD5F03FE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Web.Api", "src\Nucleus.Web.Api\Nucleus.Web.Api.csproj", "{3BCD7CDA-7CDC-44A7-873F-47BF714EEC7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Web.Api", "src\Nucleus.Web.Api\Nucleus.Web.Api.csproj", "{3BCD7CDA-7CDC-44A7-873F-47BF714EEC7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Tests.Shared", "test\Nucleus.Tests.Shared\Nucleus.Tests.Shared.csproj", "{44E30F75-6B9B-47B1-9361-79467C735F48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{3BCD7CDA-7CDC-44A7-873F-47BF714EEC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BCD7CDA-7CDC-44A7-873F-47BF714EEC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BCD7CDA-7CDC-44A7-873F-47BF714EEC7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E30F75-6B9B-47B1-9361-79467C735F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E30F75-6B9B-47B1-9361-79467C735F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E30F75-6B9B-47B1-9361-79467C735F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E30F75-6B9B-47B1-9361-79467C735F48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{FFDC2C0F-1B2A-4311-85F9-CE9716696F50} = {CBE903BE-AD0D-4857-98E4-CCA1AD73902E}
 		{4BBE5781-7BF2-4F9C-8FBC-8C9FD5F03FE5} = {CBE903BE-AD0D-4857-98E4-CCA1AD73902E}
 		{3BCD7CDA-7CDC-44A7-873F-47BF714EEC7C} = {CBE903BE-AD0D-4857-98E4-CCA1AD73902E}
+		{44E30F75-6B9B-47B1-9361-79467C735F48} = {51A63C9A-CAB5-4B1A-A226-C68A20315AD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88064184-5E5C-4366-AA19-B3A9D50666E1}
