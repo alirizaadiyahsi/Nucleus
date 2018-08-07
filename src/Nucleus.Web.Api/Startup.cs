@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Nucleus.Application;
 using Nucleus.EntityFramework;
 
 namespace Nucleus.Web.Api
@@ -23,6 +24,8 @@ namespace Nucleus.Web.Api
             services.AddDbContext<NucleusDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .UseLazyLoadingProxies());
+
+            services.AddNucleusApplication();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -14,15 +14,15 @@ namespace Nucleus.Application.Users
 {
     public class UserAppService : IUserAppService
     {
-        private readonly IMapper _mapper;
         private readonly NucleusDbContext _dbContext;
+        private readonly IMapper _mapper;
 
         public UserAppService(
-            IMapper mapper,
-            NucleusDbContext dbContext)
+            NucleusDbContext dbContext,
+            IMapper mapper)
         {
-            _mapper = mapper;
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input)

@@ -17,15 +17,15 @@ namespace Nucleus.Application.Permissions
 {
     public class PermissionAppService : IPermissionAppService
     {
-        private readonly IMapper _mapper;
         private readonly NucleusDbContext _dbContext;
-
+        private readonly IMapper _mapper;
+        
         public PermissionAppService(
-            IMapper mapper,
-            NucleusDbContext dbContext)
+            NucleusDbContext dbContext,
+            IMapper mapper)
         {
-            _mapper = mapper;
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<IPagedList<PermissionListOutput>> GetPermissionsAsync(PermissionListInput input)
@@ -37,7 +37,7 @@ namespace Nucleus.Application.Permissions
                 .OrderBy(input.Sorting);
 
             var permissionsCount = await query.CountAsync();
-            var permissions = query.PagedBy(input.PageSize, input.PageIndex).ToList();
+            var permissions = query.PagedBy(input.PageIndex, input.PageSize).ToList();
             var permissionListDtos = _mapper.Map<List<PermissionListOutput>>(permissions);
 
             return permissionListDtos.ToPagedList(permissionsCount);
