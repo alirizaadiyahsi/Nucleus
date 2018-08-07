@@ -15,19 +15,19 @@ namespace Nucleus.Application.Users
     public class UserAppService : IUserAppService
     {
         private readonly IMapper _mapper;
-        private readonly NucleusDbContext _nucleusDbContext;
+        private readonly NucleusDbContext _dbContext;
 
         public UserAppService(
             IMapper mapper,
-            NucleusDbContext nucleusDbContext)
+            NucleusDbContext dbContext)
         {
             _mapper = mapper;
-            _nucleusDbContext = nucleusDbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input)
         {
-            var query = _nucleusDbContext.Users.Where(
+            var query = _dbContext.Users.Where(
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.UserName.ToLowerInvariant().Contains(input.Filter) ||
                                  predicate.Email.Contains(input.Filter))
