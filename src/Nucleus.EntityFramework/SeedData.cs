@@ -22,11 +22,13 @@ namespace Nucleus.EntityFramework
         {
             return new[]
             {
+                //admin role to admin user
                 new UserRole
                 {
                     RoleId = DefaultRoles.Admin.Id,
                     UserId = DefaultUsers.Admin.Id
                 },
+                //member role to member user
                 new UserRole
                 {
                     RoleId = DefaultRoles.Member.Id,
@@ -42,6 +44,7 @@ namespace Nucleus.EntityFramework
 
         public static RolePermission[] BuildRolePermissions()
         {
+            //grant all permissions to admin role
             var rolePermissions = DefaultPermissions.All().Select(p =>
                 new RolePermission
                 {
@@ -49,6 +52,7 @@ namespace Nucleus.EntityFramework
                     RoleId = DefaultRoles.Admin.Id
                 }).ToList();
 
+            //grant member access permission to member role
             rolePermissions.Add(new RolePermission
             {
                 PermissionId = DefaultPermissions.MemberAccess.Id,
