@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nucleus.EntityFramework\Nucleus.EntityFramework.csproj" />
+    <ProjectReference Include="..\Nucleus.Utilities\Nucleus.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>
