@@ -30,7 +30,7 @@ namespace Nucleus.Web.Api
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<UnitOfWorkFilter>();
+            services.AddScoped<UnitOfWorkActionFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
