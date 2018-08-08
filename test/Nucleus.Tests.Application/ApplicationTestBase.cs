@@ -1,6 +1,6 @@
 ﻿using Nucleus.Tests.Shared;
 
-namespace Nucleus.Application.Tests
+namespace Nucleus.Tests.Application
 {
     public class ApplicationTestBase : TestBase
     {

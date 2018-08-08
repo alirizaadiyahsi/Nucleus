@@ -7,7 +7,7 @@ using Nucleus.Core.Permissions;
 using Nucleus.EntityFramework;
 using Xunit;
 
-namespace Nucleus.Application.Tests.Permissions
+namespace Nucleus.Tests.Application.Permissions
 {
     public class PermissionAppServiceTests : ApplicationTestBase
     {

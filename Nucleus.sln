@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Web.Api", "src\Nucl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Shared", "test\Nucleus.Tests.Shared\Nucleus.Tests.Shared.csproj", "{44E30F75-6B9B-47B1-9361-79467C735F48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Application.Tests", "test\Nucleus.Application.Tests\Nucleus.Application.Tests.csproj", "{F326A153-8273-4D88-AEAE-F7C0BEB15732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Application", "test\Nucleus.Tests.Application\Nucleus.Tests.Application.csproj", "{F326A153-8273-4D88-AEAE-F7C0BEB15732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Web.Api.Tests", "test\Nucleus.Web.Api.Tests\Nucleus.Web.Api.Tests.csproj", "{E36E92AC-E12D-4B70-A355-6CBC1AFDAB43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Tests.Web.Api", "test\Nucleus.Tests.Web.Api\Nucleus.Tests.Web.Api.csproj", "{E36E92AC-E12D-4B70-A355-6CBC1AFDAB43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using Nucleus.Application.Users.Dto;
 using Nucleus.EntityFramework;
 using Xunit;
 
-namespace Nucleus.Application.Tests.Users
+namespace Nucleus.Tests.Application.Users
 {
     public class UserAppServiceTests : ApplicationTestBase
     {
