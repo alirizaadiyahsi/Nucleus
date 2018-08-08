@@ -24,12 +24,12 @@ namespace Nucleus.Application.Tests.Permissions
         public async void TestGetPermissions()
         {
             var permissionListInput = new PermissionListInput();
-            var permissionsList = await _permissionAppService.GetPermissionsAsync(permissionListInput);
-            Assert.True(permissionsList.Items.Count >= 0);
+            var permissionList = await _permissionAppService.GetPermissionsAsync(permissionListInput);
+            Assert.True(permissionList.Items.Count >= 0);
 
             permissionListInput.Filter = "qwerty";
-            var permissionsListEmpty = await _permissionAppService.GetPermissionsAsync(permissionListInput);
-            Assert.True(permissionsListEmpty.Items.Count == 0);
+            var permissionListEmpty = await _permissionAppService.GetPermissionsAsync(permissionListInput);
+            Assert.True(permissionListEmpty.Items.Count == 0);
         }
 
         [Fact]
