@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Nucleus.Application\Nucleus.Application.csproj" />
     <ProjectReference Include="..\Nucleus.EntityFramework\Nucleus.EntityFramework.csproj" />
+    <ProjectReference Include="..\Nucleus.Web.Core\Nucleus.Web.Core.csproj" />
   </ItemGroup>
 
 </Project>

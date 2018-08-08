@@ -1,9 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Nucleus.Application.Permissions;
-using Nucleus.Core.Permissions;
 using Serilog;
 using Serilog.Events;
 

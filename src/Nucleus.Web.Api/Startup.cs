@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application;
 using Nucleus.EntityFramework;
+using Nucleus.Web.Core.ActionFilters;
 
 namespace Nucleus.Web.Api
 {
@@ -28,6 +29,8 @@ namespace Nucleus.Web.Api
             services.AddNucleusApplication();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<UnitOfWorkFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
