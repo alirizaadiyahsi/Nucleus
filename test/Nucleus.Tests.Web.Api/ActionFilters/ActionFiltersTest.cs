@@ -23,15 +23,25 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
         [Fact]
         public void TestUnitOfWorkActionFilter()
         {
-            //todo: add request method as post
             var dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var unitOfWorkActionFilter = new UnitOfWorkActionFilter(dbContext);
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext
+                {
+                    Request =
+                    {
+                        Method = "Post"
+                    }
+                },
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var actionExecutedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), null);
             var testRole = new Role { Name = "test_role" };
 
             dbContext.Roles.Add(testRole);
 
+            //to get non-local(non-tracking) data, created new dbContext
             var dbContextForGet = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var insertedTestRole = dbContextForGet.Roles.Find(testRole.Id);
             Assert.Null(insertedTestRole);
