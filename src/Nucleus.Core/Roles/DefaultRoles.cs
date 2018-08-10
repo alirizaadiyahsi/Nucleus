@@ -18,18 +18,18 @@ namespace Nucleus.Core.Roles
         public static readonly Role Admin = new Role
         {
             Id = new Guid("F22BCE18-06EC-474A-B9AF-A9DE2A7B8263"),
-            Name = AdminRoleName,
-            NormalizedName = AdminRoleName.ToUpper(CultureInfo.InvariantCulture)
+            Name = RoleNameForAdmin,
+            NormalizedName = RoleNameForAdmin.ToUpper(CultureInfo.InvariantCulture)
         };
 
         public static readonly Role Member = new Role
         {
             Id = new Guid("11D14A89-3A93-4D39-A94F-82B823F0D4CE"),
-            Name = MemberRoleName,
-            NormalizedName = MemberRoleName.ToUpper(CultureInfo.InvariantCulture)
+            Name = RoleNameForMember,
+            NormalizedName = RoleNameForMember.ToUpper(CultureInfo.InvariantCulture)
         };
 
-        private const string AdminRoleName = "Admin";
-        private const string MemberRoleName = "Member";
+        private const string RoleNameForAdmin = "Admin";
+        private const string RoleNameForMember = "Member";
     }
 }
