@@ -41,7 +41,7 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
 
             dbContext.Roles.Add(testRole);
 
-            //to get non-local(non-tracking) data, created new dbContext
+            //created a new db context to get non-local(non-tracking) data
             var dbContextForGet = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var insertedTestRole = dbContextForGet.Roles.Find(testRole.Id);
             Assert.Null(insertedTestRole);

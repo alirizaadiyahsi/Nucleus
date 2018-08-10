@@ -27,7 +27,7 @@ namespace Nucleus.Tests.Application.Permissions
             var permissionList = await _permissionAppService.GetPermissionsAsync(permissionListInput);
             Assert.True(permissionList.Items.Count >= 0);
 
-            permissionListInput.Filter = "qwerty";
+            permissionListInput.Filter = ".!1Aa_";
             var permissionListEmpty = await _permissionAppService.GetPermissionsAsync(permissionListInput);
             Assert.True(permissionListEmpty.Items.Count == 0);
         }

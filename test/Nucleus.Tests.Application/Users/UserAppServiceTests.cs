@@ -25,7 +25,7 @@ namespace Nucleus.Tests.Application.Users
             var userList = await _userAppService.GetUsersAsync(userListInput);
             Assert.True(userList.Items.Count >= 0);
 
-            userListInput.Filter = "qwerty";
+            userListInput.Filter = ".!1Aa_";
             var usersListEmpty = await _userAppService.GetUsersAsync(userListInput);
             Assert.True(usersListEmpty.Items.Count == 0);
         }
