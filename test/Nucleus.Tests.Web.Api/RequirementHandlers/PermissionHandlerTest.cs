@@ -11,7 +11,7 @@ using Nucleus.EntityFramework;
 using Nucleus.Web.Core.Authentication;
 using Xunit;
 
-namespace Nucleus.Tests.Web.Api.CustomRequirementHandlers
+namespace Nucleus.Tests.Web.Api.RequirementHandlers
 {
   public  class PermissionHandlerTest:ApiTestBase
     {

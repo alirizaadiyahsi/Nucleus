@@ -16,7 +16,6 @@ using Nucleus.Web.Core.Helpers;
 
 namespace Nucleus.Web.Api.Controllers
 {
-    //todo: add test for account controller
     public class AccountController : BaseController
     {
         private readonly UserManager<User> _userManager;
