@@ -83,7 +83,7 @@ namespace Nucleus.Web.Api.Controllers
                 });
             }
 
-            return new RegisterResult { ResultMessage = "Your account has been successfully created." };
+            return Ok(new RegisterResult { ResultMessage = "Your account has been successfully created." });
         }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userName, string password)

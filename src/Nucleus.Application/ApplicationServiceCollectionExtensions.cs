@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Nucleus.Application.Permissions;
+using Nucleus.Application.Users;
 
 namespace Nucleus.Application
 {
@@ -10,8 +12,8 @@ namespace Nucleus.Application
             services.AddAutoMapper();
 
             ////todo: add conventional registrar
-            //services.AddTransient<IUserAppService, UserAppService>();
-            //services.AddTransient<IPermissionAppService, PermissionAppService>();
+            services.AddTransient<IUserAppService, UserAppService>();
+            services.AddTransient<IPermissionAppService, PermissionAppService>();
 
             return services;
         }
