@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -13,9 +12,9 @@ using Xunit;
 
 namespace Nucleus.Tests.Web.Api.ActionFilters
 {
-    public class ActionFiltersTest : ApiTestBase
+    public class UnitOfWorkFilterTest : ApiTestBase
     {
-        public ActionFiltersTest()
+        public UnitOfWorkFilterTest()
         {
             var dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
         }
