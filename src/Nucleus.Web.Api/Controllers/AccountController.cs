@@ -29,6 +29,7 @@ namespace Nucleus.Web.Api.Controllers
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
         }
 
+        //todo: check login by username or email
         [HttpPost("[action]")]
         public async Task<ActionResult<LoginResult>> Login([FromBody]LoginViewModel loginViewModel)
         {
