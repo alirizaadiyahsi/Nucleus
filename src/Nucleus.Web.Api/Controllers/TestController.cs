@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +30,7 @@ namespace Nucleus.Web.Api.Controllers
             return Ok(await _userAppService.GetUsersAsync(new UserListInput()));
         }
 
+        //todo: return user dto instead of domain object
         [HttpGet("[action]/{username}")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForMemberAccess)]
         public ActionResult<User> Users(string userName)
