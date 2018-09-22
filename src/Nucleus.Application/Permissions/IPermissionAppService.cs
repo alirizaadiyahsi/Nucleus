@@ -14,5 +14,8 @@ namespace Nucleus.Application.Permissions
         Task<bool> IsPermissionGrantedToUserAsync(ClaimsPrincipal contextUser, Permission permission);
 
         Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission);
+
+        //todo: grant permission to user
+        //todo: grant permission to role
     }
 }

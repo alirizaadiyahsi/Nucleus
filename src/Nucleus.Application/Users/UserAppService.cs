@@ -27,6 +27,7 @@ namespace Nucleus.Application.Users
 
         public async Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input)
         {
+            //todo: use userManager.Users instead of dbContext ?
             var query = _dbContext.Users.Where(
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.UserName.ToLowerInvariant().Contains(input.Filter) ||
