@@ -12,8 +12,7 @@ namespace Nucleus.Tests.Web.Api
     {
         private static readonly Dictionary<string, string> ApiUserFormData = new Dictionary<string, string>
         {
-            {"email",  DefaultUsers.Member.Email},
-            {"username",  DefaultUsers.Member.UserName},
+            {"usernameoremail",  DefaultUsers.Member.Email},
             {"password", "123qwe"}
         };
 

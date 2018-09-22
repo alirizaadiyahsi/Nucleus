@@ -19,7 +19,7 @@ namespace Nucleus.Application.Permissions
     {
         private readonly NucleusDbContext _dbContext;
         private readonly IMapper _mapper;
-        
+
         public PermissionAppService(
             NucleusDbContext dbContext,
             IMapper mapper)
@@ -45,7 +45,8 @@ namespace Nucleus.Application.Permissions
 
         public async Task<bool> IsPermissionGrantedToUserAsync(ClaimsPrincipal contextUser, Permission permission)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == contextUser.Identity.Name);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u =>
+                u.UserName == contextUser.Identity.Name || u.Email == contextUser.Identity.Name);
             if (user == null)
             {
                 return false;
