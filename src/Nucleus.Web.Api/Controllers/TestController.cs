@@ -13,6 +13,7 @@ namespace Nucleus.Web.Api.Controllers
 {
     public class TestController : BaseController
     {
+        //todo: remove this controller after create UsersController
         private readonly IUserAppService _userAppService;
         private static readonly string[] Summaries = {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -29,8 +30,7 @@ namespace Nucleus.Web.Api.Controllers
         {
             return Ok(await _userAppService.GetUsersAsync(new UserListInput()));
         }
-
-        //todo: return user dto instead of domain object
+        
         [HttpGet("[action]/{username}")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForMemberAccess)]
         public ActionResult<User> Users(string userName)

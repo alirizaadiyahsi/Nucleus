@@ -9,7 +9,6 @@ using Nucleus.Web.Api;
 
 namespace Nucleus.Tests.Shared
 {
-    //todo: add test coverage tool
     public class TestBase
     {
         protected ClaimsPrincipal ContextUser => new ClaimsPrincipal(
