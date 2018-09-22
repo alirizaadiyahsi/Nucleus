@@ -9,6 +9,7 @@ using Nucleus.Web.Core.Controllers;
 
 namespace Nucleus.Web.Api.Controllers
 {
+    [Authorize(Policy = DefaultPermissions.PermissionNameForMemberAccess)]
     public class UserController : BaseController
     {
         private readonly IUserAppService _userAppService;
@@ -18,8 +19,7 @@ namespace Nucleus.Web.Api.Controllers
             _userAppService = userAppService;
         }
 
-        [HttpGet("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForMemberAccess)]
+        [HttpGet]
         public async Task<ActionResult<IPagedList<UserListOutput>>> Users()
         {
             return Ok(await _userAppService.GetUsersAsync(new UserListInput()));

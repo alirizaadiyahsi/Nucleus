@@ -15,8 +15,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task TestUnAuthorizedAccess()
         {
-            var responseGetUsers = await TestServer.CreateClient().GetAsync("/api/user/Users");
-            Assert.Equal(HttpStatusCode.Unauthorized, responseGetUsers.StatusCode);
+            var responseUsers = await TestServer.CreateClient().GetAsync("/api/user");
+            Assert.Equal(HttpStatusCode.Unauthorized, responseUsers.StatusCode);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
             var token = responseContent.Token;
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/users/");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
