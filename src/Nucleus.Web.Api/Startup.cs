@@ -23,12 +23,12 @@ namespace Nucleus.Web.Api
         {
             services.ConfigureDbContext(_configuration);
             services.ConfigureAuthentication(_configuration);
-            services.ConfigureCors();
+            services.ConfigureCors(_configuration);
             services.ConfigureDependencyInjection();
             services.ConfigureNucleusApplication();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Nucleus API", Version = "v1" });
