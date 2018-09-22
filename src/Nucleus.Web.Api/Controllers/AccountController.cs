@@ -29,11 +29,10 @@ namespace Nucleus.Web.Api.Controllers
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
         }
 
-        //todo: check login by username or email
         [HttpPost("[action]")]
         public async Task<ActionResult<LoginResult>> Login([FromBody]LoginViewModel loginViewModel)
         {
-            var userToVerify = await CreateClaimsIdentityAsync(loginViewModel.UserName, loginViewModel.Password);
+            var userToVerify = await CreateClaimsIdentityAsync(loginViewModel.UserNameOrEmail, loginViewModel.Password);
             if (userToVerify == null)
             {
                 return BadRequest(new ErrorResult
@@ -87,14 +86,15 @@ namespace Nucleus.Web.Api.Controllers
             return Ok(new RegisterResult { ResultMessage = "Your account has been successfully created." });
         }
 
-        private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userName, string password)
+        private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
         {
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(userNameOrEmail) || string.IsNullOrEmpty(password))
             {
                 return null;
             }
 
-            var userToVerify = await _userManager.FindByNameAsync(userName);
+            var userToVerify = await _userManager.FindByEmailAsync(userNameOrEmail) ?? await _userManager.FindByNameAsync(userNameOrEmail);
+
             if (userToVerify == null)
             {
                 return null;
@@ -102,9 +102,9 @@ namespace Nucleus.Web.Api.Controllers
 
             if (await _userManager.CheckPasswordAsync(userToVerify, password))
             {
-                return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
+                return new ClaimsIdentity(new GenericIdentity(userNameOrEmail, "Token"), new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, userName),
+                    new Claim(JwtRegisteredClaimNames.Sub, userNameOrEmail),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 });
             }
