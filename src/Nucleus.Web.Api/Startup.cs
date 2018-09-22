@@ -1,19 +1,11 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application;
-using Nucleus.Core.Permissions;
-using Nucleus.Core.Roles;
-using Nucleus.Core.Users;
-using Nucleus.EntityFramework;
-using Nucleus.Web.Core.ActionFilters;
-using Nucleus.Web.Core.Authentication;
+using Nucleus.Web.Core.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Nucleus.Web.Api
@@ -29,35 +21,18 @@ namespace Nucleus.Web.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<NucleusDbContext>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"))
-                    .UseLazyLoadingProxies());
-
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<NucleusDbContext>()
-                .AddDefaultTokenProviders();
-
-            JwtTokenAuthConfigurer.Configure(services, _configuration);
-
-            services.AddAuthorization(options =>
-            {
-                foreach (var permission in DefaultPermissions.All())
-                {
-                    options.AddPolicy(permission.Name,
-                        policy => policy.Requirements.Add(new PermissionRequirement(permission)));
-                }
-            });
+            services.ConfigureDbContext(_configuration);
+            services.ConfigureAuthentication(_configuration);
+            services.ConfigureCors();
+            services.ConfigureDependencyInjection();
+            services.ConfigureNucleusApplication();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddCors();
-
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Nucleus API", Version = "v1" });
             });
-            services.AddNucleusApplication();
-            services.AddScoped<IAuthorizationHandler, PermissionHandler>();
-            services.AddScoped<UnitOfWorkActionFilter>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

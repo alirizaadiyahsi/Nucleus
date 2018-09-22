@@ -7,7 +7,7 @@ namespace Nucleus.Application
 {
     public static class ApplicationServiceCollectionExtensions
     {
-        public static IServiceCollection AddNucleusApplication(this IServiceCollection services)
+        public static IServiceCollection ConfigureNucleusApplication(this IServiceCollection services)
         {
             services.AddAutoMapper();
 
