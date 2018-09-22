@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Core.Permissions;
+using Nucleus.Core.Roles;
 using Nucleus.EntityFramework;
 using Xunit;
 
@@ -37,6 +38,15 @@ namespace Nucleus.Tests.Application.Permissions
         {
             var isPermissionGranted =
                 await _permissionAppService.IsPermissionGrantedToUserAsync(ContextUser, DefaultPermissions.MemberAccess);
+
+            Assert.True(isPermissionGranted);
+        }
+
+        [Fact]
+        public async Task TestIsPermissionGrantedForRole()
+        {
+            var isPermissionGranted =
+                await _permissionAppService.IsPermissionGrantedToRoleAsync(DefaultRoles.Member, DefaultPermissions.MemberAccess);
 
             Assert.True(isPermissionGranted);
         }
