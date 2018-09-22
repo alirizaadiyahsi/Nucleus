@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,15 +15,16 @@ namespace Nucleus.Web.Core.Extensions
 {
     public static class ServiceCollection
     {
-        public static void ConfigureCors(this IServiceCollection services)
+        public static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+                    builder =>
+                        builder.WithOrigins(configuration["App:CorsOrigins"]
+                                .Split(",", StringSplitOptions.RemoveEmptyEntries))
+                            .AllowAnyHeader()
+                            .AllowAnyMethod());
             });
         }
 
