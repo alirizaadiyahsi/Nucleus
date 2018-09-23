@@ -9,12 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
 using Nucleus.Core.Users;
-using Nucleus.Web.Api.Models;
 using Nucleus.Web.Core.Authentication;
 using Nucleus.Web.Core.Controllers;
-using Nucleus.Web.Core.Helpers;
 
-namespace Nucleus.Web.Api.Controllers
+namespace Nucleus.Web.Api.Api.Account
 {
     public class AccountController : BaseController
     {
@@ -35,10 +33,8 @@ namespace Nucleus.Web.Api.Controllers
             var userToVerify = await CreateClaimsIdentityAsync(loginViewModel.UserNameOrEmail, loginViewModel.Password);
             if (userToVerify == null)
             {
-                return BadRequest(new ErrorResult
-                {
-                    Errors = ErrorHelper.CreateError("ErrorMessage", "The user name or password is incorrect.")
-                });
+                return BadRequest(
+                    new NameValueDto("ErrorMessage", "The user name or password is incorrect."));
             }
 
             var token = new JwtSecurityToken
@@ -60,10 +56,7 @@ namespace Nucleus.Web.Api.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
-                return BadRequest(new ErrorResult
-                {
-                    Errors = ErrorHelper.CreateError("EmailAlreadyExist", "This email already exists!")
-                });
+                return BadRequest(new NameValueDto("EmailAlreadyExist", "This email already exists!"));
             }
 
             var applicationUser = new User
@@ -77,10 +70,7 @@ namespace Nucleus.Web.Api.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new ErrorResult
-                {
-                    Errors = result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList()
-                });
+                return BadRequest(result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList());
             }
 
             return Ok(new RegisterResult { ResultMessage = "Your account has been successfully created." });

@@ -7,7 +7,7 @@ using Nucleus.Core.Permissions;
 using Nucleus.Utilities.Collections;
 using Nucleus.Web.Core.Controllers;
 
-namespace Nucleus.Web.Api.Controllers
+namespace Nucleus.Web.Api.Api.Users
 {
     public class UserController : AdminController
     {

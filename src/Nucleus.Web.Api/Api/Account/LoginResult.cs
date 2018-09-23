@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Web.Api.Models
+﻿namespace Nucleus.Web.Api.Api.Account
 {
     public class LoginResult
     {
