@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
-using Nucleus.EntityFramework;
 using Xunit;
 
 namespace Nucleus.Tests.Application.Permissions
@@ -16,9 +14,7 @@ namespace Nucleus.Tests.Application.Permissions
 
         public PermissionAppServiceTests()
         {
-            var dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
-            var mapper = TestServer.Host.Services.GetRequiredService<IMapper>();
-            _permissionAppService = new PermissionAppService(dbContext, mapper);
+            _permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
         }
 
         [Fact]

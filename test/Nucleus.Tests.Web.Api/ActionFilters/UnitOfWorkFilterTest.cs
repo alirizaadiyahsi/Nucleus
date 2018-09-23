@@ -14,11 +14,6 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
 {
     public class UnitOfWorkFilterTest : ApiTestBase
     {
-        public UnitOfWorkFilterTest()
-        {
-            var dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
-        }
-
         [Fact]
         public void TestUnitOfWorkActionFilter()
         {

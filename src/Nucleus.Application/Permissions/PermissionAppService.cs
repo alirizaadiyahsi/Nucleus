@@ -11,20 +11,29 @@ using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
 using System.Linq.Dynamic.Core;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Nucleus.Core.Users;
 
 namespace Nucleus.Application.Permissions
 {
     public class PermissionAppService : IPermissionAppService
     {
         private readonly NucleusDbContext _dbContext;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly IMapper _mapper;
 
         public PermissionAppService(
             NucleusDbContext dbContext,
-            IMapper mapper)
+            UserManager<User> userManager,
+            RoleManager<Role> roleManager,
+            IMapper mapper
+            )
         {
             _dbContext = dbContext;
+            _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
         }
 
@@ -45,7 +54,7 @@ namespace Nucleus.Application.Permissions
 
         public async Task<bool> IsPermissionGrantedToUserAsync(ClaimsPrincipal contextUser, Permission permission)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u =>
+            var user = await _userManager.Users.FirstOrDefaultAsync(u =>
                 u.UserName == contextUser.Identity.Name || u.Email == contextUser.Identity.Name);
             if (user == null)
             {
@@ -62,7 +71,7 @@ namespace Nucleus.Application.Permissions
 
         public async Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission)
         {
-            var existingRole = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == role.Id);
+            var existingRole = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Id == role.Id);
             if (existingRole == null)
             {
                 return false;

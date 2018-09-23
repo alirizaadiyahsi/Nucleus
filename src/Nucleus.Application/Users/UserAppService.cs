@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Nucleus.EntityFramework;
 using System.Linq.Dynamic.Core;
+using Microsoft.AspNetCore.Identity;
 using Nucleus.Application.Users.Dto;
+using Nucleus.Core.Users;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
@@ -14,21 +15,20 @@ namespace Nucleus.Application.Users
 {
     public class UserAppService : IUserAppService
     {
-        private readonly NucleusDbContext _dbContext;
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
         public UserAppService(
-            NucleusDbContext dbContext,
-            IMapper mapper)
+            IMapper mapper, 
+            UserManager<User> userManager)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input)
         {
-            //todo: use userManager.Users instead of dbContext ?
-            var query = _dbContext.Users.Where(
+            var query = _userManager.Users.Where(
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.UserName.ToLowerInvariant().Contains(input.Filter) ||
                                  predicate.Email.Contains(input.Filter))
