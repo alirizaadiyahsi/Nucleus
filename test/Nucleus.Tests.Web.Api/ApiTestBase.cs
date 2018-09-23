@@ -12,11 +12,11 @@ namespace Nucleus.Tests.Web.Api
     {
         private static readonly Dictionary<string, string> ApiUserFormData = new Dictionary<string, string>
         {
-            {"usernameoremail",  DefaultUsers.Member.Email},
+            {"usernameoremail",  DefaultUsers.Admin.Email},
             {"password", "123qwe"}
         };
 
-        protected async Task<HttpResponseMessage> LoginAsApiUserAsync()
+        protected async Task<HttpResponseMessage> LoginAsAdminUserAsync()
         {
             return await TestServer.CreateClient().PostAsync("/api/account/login",
                 ApiUserFormData.ToStringContent(Encoding.UTF8, "application/json"));

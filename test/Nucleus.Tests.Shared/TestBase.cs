@@ -9,7 +9,6 @@ using Nucleus.Web.Api;
 
 namespace Nucleus.Tests.Shared
 {
-    //todo: use a mocking framework
     public class TestBase
     {
         protected ClaimsPrincipal ContextUser => new ClaimsPrincipal(

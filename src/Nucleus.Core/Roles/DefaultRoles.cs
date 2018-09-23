@@ -29,7 +29,7 @@ namespace Nucleus.Core.Roles
             NormalizedName = RoleNameForMember.ToUpper(CultureInfo.InvariantCulture)
         };
 
-        private const string RoleNameForAdmin = "Admin";
-        private const string RoleNameForMember = "Member";
+        public const string RoleNameForAdmin = "Admin";
+        public const string RoleNameForMember = "Member";
     }
 }

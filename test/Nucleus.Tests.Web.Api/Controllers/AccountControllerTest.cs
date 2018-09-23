@@ -22,14 +22,14 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task TestLogin()
         {
-            var responseLogin = await LoginAsApiUserAsync();
+            var responseLogin = await LoginAsAdminUserAsync();
             Assert.Equal(HttpStatusCode.OK, responseLogin.StatusCode);
         }
 
         [Fact]
         public async Task TestGetToken()
         {
-            var responseLogin = await LoginAsApiUserAsync();
+            var responseLogin = await LoginAsAdminUserAsync();
             var loginResult = await responseLogin.Content.ReadAsAsync<LoginResult>();
             Assert.NotNull(loginResult.Token);
         }
@@ -37,7 +37,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task TestAuthorizedAccess()
         {
-            var responseLogin = await LoginAsApiUserAsync();
+            var responseLogin = await LoginAsAdminUserAsync();
             var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
             var token = responseContent.Token;
 
