@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
 using Nucleus.Core.Users;
+using Nucleus.Web.Api.App.Account.Models;
 using Nucleus.Web.Core.Authentication;
 using Nucleus.Web.Core.Controllers;
 
-namespace Nucleus.Web.Api.Api.Account
+namespace Nucleus.Web.Api.App.Account
 {
     public class AccountController : BaseController
     {

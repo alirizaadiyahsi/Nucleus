@@ -2,6 +2,6 @@
 {
     public interface IRoleAppService
     {
-        //todo: role app service methods
+        //todo: CRUD role
     }
 }

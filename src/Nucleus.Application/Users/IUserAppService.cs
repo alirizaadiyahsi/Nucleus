@@ -7,5 +7,7 @@ namespace Nucleus.Application.Users
     public interface IUserAppService
     {
         Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input);
+
+        //todo: CRUD user
     }
 }

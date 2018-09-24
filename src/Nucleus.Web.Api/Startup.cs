@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +11,7 @@ namespace Nucleus.Web.Api
 {
     public class Startup
     {
+        //todo: localize application
         private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)

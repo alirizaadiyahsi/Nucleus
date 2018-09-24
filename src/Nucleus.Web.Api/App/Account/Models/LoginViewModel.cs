@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Web.Api.Api.Account
+﻿namespace Nucleus.Web.Api.App.Account.Models
 {
     public class LoginViewModel
     {

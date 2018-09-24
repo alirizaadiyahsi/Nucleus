@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Utilities.Collections;
-using Nucleus.Web.Api.Api.Account;
+using Nucleus.Web.Api.App.Account.Models;
 using Xunit;
 
 namespace Nucleus.Tests.Web.Api.Controllers
