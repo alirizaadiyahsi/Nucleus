@@ -17,10 +17,11 @@ namespace Nucleus.Web.Core.Authentication
         {
             if (context.User == null || !context.User.Identity.IsAuthenticated)
             {
+                context.Fail();
                 return;
             }
 
-            var hasPermission = await _permissionApp.IsPermissionGrantedToUserAsync(context.User, requirement.Permission);
+            var hasPermission = await _permissionApp.IsPermissionGrantedToUserAsync(context.User.Identity.Name, requirement.Permission.Id);
             if (hasPermission)
             {
                 context.Succeed(requirement);

@@ -9,6 +9,7 @@ using Nucleus.Web.Api;
 
 namespace Nucleus.Tests.Shared
 {
+    //todo: use in-memory database?
     public class TestBase
     {
         protected ClaimsPrincipal ContextUser => new ClaimsPrincipal(

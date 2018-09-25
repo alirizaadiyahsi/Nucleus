@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Nucleus.Application.Permissions.Dto;
@@ -52,10 +52,10 @@ namespace Nucleus.Application.Permissions
             return permissionListDtos.ToPagedList(permissionsCount);
         }
 
-        public async Task<bool> IsPermissionGrantedToUserAsync(ClaimsPrincipal contextUser, Permission permission)
+        public async Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, Guid permissionId)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u =>
-                u.UserName == contextUser.Identity.Name || u.Email == contextUser.Identity.Name);
+                u.UserName == userNameOrEmail || u.Email == userNameOrEmail);
             if (user == null)
             {
                 return false;
@@ -66,7 +66,7 @@ namespace Nucleus.Application.Permissions
                 .SelectMany(r => r.RolePermissions)
                 .Select(rp => rp.Permission);
 
-            return grantedPermissions.Any(p => p.Name == permission.Name);
+            return grantedPermissions.Any(p => p.Id == permissionId);
         }
 
         public async Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission)

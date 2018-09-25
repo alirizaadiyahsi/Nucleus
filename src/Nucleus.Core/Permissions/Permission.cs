@@ -9,6 +9,6 @@ namespace Nucleus.Core.Permissions
 
         public string DisplayName { get; set; }
 
-        public virtual ICollection<RolePermission> RolePermissions { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+﻿using System;
 using System.Threading.Tasks;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Core.Permissions;
@@ -11,11 +11,10 @@ namespace Nucleus.Application.Permissions
     {
         Task<IPagedList<PermissionListOutput>> GetPermissionsAsync(PermissionListInput input);
 
-        Task<bool> IsPermissionGrantedToUserAsync(ClaimsPrincipal contextUser, Permission permission);
+        Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, Guid permissionId);
 
         Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission);
 
-        //todo: grant permission to user
         //todo: grant permission to role
     }
 }

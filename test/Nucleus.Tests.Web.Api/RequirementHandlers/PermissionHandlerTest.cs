@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Nucleus.Tests.Web.Api.RequirementHandlers
 {
-  public  class PermissionHandlerTest:ApiTestBase
+    public class PermissionHandlerTest : ApiTestBase
     {
         [Fact]
         public async Task TestPermissionHandler()
@@ -25,6 +25,22 @@ namespace Nucleus.Tests.Web.Api.RequirementHandlers
             await permissionHandler.HandleAsync(authorizationHandlerContext);
 
             Assert.True(authorizationHandlerContext.HasSucceeded);
+        }
+
+        [Fact]
+        public async Task TestPermissionHandlerWithNullUser()
+        {
+            var permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
+
+            var requirements = new List<PermissionRequirement>
+            {
+                new PermissionRequirement(DefaultPermissions.MemberAccess)
+            };
+            var authorizationHandlerContext = new AuthorizationHandlerContext(requirements, null, null);
+            var permissionHandler = new PermissionHandler(permissionAppService);
+            await permissionHandler.HandleAsync(authorizationHandlerContext);
+
+            Assert.True(authorizationHandlerContext.HasFailed);
         }
     }
 }

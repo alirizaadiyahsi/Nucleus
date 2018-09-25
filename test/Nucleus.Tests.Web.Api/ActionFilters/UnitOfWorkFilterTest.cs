@@ -14,6 +14,8 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
 {
     public class UnitOfWorkFilterTest : ApiTestBase
     {
+        //todo: operations should be on app service, not db context
+        //todo: - if unit of work manager implement, then this can be solved
         [Fact]
         public void TestUnitOfWorkActionFilter()
         {
@@ -30,6 +32,7 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
                 new RouteData(),
                 new ActionDescriptor()
             );
+
             var actionExecutedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), null);
             var testRole = new Role { Name = "test_role" };
 
