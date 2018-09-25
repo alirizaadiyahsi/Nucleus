@@ -4,7 +4,6 @@ using Nucleus.EntityFramework;
 
 namespace Nucleus.Web.Core.ActionFilters
 {
-    //todo: implement unit of work manager
     public class UnitOfWorkActionFilter : ActionFilterAttribute
     {
         private readonly NucleusDbContext _dbContext;

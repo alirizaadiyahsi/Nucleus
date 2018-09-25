@@ -15,7 +15,7 @@ namespace Nucleus.Tests.Application.Permissions
         public PermissionAppServiceTests()
         {
             _permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
-            }
+        }
 
         [Fact]
         public async void TestGetPermissions()
