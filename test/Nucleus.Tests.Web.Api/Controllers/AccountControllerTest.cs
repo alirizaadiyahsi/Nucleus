@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Utilities.Collections;
+using Nucleus.Utilities.Extensions.Collections;
 using Nucleus.Web.Api.App.Account.Models;
 using Xunit;
 
@@ -48,6 +52,22 @@ namespace Nucleus.Tests.Web.Api.Controllers
 
             var users = await responseGetUsers.Content.ReadAsAsync<PagedList<UserListOutput>>();
             Assert.True(users.Items.Any());
+        }
+
+        [Fact]
+        public async Task TestRegister()
+        {
+            var registrationData = new Dictionary<string, string>
+            {
+                {"username",  "TestUserName_" + Guid.NewGuid()},
+                {"email",  "TestUserEmail_" + Guid.NewGuid() + "@mail.com"},
+                {"password", "aA!121212"}
+            };
+
+            var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
+                registrationData.ToStringContent(Encoding.UTF8, "application/json"));
+
+            Assert.Equal(HttpStatusCode.OK, responseRegister.StatusCode);
         }
     }
 }
