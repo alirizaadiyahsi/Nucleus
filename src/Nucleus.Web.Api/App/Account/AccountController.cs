@@ -15,7 +15,6 @@ using Nucleus.Web.Core.Controllers;
 
 namespace Nucleus.Web.Api.App.Account
 {
-    //todo: cover all lines in unit tests
     public class AccountController : BaseController
     {
         private readonly UserManager<User> _userManager;

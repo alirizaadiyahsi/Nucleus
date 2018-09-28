@@ -21,5 +21,17 @@ namespace Nucleus.Tests.Web.Api
             return await TestServer.CreateClient().PostAsync("/api/account/login",
                 ApiUserFormData.ToStringContent(Encoding.UTF8, "application/json"));
         }
+
+        protected async Task<HttpResponseMessage> LoginAsync(string userNameOrEmail, string password)
+        {
+            var userFormData = new Dictionary<string, string>
+            {
+                {"usernameoremail",  userNameOrEmail},
+                {"password", password}
+            };
+
+            return await TestServer.CreateClient().PostAsync("/api/account/login",
+                userFormData.ToStringContent(Encoding.UTF8, "application/json"));
+        }
     }
 }

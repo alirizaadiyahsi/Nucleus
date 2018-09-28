@@ -113,8 +113,8 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
             var actionExecutedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), null);
             await _dbContext.Roles.AddAsync(testRole);
 
-            var exception = Assert.Throws<DbUpdateException>(() =>unitOfWorkActionFilter.OnActionExecuted(actionExecutedContext));
-            Assert.Equal(typeof(DbUpdateException), exception.GetType() );
+            var exception = Assert.Throws<DbUpdateException>(() => unitOfWorkActionFilter.OnActionExecuted(actionExecutedContext));
+            Assert.Equal(typeof(DbUpdateException), exception.GetType());
         }
     }
 }

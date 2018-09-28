@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Nucleus.Application.Users.Dto;
+using Nucleus.Core.Users;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.Collections;
 using Nucleus.Web.Api.App.Account.Models;
@@ -28,6 +29,13 @@ namespace Nucleus.Tests.Web.Api.Controllers
         {
             var responseLogin = await LoginAsAdminUserAsync();
             Assert.Equal(HttpStatusCode.OK, responseLogin.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_Not_Login_With_Wrong_Credentials()
+        {
+            var responseLogin = await LoginAsync("wrongUserName", "wrongPassword");
+            Assert.Equal(HttpStatusCode.BadRequest, responseLogin.StatusCode);
         }
 
         [Fact]
@@ -68,6 +76,38 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 registrationData.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.OK, responseRegister.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_Not_Register_With_Existing_User()
+        {
+            var registrationData = new Dictionary<string, string>
+            {
+                {"username",  DefaultUsers.Admin.UserName},
+                {"email",  DefaultUsers.Admin.Email},
+                {"password", "aA!121212"}
+            };
+
+            var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
+                registrationData.ToStringContent(Encoding.UTF8, "application/json"));
+
+            Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_Not_Register_With_Invalid_User()
+        {
+            var registrationData = new Dictionary<string, string>
+            {
+                {"username",  new string('*', 300)},
+                {"email",  new string('*', 300)},
+                {"password", "aA!121212"}
+            };
+
+            var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
+                registrationData.ToStringContent(Encoding.UTF8, "application/json"));
+
+            Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
         }
     }
 }
