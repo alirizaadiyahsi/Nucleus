@@ -9,6 +9,7 @@ using Nucleus.Web.Api;
 
 namespace Nucleus.Tests.Shared
 {
+    //todo: improve unit tests code coverade
     public class TestBase
     {
         protected ClaimsPrincipal ContextUser => new ClaimsPrincipal(

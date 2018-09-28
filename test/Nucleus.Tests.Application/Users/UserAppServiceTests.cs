@@ -15,7 +15,7 @@ namespace Nucleus.Tests.Application.Users
         }
 
         [Fact]
-        public async void TestGetUsers()
+        public async void Should_Get_Users()
         {
             var userListInput = new UserListInput();
             var userList = await _userAppService.GetUsersAsync(userListInput);

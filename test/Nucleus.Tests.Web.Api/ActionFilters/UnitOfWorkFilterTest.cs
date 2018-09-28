@@ -24,7 +24,7 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
         }
 
         [Fact]
-        public async Task TestUnitOfWorkActionFilter()
+        public async Task Should_UnitOfWork_Action_Filter_Save_Changes()
         {
             var testRole = new Role
             {

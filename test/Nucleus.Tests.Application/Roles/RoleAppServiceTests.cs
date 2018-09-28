@@ -23,7 +23,7 @@ namespace Nucleus.Tests.Application.Roles
         }
 
         [Fact]
-        public async void TestAddRole()
+        public async void Should_Add_Role()
         {
             var testRole = new RoleDto
             {

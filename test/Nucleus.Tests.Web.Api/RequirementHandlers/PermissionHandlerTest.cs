@@ -12,7 +12,7 @@ namespace Nucleus.Tests.Web.Api.RequirementHandlers
     public class PermissionHandlerTest : ApiTestBase
     {
         [Fact]
-        public async Task TestPermissionHandler()
+        public async Task Should_Handle_Permission()
         {
             var permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
 
@@ -28,7 +28,7 @@ namespace Nucleus.Tests.Web.Api.RequirementHandlers
         }
 
         [Fact]
-        public async Task TestPermissionHandlerWithNullUser()
+        public async Task Should_Not_Handle_Permission_With_Null_User()
         {
             var permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
 

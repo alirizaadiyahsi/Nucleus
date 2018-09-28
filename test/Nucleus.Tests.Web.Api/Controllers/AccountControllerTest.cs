@@ -17,21 +17,21 @@ namespace Nucleus.Tests.Web.Api.Controllers
     public class AccountTests : ApiTestBase
     {
         [Fact]
-        public async Task TestUnAuthorizedAccess()
+        public async Task Should_Not_Access_Authorized_Controller()
         {
             var responseUsers = await TestServer.CreateClient().GetAsync("/api/user");
             Assert.Equal(HttpStatusCode.Unauthorized, responseUsers.StatusCode);
         }
 
         [Fact]
-        public async Task TestLogin()
+        public async Task Should_Login()
         {
             var responseLogin = await LoginAsAdminUserAsync();
             Assert.Equal(HttpStatusCode.OK, responseLogin.StatusCode);
         }
 
         [Fact]
-        public async Task TestGetToken()
+        public async Task Shoudl_Get_Token()
         {
             var responseLogin = await LoginAsAdminUserAsync();
             var loginResult = await responseLogin.Content.ReadAsAsync<LoginResult>();
@@ -39,7 +39,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
-        public async Task TestAuthorizedAccess()
+        public async Task Should_Access_Authorized_Controller()
         {
             var responseLogin = await LoginAsAdminUserAsync();
             var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
@@ -55,7 +55,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
-        public async Task TestRegister()
+        public async Task Should_Register()
         {
             var registrationData = new Dictionary<string, string>
             {

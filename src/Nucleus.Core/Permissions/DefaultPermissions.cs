@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Nucleus.Core.Permissions
 {
     //todo: update permissions on app start, search about same example
+    //todo: + this can be only applied for admin user
    public class DefaultPermissions
     {
         public static List<Permission> All()
