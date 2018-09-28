@@ -2,6 +2,7 @@
 
 namespace Nucleus.Core
 {
+    //todo: add creation/update time/user
     public abstract class BaseEntity
     {
         public Guid Id { get; set; }
