@@ -1,10 +1,9 @@
-import Vue from 'vue';
-import App from './App.vue';
+import './assets/sass/site.css';
 import router from './router';
+import Vue from 'vue';
 
-Vue.config.productionTip = false;
-
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount('#app');
+let vue = new Vue({
+    el: '#app-root',
+    router: router,
+    render: h => h(require('./app.vue').default)
+});
