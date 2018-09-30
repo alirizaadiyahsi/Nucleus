@@ -1,11 +1,10 @@
 ﻿import Vue from 'vue';
 import VueRouter from 'vue-router';
 import AuthStore from './stores/auth-store';
+import accountLayout from './account/account-layout.vue';
+import adminLayout from './admin/admin-layout.vue';
 
 Vue.use(VueRouter);
-
-const accountLayout = require('./account/account-layout.vue').default;
-const adminLayout = require('./admin/admin-layout.vue').default;
 
 const router = new VueRouter({
     mode: 'history',
@@ -16,8 +15,8 @@ const router = new VueRouter({
             component: accountLayout,
             children: [
                 { path: 'login', component: require('./account/views/login/login.vue').default },
-                { path: 'register', component: require('./account/views/register/register.vue').default }
-            ]
+                { path: 'register', component: require('./account/views/register/register.vue').default },
+            ],
         },
         {
             path: '/admin',
@@ -27,10 +26,10 @@ const router = new VueRouter({
                 { path: 'home', component: require('./admin/views/home/home.vue').default },
                 { path: 'counter', component: require('./admin/views/counter/counter.vue').default },
                 { path: 'fetchdata', component: require('./admin/views/fetchdata/fetchdata.vue').default },
-                { path: 'user-list', component: require('./admin/views/users/user-list.vue').default }
-            ]
-        }
-    ]
+                { path: 'user-list', component: require('./admin/views/users/user-list.vue').default },
+            ],
+        },
+    ],
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
