@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import TestAppService from '../../../shared/services/test-app-service';
+import TestAppService from '../../../services/test-app-service';
 
 @Component
 export default class FetchDataComponent extends Vue {

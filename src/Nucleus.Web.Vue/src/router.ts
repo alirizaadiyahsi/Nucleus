@@ -1,6 +1,6 @@
 ﻿import Vue from 'vue';
 import VueRouter from 'vue-router';
-import AuthStore from './shared/stores/auth-store';
+import AuthStore from './stores/auth-store';
 
 Vue.use(VueRouter);
 

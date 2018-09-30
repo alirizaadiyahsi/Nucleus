@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import UserAppService from '../../../shared/services/user-app-service';
+import UserAppService from '../../../services/user-app-service';
 
 @Component
 export default class UserListComponent extends Vue {
