@@ -1,0 +1,3 @@
+﻿interface IUserListInput extends IPagedListInput {
+
+}

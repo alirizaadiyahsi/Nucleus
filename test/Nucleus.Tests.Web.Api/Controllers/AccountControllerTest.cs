@@ -10,7 +10,7 @@ using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.Collections;
-using Nucleus.Web.Api.App.Account.Models;
+using Nucleus.Web.Api.Models;
 using Xunit;
 
 namespace Nucleus.Tests.Web.Api.Controllers
