@@ -27,6 +27,7 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "typescript": "^3.0.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "query-string": "^6.1.0" 
   }
 }

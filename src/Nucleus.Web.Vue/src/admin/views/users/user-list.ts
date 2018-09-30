@@ -12,7 +12,7 @@ export default class UserListComponent extends Vue {
 
     public mounted() {
         const userListInput: IUserListInput = {
-
+            filter: '',
         };
 
         this.userAppService.getAll(userListInput).then((response) => {

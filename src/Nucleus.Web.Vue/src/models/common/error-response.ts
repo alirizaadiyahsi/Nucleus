@@ -1,4 +1,4 @@
 ﻿interface IErrorResponse {
-    name:string;
+    name: string;
     value: string;
 }
