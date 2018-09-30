@@ -4,10 +4,10 @@ import TestAppService from '../../../services/test-app-service';
 
 @Component
 export default class FetchDataComponent extends Vue {
-    forecasts: IWeatherForecast[] = [];
-    testAppService = new TestAppService();
+    public forecasts: IWeatherForecast[] = [];
+    public testAppService = new TestAppService();
 
-    mounted() {
+    public mounted() {
         this.testAppService.getAll().then((response) => {
             this.forecasts = response.content as IWeatherForecast[];
         });

@@ -4,7 +4,7 @@ import AccountAppService from '../../../services/account-app-service';
 
 @Component
 export default class TopMenuComponent extends Vue {
-    logOut() {
+    public logOut() {
         const accountAppService = new AccountAppService();
         accountAppService.logOut();
         this.$router.push({ path: '/account/login' });

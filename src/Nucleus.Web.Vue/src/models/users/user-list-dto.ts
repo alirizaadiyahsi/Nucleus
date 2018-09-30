@@ -1,4 +1,4 @@
 ﻿interface IUserListDto {
-    userName: string,
-    email: string,
+    userName: string;
+    email: string;
 }

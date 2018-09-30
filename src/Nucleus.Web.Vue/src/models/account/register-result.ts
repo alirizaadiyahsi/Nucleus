@@ -1,3 +1,3 @@
 ﻿interface IRegisterResult {
-    resultMessage: string,
+    resultMessage: string;
 }

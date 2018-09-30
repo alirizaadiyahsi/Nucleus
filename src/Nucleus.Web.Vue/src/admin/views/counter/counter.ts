@@ -3,9 +3,9 @@ import { Component } from 'vue-property-decorator';
 
 @Component
 export default class CounterComponent extends Vue {
-    currentcount: number = 0;
+    public currentcount: number = 0;
 
-    incrementCounter() {
+    public incrementCounter() {
         this.currentcount++;
     }
 }

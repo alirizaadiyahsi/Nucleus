@@ -1,8 +1,8 @@
 ﻿import BaseAppService from './base-app-service';
-import AuthStore from "../stores/auth-store";
+import AuthStore from '../stores/auth-store';
 
 export default class AccountAppService extends BaseAppService {
-    login(loginViewModel: ILoginViewModel) {
+    public login(loginViewModel: ILoginViewModel) {
         return this.post<ILoginResult>('/api/account/login', loginViewModel)
             .then((response) => {
                 if (!response.isError) {
@@ -13,11 +13,11 @@ export default class AccountAppService extends BaseAppService {
             });
     }
 
-    logOut(): void {
+    public logOut(): void {
         AuthStore.removeToken();
     }
 
-    register(registerViewModel: IRegisterViewModel) {
+    public register(registerViewModel: IRegisterViewModel) {
         return this.post<IRegisterResult>('/api/account/register', registerViewModel)
             .then((response) => {
                 return response;

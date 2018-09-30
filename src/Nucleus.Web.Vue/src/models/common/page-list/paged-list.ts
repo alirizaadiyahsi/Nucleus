@@ -1,4 +1,4 @@
 ﻿interface IPagedList<T> {
-    totalCount: number,
-    items: T[],
+    totalCount: number;
+    items: T[];
 }

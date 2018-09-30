@@ -4,14 +4,14 @@ import UserAppService from '../../../services/user-app-service';
 
 @Component
 export default class UserListComponent extends Vue {
-    pagedListOfUserListDto: IPagedList<IUserListDto> = {
+    public pagedListOfUserListDto: IPagedList<IUserListDto> = {
         totalCount: 0,
-        items: []
+        items: [],
     };
-    userAppService = new UserAppService();
+    public userAppService = new UserAppService();
 
-    mounted() {
-        let userListInput: IUserListInput = {
+    public mounted() {
+        const userListInput: IUserListInput = {
 
         };
 
