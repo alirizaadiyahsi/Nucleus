@@ -1,5 +1,5 @@
 import BaseAppService from './base-app-service';
-import AuthStore from "../stores/auth-store";
+import AuthStore from '../stores/auth-store';
 export default class AccountAppService extends BaseAppService {
     login(loginViewModel) {
         return this.post('/api/account/login', loginViewModel)

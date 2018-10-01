@@ -7,8 +7,8 @@ AdminLayoutComponent = tslib_1.__decorate([
     Component({
         components: {
             NavMenuComponent: require('./components/nav-menu/nav-menu.vue').default,
-            TopMenuComponent: require('./components/top-menu/top-menu.vue').default
-        }
+            TopMenuComponent: require('./components/top-menu/top-menu.vue').default,
+        },
     })
 ], AdminLayoutComponent);
 export default AdminLayoutComponent;

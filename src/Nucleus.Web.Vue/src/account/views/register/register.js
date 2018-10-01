@@ -5,16 +5,20 @@ import AccountAppService from '../../../services/account-app-service';
 let RegisterComponent = class RegisterComponent extends Vue {
     constructor() {
         super(...arguments);
-        this.username = "";
-        this.email = "";
-        this.password = "";
+        this.username = '';
+        this.email = '';
+        this.password = '';
         this.errors = [];
         this.registerComplete = false;
     }
     onSubmit() {
         const accountAppService = new AccountAppService();
-        const registerViewModel = { userName: this.username, email: this.email, password: this.password };
-        accountAppService.register(registerViewModel).then(response => {
+        const registerViewModel = {
+            userName: this.username,
+            email: this.email,
+            password: this.password,
+        };
+        accountAppService.register(registerViewModel).then((response) => {
             if (!response.isError) {
                 this.resultMessage = response.content.resultMessage;
                 this.registerComplete = true;

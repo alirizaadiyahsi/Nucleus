@@ -1,9 +1,10 @@
 import './assets/sass/site.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import router from './router';
 import Vue from 'vue';
-let vue = new Vue({
+const vue = new Vue({
     el: '#app-root',
-    router: router,
-    render: h => h(require('./app.vue').default)
+    router,
+    render: (h) => h(require('./App.vue').default),
 });
 //# sourceMappingURL=main.js.map

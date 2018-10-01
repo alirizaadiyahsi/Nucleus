@@ -7,12 +7,14 @@ let UserListComponent = class UserListComponent extends Vue {
         super(...arguments);
         this.pagedListOfUserListDto = {
             totalCount: 0,
-            items: []
+            items: [],
         };
         this.userAppService = new UserAppService();
     }
     mounted() {
-        let userListInput = {};
+        const userListInput = {
+            filter: '',
+        };
         this.userAppService.getAll(userListInput).then((response) => {
             this.pagedListOfUserListDto = response.content;
         });
