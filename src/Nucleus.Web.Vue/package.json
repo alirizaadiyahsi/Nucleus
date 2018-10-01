@@ -12,7 +12,8 @@
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "bootstrap": "^4.1.3"
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",
@@ -28,6 +29,6 @@
     "less-loader": "^4.1.0",
     "typescript": "^3.0.0",
     "vue-template-compiler": "^2.5.17",
-    "query-string": "^6.1.0" 
+    "query-string": "^6.1.0"
   }
 }
