@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" v-model="username" class="form-control" placeholder="User name" required="required">
+                <input type="text" v-model="usernameoremail" class="form-control" placeholder="User name or e-mail" required="required">
             </div>
             <div class="form-group">
                 <input type="password" v-model="password" class="form-control" placeholder="Password" required="required">

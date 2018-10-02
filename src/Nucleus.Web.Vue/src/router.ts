@@ -25,7 +25,6 @@ const router = new VueRouter({
             children: [
                 { path: 'home', component: require('./admin/views/home/home.vue').default },
                 { path: 'counter', component: require('./admin/views/counter/counter.vue').default },
-                { path: 'fetchdata', component: require('./admin/views/fetchdata/fetchdata.vue').default },
                 { path: 'user-list', component: require('./admin/views/users/user-list.vue').default },
             ],
         },

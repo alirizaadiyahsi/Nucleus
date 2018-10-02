@@ -19,7 +19,7 @@ namespace Nucleus.Web.Core.Extensions
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
+                options.AddPolicy("CorsPolicy",//todo: get this string from appsettings.json
                     builder =>
                         builder.WithOrigins(configuration["App:CorsOrigins"]
                                 .Split(",", StringSplitOptions.RemoveEmptyEntries))

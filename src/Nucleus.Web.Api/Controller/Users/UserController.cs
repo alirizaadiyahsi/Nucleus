@@ -18,11 +18,11 @@ namespace Nucleus.Web.Api.Controller.Users
             _userAppService = userAppService;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForUserList)]
-        public async Task<ActionResult<IPagedList<UserListOutput>>> Users()
+        public async Task<ActionResult<IPagedList<UserListOutput>>> GetUsers(UserListInput input)
         {
-            return Ok(await _userAppService.GetUsersAsync(new UserListInput()));
+            return Ok(await _userAppService.GetUsersAsync(input));
         }
     }
 }

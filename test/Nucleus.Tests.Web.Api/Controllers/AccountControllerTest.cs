@@ -20,7 +20,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Access_Authorized_Controller()
         {
-            var responseUsers = await TestServer.CreateClient().GetAsync("/api/user");
+            var responseUsers = await TestServer.CreateClient().GetAsync("/api/user/getusers");
             Assert.Equal(HttpStatusCode.Unauthorized, responseUsers.StatusCode);
         }
 
@@ -54,7 +54,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
             var token = responseContent.Token;
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getusers");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);

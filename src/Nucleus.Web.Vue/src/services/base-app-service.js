@@ -46,5 +46,5 @@ export default class BaseAppService {
     }
 }
 // todo: get this from a config file
-BaseAppService.baseApiUrl = 'http://localhost:60320';
+BaseAppService.baseApiUrl = 'https://localhost:44339';
 //# sourceMappingURL=base-app-service.js.map

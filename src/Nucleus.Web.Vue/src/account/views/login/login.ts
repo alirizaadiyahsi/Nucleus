@@ -5,13 +5,13 @@ import AccountAppService from '../../../services/account-app-service';
 @Component
 export default class LoginComponent extends Vue {
 
-    public username = '';
+    public usernameoremail = '';
     public password = '';
     public errors: IErrorResponse[] = [];
 
     public onSubmit() {
         const accountAppService = new AccountAppService();
-        const loginViewModel: ILoginViewModel = { userName: this.username, password: this.password };
+        const loginViewModel: ILoginViewModel = { userNameOrEmail: this.usernameoremail, password: this.password };
 
         accountAppService.login(loginViewModel).then((response) => {
             if (!response.isError) {

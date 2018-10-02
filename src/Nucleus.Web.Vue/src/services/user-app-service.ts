@@ -5,6 +5,6 @@ export default class UserAppService extends BaseAppService {
     public getAll(userListInput: IUserListInput) {
         const query = '?' + queryString.stringify(userListInput);
 
-        return this.get<IPagedList<IUserListDto>>('/api/User/Users' + query);
+        return this.get<IPagedList<IUserListDto>>('/api/User/GetUsers' + query);
     }
 }

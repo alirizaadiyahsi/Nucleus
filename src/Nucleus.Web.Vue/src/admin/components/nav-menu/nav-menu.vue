@@ -4,17 +4,12 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <router-link to="/admin/home" :exact="true" class="nav-link active">
-                        <span class="glyphicon glyphicon-home"></span> Home
+                        Home
                     </router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/admin/counter" class="nav-link">
-                        <span class="glyphicon glyphicon-education"></span> Counter
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link to="/admin/fetchdata" class="nav-link">
-                        <span class="glyphicon glyphicon-th-list"></span> Fetch data
+                        Counter
                     </router-link>
                 </li>
             </ul>
@@ -25,7 +20,7 @@
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
                     <router-link to="/admin/user-list" class="nav-link">
-                        <span class="glyphicon glyphicon-user"></span> Users
+                        Users
                     </router-link>
                 </li>
             </ul>

@@ -5,13 +5,13 @@ import AccountAppService from '../../../services/account-app-service';
 let LoginComponent = class LoginComponent extends Vue {
     constructor() {
         super(...arguments);
-        this.username = '';
+        this.usernameoremail = '';
         this.password = '';
         this.errors = [];
     }
     onSubmit() {
         const accountAppService = new AccountAppService();
-        const loginViewModel = { userName: this.username, password: this.password };
+        const loginViewModel = { userNameOrEmail: this.usernameoremail, password: this.password };
         accountAppService.login(loginViewModel).then((response) => {
             if (!response.isError) {
                 this.$router.push({ path: '/admin/home' });
