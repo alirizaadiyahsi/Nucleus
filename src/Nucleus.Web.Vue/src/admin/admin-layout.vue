@@ -3,9 +3,7 @@
         <top-menu-component />
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2">
-                    <nav-menu-component />
-                </div>
+                <nav-menu-component />
                 <div class="col-sm-9 col-md-10">
                     <router-view></router-view>
                 </div>

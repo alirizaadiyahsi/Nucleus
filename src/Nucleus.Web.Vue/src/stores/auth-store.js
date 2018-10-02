@@ -9,7 +9,6 @@ export default class AuthStore {
         window.localStorage.removeItem(AuthStore.storageKey);
     }
     static isSignedIn() {
-        return true;
         return !!AuthStore.getToken();
     }
 }
