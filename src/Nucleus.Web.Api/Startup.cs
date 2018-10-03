@@ -52,7 +52,7 @@ namespace Nucleus.Web.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kodkod API V1");
             });
 
-            app.UseCors("CorsPolicy");
+            app.UseCors(_configuration["App:CorsOriginPolicyName"]);
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
