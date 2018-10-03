@@ -3,12 +3,12 @@
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <router-link to="/admin/home" :exact="true" class="nav-link active">
+                    <router-link to="/admin/home" active-class="active" class="nav-link">
                         <i class="fas fa-home"></i> Home
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/admin/counter" class="nav-link">
+                    <router-link to="/admin/counter" active-class="active" class="nav-link">
                         <i class="fas fa-calculator"></i>  Counter
                     </router-link>
                 </li>
@@ -19,7 +19,7 @@
             </h6>
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
-                    <router-link to="/admin/user-list" class="nav-link">
+                    <router-link to="/admin/user-list" active-class="active" class="nav-link">
                         <i class="fas fa-users"></i>  Users
                     </router-link>
                 </li>

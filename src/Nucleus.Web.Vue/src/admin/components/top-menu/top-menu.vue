@@ -8,30 +8,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li>
-                    <router-link to="/" v-on:click.native="logOut" class="nav-link">
-                        <i class="fas fa-sign-out-alt"></i>Logout
+                    <router-link to="#" v-on:click.native="logOut" active-class="active" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </router-link>
                 </li>
             </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 </template>
