@@ -24,7 +24,7 @@
                 </li>
                 <li>
                     <router-link to="/" v-on:click.native="logOut" class="nav-link">
-                        Logout
+                        <i class="fas fa-sign-out-alt"></i>Logout
                     </router-link>
                 </li>
             </ul>
