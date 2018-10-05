@@ -11,7 +11,6 @@ namespace Nucleus.Web.Api
 {
     public class Startup
     {
-        //todo: localize application
         private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
