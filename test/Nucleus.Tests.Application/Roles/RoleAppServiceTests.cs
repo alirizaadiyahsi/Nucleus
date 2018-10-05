@@ -49,5 +49,17 @@ namespace Nucleus.Tests.Application.Roles
             Assert.NotNull(insertedTestRole);
             Assert.Equal(1, insertedTestRole.RolePermissions.Count);
         }
+
+        [Fact]
+        public async void Should_Get_Roles()
+        {
+            var roleListInput = new RoleListInput();
+            var roleList = await _roleAppService.GetRolesAsync(roleListInput);
+            Assert.True(roleList.Items.Count >= 0);
+
+            roleListInput.Filter = ".!1Aa_";
+            var rolesListEmpty = await _roleAppService.GetRolesAsync(roleListInput);
+            Assert.True(rolesListEmpty.Items.Count == 0);
+        }
     }
 }
