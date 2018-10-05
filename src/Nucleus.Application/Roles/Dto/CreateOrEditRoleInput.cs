@@ -4,7 +4,7 @@ using Nucleus.Application.Permissions.Dto;
 
 namespace Nucleus.Application.Roles.Dto
 {
-    public class RoleDto : EntityDto
+    public class CreateOrEditRoleInput : EntityDto
     {
         public string Name { get; set; }
 

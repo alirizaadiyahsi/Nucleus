@@ -5,7 +5,7 @@ namespace Nucleus.Core.Permissions
 {
     //todo: update permissions on app start, search about same example
     //todo: + this can be only applied for admin user
-   public class DefaultPermissions
+    public class DefaultPermissions
     {
         public static List<Permission> All()
         {
@@ -44,5 +44,6 @@ namespace Nucleus.Core.Permissions
         public const string PermissionNameForUserCreate = "Permissions_User_Create";
         public const string PermissionNameForUserUpdate = "Permissions_User_Update";
         public const string PermissionNameForUserDelete = "Permissions_User_Delete";
+        public const string PermissionNameForRoleList = "Permissions_Role_List";
     }
 }

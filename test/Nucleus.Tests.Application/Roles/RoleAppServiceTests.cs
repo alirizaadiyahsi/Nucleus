@@ -25,7 +25,7 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Add_Role()
         {
-            var testRole = new RoleDto
+            var testRole = new CreateOrEditRoleInput
             {
                 Id = Guid.NewGuid(),
                 Name = "TestRole_" + Guid.NewGuid(),

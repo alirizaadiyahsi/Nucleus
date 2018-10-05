@@ -26,6 +26,7 @@ const router = new VueRouter({
                 { path: 'home', component: require('./admin/views/home/home.vue').default },
                 { path: 'counter', component: require('./admin/views/counter/counter.vue').default },
                 { path: 'user-list', component: require('./admin/views/users/user-list.vue').default },
+                { path: 'role-list', component: require('./admin/views/roles/role-list.vue').default },
             ],
         },
     ],

@@ -23,6 +23,11 @@
                         <i class="fas fa-users"></i>  Users
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link to="/admin/role-list" active-class="active" class="nav-link">
+                        <i class="fas fa-suitcase"></i>  Roles
+                    </router-link>
+                </li>
             </ul>
         </div>
     </nav>
