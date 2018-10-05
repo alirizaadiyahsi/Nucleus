@@ -33,11 +33,11 @@ export default class BaseAppService {
             })
             .then((responseContent: any) => {
 
-                const response: IRestResponse<T> = ({
+                const response: IRestResponse<T> = {
                     isError: isBadRequest,
                     errors: isBadRequest ? responseContent.errors : null,
                     content: isBadRequest ? null : responseContent,
-                }) as IRestResponse<T>;
+                };
 
                 return response;
             });
