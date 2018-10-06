@@ -9,11 +9,11 @@ using Nucleus.Web.Core.Controllers;
 
 namespace Nucleus.Web.Api.Controller.Users
 {
-    public class RoleController : AdminController
+    public class UserController : AdminController
     {
         private readonly IUserAppService _userAppService;
 
-        public RoleController(IUserAppService userAppService)
+        public UserController(IUserAppService userAppService)
         {
             _userAppService = userAppService;
         }
