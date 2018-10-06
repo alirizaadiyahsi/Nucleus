@@ -1,6 +1,11 @@
 <template>
     <div>
-        <h1>Roles</h1>
+        <h1>
+            Roles
+            <b-btn v-b-modal.modalCreateRole variant="success" class="float-right">
+                Create Role
+            </b-btn>
+        </h1>
 
         <table v-if="pagedListOfRoleListDto.totalCount" class="table">
             <thead>
@@ -16,6 +21,8 @@
         </table>
 
         <p v-else><em>Loading...</em></p>
+
+        <create-role-modal-component />
     </div>
 </template>
 

@@ -6,7 +6,7 @@ namespace Nucleus.Application.Roles
 {
     public interface IRoleAppService
     {
-        Task AddRoleAsync(CreateOrEditRoleInput roleDto);
+        Task AddRoleAsync(CreateOrEditRoleInput input);
 
         Task<IPagedList<RoleListOutput>> GetRolesAsync(RoleListInput input);
     }

@@ -32,7 +32,7 @@ export default class BaseAppService {
                 return response.json();
             })
             .then((responseContent: any) => {
-                debugger;
+
                 const response: IRestResponse<T> = {
                     isError: isBadRequest,
                     errors: isBadRequest ? responseContent : null,

@@ -27,19 +27,19 @@ namespace Nucleus.Application.Roles
             _mapper = mapper;
         }
 
-        public async Task AddRoleAsync(CreateOrEditRoleInput roleDto)
+        public async Task AddRoleAsync(CreateOrEditRoleInput input)
         {
             var role = new Role
             {
-                Id = roleDto.Id,
-                Name = roleDto.Name,
-                NormalizedName = roleDto.Name.Normalize()
+                Id = input.Id,
+                Name = input.Name,
+                NormalizedName = input.Name.Normalize()
             };
 
             var createRoleResult = await _roleManager.CreateAsync(role);
             if (createRoleResult.Succeeded)
             {
-                foreach (var permission in roleDto.Permissions)
+                foreach (var permission in input.Permissions)
                 {
                     _dbContext.RolePermissions.Add(new RolePermission
                     {

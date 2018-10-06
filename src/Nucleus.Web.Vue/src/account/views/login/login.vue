@@ -10,10 +10,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" v-model="usernameoremail" class="form-control" placeholder="User name or e-mail" required="required">
+                        <input type="text" v-model="usernameoremail" class="form-control" placeholder="User name or e-mail" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" v-model="password" class="form-control" placeholder="Password" required="required">
+                        <input type="password" v-model="password" class="form-control" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Login</button>

@@ -2,9 +2,9 @@
 import queryString from 'query-string';
 
 export default class UserAppService extends BaseAppService {
-    public getAll(userListInput: IUserListInput) {
-        const query = '?' + queryString.stringify(userListInput);
+    public getAll(input: IUserListInput) {
+        const query = '?' + queryString.stringify(input);
 
-        return this.get<IPagedList<IUserListDto>>('/api/User/GetUsers' + query);
+        return this.get<IPagedList<IUserListInput>>('/api/user/getUsers' + query);
     }
 }

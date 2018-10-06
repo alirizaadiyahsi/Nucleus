@@ -1,16 +1,13 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
-using Nucleus.Application.Users;
-using Nucleus.Application.Users.Dto;
-using Nucleus.Core.Permissions;
 using Nucleus.Utilities.Collections;
 using Nucleus.Web.Core.Controllers;
 
 namespace Nucleus.Web.Api.Controller.Roles
 {
+    //todo: add test cases for actions
     public class RoleController : AdminController
     {
         private readonly IRoleAppService _roleAppService;
@@ -26,6 +23,16 @@ namespace Nucleus.Web.Api.Controller.Roles
         public async Task<ActionResult<IPagedList<RoleListOutput>>> GetRoles(RoleListInput input)
         {
             return Ok(await _roleAppService.GetRolesAsync(input));
+        }
+
+        [HttpPost("[action]")]
+        //todo: comment out this line after auto initialize permissions imlementation
+        //[Authorize(Policy = DefaultPermissions.PermissionNameForRoleAdd)] 
+        public async Task<ActionResult> AddRole([FromBody]CreateOrEditRoleInput input)
+        {
+            await _roleAppService.AddRoleAsync(input);
+
+            return Ok(new { success = true });
         }
     }
 }

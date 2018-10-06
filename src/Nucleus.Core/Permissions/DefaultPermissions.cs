@@ -13,7 +13,9 @@ namespace Nucleus.Core.Permissions
             {
                 AdministrationAccess,
                 MemberAccess,
-                UserList
+                UserList,
+                RoleList,
+                RoleAdd
             };
         }
 
@@ -38,12 +40,27 @@ namespace Nucleus.Core.Permissions
             Id = new Guid("86D804BD-D022-49A5-821A-D2240478AAC4")
         };
 
+        public static readonly Permission RoleList = new Permission
+        {
+            DisplayName = "Role list",
+            Name = PermissionNameForRoleList,
+            Id = new Guid("80562F50-8A7D-4BCD-8971-6D856BBCBB7F")
+        };
+
+        public static readonly Permission RoleAdd = new Permission
+        {
+            DisplayName = "Role add",
+            Name = PermissionNameForRoleAdd,
+            Id = new Guid("D4D7C0E3-EFCF-4DD2-86E7-17D69FDA8C75")
+        };
+
         public const string PermissionNameForAdministration = "Permissions_Administration";
         public const string PermissionNameForMemberAccess = "Permissions_Member_Access";
         public const string PermissionNameForUserList = "Permissions_User_List";
-        public const string PermissionNameForUserCreate = "Permissions_User_Create";
-        public const string PermissionNameForUserUpdate = "Permissions_User_Update";
-        public const string PermissionNameForUserDelete = "Permissions_User_Delete";
+        public const string PermissionNameForUserAdd = "Permissions_User_Add";
+        public const string PermissionNameForUserEdit = "Permissions_User_Edit";
+        public const string PermissionNameForUserRemove = "Permissions_User_Remove";
         public const string PermissionNameForRoleList = "Permissions_Role_List";
+        public const string PermissionNameForRoleAdd = "Permissions_Role_Add";
     }
 }

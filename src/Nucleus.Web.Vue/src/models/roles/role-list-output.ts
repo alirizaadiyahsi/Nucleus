@@ -1,4 +1,4 @@
-﻿interface IUserListDto {
+﻿interface IRoleListOutput {
     userName: string;
     email: string;
 }
