@@ -13,6 +13,10 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    UpdateDate = table.Column<DateTime>(nullable: false),
+                    CreateUserId = table.Column<Guid>(nullable: false),
+                    UpdateUserId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true)
                 },
@@ -192,12 +196,14 @@ namespace Nucleus.EntityFramework.Migrations
 
             migrationBuilder.InsertData(
                 table: "Permission",
-                columns: new[] { "Id", "DisplayName", "Name" },
+                columns: new[] { "Id", "CreateDate", "CreateUserId", "DisplayName", "Name", "UpdateDate", "UpdateUserId" },
                 values: new object[,]
                 {
-                    { new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32"), "Administration access", "Permissions_Administration" },
-                    { new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d"), "Member access", "Permissions_Member_Access" },
-                    { new Guid("86d804bd-d022-49a5-821a-d2240478aac4"), "User list", "Permissions_User_List" }
+                    { new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Administration access", "Permissions_Administration", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Member access", "Permissions_Member_Access", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("86d804bd-d022-49a5-821a-d2240478aac4"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User list", "Permissions_User_List", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role list", "Permissions_Role_List", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role add", "Permissions_Role_Add", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -205,8 +211,8 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "4401ec09-ac31-4674-9e5b-0a09428c3d9d", "Admin", "ADMIN" },
-                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "bd761685-4632-48d4-aad2-e05fcb1f48fa", "Member", "MEMBER" }
+                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "230ccacf-edc0-45c0-97d2-baa8253e6243", "Admin", "ADMIN" },
+                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "3d279907-ffe0-4d55-8949-8591a1d0acc3", "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -214,8 +220,8 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "59e9ae4b-44fa-4744-8bf1-d539fa112d27", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
-                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "bde4b799-9609-4c6d-8e34-dafa672f515e", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" }
+                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "76f7dca6-8bc1-418a-88d1-911136988f97", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
+                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "be99528c-c400-4917-a04a-36d933bc1099", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" }
                 });
 
             migrationBuilder.InsertData(
@@ -226,6 +232,8 @@ namespace Nucleus.EntityFramework.Migrations
                     { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32") },
                     { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d") },
                     { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), new Guid("86d804bd-d022-49a5-821a-d2240478aac4") },
+                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f") },
+                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75") },
                     { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d") }
                 });
 

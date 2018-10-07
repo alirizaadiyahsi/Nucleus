@@ -43,7 +43,9 @@ namespace Nucleus.EntityFramework.Migrations
                     b.HasData(
                         new { Id = new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32"), CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"), DisplayName = "Administration access", Name = "Permissions_Administration", UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000") },
                         new { Id = new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d"), CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"), DisplayName = "Member access", Name = "Permissions_Member_Access", UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000") },
-                        new { Id = new Guid("86d804bd-d022-49a5-821a-d2240478aac4"), CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"), DisplayName = "User list", Name = "Permissions_User_List", UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000") }
+                        new { Id = new Guid("86d804bd-d022-49a5-821a-d2240478aac4"), CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"), DisplayName = "User list", Name = "Permissions_User_List", UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000") },
+                        new { Id = new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f"), CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"), DisplayName = "Role list", Name = "Permissions_Role_List", UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000") },
+                        new { Id = new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75"), CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"), DisplayName = "Role add", Name = "Permissions_Role_Add", UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000") }
                     );
                 });
 
@@ -71,8 +73,8 @@ namespace Nucleus.EntityFramework.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), ConcurrencyStamp = "5b89b452-ebcb-4169-943a-b6df6465b66f", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), ConcurrencyStamp = "f2cdb73e-2d83-48b2-bd30-42f082f7faa1", Name = "Member", NormalizedName = "MEMBER" }
+                        new { Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), ConcurrencyStamp = "230ccacf-edc0-45c0-97d2-baa8253e6243", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), ConcurrencyStamp = "3d279907-ffe0-4d55-8949-8591a1d0acc3", Name = "Member", NormalizedName = "MEMBER" }
                     );
                 });
 
@@ -111,6 +113,8 @@ namespace Nucleus.EntityFramework.Migrations
                         new { RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), PermissionId = new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32") },
                         new { RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), PermissionId = new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d") },
                         new { RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), PermissionId = new Guid("86d804bd-d022-49a5-821a-d2240478aac4") },
+                        new { RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), PermissionId = new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f") },
+                        new { RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), PermissionId = new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75") },
                         new { RoleId = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), PermissionId = new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d") }
                     );
                 });
@@ -166,8 +170,8 @@ namespace Nucleus.EntityFramework.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), AccessFailedCount = 5, ConcurrencyStamp = "16c5a898-77ca-4fe3-9556-9e1efb4e8442", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "admin" },
-                        new { Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), AccessFailedCount = 5, ConcurrencyStamp = "0cd0d897-ac03-498b-b519-61566020c7a8", Email = "memberuser@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "MEMBERUSER@MAIL.COM", NormalizedUserName = "MEMBERUSER", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "memberuser" }
+                        new { Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), AccessFailedCount = 5, ConcurrencyStamp = "76f7dca6-8bc1-418a-88d1-911136988f97", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "admin" },
+                        new { Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), AccessFailedCount = 5, ConcurrencyStamp = "be99528c-c400-4917-a04a-36d933bc1099", Email = "memberuser@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "MEMBERUSER@MAIL.COM", NormalizedUserName = "MEMBERUSER", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "memberuser" }
                     );
                 });
 
