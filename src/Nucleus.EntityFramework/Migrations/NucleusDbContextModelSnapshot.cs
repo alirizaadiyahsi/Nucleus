@@ -57,6 +57,8 @@ namespace Nucleus.EntityFramework.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<bool>("IsSystemDefault");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
@@ -73,8 +75,8 @@ namespace Nucleus.EntityFramework.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), ConcurrencyStamp = "230ccacf-edc0-45c0-97d2-baa8253e6243", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), ConcurrencyStamp = "3d279907-ffe0-4d55-8949-8591a1d0acc3", Name = "Member", NormalizedName = "MEMBER" }
+                        new { Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), ConcurrencyStamp = "4d393547-dcbd-499e-8b30-2947e74b79e9", IsSystemDefault = true, Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), ConcurrencyStamp = "e467bae9-aca0-40ba-bd27-606716b63d2e", IsSystemDefault = true, Name = "Member", NormalizedName = "MEMBER" }
                     );
                 });
 
@@ -170,8 +172,8 @@ namespace Nucleus.EntityFramework.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), AccessFailedCount = 5, ConcurrencyStamp = "76f7dca6-8bc1-418a-88d1-911136988f97", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "admin" },
-                        new { Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), AccessFailedCount = 5, ConcurrencyStamp = "be99528c-c400-4917-a04a-36d933bc1099", Email = "memberuser@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "MEMBERUSER@MAIL.COM", NormalizedUserName = "MEMBERUSER", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "memberuser" }
+                        new { Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), AccessFailedCount = 5, ConcurrencyStamp = "632edd4f-3630-405a-bbc2-0c42342bae5f", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "admin" },
+                        new { Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), AccessFailedCount = 5, ConcurrencyStamp = "6351983c-ffad-4906-8d34-b209caea83bb", Email = "memberuser@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "MEMBERUSER@MAIL.COM", NormalizedUserName = "MEMBERUSER", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "memberuser" }
                     );
                 });
 

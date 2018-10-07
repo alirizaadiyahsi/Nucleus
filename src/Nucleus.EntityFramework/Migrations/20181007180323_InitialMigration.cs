@@ -32,7 +32,8 @@ namespace Nucleus.EntityFramework.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    IsSystemDefault = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,11 +209,11 @@ namespace Nucleus.EntityFramework.Migrations
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                columns: new[] { "Id", "ConcurrencyStamp", "IsSystemDefault", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "230ccacf-edc0-45c0-97d2-baa8253e6243", "Admin", "ADMIN" },
-                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "3d279907-ffe0-4d55-8949-8591a1d0acc3", "Member", "MEMBER" }
+                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "4d393547-dcbd-499e-8b30-2947e74b79e9", true, "Admin", "ADMIN" },
+                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "e467bae9-aca0-40ba-bd27-606716b63d2e", true, "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,8 +221,8 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "76f7dca6-8bc1-418a-88d1-911136988f97", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
-                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "be99528c-c400-4917-a04a-36d933bc1099", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" }
+                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "632edd4f-3630-405a-bbc2-0c42342bae5f", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
+                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "6351983c-ffad-4906-8d34-b209caea83bb", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" }
                 });
 
             migrationBuilder.InsertData(
