@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Utilities.Collections;
 
@@ -9,5 +10,7 @@ namespace Nucleus.Application.Roles
         Task AddRoleAsync(CreateOrEditRoleInput input);
 
         Task<IPagedList<RoleListOutput>> GetRolesAsync(RoleListInput input);
+
+        void RemoveRole(Guid id);
     }
 }

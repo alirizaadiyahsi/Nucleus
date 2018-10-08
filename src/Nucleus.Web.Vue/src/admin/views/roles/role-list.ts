@@ -15,6 +15,10 @@ export default class RoleListComponent extends Vue {
     public roleAppService = new RoleAppService();
 
     public mounted() {
+        this.getRoles();
+    }
+
+    public getRoles() {
         const roleListInput: IRoleListInput = {
             filter: '',
         };
@@ -22,5 +26,17 @@ export default class RoleListComponent extends Vue {
         this.roleAppService.getAll(roleListInput).then((response) => {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
         });
+    }
+
+    public removeRole(id: string) {
+        if (confirm('Are you sure want to delete?')) {
+            this.roleAppService.removeRole(id).then((response) => {
+                if (!response.isError) {
+                    this.getRoles();
+                } else {
+                    // todo: handle errors
+                }
+            });
+        }
     }
 }

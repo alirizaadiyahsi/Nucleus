@@ -54,13 +54,21 @@ namespace Nucleus.Core.Permissions
             Id = new Guid("D4D7C0E3-EFCF-4DD2-86E7-17D69FDA8C75")
         };
 
+        public static readonly Permission RoleDelete = new Permission
+        {
+            DisplayName = "Role delete",
+            Name = PermissionNameForRoleDelete,
+            Id = new Guid("8F76DE0B-114A-4DF8-A93D-CEC927D06A3C")
+        };
+
         public const string PermissionNameForAdministration = "Permissions_Administration";
         public const string PermissionNameForMemberAccess = "Permissions_Member_Access";
         public const string PermissionNameForUserList = "Permissions_User_List";
         public const string PermissionNameForUserAdd = "Permissions_User_Add";
-        public const string PermissionNameForUserEdit = "Permissions_User_Edit";
-        public const string PermissionNameForUserRemove = "Permissions_User_Remove";
+        public const string PermissionNameForUserEdit = "Permissions_User_Edi";
+        public const string PermissionNameForUserDelete = "Permissions_User_Delete";
         public const string PermissionNameForRoleList = "Permissions_Role_List";
         public const string PermissionNameForRoleAdd = "Permissions_Role_Add";
+        public const string PermissionNameForRoleDelete = "Permissions_Role_Delete";
     }
 }
