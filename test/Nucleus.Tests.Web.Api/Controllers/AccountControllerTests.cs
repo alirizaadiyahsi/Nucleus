@@ -15,7 +15,7 @@ using Xunit;
 
 namespace Nucleus.Tests.Web.Api.Controllers
 {
-    public class AccountTests : ApiTestBase
+    public class AccountControllerTests : ApiTestBase
     {
         [Fact]
         public async Task Should_Not_Access_Authorized_Controller()
