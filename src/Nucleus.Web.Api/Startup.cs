@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application;
+using Nucleus.Web.Core.ActionFilters;
 using Nucleus.Web.Core.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -26,7 +27,10 @@ namespace Nucleus.Web.Api
             services.ConfigureDependencyInjection();
             services.ConfigureNucleusApplication();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(setup =>
+            {
+                setup.Filters.AddService<UnitOfWorkActionFilter>();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSwaggerGen(c =>
             {
