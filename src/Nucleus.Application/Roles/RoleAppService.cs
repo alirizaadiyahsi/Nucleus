@@ -69,6 +69,13 @@ namespace Nucleus.Application.Roles
         {
             var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
 
+            if (role == null)
+            {
+                return;
+            }
+
+            role.RolePermissions.Clear();
+            role.UserRoles.Clear();
             _dbContext.Roles.Remove(role);
         }
     }
