@@ -10,7 +10,8 @@ namespace Nucleus.Application
     {
         public static IServiceCollection ConfigureNucleusApplication(this IServiceCollection services)
         {
-            services.AddAutoMapper();
+            // https://github.com/AutoMapper/AutoMapper.Extensions.Microsoft.DependencyInjection/issues/28#issuecomment-339772823
+            services.AddAutoMapper(typeof(ApplicationServiceCollectionExtensions));
 
             ////todo: add conventional registrar
             services.AddTransient<IUserAppService, UserAppService>();
