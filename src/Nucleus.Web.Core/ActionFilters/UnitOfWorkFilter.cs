@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Nucleus.EntityFramework;
 
 namespace Nucleus.Web.Core.ActionFilters
 {
+    // todo: this doesn't work
     public class UnitOfWorkActionFilter : ActionFilterAttribute
     {
         private readonly NucleusDbContext _dbContext;
@@ -15,7 +17,8 @@ namespace Nucleus.Web.Core.ActionFilters
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            if (!context.HttpContext.Request.Method.Equals("Post", StringComparison.OrdinalIgnoreCase) ||
+            var dataModificationRequestTypes = new[] { "post", "put", "delete" };
+            if (!dataModificationRequestTypes.Contains(context.HttpContext.Request.Method, StringComparer.InvariantCultureIgnoreCase) ||
                 context.Exception != null ||
                 !context.ModelState.IsValid)
             {

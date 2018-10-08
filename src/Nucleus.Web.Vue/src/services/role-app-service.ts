@@ -14,4 +14,13 @@ export default class RoleAppService extends BaseAppService {
                 return response;
             });
     }
+
+    public removeRole(id: string) {
+        const query = '?id=' + id;
+
+        return this.delete('/api/role/removeRole' + query)
+            .then((response) => {
+                return response;
+            });
+    }
 }
