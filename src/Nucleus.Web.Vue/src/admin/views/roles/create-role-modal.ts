@@ -16,13 +16,7 @@ export default class CreateRoleModalComponent extends Vue {
         roleAppService.addRole(createOrEditRoleInput).then((response) => {
             if (!response.isError) {
                 this.$refs.modalCreateRole.hide();
-                // todo: find more elegant way to refresh data
-                this.$router.go({
-                    path: '/admin/role-list',
-                    query: {
-                        t: + new Date(),
-                    },
-                });
+                this.$parent.getRoles();
             } else {
                 this.errors = response.errors;
             }

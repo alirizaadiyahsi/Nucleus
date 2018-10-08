@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
@@ -62,6 +63,20 @@ namespace Nucleus.Application.Roles
             var roleListDtos = _mapper.Map<List<RoleListOutput>>(roles);
 
             return roleListDtos.ToPagedList(rolesCount);
+        }
+
+        public void RemoveRole(Guid id)
+        {
+            var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
+
+            if (role == null)
+            {
+                return;
+            }
+
+            role.RolePermissions.Clear();
+            role.UserRoles.Clear();
+            _dbContext.Roles.Remove(role);
         }
     }
 }

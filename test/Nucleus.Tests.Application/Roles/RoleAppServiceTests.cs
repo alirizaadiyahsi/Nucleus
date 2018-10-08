@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Roles;
@@ -23,7 +24,7 @@ namespace Nucleus.Tests.Application.Roles
         }
 
         [Fact]
-        public async void Should_Add_Role()
+        public async void Should_Add_Remove_Role()
         {
             var testRole = new CreateOrEditRoleInput
             {
@@ -48,6 +49,18 @@ namespace Nucleus.Tests.Application.Roles
 
             Assert.NotNull(insertedTestRole);
             Assert.Equal(1, insertedTestRole.RolePermissions.Count);
+
+            _roleAppService.RemoveRole(insertedTestRole.Id);
+            _dbContext.SaveChanges();
+
+            dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            var removedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
+            var removedPermissionMatches = dbContextFromAnotherScope.RolePermissions.Where(rp => rp.RoleId == testRole.Id);
+            var removedUserMatches = dbContextFromAnotherScope.RolePermissions.Where(rp => rp.RoleId == testRole.Id);
+
+            Assert.Null(removedTestRole);
+            Assert.Equal(0, removedPermissionMatches.Count());
+            Assert.Equal(0, removedUserMatches.Count());
         }
 
         [Fact]

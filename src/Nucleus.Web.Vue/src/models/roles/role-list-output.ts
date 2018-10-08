@@ -1,4 +1,4 @@
 ﻿interface IRoleListOutput {
-    userName: string;
-    email: string;
+    name: string;
+    isSystemDefault: boolean;
 }

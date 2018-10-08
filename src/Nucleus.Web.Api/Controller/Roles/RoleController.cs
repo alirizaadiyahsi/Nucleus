@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
@@ -31,6 +32,16 @@ namespace Nucleus.Web.Api.Controller.Roles
         public async Task<ActionResult> AddRole([FromBody]CreateOrEditRoleInput input)
         {
             await _roleAppService.AddRoleAsync(input);
+
+            return Ok(new { success = true });
+        }
+
+        [HttpDelete("[action]")]
+        //todo: comment out this line after auto initialize permissions imlementation
+        //[Authorize(Policy = DefaultPermissions.PermissionNameForRoleDelete)] 
+        public ActionResult RemoveRole(Guid id)
+        {
+            _roleAppService.RemoveRole(id);
 
             return Ok(new { success = true });
         }
