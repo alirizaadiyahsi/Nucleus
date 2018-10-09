@@ -67,8 +67,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = addRoleInput.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
-
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
+
+            var insertedRole = await _dbContext.Roles.FindAsync(addRoleInput.Id);
+            Assert.NotNull(insertedRole);
         }
 
         [Fact]
