@@ -78,6 +78,11 @@ namespace Nucleus.Tests.Web.Api.Controllers
         {
             var roleToInsert = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
             await _dbContext.Roles.AddAsync(roleToInsert);
+            await _dbContext.RolePermissions.AddAsync(new RolePermission
+            {
+                RoleId = roleToInsert.Id,
+                PermissionId = DefaultPermissions.RoleList.Id
+            });
             await _dbContext.SaveChangesAsync();
 
             var token = await LoginAsAdminUserAndGetTokenAsync();
