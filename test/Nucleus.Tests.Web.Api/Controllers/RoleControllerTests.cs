@@ -6,9 +6,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Core.Permissions;
+using Nucleus.Core.Roles;
+using Nucleus.EntityFramework;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
 using Nucleus.Web.Api.Models;
@@ -18,6 +21,13 @@ namespace Nucleus.Tests.Web.Api.Controllers
 {
     public class RoleControllerTests : ApiTestBase
     {
+        private readonly NucleusDbContext _dbContext;
+
+        public RoleControllerTests()
+        {
+            _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+        }
+
         [Fact]
         public async Task Should_Get_Roles()
         {
@@ -35,7 +45,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
-        public async Task Should_CreateRole()
+        public async Task Should_Create_Role()
         {
             var addRoleInput = new CreateOrEditRoleInput
             {
@@ -56,6 +66,22 @@ namespace Nucleus.Tests.Web.Api.Controllers
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/addRole");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = addRoleInput.ToStringContent(Encoding.UTF8, "application/json");
+            var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
+
+            Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_Delete_Role()
+        {
+            var roleToInsert = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
+            await _dbContext.Roles.AddAsync(roleToInsert);
+            await _dbContext.SaveChangesAsync();
+
+            var token = await LoginAsAdminUserAndGetTokenAsync();
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/removeRole");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Content = new {id = roleToInsert.Id}.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
 
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
