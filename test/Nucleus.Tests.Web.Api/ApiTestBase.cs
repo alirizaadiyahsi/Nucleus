@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nucleus.Core.Users;
 using Nucleus.Tests.Shared;
-using Nucleus.Utilities.Extensions.Collections;
+using Nucleus.Utilities.Extensions.PrimitiveTypes;
 
 namespace Nucleus.Tests.Web.Api
 {

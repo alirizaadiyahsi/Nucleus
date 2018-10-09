@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Nucleus.Utilities.Extensions.Collections
+namespace Nucleus.Utilities.Extensions.PrimitiveTypes
 {
-    public static class DictionaryExtensions
+    public static class ObjectExtensions
     {
         public static StringContent ToStringContent(
-            this Dictionary<string, string> dictionary,
+            this object dictionary,
             Encoding encoding,
             string mediaType)
         {
