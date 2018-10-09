@@ -6,6 +6,7 @@ using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Core.Permissions;
+using Nucleus.Core.Roles;
 using Nucleus.EntityFramework;
 using Xunit;
 
@@ -24,7 +25,7 @@ namespace Nucleus.Tests.Application.Roles
         }
 
         [Fact]
-        public async void Should_Add_Remove_Role()
+        public async void Should_Add_Role()
         {
             var testRole = new CreateOrEditRoleInput
             {
@@ -49,6 +50,25 @@ namespace Nucleus.Tests.Application.Roles
 
             Assert.NotNull(insertedTestRole);
             Assert.Equal(1, insertedTestRole.RolePermissions.Count);
+        }
+
+        [Fact]
+        public async void Should_Remove_Role()
+        {
+            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
+            await _dbContext.Roles.AddAsync(testRole);
+            await _dbContext.RolePermissions.AddAsync(new RolePermission
+            {
+                RoleId = testRole.Id,
+                PermissionId = DefaultPermissions.RoleList.Id
+            });
+            await _dbContext.SaveChangesAsync();
+
+            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
+
+            Assert.NotNull(insertedTestRole);
+            Assert.Equal(1, insertedTestRole.RolePermissions.Count);
 
             _roleAppService.RemoveRole(insertedTestRole.Id);
             _dbContext.SaveChanges();
@@ -61,8 +81,6 @@ namespace Nucleus.Tests.Application.Roles
             Assert.Null(removedTestRole);
             Assert.Equal(0, removedPermissionMatches.Count());
             Assert.Equal(0, removedUserMatches.Count());
-
-            //todo: seperate tests create and remove
         }
 
         [Fact]
