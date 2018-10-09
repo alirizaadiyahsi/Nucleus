@@ -65,15 +65,15 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Register()
         {
-            var registrationData = new Dictionary<string, string>
+            var registerViewModel = new RegisterViewModel
             {
-                {"username",  "TestUserName_" + Guid.NewGuid()},
-                {"email",  "TestUserEmail_" + Guid.NewGuid() + "@mail.com"},
-                {"password", "aA!121212"}
+                Email = "TestUserEmail_" + Guid.NewGuid() + "@mail.com",
+                UserName = "TestUserName_" + Guid.NewGuid(),
+                Password = "aA!121212"
             };
 
             var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-                registrationData.ToStringContent(Encoding.UTF8, "application/json"));
+                registerViewModel.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.OK, responseRegister.StatusCode);
         }
@@ -81,15 +81,15 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Register_With_Existing_User()
         {
-            var registrationData = new Dictionary<string, string>
+            var registerViewModel = new RegisterViewModel
             {
-                {"username",  DefaultUsers.Admin.UserName},
-                {"email",  DefaultUsers.Admin.Email},
-                {"password", "aA!121212"}
+                Email = DefaultUsers.Admin.Email,
+                UserName = DefaultUsers.Admin.UserName,
+                Password = "aA!121212"
             };
 
             var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-                registrationData.ToStringContent(Encoding.UTF8, "application/json"));
+                registerViewModel.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
         }
