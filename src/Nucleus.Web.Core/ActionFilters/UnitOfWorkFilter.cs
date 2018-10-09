@@ -5,7 +5,6 @@ using Nucleus.EntityFramework;
 
 namespace Nucleus.Web.Core.ActionFilters
 {
-    // todo: this doesn't work
     public class UnitOfWorkActionFilter : ActionFilterAttribute
     {
         private readonly NucleusDbContext _dbContext;

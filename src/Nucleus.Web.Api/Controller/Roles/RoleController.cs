@@ -8,7 +8,6 @@ using Nucleus.Web.Core.Controllers;
 
 namespace Nucleus.Web.Api.Controller.Roles
 {
-    //todo: add test cases for actions
     public class RoleController : AdminController
     {
         private readonly IRoleAppService _roleAppService;
