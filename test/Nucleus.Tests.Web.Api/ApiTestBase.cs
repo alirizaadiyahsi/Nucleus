@@ -33,5 +33,13 @@ namespace Nucleus.Tests.Web.Api
             return await TestServer.CreateClient().PostAsync("/api/account/login",
                 adminUserLoginViewModel.ToStringContent(Encoding.UTF8, "application/json"));
         }
+
+        protected async Task<string> LoginAsAdminUserAndGetTokenAsync()
+        {
+            var responseLogin = await LoginAsAdminUserAsync();
+            var loginResult = await responseLogin.Content.ReadAsAsync<LoginResult>();
+
+            return loginResult.Token;
+        }
     }
 }
