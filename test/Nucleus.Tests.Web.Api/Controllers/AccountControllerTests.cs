@@ -39,7 +39,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
-        public async Task Shoudl_Get_Token()
+        public async Task Should_Get_Token()
         {
             var responseLogin = await LoginAsAdminUserAsync();
             var loginResult = await responseLogin.Content.ReadAsAsync<LoginResult>();
@@ -49,10 +49,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Access_Authorized_Controller()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
-            var token = responseContent.Token;
-
+            var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getusers");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
