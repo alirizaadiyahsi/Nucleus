@@ -10,8 +10,15 @@ Web API startup template with a Vue Client demo.
 - Run(F5 or CTRL+F5) Web API project first 
 - Run `yarn` command at location `src/Nucleus.Web.Vue` to install npm packages.
 - Run `yarn serve` command to run Vue application.
+- Admin user name and password : `admin/123qwe`
 
 ## Vue Client Demo
+
+### Login Page
+
+<img src="_images/vue-client-login.png" alt="Vue Client Demo" class="img-thumbnail" />
+
+### Admin Page
 
 <img src="_images/vue-client.png" alt="Vue Client Demo" class="img-thumbnail" />
 
