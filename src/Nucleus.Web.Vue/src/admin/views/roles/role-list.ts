@@ -34,7 +34,7 @@ export default class RoleListComponent extends Vue {
                 if (!response.isError) {
                     this.getRoles();
                 } else {
-                    // todo: handle errors
+                    alert(response.errors);
                 }
             });
         }
