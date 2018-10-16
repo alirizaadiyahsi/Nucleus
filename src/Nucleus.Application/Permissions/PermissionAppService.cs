@@ -52,6 +52,13 @@ namespace Nucleus.Application.Permissions
             return permissionListDtos.ToPagedList(permissionsCount);
         }
 
+        public List<PermissionListOutput> GetAllPermissions()
+        {
+            var permissionListDtos = _mapper.Map<List<PermissionListOutput>>(_dbContext.Permissions);
+
+            return permissionListDtos;
+        }
+
         public async Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, Guid permissionId)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u =>

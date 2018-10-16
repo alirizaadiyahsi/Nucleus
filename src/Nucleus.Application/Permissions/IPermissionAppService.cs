@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Core.Permissions;
@@ -14,5 +15,7 @@ namespace Nucleus.Application.Permissions
         Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, Guid permissionId);
 
         Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission);
+
+        List<PermissionListOutput> GetAllPermissions();
     }
 }
