@@ -31,15 +31,7 @@ namespace Nucleus.Tests.Application.Roles
             {
                 Id = Guid.NewGuid(),
                 Name = "TestRole_" + Guid.NewGuid(),
-                Permissions = new List<PermissionDto>
-                {
-                    new PermissionDto
-                    {
-                        Id =  DefaultPermissions.MemberAccess.Id,
-                        Name = DefaultPermissions.MemberAccess.Name,
-                        DisplayName = DefaultPermissions.MemberAccess.DisplayName
-                    }
-                }
+                PermissionIds = new Guid[] { DefaultPermissions.MemberAccess.Id }
             };
 
             await _roleAppService.AddRoleAsync(testRole);

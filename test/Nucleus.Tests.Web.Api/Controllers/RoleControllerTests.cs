@@ -51,15 +51,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             {
                 Id = Guid.NewGuid(),
                 Name = "TestRole_" + Guid.NewGuid(),
-                Permissions = new List<PermissionDto>
-                {
-                    new PermissionDto
-                    {
-                        Id =  DefaultPermissions.MemberAccess.Id,
-                        Name = DefaultPermissions.MemberAccess.Name,
-                        DisplayName = DefaultPermissions.MemberAccess.DisplayName
-                    }
-                }
+                PermissionIds = new Guid[] { DefaultPermissions.MemberAccess.Id }
             };
 
             var token = await LoginAsAdminUserAndGetTokenAsync();
@@ -88,7 +80,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/removeRole");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            requestMessage.Content = new {id = roleToInsert.Id}.ToStringContent(Encoding.UTF8, "application/json");
+            requestMessage.Content = new { id = roleToInsert.Id }.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
 
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);

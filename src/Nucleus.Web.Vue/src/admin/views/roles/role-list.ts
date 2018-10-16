@@ -23,7 +23,7 @@ export default class RoleListComponent extends Vue {
             filter: '',
         };
 
-        this.roleAppService.getAll(roleListInput).then((response) => {
+        this.roleAppService.getRoles(roleListInput).then((response) => {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
         });
     }

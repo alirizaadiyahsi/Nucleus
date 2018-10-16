@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Nucleus.Application.Permissions;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Utilities.Collections;
@@ -11,10 +12,12 @@ namespace Nucleus.Web.Api.Controller.Roles
     public class RoleController : AdminController
     {
         private readonly IRoleAppService _roleAppService;
+        private readonly IPermissionAppService _permissionAppService;
 
-        public RoleController(IRoleAppService roleAppService)
+        public RoleController(IRoleAppService roleAppService, IPermissionAppService permissionAppService)
         {
             _roleAppService = roleAppService;
+            _permissionAppService = permissionAppService;
         }
 
         [HttpGet("[action]")]
@@ -43,6 +46,14 @@ namespace Nucleus.Web.Api.Controller.Roles
             _roleAppService.RemoveRole(id);
 
             return Ok(new { success = true });
+        }
+
+        [HttpGet("[action]")]
+        //todo: comment out this line after auto initialize permissions imlementation
+        //[Authorize(Policy = DefaultPermissions.PermissionNameForRoleAdd)] 
+        public ActionResult<IPagedList<RoleListOutput>> GetAllPermissions()
+        {
+            return Ok(_permissionAppService.GetAllPermissions());
         }
     }
 }

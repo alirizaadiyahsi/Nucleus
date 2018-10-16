@@ -1,4 +1,4 @@
 ﻿interface ICreateOrEditRoleInput extends IEntityDto {
     name: string;
-    permissions: IPermissionDto[];
+    permissionIds: string[];
 }

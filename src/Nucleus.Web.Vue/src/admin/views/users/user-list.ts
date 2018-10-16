@@ -15,7 +15,7 @@ export default class UserListComponent extends Vue {
             filter: '',
         };
 
-        this.userAppService.getAll(userListInput).then((response) => {
+        this.userAppService.getUsers(userListInput).then((response) => {
             this.pagedListOfUserListDto = response.content as IPagedList<IUserListInput>;
         });
     }

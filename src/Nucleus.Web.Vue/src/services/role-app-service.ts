@@ -2,7 +2,7 @@
 import queryString from 'query-string';
 
 export default class RoleAppService extends BaseAppService {
-    public getAll(input: IRoleListInput) {
+    public getRoles(input: IRoleListInput) {
         const query = '?' + queryString.stringify(input);
 
         return this.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query);

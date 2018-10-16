@@ -40,11 +40,11 @@ namespace Nucleus.Application.Roles
             var createRoleResult = await _roleManager.CreateAsync(role);
             if (createRoleResult.Succeeded)
             {
-                foreach (var permission in input.Permissions)
+                foreach (var permissionId in input.PermissionIds)
                 {
                     _dbContext.RolePermissions.Add(new RolePermission
                     {
-                        PermissionId = permission.Id,
+                        PermissionId = permissionId,
                         RoleId = role.Id
                     });
                 }
