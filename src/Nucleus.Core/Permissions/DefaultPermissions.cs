@@ -61,11 +61,12 @@ namespace Nucleus.Core.Permissions
             Id = new Guid("8F76DE0B-114A-4DF8-A93D-CEC927D06A3C")
         };
 
+        // todo: change permission names to CRUD letters for exam: create, read, update, delete
         public const string PermissionNameForAdministration = "Permissions_Administration";
         public const string PermissionNameForMemberAccess = "Permissions_Member_Access";
         public const string PermissionNameForUserList = "Permissions_User_List";
         public const string PermissionNameForUserAdd = "Permissions_User_Add";
-        public const string PermissionNameForUserEdit = "Permissions_User_Edi";
+        public const string PermissionNameForUserEdit = "Permissions_User_Edit";
         public const string PermissionNameForUserDelete = "Permissions_User_Delete";
         public const string PermissionNameForRoleList = "Permissions_Role_List";
         public const string PermissionNameForRoleAdd = "Permissions_Role_Add";
