@@ -1,4 +1,4 @@
-﻿interface IPermissionDto extends IEntityDto{
+﻿interface IPermissionDto extends IEntityDto {
     name: string;
     displayName: string;
 }

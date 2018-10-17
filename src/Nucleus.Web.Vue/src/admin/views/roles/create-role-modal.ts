@@ -9,8 +9,8 @@ export default class CreateRoleModalComponent extends Vue {
     public createOrEditRoleModel = {};
     public errors: IErrorResponse[] = [];
     public allPermissions: IPermissionDto[] = [];
-    public roleAppService: RoleAppService = new RoleAppService;
-    public permissionAppService: PermissionAppService = new PermissionAppService;
+    public roleAppService: RoleAppService = new RoleAppService();
+    public permissionAppService: PermissionAppService = new PermissionAppService();
 
     public mounted() {
         this.permissionAppService.getAllPermissions().then((response) => {
@@ -21,7 +21,7 @@ export default class CreateRoleModalComponent extends Vue {
     public createRoleModalShown() {
         this.createOrEditRoleModel = {
             permissionIds: [],
-            name: ''
+            name: '',
         };
     }
 
