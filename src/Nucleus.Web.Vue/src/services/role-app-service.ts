@@ -8,14 +8,14 @@ export default class RoleAppService extends BaseAppService {
         return this.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query);
     }
 
-    public addRole(input: ICreateOrEditRoleInput) {
+    public createRole(input: ICreateOrEditRoleInput) {
         return this.post<void>('/api/role/createRole', input)
             .then((response) => {
                 return response;
             });
     }
 
-    public removeRole(id: string) {
+    public deleteRole(id: string) {
         const query = '?id=' + id;
 
         return this.delete('/api/role/deleteRole' + query)

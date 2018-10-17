@@ -30,7 +30,7 @@ export default class RoleListComponent extends Vue {
 
     public removeRole(id: string) {
         if (confirm('Are you sure want to delete?')) {
-            this.roleAppService.removeRole(id).then((response) => {
+            this.roleAppService.deleteRole(id).then((response) => {
                 if (!response.isError) {
                     this.getRoles();
                 } else {
