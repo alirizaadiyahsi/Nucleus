@@ -19,7 +19,7 @@ namespace Nucleus.Web.Api.Controller.Users
         }
 
         [HttpGet("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForUserList)]
+        [Authorize(Policy = DefaultPermissions.PermissionNameForUserRead)]
         public async Task<ActionResult<IPagedList<UserListOutput>>> GetUsers(UserListInput input)
         {
             return Ok(await _userAppService.GetUsersAsync(input));

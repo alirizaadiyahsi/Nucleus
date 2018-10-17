@@ -9,7 +9,7 @@ export default class RoleAppService extends BaseAppService {
     }
 
     public addRole(input: ICreateOrEditRoleInput) {
-        return this.post<void>('/api/role/addRole', input)
+        return this.post<void>('/api/role/createRole', input)
             .then((response) => {
                 return response;
             });
@@ -18,7 +18,7 @@ export default class RoleAppService extends BaseAppService {
     public removeRole(id: string) {
         const query = '?id=' + id;
 
-        return this.delete('/api/role/removeRole' + query)
+        return this.delete('/api/role/deleteRole' + query)
             .then((response) => {
                 return response;
             });

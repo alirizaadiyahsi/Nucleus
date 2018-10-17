@@ -31,7 +31,7 @@ namespace Nucleus.Tests.Application.Roles
             {
                 Id = Guid.NewGuid(),
                 Name = "TestRole_" + Guid.NewGuid(),
-                PermissionIds = new Guid[] { DefaultPermissions.MemberAccess.Id }
+                PermissionIds = new[] { DefaultPermissions.MemberAccess.Id }
             };
 
             await _roleAppService.AddRoleAsync(testRole);
@@ -52,7 +52,7 @@ namespace Nucleus.Tests.Application.Roles
             await _dbContext.RolePermissions.AddAsync(new RolePermission
             {
                 RoleId = testRole.Id,
-                PermissionId = DefaultPermissions.RoleList.Id
+                PermissionId = DefaultPermissions.RoleRead.Id
             });
             await _dbContext.SaveChangesAsync();
 
