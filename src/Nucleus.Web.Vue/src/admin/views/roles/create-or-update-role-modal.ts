@@ -4,9 +4,9 @@ import RoleAppService from '../../../services/role-app-service';
 import PermissionAppService from '../../../services/permission-app-service';
 
 @Component
-export default class CreateRoleModalComponent extends Vue {
+export default class CreateOrUpdateRoleModalComponent extends Vue {
 
-    public createOrEditRoleModel = {};
+    public createOrUpdateRoleModel = {};
     public errors: IErrorResponse[] = [];
     public allPermissions: IPermissionDto[] = [];
     public roleAppService: RoleAppService = new RoleAppService();
@@ -19,14 +19,14 @@ export default class CreateRoleModalComponent extends Vue {
     }
 
     public createRoleModalShown() {
-        this.createOrEditRoleModel = {
+        this.createOrUpdateRoleModel = {
             permissionIds: [],
             name: '',
         };
     }
 
     public onSubmit() {
-        this.roleAppService.createRole(this.createOrEditRoleModel as ICreateOrEditRoleInput).then((response) => {
+        this.roleAppService.createRole(this.createOrUpdateRoleModel as ICreateOrUpdateRoleInput).then((response) => {
             if (!response.isError) {
                 this.$refs.modalCreateRole.hide();
                 this.$parent.getRoles();

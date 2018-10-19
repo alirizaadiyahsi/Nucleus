@@ -24,7 +24,7 @@
 
         <p v-else><em>Loading...</em></p>
 
-        <create-role-modal-component />
+        <create-or-update-role-modal-component />
     </div>
 </template>
 

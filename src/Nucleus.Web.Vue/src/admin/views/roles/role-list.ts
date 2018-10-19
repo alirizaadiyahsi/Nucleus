@@ -4,7 +4,7 @@ import RoleAppService from '../../../services/role-app-service';
 
 @Component({
     components: {
-        CreateRoleModalComponent: require('./create-role-modal.vue').default,
+        CreateOrUpdateRoleModalComponent: require('./create-or-update-role-modal.vue').default,
     },
 })
 export default class RoleListComponent extends Vue {

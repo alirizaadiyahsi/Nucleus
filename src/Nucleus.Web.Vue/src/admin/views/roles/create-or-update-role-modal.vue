@@ -10,14 +10,14 @@
             <b-tabs>
                 <b-tab title="Role" active class="pt-3">
                     <div class="form-group">
-                        <input type="text" v-model="createOrEditRoleModel.name" class="form-control" placeholder="Role name" required>
+                        <input type="text" v-model="createOrUpdateRoleModel.name" class="form-control" placeholder="Role name" required>
                     </div>
                 </b-tab>
                 <b-tab title="Permissions" class="pt-3">
                     <b-form-group>
                         <b-form-checkbox-group stacked
                                                name="permissions"
-                                               v-model="createOrEditRoleModel.permissionIds"
+                                               v-model="createOrUpdateRoleModel.permissionIds"
                                                :options="allPermissions"
                                                value-field="id"
                                                text-field="displayName">
@@ -35,4 +35,4 @@
     </form>
 </template>
 
-<script src="./create-role-modal.ts"></script>
+<script src="./create-or-update-role-modal.ts"></script>

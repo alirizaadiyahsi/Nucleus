@@ -8,7 +8,7 @@ export default class RoleAppService extends BaseAppService {
         return this.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query);
     }
 
-    public createRole(input: ICreateOrEditRoleInput) {
+    public createRole(input: ICreateOrUpdateRoleInput) {
         return this.post<void>('/api/role/createRole', input)
             .then((response) => {
                 return response;

@@ -50,7 +50,7 @@ namespace Nucleus.Web.Api.Controller.Roles
             return Ok(new { success = true });
         }
 
-        // todo: create a GetRoleToCreateOrEdit model and move this logic to that class
+        // todo: create a GetRoleForCreateOrEdit model and move this logic to that class
         [HttpGet("[action]")]
         //todo: comment out this line after auto initialize permissions imlementation
         public ActionResult<IPagedList<RoleListOutput>> GetAllPermissions()
