@@ -15,7 +15,5 @@ namespace Nucleus.Application.Permissions
         Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, Guid permissionId);
 
         Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission);
-
-        List<PermissionListOutput> GetAllPermissions();
     }
 }
