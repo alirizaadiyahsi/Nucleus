@@ -14,5 +14,7 @@ namespace Nucleus.Application.Roles
         void RemoveRole(Guid id);
 
         Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(GetRoleForCreateOrUpdateInput input);
+
+        Task EditRoleAsync(CreateOrUpdateRoleInput input);
     }
 }

@@ -29,10 +29,17 @@ namespace Nucleus.Web.Api.Controller.Roles
 
         [HttpPost("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)] 
-        public async Task<ActionResult> CreateRole([FromBody]CreateOrUpdateRoleInput input)
+        public async Task<ActionResult> CreateOrUpdateRole([FromBody]CreateOrUpdateRoleInput input)
         {
-            await _roleAppService.AddRoleAsync(input);
-
+            if (input.Role.Id == Guid.Empty)
+            {
+                await _roleAppService.AddRoleAsync(input);
+            }
+            else
+            {
+                await _roleAppService.EditRoleAsync(input);
+            }
+            
             return Ok(new { success = true });
         }
 

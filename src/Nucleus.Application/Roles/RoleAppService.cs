@@ -104,5 +104,11 @@ namespace Nucleus.Application.Roles
                 GrantedPermissionIds = grantedPermissions.Select(p => p.Id).ToList()
             };
         }
+
+        public Task EditRoleAsync(CreateOrUpdateRoleInput input)
+        {
+            //todo: implement edit role service
+            throw new NotImplementedException();
+        }
     }
 }
