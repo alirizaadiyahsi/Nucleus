@@ -27,18 +27,21 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Add_Role()
         {
-            var testRole = new CreateOrEditRoleInput
+            var input = new CreateOrUpdateRoleInput
             {
-                Id = Guid.NewGuid(),
-                Name = "TestRole_" + Guid.NewGuid(),
-                PermissionIds = new[] { DefaultPermissions.MemberAccess.Id }
+                Role = new RoleDto
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "TestRole_" + Guid.NewGuid()
+                },
+                GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
-            await _roleAppService.AddRoleAsync(testRole);
+            await _roleAppService.AddRoleAsync(input);
             await _dbContext.SaveChangesAsync();
 
             var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
-            var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
+            var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(input.Role.Id);
 
             Assert.NotNull(insertedTestRole);
             Assert.Equal(1, insertedTestRole.RolePermissions.Count);

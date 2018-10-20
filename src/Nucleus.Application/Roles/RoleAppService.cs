@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Core.Roles;
 using Nucleus.EntityFramework;
@@ -28,19 +29,19 @@ namespace Nucleus.Application.Roles
             _mapper = mapper;
         }
 
-        public async Task AddRoleAsync(CreateOrEditRoleInput input)
+        public async Task AddRoleAsync(CreateOrUpdateRoleInput input)
         {
             var role = new Role
             {
-                Id = input.Id,
-                Name = input.Name,
-                NormalizedName = input.Name.Normalize()
+                Id = input.Role.Id,
+                Name = input.Role.Name,
+                NormalizedName = input.Role.Name.Normalize()
             };
 
             var createRoleResult = await _roleManager.CreateAsync(role);
             if (createRoleResult.Succeeded)
             {
-                foreach (var permissionId in input.PermissionIds)
+                foreach (var permissionId in input.GrantedPermissionIds)
                 {
                     _dbContext.RolePermissions.Add(new RolePermission
                     {
@@ -77,6 +78,31 @@ namespace Nucleus.Application.Roles
             role.RolePermissions.Clear();
             role.UserRoles.Clear();
             _dbContext.Roles.Remove(role);
+        }
+
+        public async Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(GetRoleForCreateOrUpdateInput input)
+        {
+            var allPermissions = _mapper.Map<List<PermissionDto>>(_dbContext.Permissions).OrderBy(p => p.DisplayName).ToList();
+            var getRoleForCreateOrUpdateOutput = new GetRoleForCreateOrUpdateOutput
+            {
+                AllPermissions = allPermissions
+            };
+
+            if (input.Id == Guid.Empty)
+            {
+                return getRoleForCreateOrUpdateOutput;
+            }
+
+            var role = await _roleManager.FindByIdAsync(input.Id.ToString());
+            var roleDto = _mapper.Map<RoleDto>(role);
+            var grantedPermissions = role.RolePermissions.Select(rp => rp.Permission);
+
+            return new GetRoleForCreateOrUpdateOutput
+            {
+                Role = roleDto,
+                AllPermissions = allPermissions,
+                GrantedPermissionIds = grantedPermissions.Select(p => p.Id).ToList()
+            };
         }
     }
 }

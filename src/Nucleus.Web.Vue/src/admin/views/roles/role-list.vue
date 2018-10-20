@@ -2,7 +2,7 @@
     <div>
         <h1>
             Roles
-            <b-btn v-b-modal.modalCreateRole variant="success" class="float-right">
+            <b-btn @click="setGetRoleForCreateOrUpdateInput()" v-b-modal.modalCreateOrUpdateRole variant="success" class="float-right">
                 Create Role
             </b-btn>
         </h1>
@@ -16,7 +16,14 @@
             </thead>
             <tbody>
                 <tr v-for="item in pagedListOfRoleListDto.items">
-                    <td><button v-if="!item.isSystemDefault" v-on:click="removeRole(item.id)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                    <td>
+                        <button v-if="!item.isSystemDefault" v-on:click="removeRole(item.id)" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <b-btn v-b-modal.modalCreateOrUpdateRole v-if="!item.isSystemDefault" @click="setGetRoleForCreateOrUpdateInput(item)" class="btn btn-primary btn-sm">
+                            <i class="fas fa-pen"></i>
+                        </b-btn>
+                    </td>
                     <td>{{ item.name }}</td>
                 </tr>
             </tbody>

@@ -14,16 +14,13 @@ namespace Nucleus.Web.Api.Controller.Roles
     public class RoleController : AdminController
     {
         private readonly IRoleAppService _roleAppService;
-        private readonly IPermissionAppService _permissionAppService;
 
         public RoleController(IRoleAppService roleAppService, IPermissionAppService permissionAppService)
         {
             _roleAppService = roleAppService;
-            _permissionAppService = permissionAppService;
         }
 
         [HttpGet("[action]")]
-        //todo: comment out this line after auto initialize permissions imlementation
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleRead)] 
         public async Task<ActionResult<IPagedList<RoleListOutput>>> GetRoles(RoleListInput input)
         {
@@ -31,9 +28,8 @@ namespace Nucleus.Web.Api.Controller.Roles
         }
 
         [HttpPost("[action]")]
-        //todo: comment out this line after auto initialize permissions imlementation
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)] 
-        public async Task<ActionResult> CreateRole([FromBody]CreateOrEditRoleInput input)
+        public async Task<ActionResult> CreateRole([FromBody]CreateOrUpdateRoleInput input)
         {
             await _roleAppService.AddRoleAsync(input);
 
@@ -41,7 +37,6 @@ namespace Nucleus.Web.Api.Controller.Roles
         }
 
         [HttpDelete("[action]")]
-        //todo: comment out this line after auto initialize permissions imlementation
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleDelete)] 
         public ActionResult DeleteRole(Guid id)
         {
@@ -50,12 +45,14 @@ namespace Nucleus.Web.Api.Controller.Roles
             return Ok(new { success = true });
         }
 
-        // todo: create a GetRoleForCreateOrEdit model and move this logic to that class
         [HttpGet("[action]")]
-        //todo: comment out this line after auto initialize permissions imlementation
-        public ActionResult<IPagedList<RoleListOutput>> GetAllPermissions()
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)]
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleUpdate)]
+        public async Task<ActionResult<GetRoleForCreateOrUpdateOutput>> GetRoleForCreateOrUpdate(GetRoleForCreateOrUpdateInput input)
         {
-            return Ok(_permissionAppService.GetAllPermissions());
+            var getRoleForCreateOrUpdateOutput = await _roleAppService.GetRoleForCreateOrUpdateAsync(input);
+
+            return Ok(getRoleForCreateOrUpdateOutput);
         }
     }
 }

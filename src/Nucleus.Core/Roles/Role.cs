@@ -7,7 +7,7 @@ namespace Nucleus.Core.Roles
 {
     public class Role : IdentityRole<Guid>
     {
-        public bool IsSystemDefault { get; set; }
+        public bool IsSystemDefault { get; set; } = false;
 
         public virtual ICollection<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
 

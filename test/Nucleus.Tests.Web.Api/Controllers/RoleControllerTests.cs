@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -45,21 +46,24 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Create_Role()
         {
-            var addRoleInput = new CreateOrEditRoleInput
+            var input = new CreateOrUpdateRoleInput
             {
-                Id = Guid.NewGuid(),
-                Name = "TestRole_" + Guid.NewGuid(),
-                PermissionIds = new Guid[] { DefaultPermissions.MemberAccess.Id }
+                Role = new RoleDto
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "TestRole_" + Guid.NewGuid()
+                },
+                GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
             var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createRole");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            requestMessage.Content = addRoleInput.ToStringContent(Encoding.UTF8, "application/json");
+            requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
 
-            var insertedRole = await _dbContext.Roles.FindAsync(addRoleInput.Id);
+            var insertedRole = await _dbContext.Roles.FindAsync(input.Role.Id);
             Assert.NotNull(insertedRole);
         }
 

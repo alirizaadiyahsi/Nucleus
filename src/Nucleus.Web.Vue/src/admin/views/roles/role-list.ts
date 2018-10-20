@@ -12,10 +12,19 @@ export default class RoleListComponent extends Vue {
         totalCount: 0,
         items: [],
     };
+    public getRoleForCreateOrUpdateInput = {} as IGetRoleForCreateOrUpdateInput;
     public roleAppService = new RoleAppService();
 
     public mounted() {
         this.getRoles();
+    }
+
+    public setGetRoleForCreateOrUpdateInput(item: IRoleDto) {
+        if (item) {
+            this.getRoleForCreateOrUpdateInput.id = item.id;
+        } else {
+            this.getRoleForCreateOrUpdateInput.id = '';
+        }
     }
 
     public getRoles() {
