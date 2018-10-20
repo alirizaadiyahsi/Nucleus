@@ -17,12 +17,14 @@
             <tbody>
                 <tr v-for="item in pagedListOfRoleListDto.items">
                     <td>
-                        <button v-if="!item.isSystemDefault" v-on:click="removeRole(item.id)" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                        <b-btn v-b-modal.modalCreateOrUpdateRole v-if="!item.isSystemDefault" @click="setGetRoleForCreateOrUpdateInput(item)" class="btn btn-primary btn-sm">
-                            <i class="fas fa-pen"></i>
-                        </b-btn>
+                        <div class="btn-group">
+                            <button v-if="!item.isSystemDefault" v-on:click="removeRole(item.id)" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <b-btn v-b-modal.modalCreateOrUpdateRole v-if="!item.isSystemDefault" @click="setGetRoleForCreateOrUpdateInput(item)" class="btn btn-primary btn-sm">
+                                <i class="fas fa-pen"></i>
+                            </b-btn>
+                        </div>
                     </td>
                     <td>{{ item.name }}</td>
                 </tr>

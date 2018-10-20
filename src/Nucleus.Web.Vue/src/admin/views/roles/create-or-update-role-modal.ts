@@ -5,6 +5,7 @@ import RoleAppService from '../../../services/role-app-service';
 @Component
 export default class CreateOrUpdateRoleModalComponent extends Vue {
 
+    public isUpdate = false;
     public getRoleForCreateOrUpdateOutput = {};
     public createOrUpdateRoleInput = {
         grantedPermissionIds: [],
@@ -14,13 +15,13 @@ export default class CreateOrUpdateRoleModalComponent extends Vue {
             isSystemDefault: false,
         } as IRoleDto,
     } as ICreateOrUpdateRoleInput;
-
     public errors: IErrorResponse[] = [];
     public roleAppService = new RoleAppService();
 
     public createOrUpdateRoleModalShown() {
         this.roleAppService.getRoleForCreateOrUpdate(this.$parent.getRoleForCreateOrUpdateInput).then((response) => {
             const result = response.content as IGetRoleForCreateOrUpdateOutput;
+            this.isUpdate = result.role.name != null;
             this.getRoleForCreateOrUpdateOutput = result;
             this.createOrUpdateRoleInput = {
                 grantedPermissionIds: result.grantedPermissionIds,
@@ -29,8 +30,8 @@ export default class CreateOrUpdateRoleModalComponent extends Vue {
         });
     }
 
-    public onSubmit() {
-        this.roleAppService.createRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput).then((response) => {
+    public onSubmit(isUpdate:boolean) {
+        this.roleAppService.createOrUpdateRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput).then((response) => {
             if (!response.isError) {
                 this.$refs.modalCreateOrUpdateRole.hide();
                 this.$parent.getRoles();
