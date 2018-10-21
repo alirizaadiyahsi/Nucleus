@@ -19,25 +19,27 @@ export default class CreateOrUpdateRoleModalComponent extends Vue {
     public roleAppService = new RoleAppService();
 
     public createOrUpdateRoleModalShown() {
-        this.roleAppService.getRoleForCreateOrUpdate(this.$parent.getRoleForCreateOrUpdateInput).then((response) => {
-            const result = response.content as IGetRoleForCreateOrUpdateOutput;
-            this.isUpdate = result.role.name != null;
-            this.getRoleForCreateOrUpdateOutput = result;
-            this.createOrUpdateRoleInput = {
-                grantedPermissionIds: result.grantedPermissionIds,
-                role: result.role,
-            };
-        });
+        this.roleAppService.getRoleForCreateOrUpdate(this.$parent.getRoleForCreateOrUpdateInput)
+            .then((response) => {
+                const result = response.content as IGetRoleForCreateOrUpdateOutput;
+                this.isUpdate = result.role.name != null;
+                this.getRoleForCreateOrUpdateOutput = result;
+                this.createOrUpdateRoleInput = {
+                    grantedPermissionIds: result.grantedPermissionIds,
+                    role: result.role,
+                };
+            });
     }
 
-    public onSubmit(isUpdate:boolean) {
-        this.roleAppService.createOrUpdateRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput).then((response) => {
-            if (!response.isError) {
-                this.$refs.modalCreateOrUpdateRole.hide();
-                this.$parent.getRoles();
-            } else {
-                this.errors = response.errors;
-            }
-        });
+    public onSubmit() {
+        this.roleAppService.createOrUpdateRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
+            .then((response) => {
+                if (!response.isError) {
+                    this.$refs.modalCreateOrUpdateRole.hide();
+                    this.$parent.getRoles();
+                } else {
+                    this.errors = response.errors;
+                }
+            });
     }
 }

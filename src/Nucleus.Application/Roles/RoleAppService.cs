@@ -105,10 +105,24 @@ namespace Nucleus.Application.Roles
             };
         }
 
-        public Task EditRoleAsync(CreateOrUpdateRoleInput input)
+        public async Task EditRoleAsync(CreateOrUpdateRoleInput input)
         {
-            //todo: implement edit role service
-            throw new NotImplementedException();
+            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
+            role.Name = input.Role.Name;
+            role.RolePermissions.Clear();
+            var updateRoleResult = await _roleManager.UpdateAsync(role);
+
+            if (updateRoleResult.Succeeded)
+            {
+                foreach (var permissionId in input.GrantedPermissionIds)
+                {
+                    _dbContext.RolePermissions.Add(new RolePermission
+                    {
+                        PermissionId = permissionId,
+                        RoleId = role.Id
+                    });
+                }
+            }
         }
     }
 }
