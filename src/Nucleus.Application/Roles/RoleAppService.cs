@@ -73,8 +73,7 @@ namespace Nucleus.Application.Roles
             var role = new Role
             {
                 Id = input.Role.Id,
-                Name = input.Role.Name,
-                NormalizedName = input.Role.Name.Normalize()
+                Name = input.Role.Name
             };
 
             var createRoleResult = await _roleManager.CreateAsync(role);
