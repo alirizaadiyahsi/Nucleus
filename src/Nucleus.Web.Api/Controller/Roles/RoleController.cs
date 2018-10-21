@@ -27,6 +27,7 @@ namespace Nucleus.Web.Api.Controller.Roles
             return Ok(await _roleAppService.GetRolesAsync(input));
         }
 
+        //todo: write test
         [HttpGet("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleUpdate)]
@@ -37,6 +38,7 @@ namespace Nucleus.Web.Api.Controller.Roles
             return Ok(getRoleForCreateOrUpdateOutput);
         }
 
+        //todo: write test
         [HttpPost("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)] 
         public async Task<ActionResult> CreateOrUpdateRole([FromBody]CreateOrUpdateRoleInput input)

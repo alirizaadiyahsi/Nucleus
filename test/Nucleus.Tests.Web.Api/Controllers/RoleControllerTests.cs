@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Core.Permissions;
@@ -50,20 +51,19 @@ namespace Nucleus.Tests.Web.Api.Controllers
             {
                 Role = new RoleDto
                 {
-                    Id = Guid.NewGuid(),
                     Name = "TestRole_" + Guid.NewGuid()
                 },
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
             var token = await LoginAsAdminUserAndGetTokenAsync();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createRole");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createOrUpdateRole");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
 
-            var insertedRole = await _dbContext.Roles.FindAsync(input.Role.Id);
+            var insertedRole = await _dbContext.Roles.FirstAsync(r => r.Name == input.Role.Name);
             Assert.NotNull(insertedRole);
         }
 
