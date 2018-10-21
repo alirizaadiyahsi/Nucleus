@@ -43,7 +43,7 @@ namespace Nucleus.Application.Roles
             return roleListDtos.ToPagedList(rolesCount);
         }
 
-        public async Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(GetRoleForCreateOrUpdateInput input)
+        public async Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(Guid id)
         {
             var allPermissions = _mapper.Map<List<PermissionDto>>(_dbContext.Permissions).OrderBy(p => p.DisplayName).ToList();
             var getRoleForCreateOrUpdateOutput = new GetRoleForCreateOrUpdateOutput
@@ -51,12 +51,12 @@ namespace Nucleus.Application.Roles
                 AllPermissions = allPermissions
             };
 
-            if (input.Id == Guid.Empty)
+            if (id == Guid.Empty)
             {
                 return getRoleForCreateOrUpdateOutput;
             }
 
-            var role = await _roleManager.FindByIdAsync(input.Id.ToString());
+            var role = await _roleManager.FindByIdAsync(id.ToString());
             var roleDto = _mapper.Map<RoleDto>(role);
             var grantedPermissions = role.RolePermissions.Select(rp => rp.Permission);
 

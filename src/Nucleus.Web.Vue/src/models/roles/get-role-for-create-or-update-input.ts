@@ -1,3 +1,0 @@
-﻿interface IGetRoleForCreateOrUpdateInput extends IEntityDto {
-
-}

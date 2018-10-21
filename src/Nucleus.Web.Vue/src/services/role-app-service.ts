@@ -8,10 +8,8 @@ export default class RoleAppService extends BaseAppService {
         return this.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query);
     }
 
-    public getRoleForCreateOrUpdate(input: IGetRoleForCreateOrUpdateInput) {
-        const query = '?' + queryString.stringify(input);
-
-        return this.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate' + query);
+    public getRoleForCreateOrUpdate(id: string) {
+        return this.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' + id);
     }
 
     public createOrUpdateRole(input: ICreateOrUpdateRoleInput) {

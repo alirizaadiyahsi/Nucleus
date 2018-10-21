@@ -27,6 +27,16 @@ namespace Nucleus.Web.Api.Controller.Roles
             return Ok(await _roleAppService.GetRolesAsync(input));
         }
 
+        [HttpGet("[action]")]
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)]
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleUpdate)]
+        public async Task<ActionResult<GetRoleForCreateOrUpdateOutput>> GetRoleForCreateOrUpdate(Guid id)
+        {
+            var getRoleForCreateOrUpdateOutput = await _roleAppService.GetRoleForCreateOrUpdateAsync(id);
+
+            return Ok(getRoleForCreateOrUpdateOutput);
+        }
+
         [HttpPost("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)] 
         public async Task<ActionResult> CreateOrUpdateRole([FromBody]CreateOrUpdateRoleInput input)
@@ -50,16 +60,6 @@ namespace Nucleus.Web.Api.Controller.Roles
             _roleAppService.RemoveRole(id);
 
             return Ok(new { success = true });
-        }
-
-        [HttpGet("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleUpdate)]
-        public async Task<ActionResult<GetRoleForCreateOrUpdateOutput>> GetRoleForCreateOrUpdate(GetRoleForCreateOrUpdateInput input)
-        {
-            var getRoleForCreateOrUpdateOutput = await _roleAppService.GetRoleForCreateOrUpdateAsync(input);
-
-            return Ok(getRoleForCreateOrUpdateOutput);
         }
     }
 }

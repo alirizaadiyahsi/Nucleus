@@ -19,7 +19,7 @@ export default class CreateOrUpdateRoleModalComponent extends Vue {
     public roleAppService = new RoleAppService();
 
     public createOrUpdateRoleModalShown() {
-        this.roleAppService.getRoleForCreateOrUpdate(this.$parent.getRoleForCreateOrUpdateInput)
+        this.roleAppService.getRoleForCreateOrUpdate(this.$parent.selectedRoleId)
             .then((response) => {
                 const result = response.content as IGetRoleForCreateOrUpdateOutput;
                 this.isUpdate = result.role.name != null;
