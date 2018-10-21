@@ -29,29 +29,6 @@ namespace Nucleus.Application.Roles
             _mapper = mapper;
         }
 
-        public async Task AddRoleAsync(CreateOrUpdateRoleInput input)
-        {
-            var role = new Role
-            {
-                Id = input.Role.Id,
-                Name = input.Role.Name,
-                NormalizedName = input.Role.Name.Normalize()
-            };
-
-            var createRoleResult = await _roleManager.CreateAsync(role);
-            if (createRoleResult.Succeeded)
-            {
-                foreach (var permissionId in input.GrantedPermissionIds)
-                {
-                    _dbContext.RolePermissions.Add(new RolePermission
-                    {
-                        PermissionId = permissionId,
-                        RoleId = role.Id
-                    });
-                }
-            }
-        }
-
         public async Task<IPagedList<RoleListOutput>> GetRolesAsync(RoleListInput input)
         {
             var query = _roleManager.Roles.Where(
@@ -64,20 +41,6 @@ namespace Nucleus.Application.Roles
             var roleListDtos = _mapper.Map<List<RoleListOutput>>(roles);
 
             return roleListDtos.ToPagedList(rolesCount);
-        }
-
-        public void RemoveRole(Guid id)
-        {
-            var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
-
-            if (role == null)
-            {
-                return;
-            }
-
-            role.RolePermissions.Clear();
-            role.UserRoles.Clear();
-            _dbContext.Roles.Remove(role);
         }
 
         public async Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(GetRoleForCreateOrUpdateInput input)
@@ -105,23 +68,57 @@ namespace Nucleus.Application.Roles
             };
         }
 
+        public async Task AddRoleAsync(CreateOrUpdateRoleInput input)
+        {
+            var role = new Role
+            {
+                Id = input.Role.Id,
+                Name = input.Role.Name,
+                NormalizedName = input.Role.Name.Normalize()
+            };
+
+            var createRoleResult = await _roleManager.CreateAsync(role);
+            if (createRoleResult.Succeeded)
+            {
+                GrantPermissionsToRole(input.GrantedPermissionIds, role);
+            }
+        }
+
         public async Task EditRoleAsync(CreateOrUpdateRoleInput input)
         {
             var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
             var updateRoleResult = await _roleManager.UpdateAsync(role);
-
             if (updateRoleResult.Succeeded)
             {
-                foreach (var permissionId in input.GrantedPermissionIds)
+                GrantPermissionsToRole(input.GrantedPermissionIds, role);
+            }
+        }
+
+        public void RemoveRole(Guid id)
+        {
+            var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
+
+            if (role == null)
+            {
+                return;
+            }
+
+            role.RolePermissions.Clear();
+            role.UserRoles.Clear();
+            _dbContext.Roles.Remove(role);
+        }
+
+        private void GrantPermissionsToRole(List<Guid> grantedPermissionIds, Role role)
+        {
+            foreach (var permissionId in grantedPermissionIds)
+            {
+                _dbContext.RolePermissions.Add(new RolePermission
                 {
-                    _dbContext.RolePermissions.Add(new RolePermission
-                    {
-                        PermissionId = permissionId,
-                        RoleId = role.Id
-                    });
-                }
+                    PermissionId = permissionId,
+                    RoleId = role.Id
+                });
             }
         }
     }
