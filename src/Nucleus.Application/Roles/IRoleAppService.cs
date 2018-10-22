@@ -9,12 +9,10 @@ namespace Nucleus.Application.Roles
     {
         Task<IPagedList<RoleListOutput>> GetRolesAsync(RoleListInput input);
 
-        //todo: write test
         Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(Guid id);
 
         Task AddRoleAsync(CreateOrUpdateRoleInput input);
 
-        //todo: write test
         Task EditRoleAsync(CreateOrUpdateRoleInput input);
 
         void RemoveRole(Guid id);

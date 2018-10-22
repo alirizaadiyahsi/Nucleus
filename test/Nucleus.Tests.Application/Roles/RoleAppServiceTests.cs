@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Core.Permissions;
@@ -32,7 +31,7 @@ namespace Nucleus.Tests.Application.Roles
                 Role = new RoleDto
                 {
                     Id = Guid.NewGuid(),
-                    Name = "TestRole_" + Guid.NewGuid()
+                    Name = "TestRoleName_" + Guid.NewGuid()
                 },
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
@@ -45,6 +44,34 @@ namespace Nucleus.Tests.Application.Roles
 
             Assert.NotNull(insertedTestRole);
             Assert.Equal(1, insertedTestRole.RolePermissions.Count);
+        }
+
+        [Fact]
+        public async void Should_Edit_Role()
+        {
+            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
+            await _dbContext.Roles.AddAsync(testRole);
+            await _dbContext.RolePermissions.AddAsync(new RolePermission
+            {
+                RoleId = testRole.Id,
+                PermissionId = DefaultPermissions.RoleRead.Id
+            });
+            await _dbContext.SaveChangesAsync();
+
+            var input = new CreateOrUpdateRoleInput
+            {
+                Role = new RoleDto
+                {
+                    Id = testRole.Id,
+                    Name = "TestRoleName_Edited" + Guid.NewGuid()
+                },
+                GrantedPermissionIds = new List<Guid> { DefaultPermissions.AdministrationAccess.Id }
+            };
+            await _roleAppService.EditRoleAsync(input);
+            var editedTestRole = await _dbContext.Roles.FindAsync(testRole.Id);
+
+            Assert.Contains("TestRoleName_Edited", editedTestRole.Name);
+            Assert.Contains(editedTestRole.RolePermissions, rp =>rp.PermissionId == DefaultPermissions.AdministrationAccess.Id);
         }
 
         [Fact]
@@ -88,6 +115,29 @@ namespace Nucleus.Tests.Application.Roles
             roleListInput.Filter = ".!1Aa_";
             var rolesListEmpty = await _roleAppService.GetRolesAsync(roleListInput);
             Assert.True(rolesListEmpty.Items.Count == 0);
+        }
+
+        [Fact]
+        public async void Should_Get_Role_For_Create()
+        {
+            var role = await _roleAppService.GetRoleForCreateOrUpdateAsync(Guid.Empty);
+            Assert.True(string.IsNullOrEmpty(role.Role.Name));
+        }
+
+        [Fact]
+        public async void Should_Get_Role_For_Update()
+        {
+            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
+            await _dbContext.Roles.AddAsync(testRole);
+            await _dbContext.RolePermissions.AddAsync(new RolePermission
+            {
+                RoleId = testRole.Id,
+                PermissionId = DefaultPermissions.RoleRead.Id
+            });
+            await _dbContext.SaveChangesAsync();
+
+            var role = await _roleAppService.GetRoleForCreateOrUpdateAsync(testRole.Id);
+            Assert.False(string.IsNullOrEmpty(role.Role.Name));
         }
     }
 }
