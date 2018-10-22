@@ -10,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in pagedListOfUserListDto.items">
+                <tr v-for="item in pagedListOfUserListDto.items" :key="item.id">
                     <td>{{ item.userName }}</td>
                     <td>{{ item.email }}</td>
                 </tr>

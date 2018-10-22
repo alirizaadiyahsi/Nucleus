@@ -4,7 +4,7 @@
             <div class="login-form">
                 <form v-on:submit.prevent="onSubmit">
                     <h2 class="text-center">Login</h2>
-                    <div v-for="error in errors">
+                    <div v-for="error in errors" :key="error">
                         <div class="alert alert-danger" role="alert">
                             {{error.value}}
                         </div>

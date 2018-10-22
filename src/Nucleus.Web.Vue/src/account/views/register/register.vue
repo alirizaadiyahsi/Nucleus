@@ -4,7 +4,7 @@
             <div v-if="!registerComplete" class="register-form">
                 <form v-on:submit.prevent="onSubmit">
                     <h2 class="text-center">Register</h2>
-                    <div v-for="error in errors">
+                    <div v-for="error in errors" :key="error">
                         <div class="alert alert-danger" role="alert">
                             {{error.value}}
                         </div>

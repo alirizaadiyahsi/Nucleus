@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in pagedListOfRoleListDto.items">
+                <tr v-for="item in pagedListOfRoleListDto.items" :key="item.id">
                     <td>
                         <div class="btn-group">
                             <button v-if="!item.isSystemDefault" 
