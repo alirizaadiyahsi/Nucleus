@@ -45,6 +45,38 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
+        public async Task Should_Get_Role_For_Create()
+        {
+            var responseLogin = await LoginAsAdminUserAsync();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var token = responseContent.Token;
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + Guid.Empty);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+
+            var role = await responseGetUsers.Content.ReadAsAsync<GetRoleForCreateOrUpdateOutput>();
+            Assert.True(string.IsNullOrEmpty(role.Role.Name));
+        }
+
+        [Fact]
+        public async Task Should_Get_Role_For_Update()
+        {
+            var responseLogin = await LoginAsAdminUserAsync();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var token = responseContent.Token;
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + DefaultRoles.Member.Id);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+
+            var role = await responseGetUsers.Content.ReadAsAsync<GetRoleForCreateOrUpdateOutput>();
+            Assert.False(string.IsNullOrEmpty(role.Role.Name));
+        }
+
+        [Fact]
         public async Task Should_Create_Role()
         {
             var input = new CreateOrUpdateRoleInput
@@ -83,6 +115,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             {
                 Role = new RoleDto
                 {
+                    Id = testRole.Id,
                     Name = "TestRoleName_Edited_" + Guid.NewGuid()
                 },
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }

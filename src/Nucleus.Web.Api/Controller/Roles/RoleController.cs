@@ -38,7 +38,6 @@ namespace Nucleus.Web.Api.Controller.Roles
             return Ok(getRoleForCreateOrUpdateOutput);
         }
 
-        //todo: write test
         [HttpPost("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)] 
         public async Task<ActionResult> CreateOrUpdateRole([FromBody]CreateOrUpdateRoleInput input)
