@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
@@ -49,14 +50,7 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Edit_Role()
         {
-            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
-            await _dbContext.Roles.AddAsync(testRole);
-            await _dbContext.RolePermissions.AddAsync(new RolePermission
-            {
-                RoleId = testRole.Id,
-                PermissionId = DefaultPermissions.RoleRead.Id
-            });
-            await _dbContext.SaveChangesAsync();
+            var testRole = await CreateAndGetTestRole();
 
             var input = new CreateOrUpdateRoleInput
             {
@@ -77,14 +71,7 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Remove_Role()
         {
-            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
-            await _dbContext.Roles.AddAsync(testRole);
-            await _dbContext.RolePermissions.AddAsync(new RolePermission
-            {
-                RoleId = testRole.Id,
-                PermissionId = DefaultPermissions.RoleRead.Id
-            });
-            await _dbContext.SaveChangesAsync();
+            var testRole = await CreateAndGetTestRole();
 
             var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
@@ -129,6 +116,19 @@ namespace Nucleus.Tests.Application.Roles
         {
             var role = await _roleAppService.GetRoleForCreateOrUpdateAsync(DefaultRoles.Member.Id);
             Assert.False(string.IsNullOrEmpty(role.Role.Name));
+        }
+
+        private async Task<Role> CreateAndGetTestRole()
+        {
+            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
+            await _dbContext.Roles.AddAsync(testRole);
+            await _dbContext.RolePermissions.AddAsync(new RolePermission
+            {
+                RoleId = testRole.Id,
+                PermissionId = DefaultPermissions.RoleRead.Id
+            });
+            await _dbContext.SaveChangesAsync();
+            return testRole;
         }
     }
 }
