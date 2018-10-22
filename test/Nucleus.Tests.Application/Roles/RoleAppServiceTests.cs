@@ -63,15 +63,15 @@ namespace Nucleus.Tests.Application.Roles
                 Role = new RoleDto
                 {
                     Id = testRole.Id,
-                    Name = "TestRoleName_Edited" + Guid.NewGuid()
+                    Name = "TestRoleName_Edited_" + Guid.NewGuid()
                 },
-                GrantedPermissionIds = new List<Guid> { DefaultPermissions.AdministrationAccess.Id }
+                GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
             await _roleAppService.EditRoleAsync(input);
             var editedTestRole = await _dbContext.Roles.FindAsync(testRole.Id);
 
-            Assert.Contains("TestRoleName_Edited", editedTestRole.Name);
-            Assert.Contains(editedTestRole.RolePermissions, rp =>rp.PermissionId == DefaultPermissions.AdministrationAccess.Id);
+            Assert.Contains("TestRoleName_Edited_", editedTestRole.Name);
+            Assert.Contains(editedTestRole.RolePermissions, rp => rp.PermissionId == DefaultPermissions.MemberAccess.Id);
         }
 
         [Fact]
@@ -127,16 +127,7 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Get_Role_For_Update()
         {
-            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
-            await _dbContext.Roles.AddAsync(testRole);
-            await _dbContext.RolePermissions.AddAsync(new RolePermission
-            {
-                RoleId = testRole.Id,
-                PermissionId = DefaultPermissions.RoleRead.Id
-            });
-            await _dbContext.SaveChangesAsync();
-
-            var role = await _roleAppService.GetRoleForCreateOrUpdateAsync(testRole.Id);
+            var role = await _roleAppService.GetRoleForCreateOrUpdateAsync(DefaultRoles.Member.Id);
             Assert.False(string.IsNullOrEmpty(role.Role.Name));
         }
     }
