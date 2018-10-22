@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application;
+using Nucleus.EntityFramework;
 using Nucleus.Web.Core.ActionFilters;
 using Nucleus.Web.Core.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
@@ -42,6 +43,7 @@ namespace Nucleus.Web.Api
         {
             if (env.IsDevelopment())
             {
+                //UpdateDatabase(app);
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -59,6 +61,20 @@ namespace Nucleus.Web.Api
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<NucleusDbContext>())
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
+            }
         }
     }
 }
