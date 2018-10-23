@@ -38,7 +38,7 @@ export default class RoleListComponent extends Vue {
         });
     }
 
-    public removeRole(id: string) {
+    public remove(id: string) {
         swal({
             title: 'Are you sure want to delete?',
             type: 'warning',
