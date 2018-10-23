@@ -7,4 +7,13 @@ export default class UserAppService extends BaseAppService {
 
         return this.get<IPagedList<IUserListInput>>('/api/user/getUsers' + query);
     }
+
+    public deleteUser(id: string) {
+        const query = '?id=' + id;
+
+        return this.delete('/api/user/deleteUser' + query)
+            .then((response) => {
+                return response;
+            });
+    }
 }
