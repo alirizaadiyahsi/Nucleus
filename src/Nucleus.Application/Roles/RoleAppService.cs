@@ -95,6 +95,7 @@ namespace Nucleus.Application.Roles
             }
         }
 
+        // todo: check if it is a system default role
         public void RemoveRole(Guid id)
         {
             var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);

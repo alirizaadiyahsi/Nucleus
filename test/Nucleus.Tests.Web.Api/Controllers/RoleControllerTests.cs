@@ -147,7 +147,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             await _dbContext.RolePermissions.AddAsync(new RolePermission
             {
                 RoleId = testRole.Id,
-                PermissionId = DefaultPermissions.RoleRead.Id
+                PermissionId = DefaultPermissions.AdministrationAccess.Id
             });
             await _dbContext.SaveChangesAsync();
             return testRole;
