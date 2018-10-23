@@ -106,7 +106,7 @@ namespace Nucleus.Application.Roles
 
             if (role.IsSystemDefault)
             {
-                throw new Exception("You cannot remove system default roles!");
+                throw new Exception("You cannot remove default system roles!");
             }
 
             role.RolePermissions.Clear();

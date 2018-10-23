@@ -55,6 +55,11 @@ namespace Nucleus.Application.Users
                 return;
             }
 
+            if (user.UserName == DefaultUsers.Admin.UserName)
+            {
+                throw new Exception("You cannot remove admin user!");
+            }
+
             user.UserRoles.Clear();
             _dbContext.Users.Remove(user);
         }
