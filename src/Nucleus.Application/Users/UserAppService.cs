@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -7,6 +8,7 @@ using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Identity;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
+using Nucleus.EntityFramework;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
@@ -15,13 +17,16 @@ namespace Nucleus.Application.Users
 {
     public class UserAppService : IUserAppService
     {
+        private readonly NucleusDbContext _dbContext;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
         public UserAppService(
+            NucleusDbContext dbContext,
             IMapper mapper, 
             UserManager<User> userManager)
         {
+            _dbContext = dbContext;
             _mapper = mapper;
             _userManager = userManager;
         }
@@ -39,6 +44,19 @@ namespace Nucleus.Application.Users
             var userListDtos = _mapper.Map<List<UserListOutput>>(users);
 
             return userListDtos.ToPagedList(usersCount);
+        }
+
+        public void RemoveUser(Guid id)
+        {
+            var user = _userManager.Users.FirstOrDefault(r => r.Id == id);
+
+            if (user == null)
+            {
+                return;
+            }
+
+            user.UserRoles.Clear();
+            _dbContext.Users.Remove(user);
         }
     }
 }
