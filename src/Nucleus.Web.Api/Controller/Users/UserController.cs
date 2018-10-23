@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nucleus.Application.Users;
@@ -23,6 +24,15 @@ namespace Nucleus.Web.Api.Controller.Users
         public async Task<ActionResult<IPagedList<UserListOutput>>> GetUsers(UserListInput input)
         {
             return Ok(await _userAppService.GetUsersAsync(input));
+        }
+
+        [HttpDelete("[action]")]
+        [Authorize(Policy = DefaultPermissions.PermissionNameForUserDelete)] 
+        public ActionResult DeleteUser(Guid id)
+        {
+            _userAppService.RemoveUser(id);
+
+            return Ok(new { success = true });
         }
     }
 }
