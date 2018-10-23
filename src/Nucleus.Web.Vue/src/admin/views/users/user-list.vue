@@ -15,7 +15,7 @@
                     <td>
                         <div class="btn-group">
                             <button v-if="item.userName != 'admin'"
-                                    v-on:click="delete(item.id)"
+                                    v-on:click="remove(item.id)"
                                     class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash-alt"></i>
                             </button>

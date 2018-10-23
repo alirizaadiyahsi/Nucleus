@@ -42,7 +42,7 @@ export default class CreateOrUpdateRoleModalComponent extends Vue {
                         showConfirmButton: false,
                         timer: 3000,
                         type: 'success',
-                        title: ('Successfully ' + (this.isUpdate ? 'updated!' : 'created!'))
+                        title: ('Successfully ' + (this.isUpdate ? 'updated!' : 'created!')),
                     });
                     this.$refs.modalCreateOrUpdateRole.hide();
                     this.$parent.getRoles();

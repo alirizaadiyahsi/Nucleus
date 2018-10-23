@@ -25,13 +25,13 @@ export default class UserListComponent extends Vue {
         });
     }
 
-    public delete(id: string) {
+    public remove(id: string) {
         swal({
             title: 'Are you sure want to delete?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
-            cancelButtonText: 'Cancel'
+            cancelButtonText: 'Cancel',
         }).then((result) => {
             if (result.value) {
                 this.userAppService.deleteUser(id).then((response) => {
@@ -42,7 +42,7 @@ export default class UserListComponent extends Vue {
                             showConfirmButton: false,
                             timer: 3000,
                             type: 'success',
-                            title: 'Successfully deleted!'
+                            title: 'Successfully deleted!',
                         });
                         this.getUsers();
                     } else {

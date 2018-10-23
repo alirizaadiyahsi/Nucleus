@@ -38,13 +38,13 @@ export default class RoleListComponent extends Vue {
         });
     }
 
-    public delete(id: string) {
+    public remove(id: string) {
         swal({
             title: 'Are you sure want to delete?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
-            cancelButtonText: 'Cancel'
+            cancelButtonText: 'Cancel',
         }).then((result) => {
             if (result.value) {
                 this.roleAppService.deleteRole(id).then((response) => {
@@ -55,7 +55,7 @@ export default class RoleListComponent extends Vue {
                             showConfirmButton: false,
                             timer: 3000,
                             type: 'success',
-                            title: 'Successfully deleted!'
+                            title: 'Successfully deleted!',
                         });
                         this.getRoles();
                     } else {
