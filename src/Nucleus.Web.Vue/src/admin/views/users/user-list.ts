@@ -26,34 +26,18 @@ export default class UserListComponent extends AppComponentBase {
     }
 
     public remove(id: string) {
-        swal({
-            title: 'Are you sure want to delete?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'Cancel',
-        }).then((result) => {
-            if (result.value) {
-                this.userAppService.deleteUser(id).then((response) => {
-                    if (!response.isError) {
-                        swal({
-                            toast: true,
-                            position: 'bottom-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            type: 'success',
-                            title: 'Successfully deleted!',
-                        });
-                        this.getUsers();
-                    } else {
-                        swal({
-                            title: response.errors.join('<br>'),
-                            type: 'error',
-                            showConfirmButton: false,
-                        });
-                    }
-                });
-            }
-        });
+        this.swalConfirm('Are you sure want to delete?')
+            .then((result) => {
+                if (result.value) {
+                    this.userAppService.deleteUser(id).then((response) => {
+                        if (!response.isError) {
+                            this.swalToast(2000, 'success', 'Successfully deleted!');
+                            this.getUsers();
+                        } else {
+                            this.swalAlert('error', response.errors.join('<br>'));
+                        }
+                    });
+                }
+            });
     }
 }

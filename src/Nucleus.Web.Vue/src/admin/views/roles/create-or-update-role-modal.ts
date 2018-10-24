@@ -1,7 +1,6 @@
 import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
 import RoleAppService from '@/services/roles/role-app-service';
-import swal from 'sweetalert2';
 
 @Component
 export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
@@ -36,14 +35,7 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
         this.roleAppService.createOrUpdateRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
             .then((response) => {
                 if (!response.isError) {
-                    swal({
-                        toast: true,
-                        position: 'bottom-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        type: 'success',
-                        title: ('Successfully ' + (this.isUpdate ? 'updated!' : 'created!')),
-                    });
+                    this.swalToast(2000,'success','Successfully ' + (this.isUpdate ? 'updated!' : 'created!'));
                     this.$refs.modalCreateOrUpdateRole.hide();
                     this.$parent.getRoles();
                 } else {

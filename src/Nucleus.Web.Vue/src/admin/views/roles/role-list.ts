@@ -1,7 +1,6 @@
 import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
 import RoleAppService from '@/services/roles/role-app-service';
-import swal from 'sweetalert2';
 
 @Component({
     components: {
@@ -39,34 +38,18 @@ export default class RoleListComponent extends AppComponentBase {
     }
 
     public remove(id: string) {
-        swal({
-            title: 'Are you sure want to delete?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'Cancel',
-        }).then((result) => {
-            if (result.value) {
-                this.roleAppService.deleteRole(id).then((response) => {
-                    if (!response.isError) {
-                        swal({
-                            toast: true,
-                            position: 'bottom-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            type: 'success',
-                            title: 'Successfully deleted!',
-                        });
-                        this.getRoles();
-                    } else {
-                        swal({
-                            title: response.errors.join('<br>'),
-                            type: 'error',
-                            showConfirmButton: false,
-                        });
-                    }
-                });
-            }
-        });
+        this.swalConfirm('Are you sure want to delete?')
+            .then((result) => {
+                if (result.value) {
+                    this.roleAppService.deleteRole(id).then((response) => {
+                        if (!response.isError) {
+                            this.swalToast(2000, 'success', 'Successfully deleted!');
+                            this.getRoles();
+                        } else {
+                            this.swalAlert('error', response.errors.join('<br>'));
+                        }
+                    });
+                }
+            });
     }
 }

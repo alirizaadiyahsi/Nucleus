@@ -22,21 +22,28 @@ export default class BaseAppService {
                 headers,
                 body,
             }) as any)
-            .then((response) => {
+            .then((response: any) => {
                 isBadRequest = !response.ok;
                 if (response.status === 401) {
                     AuthStore.removeToken();
                     return { errorMessage: 'Unauthorized request' };
                 }
 
-                return response.json();
+                return response.text();
             })
             .then((responseContent: any) => {
+                var content: any;
+
+                try {
+                    content = JSON.parse(responseContent);
+                } catch (err) {
+                    content = responseContent;
+                }
 
                 const response = {
                     isError: isBadRequest,
-                    errors: isBadRequest ? responseContent : null,
-                    content: isBadRequest ? null : responseContent,
+                    errors: isBadRequest ? content : null,
+                    content: isBadRequest ? null : content,
                 } as IRestResponse<T>;
 
                 return response;
