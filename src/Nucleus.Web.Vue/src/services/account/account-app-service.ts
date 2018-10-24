@@ -1,5 +1,5 @@
-﻿import BaseAppService from './base-app-service';
-import AuthStore from '../stores/auth-store';
+﻿import BaseAppService from '../base-app-service';
+import AuthStore from '../../stores/auth-store';
 
 export default class AccountAppService extends BaseAppService {
     public login(loginViewModel: ILoginViewModel) {

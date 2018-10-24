@@ -20,6 +20,7 @@ namespace Nucleus.Web.Api.Controller.Account
         private readonly UserManager<User> _userManager;
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
 
+        //todo: change DTO names to make it standard (use -input, -output post fix), open an issue related this todo
         public AccountController(
             UserManager<User> userManager,
             IOptions<JwtTokenConfiguration> jwtTokenConfiguration)
@@ -74,6 +75,7 @@ namespace Nucleus.Web.Api.Controller.Account
                 return BadRequest(result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList());
             }
 
+            //todo: no need to return RegisterResult return just OK and show message at client side
             return Ok(new RegisterResult { ResultMessage = "Your account has been successfully created." });
         }
 

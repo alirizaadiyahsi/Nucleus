@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import UserAppService from '../../../services/user-app-service';
+import UserAppService from '../../../services/users/user-app-service';
 import swal from 'sweetalert2';
 
 @Component
