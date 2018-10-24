@@ -1,4 +1,4 @@
-﻿import Vue from 'vue';
+﻿import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
 
 @Component({
@@ -7,5 +7,5 @@ import { Component } from 'vue-property-decorator';
         TopMenuComponent: require('./components/top-menu/top-menu.vue').default,
     },
 })
-export default class AdminLayoutComponent extends Vue {
+export default class AdminLayoutComponent extends AppComponentBase {
 }

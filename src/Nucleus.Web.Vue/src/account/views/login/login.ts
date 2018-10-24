@@ -1,9 +1,9 @@
-﻿import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import AccountAppService from '../../../services/account/account-app-service';
+﻿import { Component } from 'vue-property-decorator';
+import AccountAppService from '@/services/account/account-app-service';
+import AppComponentBase from '@/models/shared/app-component-base';
 
 @Component
-export default class LoginComponent extends Vue {
+export default class LoginComponent extends AppComponentBase {
 
     public usernameoremail = '';
     public password = '';

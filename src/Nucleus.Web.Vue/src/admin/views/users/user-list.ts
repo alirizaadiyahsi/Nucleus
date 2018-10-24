@@ -1,10 +1,10 @@
-import Vue from 'vue';
+import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
-import UserAppService from '../../../services/users/user-app-service';
+import UserAppService from '@/services/users/user-app-service';
 import swal from 'sweetalert2';
 
 @Component
-export default class UserListComponent extends Vue {
+export default class UserListComponent extends AppComponentBase {
     public pagedListOfUserListDto: IPagedList<IUserListInput> = {
         totalCount: 0,
         items: [],

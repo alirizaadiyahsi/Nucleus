@@ -1,10 +1,10 @@
-import Vue from 'vue';
+import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
-import RoleAppService from '../../../services/roles/role-app-service';
+import RoleAppService from '@/services/roles/role-app-service';
 import swal from 'sweetalert2';
 
 @Component
-export default class CreateOrUpdateRoleModalComponent extends Vue {
+export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
 
     public isUpdate = false;
     public getRoleForCreateOrUpdateOutput = {};

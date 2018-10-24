@@ -1,9 +1,9 @@
-﻿import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import AccountAppService from '../../../services/account/account-app-service';
+﻿import { Component } from 'vue-property-decorator';
+import AccountAppService from '@/services/account/account-app-service';
+import AppComponentBase from '@/models/shared/app-component-base';
 
 @Component
-export default class RegisterComponent extends Vue {
+export default class RegisterComponent extends AppComponentBase {
 
     public username = '';
     public email = '';
@@ -22,7 +22,7 @@ export default class RegisterComponent extends Vue {
 
         accountAppService.register(registerViewModel).then((response) => {
             if (!response.isError) {
-                this.resultMessage = "Your account has been successfully created.";
+                this.resultMessage = 'Your account has been successfully created.';
                 this.registerComplete = true;
             } else {
                 this.errors = response.errors;

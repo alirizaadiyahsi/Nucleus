@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
-import RoleAppService from '../../../services/roles/role-app-service';
+import RoleAppService from '@/services/roles/role-app-service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
         CreateOrUpdateRoleModalComponent: require('./create-or-update-role-modal.vue').default,
     },
 })
-export default class RoleListComponent extends Vue {
+export default class RoleListComponent extends AppComponentBase {
     public pagedListOfRoleListDto: IPagedList<IRoleListOutput> = {
         totalCount: 0,
         items: [],
