@@ -50,8 +50,7 @@ namespace Nucleus.Web.Api.Controller.Roles
                 await _roleAppService.EditRoleAsync(input);
             }
             
-            //todo: no need to return success true, OK is already ok.
-            return Ok(new { success = true });
+            return Ok();
         }
 
         [HttpDelete("[action]")]
@@ -60,8 +59,7 @@ namespace Nucleus.Web.Api.Controller.Roles
         {
             _roleAppService.RemoveRole(id);
 
-            //todo: no need to return success true, OK is already ok.
-            return Ok(new { success = true });
+            return Ok();
         }
     }
 }

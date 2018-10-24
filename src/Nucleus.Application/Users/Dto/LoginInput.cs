@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Web.Api.Models
+﻿namespace Nucleus.Application.Users.Dto
 {
     public class LoginInput
     {

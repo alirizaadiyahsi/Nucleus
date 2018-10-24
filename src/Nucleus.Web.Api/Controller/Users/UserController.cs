@@ -32,8 +32,7 @@ namespace Nucleus.Web.Api.Controller.Users
         {
             _userAppService.RemoveUser(id);
 
-            //todo: no need to return success true, OK is already ok.
-            return Ok(new { success = true });
+            return Ok();
         }
     }
 }

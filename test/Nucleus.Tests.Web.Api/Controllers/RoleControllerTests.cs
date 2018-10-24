@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Roles.Dto;
+using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
 using Nucleus.EntityFramework;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
-using Nucleus.Web.Api.Models;
 using Xunit;
 
 namespace Nucleus.Tests.Web.Api.Controllers

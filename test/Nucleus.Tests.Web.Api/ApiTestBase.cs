@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
 using Nucleus.Tests.Shared;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
-using Nucleus.Web.Api.Models;
 
 namespace Nucleus.Tests.Web.Api
 {

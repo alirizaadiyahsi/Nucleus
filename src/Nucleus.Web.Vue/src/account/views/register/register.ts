@@ -22,7 +22,7 @@ export default class RegisterComponent extends Vue {
 
         accountAppService.register(registerViewModel).then((response) => {
             if (!response.isError) {
-                this.resultMessage = response.content.resultMessage;
+                this.resultMessage = "Your account has been successfully created.";
                 this.registerComplete = true;
             } else {
                 this.errors = response.errors;

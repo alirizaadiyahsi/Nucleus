@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
+using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
-using Nucleus.Web.Api.Models;
 using Nucleus.Web.Core.Authentication;
 using Nucleus.Web.Core.Controllers;
 
@@ -20,7 +20,6 @@ namespace Nucleus.Web.Api.Controller.Account
         private readonly UserManager<User> _userManager;
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
 
-        //todo: change DTO names to make it standard (use -input, -output post fix), open an issue related this todo
         public AccountController(
             UserManager<User> userManager,
             IOptions<JwtTokenConfiguration> jwtTokenConfiguration)
@@ -53,7 +52,7 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<RegisterOutput>> Register([FromBody]RegisterInput model)
+        public async Task<ActionResult> Register([FromBody]RegisterInput model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null)
@@ -75,8 +74,7 @@ namespace Nucleus.Web.Api.Controller.Account
                 return BadRequest(result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList());
             }
 
-            //todo: no need to return RegisterResult return just OK and show message at client side
-            return Ok(new RegisterOutput { ResultMessage = "Your account has been successfully created." });
+            return Ok();
         }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
