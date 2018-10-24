@@ -42,7 +42,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Get_Token()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var loginResult = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var loginResult = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             Assert.NotNull(loginResult.Token);
         }
 
@@ -62,7 +62,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Register()
         {
-            var registerViewModel = new RegisterViewModel
+            var registerViewModel = new RegisterInput
             {
                 Email = "TestUserEmail_" + Guid.NewGuid() + "@mail.com",
                 UserName = "TestUserName_" + Guid.NewGuid(),
@@ -78,7 +78,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Register_With_Existing_User()
         {
-            var registerViewModel = new RegisterViewModel
+            var registerViewModel = new RegisterInput
             {
                 Email = DefaultUsers.Admin.Email,
                 UserName = DefaultUsers.Admin.UserName,

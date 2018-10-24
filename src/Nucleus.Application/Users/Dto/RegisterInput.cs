@@ -1,6 +1,6 @@
 ﻿namespace Nucleus.Web.Api.Models
 {
-    public class RegisterViewModel
+    public class RegisterInput
     {
         public string UserName { get; set; }
 

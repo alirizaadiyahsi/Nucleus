@@ -1,6 +1,6 @@
 ﻿namespace Nucleus.Web.Api.Models
 {
-    public class LoginViewModel
+    public class LoginInput
     {
         public string UserNameOrEmail { get; set; }
 

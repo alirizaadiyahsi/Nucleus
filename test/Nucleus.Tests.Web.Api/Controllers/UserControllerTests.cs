@@ -30,7 +30,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Get_Users()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             var token = responseContent.Token;
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUsers");

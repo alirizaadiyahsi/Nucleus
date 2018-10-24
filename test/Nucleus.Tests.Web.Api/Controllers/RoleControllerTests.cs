@@ -32,7 +32,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Get_Roles()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             var token = responseContent.Token;
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getroles");
@@ -48,7 +48,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Get_Role_For_Create()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             var token = responseContent.Token;
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + Guid.Empty);
@@ -64,7 +64,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Get_Role_For_Update()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             var token = responseContent.Token;
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + DefaultRoles.Member.Id);

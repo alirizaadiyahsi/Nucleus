@@ -30,7 +30,7 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<LoginResult>> Login([FromBody]LoginViewModel loginViewModel)
+        public async Task<ActionResult<LoginOutput>> Login([FromBody]LoginInput loginViewModel)
         {
             var userToVerify = await CreateClaimsIdentityAsync(loginViewModel.UserNameOrEmail, loginViewModel.Password);
             if (userToVerify == null)
@@ -49,11 +49,11 @@ namespace Nucleus.Web.Api.Controller.Account
                 signingCredentials: _jwtTokenConfiguration.SigningCredentials
             );
 
-            return Ok(new LoginResult { Token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return Ok(new LoginOutput { Token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<RegisterResult>> Register([FromBody]RegisterViewModel model)
+        public async Task<ActionResult<RegisterOutput>> Register([FromBody]RegisterInput model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null)
@@ -76,7 +76,7 @@ namespace Nucleus.Web.Api.Controller.Account
             }
 
             //todo: no need to return RegisterResult return just OK and show message at client side
-            return Ok(new RegisterResult { ResultMessage = "Your account has been successfully created." });
+            return Ok(new RegisterOutput { ResultMessage = "Your account has been successfully created." });
         }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)

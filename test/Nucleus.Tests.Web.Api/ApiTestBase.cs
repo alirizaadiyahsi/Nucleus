@@ -10,7 +10,7 @@ namespace Nucleus.Tests.Web.Api
 {
     public class ApiTestBase : TestBase
     {
-        private static readonly LoginViewModel AdminUserLoginViewModel = new LoginViewModel
+        private static readonly LoginInput AdminUserLoginViewModel = new LoginInput
         {
             UserNameOrEmail = DefaultUsers.Admin.Email,
             Password = "123qwe"
@@ -24,7 +24,7 @@ namespace Nucleus.Tests.Web.Api
 
         protected async Task<HttpResponseMessage> LoginAsync(string userNameOrEmail, string password)
         {
-            var adminUserLoginViewModel = new LoginViewModel
+            var adminUserLoginViewModel = new LoginInput
             {
                 UserNameOrEmail = userNameOrEmail,
                 Password = password
@@ -37,7 +37,7 @@ namespace Nucleus.Tests.Web.Api
         protected async Task<string> LoginAsAdminUserAndGetTokenAsync()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var loginResult = await responseLogin.Content.ReadAsAsync<LoginResult>();
+            var loginResult = await responseLogin.Content.ReadAsAsync<LoginOutput>();
 
             return loginResult.Token;
         }
