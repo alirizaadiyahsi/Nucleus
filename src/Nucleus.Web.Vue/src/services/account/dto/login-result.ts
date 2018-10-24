@@ -1,3 +1,0 @@
-﻿interface ILoginResult {
-    token: string;
-}

@@ -11,7 +11,7 @@ export default class LoginComponent extends Vue {
 
     public onSubmit() {
         const accountAppService = new AccountAppService();
-        const loginViewModel: ILoginViewModel = { userNameOrEmail: this.usernameoremail, password: this.password };
+        const loginViewModel: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };
 
         accountAppService.login(loginViewModel).then((response) => {
             if (!response.isError) {

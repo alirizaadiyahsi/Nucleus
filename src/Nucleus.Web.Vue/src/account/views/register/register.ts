@@ -14,7 +14,7 @@ export default class RegisterComponent extends Vue {
 
     public onSubmit() {
         const accountAppService = new AccountAppService();
-        const registerViewModel: IRegisterViewModel = {
+        const registerViewModel: IRegisterInput = {
             userName: this.username,
             email: this.email,
             password: this.password,

@@ -1,4 +1,4 @@
-﻿interface ILoginViewModel {
+﻿interface ILoginInput {
     userNameOrEmail: string;
     password: string;
 }
