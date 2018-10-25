@@ -14,7 +14,7 @@
                 <tr v-for="item in pagedListOfUserListDto.items" :key="item.id">
                     <td>
                         <div class="btn-group">
-                            <button v-if="item.userName != 'admin'"
+                            <button v-if="!isAdminUser(item.userName)"
                                     v-on:click="remove(item.id)"
                                     class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash-alt"></i>

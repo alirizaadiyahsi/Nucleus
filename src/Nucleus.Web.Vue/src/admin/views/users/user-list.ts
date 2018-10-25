@@ -1,7 +1,7 @@
 import AppComponentBase from '@/models/shared/app-component-base';
 import { Component } from 'vue-property-decorator';
 import UserAppService from '@/services/users/user-app-service';
-import swal from 'sweetalert2';
+import AppConsts from '@/models/shared/app-consts';
 
 @Component
 export default class UserListComponent extends AppComponentBase {
@@ -39,5 +39,9 @@ export default class UserListComponent extends AppComponentBase {
                     });
                 }
             });
+    }
+
+    public isAdminUser(userName: string) {
+        return userName === AppConsts.userManagement.adminUserName;
     }
 }
