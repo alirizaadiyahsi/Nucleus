@@ -1,4 +1,4 @@
-﻿import BaseAppService from '../base-app-service';
+﻿import BaseAppService from '@/services/base-app-service';
 import queryString from 'query-string';
 
 export default class RoleAppService extends BaseAppService {

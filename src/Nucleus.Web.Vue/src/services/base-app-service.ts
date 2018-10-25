@@ -1,4 +1,4 @@
-﻿import AuthStore from '../stores/auth-store';
+﻿import AuthStore from '@/stores/auth-store';
 import AppConsts from '@/models/shared/app-consts';
 
 export default class BaseAppService {

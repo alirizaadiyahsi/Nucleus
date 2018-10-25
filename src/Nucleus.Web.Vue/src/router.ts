@@ -1,8 +1,8 @@
 ﻿import Vue from 'vue';
 import VueRouter from 'vue-router';
-import AuthStore from './stores/auth-store';
-import accountLayout from './account/account-layout.vue';
-import adminLayout from './admin/admin-layout.vue';
+import AuthStore from '@/stores/auth-store';
+import accountLayout from '@/account/account-layout.vue';
+import adminLayout from '@/admin/admin-layout.vue';
 
 Vue.use(VueRouter);
 
