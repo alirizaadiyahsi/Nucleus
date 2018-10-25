@@ -30,7 +30,7 @@ export default class BaseAppService {
                 return response.text();
             })
             .then((responseContent: any) => {
-                var content: any;
+                let content: any;
 
                 try {
                     content = JSON.parse(responseContent);

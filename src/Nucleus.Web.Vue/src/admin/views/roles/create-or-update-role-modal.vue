@@ -1,7 +1,7 @@
 <template>
     <form v-on:submit.prevent="onSubmit()">
         <b-modal id="modalCreateOrUpdateRole" ref="modalCreateOrUpdateRole" v-bind:title="isUpdate ? 'Update Role' : 'Create Role'" @shown="createOrUpdateRoleModalShown">
-            <div v-for="error in errors">
+            <div v-for="error in errors" :key="error">
                 <div class="alert alert-danger" role="alert">
                     {{error.value}}
                 </div>

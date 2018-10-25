@@ -1,8 +1,8 @@
 ﻿const appConsts = {
-    userManagement:{
-        adminUserName: 'admin'
+    userManagement: {
+        adminUserName: 'admin',
     },
-    baseApiUrl: "https://localhost:44339",
-}
+    baseApiUrl: 'https://localhost:44339',
+};
 
-export default appConsts
+export default appConsts;

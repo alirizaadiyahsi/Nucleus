@@ -10,14 +10,14 @@ export default class AppComponentBase extends Vue {
             position: 'bottom-end',
             showConfirmButton: false,
             timer: duration,
-            type: type,
-            title: title,
+            type,
+            title,
         } as any);
     }
 
     protected swalConfirm(title: string) {
         return swal({
-            title: title,
+            title,
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
@@ -27,8 +27,8 @@ export default class AppComponentBase extends Vue {
 
     protected swalAlert(type: string, html: string) {
         swal({
-            html: html,
-            type: type,
+            html,
+            type,
             showConfirmButton: false,
         } as any);
     }

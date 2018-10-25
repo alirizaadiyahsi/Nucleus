@@ -35,7 +35,7 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
         this.roleAppService.createOrUpdateRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
             .then((response) => {
                 if (!response.isError) {
-                    this.swalToast(2000,'success','Successfully ' + (this.isUpdate ? 'updated!' : 'created!'));
+                    this.swalToast(2000, 'success', 'Successfully ' + (this.isUpdate ? 'updated!' : 'created!'));
                     this.$refs.modalCreateOrUpdateRole.hide();
                     this.$parent.getRoles();
                 } else {
