@@ -1,9 +1,7 @@
 ﻿import AuthStore from '../stores/auth-store';
+import AppConsts from '@/models/shared/app-consts';
 
 export default class BaseAppService {
-    // todo: get this from a config file
-    public static baseApiUrl = 'https://localhost:44339';
-
     private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponse<T>> {
         let isBadRequest = false;
         let body = data === '' ? null : data;
@@ -16,7 +14,7 @@ export default class BaseAppService {
             body = JSON.stringify(data);
         }
 
-        return fetch(this.baseApiUrl + url,
+        return fetch(AppConsts.baseApiUrl + url,
             ({
                 method,
                 headers,
