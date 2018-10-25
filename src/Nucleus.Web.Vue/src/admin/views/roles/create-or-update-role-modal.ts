@@ -5,6 +5,8 @@ import RoleAppService from '@/services/roles/role-app-service';
 @Component
 export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
 
+    public parent: any = this.$parent;
+    public refs: any = this.$refs;
     public isUpdate = false;
     public getRoleForCreateOrUpdateOutput = {};
     public createOrUpdateRoleInput = {
@@ -19,7 +21,7 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
     public roleAppService = new RoleAppService();
 
     public createOrUpdateRoleModalShown() {
-        this.roleAppService.getRoleForCreateOrUpdate(this.$parent.selectedRoleId)
+        this.roleAppService.getRoleForCreateOrUpdate(this.parent.selectedRoleId)
             .then((response) => {
                 const result = response.content as IGetRoleForCreateOrUpdateOutput;
                 this.isUpdate = result.role.name != null;
@@ -36,8 +38,8 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
             .then((response) => {
                 if (!response.isError) {
                     this.swalToast(2000, 'success', 'Successfully ' + (this.isUpdate ? 'updated!' : 'created!'));
-                    this.$refs.modalCreateOrUpdateRole.hide();
-                    this.$parent.getRoles();
+                    this.refs.modalCreateOrUpdateRole.hide();
+                    this.parent.getRoles();
                 } else {
                     this.errors = response.errors;
                 }
