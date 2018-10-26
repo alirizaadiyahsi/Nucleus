@@ -1,7 +1,6 @@
-import AppComponentBase from '@/models/shared/app-component-base';
+import AppComponentBase from '@/infrastructure/core/app-component-base';
 import { Component } from 'vue-property-decorator';
-import UserAppService from '@/services/users/user-app-service';
-import AppConsts from '@/models/shared/app-consts';
+import AppConsts from '@/infrastructure/core/app-consts';
 
 @Component
 export default class UserListComponent extends AppComponentBase {
@@ -9,7 +8,6 @@ export default class UserListComponent extends AppComponentBase {
         totalCount: 0,
         items: [],
     };
-    public userAppService = new UserAppService();
 
     public mounted() {
         this.getUsers();
@@ -20,7 +18,8 @@ export default class UserListComponent extends AppComponentBase {
             filter: '',
         };
 
-        this.userAppService.getUsers(userListInput).then((response) => {
+        const query = '?' + this.queryString.stringify(userListInput);
+        this.appService.get<IPagedList<IUserListInput>>('/api/user/getUsers' + query).then((response) => {
             this.pagedListOfUserListDto = response.content as IPagedList<IUserListInput>;
         });
     }
@@ -29,14 +28,17 @@ export default class UserListComponent extends AppComponentBase {
         this.swalConfirm('Are you sure want to delete?')
             .then((result) => {
                 if (result.value) {
-                    this.userAppService.deleteUser(id).then((response) => {
-                        if (!response.isError) {
-                            this.swalToast(2000, 'success', 'Successfully deleted!');
-                            this.getUsers();
-                        } else {
-                            this.swalAlert('error', response.errors.join('<br>'));
-                        }
-                    });
+                    const query = '?id=' + id;
+
+                    this.appService.delete('/api/user/deleteUser' + query)
+                        .then((response) => {
+                            if (!response.isError) {
+                                this.swalToast(2000, 'success', 'Successfully deleted!');
+                                this.getUsers();
+                            } else {
+                                this.swalAlert('error', response.errors.join('<br>'));
+                            }
+                        });
                 }
             });
     }

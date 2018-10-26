@@ -1,9 +1,14 @@
 ﻿import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import swal from 'sweetalert2';
+import AppService from '@/infrastructure/core/app-service';
+import QueryString from 'query-string';
 
 @Component
 export default class AppComponentBase extends Vue {
+    protected appService: AppService = new AppService();
+    protected queryString = QueryString;
+
     protected swalToast(duration: number, type: string, title: string) {
         swal({
             toast: true,

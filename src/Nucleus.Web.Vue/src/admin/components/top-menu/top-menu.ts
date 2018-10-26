@@ -1,12 +1,11 @@
 import { Component } from 'vue-property-decorator';
-import AccountAppService from '@/services/account/account-app-service';
-import AppComponentBase from '@/models/shared/app-component-base';
+import AppComponentBase from '@/infrastructure/core/app-component-base';
+import AuthStore from '@/stores/auth-store';
 
 @Component
 export default class TopMenuComponent extends AppComponentBase {
     public logOut() {
-        const accountAppService = new AccountAppService();
-        accountAppService.logOut();
+        AuthStore.removeToken();
         this.$router.push({ path: '/account/login' });
     }
 }

@@ -1,4 +1,4 @@
-﻿import AppComponentBase from '@/models/shared/app-component-base';
+﻿import AppComponentBase from '@/infrastructure/core/app-component-base';
 import { Component } from 'vue-property-decorator';
 
 @Component({

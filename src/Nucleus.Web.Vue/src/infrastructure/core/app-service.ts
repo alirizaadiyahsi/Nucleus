@@ -1,8 +1,8 @@
 ﻿import AuthStore from '@/stores/auth-store';
-import AppConsts from '@/models/shared/app-consts';
+import AppConsts from '@/infrastructure/core/app-consts';
 
-export default class BaseAppService {
-    private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponse<T>> {
+export default class AppService {
+    private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponseDto<T>> {
         let isBadRequest = false;
         let body = data === '' ? null : data;
         const headers: { [key: string]: string } = {
@@ -42,25 +42,25 @@ export default class BaseAppService {
                     isError: isBadRequest,
                     errors: isBadRequest ? content : null,
                     content: isBadRequest ? null : content,
-                } as IRestResponse<T>;
+                } as IRestResponseDto<T>;
 
                 return response;
             });
     }
 
-    public get<T>(url: string): Promise<IRestResponse<T>> {
-        return BaseAppService.request<T>('GET', url);
+    public get<T>(url: string): Promise<IRestResponseDto<T>> {
+        return AppService.request<T>('GET', url);
     }
 
-    public delete(url: string): Promise<IRestResponse<void>> {
-        return BaseAppService.request<void>('DELETE', url);
+    public delete(url: string): Promise<IRestResponseDto<void>> {
+        return AppService.request<void>('DELETE', url);
     }
 
-    public put<T>(url: string, data: object | string): Promise<IRestResponse<T>> {
-        return BaseAppService.request<T>('PUT', url, data);
+    public put<T>(url: string, data: object | string): Promise<IRestResponseDto<T>> {
+        return AppService.request<T>('PUT', url, data);
     }
 
-    public post<T>(url: string, data: object | string): Promise<IRestResponse<T>> {
-        return BaseAppService.request<T>('POST', url, data);
+    public post<T>(url: string, data: object | string): Promise<IRestResponseDto<T>> {
+        return AppService.request<T>('POST', url, data);
     }
 }

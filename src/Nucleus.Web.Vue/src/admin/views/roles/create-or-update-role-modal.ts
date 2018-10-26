@@ -1,6 +1,5 @@
-import AppComponentBase from '@/models/shared/app-component-base';
+import AppComponentBase from '@/infrastructure/core/app-component-base';
 import { Component } from 'vue-property-decorator';
-import RoleAppService from '@/services/roles/role-app-service';
 
 @Component
 export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
@@ -17,11 +16,11 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
             isSystemDefault: false,
         } as IRoleDto,
     } as ICreateOrUpdateRoleInput;
-    public errors: IErrorResponse[] = [];
-    public roleAppService = new RoleAppService();
+    public errors: INameValueDto[] = [];
 
     public createOrUpdateRoleModalShown() {
-        this.roleAppService.getRoleForCreateOrUpdate(this.parent.selectedRoleId)
+        this.appService.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' +
+        this.parent.selectedRoleId)
             .then((response) => {
                 const result = response.content as IGetRoleForCreateOrUpdateOutput;
                 this.isUpdate = result.role.name != null;
@@ -34,7 +33,8 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
     }
 
     public onSubmit() {
-        this.roleAppService.createOrUpdateRole(this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
+        this.appService.post<void>('/api/role/createOrUpdateRole',
+        this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
             .then((response) => {
                 if (!response.isError) {
                     this.swalToast(2000, 'success', 'Successfully ' + (this.isUpdate ? 'updated!' : 'created!'));

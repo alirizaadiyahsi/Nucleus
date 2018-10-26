@@ -1,24 +1,25 @@
 ﻿import { Component } from 'vue-property-decorator';
-import AccountAppService from '@/services/account/account-app-service';
-import AppComponentBase from '@/models/shared/app-component-base';
+import AppComponentBase from '@/infrastructure/core/app-component-base';
+import AuthStore from '@/stores/auth-store';
 
 @Component
 export default class LoginComponent extends AppComponentBase {
 
     public usernameoremail = '';
     public password = '';
-    public errors: IErrorResponse[] = [];
+    public errors: INameValueDto[] = [];
 
     public onSubmit() {
-        const accountAppService = new AccountAppService();
-        const loginViewModel: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };
+        const loginInput: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };
 
-        accountAppService.login(loginViewModel).then((response) => {
-            if (!response.isError) {
-                this.$router.push({ path: '/admin/home' });
-            } else {
-                this.errors = response.errors;
-            }
-        });
+        this.appService.post<ILoginOutput>('/api/account/login', loginInput)
+            .then((response) => {
+                if (!response.isError) {
+                    AuthStore.setToken(response.content.token);
+                    this.$router.push({ path: '/admin/home' });
+                } else {
+                    this.errors = response.errors;
+                }
+            });
     }
 }
