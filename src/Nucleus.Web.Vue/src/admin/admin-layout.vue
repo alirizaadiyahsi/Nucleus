@@ -3,8 +3,8 @@
         <top-menu-component />
         <div class="container-fluid">
             <div class="row">
-                <nav-menu-component />
-                <div class="col-sm-9 col-md-10 mt-3">
+                <side-menu-component />
+                <div class="col-sm-12 col-md-9 mt-3">
                     <router-view></router-view>
                 </div>
             </div>

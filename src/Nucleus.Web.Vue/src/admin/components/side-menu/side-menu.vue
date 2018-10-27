@@ -1,6 +1,6 @@
 <template>
-    <nav class="col-sm-3 col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
+    <nav class="col-sm-12 col-md-3 d-none d-md-block bg-light side-menu">
+        <div class="side-menu-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <router-link to="/admin/home" active-class="active" class="nav-link">
@@ -14,7 +14,7 @@
                 </li>
             </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <h6 class="side-menu-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span>Administration</span>
             </h6>
             <ul class="nav flex-column mb-2">
@@ -34,5 +34,5 @@
 
 </template>
 
-<style src="./nav-menu.css"></style>
-<script src="./nav-menu.ts"></script>
+<style src="./side-menu.css"></style>
+<script src="./side-menu.ts"></script>

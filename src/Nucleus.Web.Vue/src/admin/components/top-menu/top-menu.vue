@@ -1,7 +1,7 @@
 <template>
     <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-        <router-link to="/admin/home" :exact="true" class="navbar-brand col-sm-3 col-md-2 mr-0">
+        <router-link to="/admin/home" :exact="true" class="navbar-brand">
             <span class="glyphicon glyphicon-home"></span> Nucleus Vue
         </router-link>
         <b-collapse is-nav id="nav_collapse">
