@@ -1,23 +1,21 @@
 <template>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <b-navbar toggleable="md" type="dark" variant="info">
+        <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <router-link to="/admin/home" :exact="true" class="navbar-brand col-sm-3 col-md-2 mr-0">
-            <span class="glyphicon glyphicon-home"></span> Application Name
+            <span class="glyphicon glyphicon-home"></span> Nucleus Vue
         </router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <b-collapse is-nav id="nav_collapse">
 
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
+            <b-navbar-nav class="ml-auto">
                 <li class="nav-item">
                     <router-link to="#" v-on:click.native="logOut" active-class="active" class="nav-link">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </router-link>
                 </li>
-            </ul>
-        </div>
-    </nav>
+            </b-navbar-nav>
+
+        </b-collapse>
+    </b-navbar>
 </template>
 
 <style src="./top-menu.css"></style>
