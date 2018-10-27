@@ -8,15 +8,15 @@
     "inputFile": "src/admin/components/top-menu/top-menu.scss"
   },
   {
-    "outputFile": "src/admin/components/nav-menu/nav-menu.css",
-    "inputFile": "src/admin/components/nav-menu/nav-menu.scss"
-  },
-  {
     "outputFile": "src/account/views/login/login.css",
     "inputFile": "src/account/views/login/login.scss"
   },
   {
     "outputFile": "src/account/views/register/register.css",
     "inputFile": "src/account/views/register/register.scss"
+  },
+  {
+    "outputFile": "src/admin/components/side-menu/side-menu.css",
+    "inputFile": "src/admin/components/side-menu/side-menu.scss"
   }
 ]

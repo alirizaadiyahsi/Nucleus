@@ -3,7 +3,7 @@ import { Component } from 'vue-property-decorator';
 
 @Component({
     components: {
-        NavMenuComponent: require('./components/nav-menu/side-menu.vue').default,
+        SideMenuComponent: require('./components/side-menu/side-menu.vue').default,
         TopMenuComponent: require('./components/top-menu/top-menu.vue').default,
     },
 })
