@@ -1,11 +1,10 @@
 .side-menu {
-    position: fixed;
+    position: sticky;
     top: 0;
     bottom: 0;
     left: 0;
     z-index: 100;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    padding-top: 56px;
 }
 
 .side-menu-sticky {
@@ -15,13 +14,6 @@
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-    .side-menu-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-    }
 }
 
 .side-menu .nav-link {
