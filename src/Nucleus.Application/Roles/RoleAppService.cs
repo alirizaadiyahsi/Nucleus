@@ -88,6 +88,10 @@ namespace Nucleus.Application.Roles
         public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
             var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
+            if (role.Name == input.Role.Name)
+            {
+                throw new Exception("Role name '" + input.Role.Name + "' is already taken.");
+            }
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
             var updateRoleResult = await _roleManager.UpdateAsync(role);
@@ -124,7 +128,7 @@ namespace Nucleus.Application.Roles
             return removeRoleResult;
         }
 
-        private void GrantPermissionsToRole(List<Guid> grantedPermissionIds, Role role)
+        private void GrantPermissionsToRole(IEnumerable<Guid> grantedPermissionIds, Role role)
         {
             foreach (var permissionId in grantedPermissionIds)
             {
