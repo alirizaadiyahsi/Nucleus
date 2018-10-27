@@ -81,6 +81,7 @@ namespace Nucleus.Application.Roles
             {
                 GrantPermissionsToRole(input.GrantedPermissionIds, role);
             }
+            //todo: else catch errors
         }
 
         public async Task EditRoleAsync(CreateOrUpdateRoleInput input)
@@ -93,6 +94,7 @@ namespace Nucleus.Application.Roles
             {
                 GrantPermissionsToRole(input.GrantedPermissionIds, role);
             }
+            //todo: else catch errors
         }
 
         public void RemoveRole(Guid id)

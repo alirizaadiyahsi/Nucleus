@@ -35,7 +35,7 @@ namespace Nucleus.Web.Api.Controller.Account
             if (userToVerify == null)
             {
                 return BadRequest(
-                    new NameValueDto("ErrorMessage", "The user name or password is incorrect."));
+                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect."));
             }
 
             var token = new JwtSecurityToken
