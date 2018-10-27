@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Utilities.Collections;
 
@@ -9,6 +10,6 @@ namespace Nucleus.Application.Users
     {
         Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input);
         
-        void RemoveUser(Guid id);
+        Task<IdentityResult> RemoveUserAsync(Guid id);
     }
 }

@@ -130,13 +130,12 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Delete_Role()
         {
             var testRole = await CreateAndGetTestRole();
-
             var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/deleteRole");
+            
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = new { id = testRole.Id }.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
-
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
         }
 

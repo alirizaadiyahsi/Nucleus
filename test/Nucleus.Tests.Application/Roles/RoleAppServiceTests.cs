@@ -79,8 +79,7 @@ namespace Nucleus.Tests.Application.Roles
             Assert.NotNull(insertedTestRole);
             Assert.Equal(1, insertedTestRole.RolePermissions.Count);
 
-            _roleAppService.RemoveRole(insertedTestRole.Id);
-            _dbContext.SaveChanges();
+            await _roleAppService.RemoveRoleAsync(insertedTestRole.Id);
 
             dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var removedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);

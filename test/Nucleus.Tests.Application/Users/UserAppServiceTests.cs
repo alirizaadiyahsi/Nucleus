@@ -46,7 +46,7 @@ namespace Nucleus.Tests.Application.Users
             Assert.NotNull(insertedTestUser);
             Assert.Equal(1, insertedTestUser.UserRoles.Count);
 
-            _userAppService.RemoveUser(insertedTestUser.Id);
+            await _userAppService.RemoveUserAsync(insertedTestUser.Id);
             _dbContext.SaveChanges();
 
             dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
