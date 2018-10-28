@@ -11,6 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="src\admin\views\users\create-user-modal.ts" />
+    <None Remove="src\models\users\create-or-edit-user-input.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -21,6 +26,11 @@
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\admin\views\users\create-user-modal.ts" />
+    <TypeScriptCompile Include="src\models\users\create-or-edit-user-input.ts" />
   </ItemGroup>
 
 </Project>

@@ -19,11 +19,23 @@ namespace Nucleus.Application.Users
         private readonly IMapper _mapper;
 
         public UserAppService(
-            IMapper mapper, 
+            IMapper mapper,
             UserManager<User> userManager)
         {
             _mapper = mapper;
             _userManager = userManager;
+        }
+
+        public async Task AddUserAsync(CreateOrEditUserInput input)
+        {
+            var user = new User
+            {
+                Id = input.Id,
+                UserName = input.UserName,
+                Email = input.Email
+            };
+
+            await _userManager.CreateAsync(user);
         }
 
         public async Task<IPagedList<UserListOutput>> GetUsersAsync(UserListInput input)

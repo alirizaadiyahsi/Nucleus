@@ -24,5 +24,14 @@ namespace Nucleus.Web.Api.Controller.Users
         {
             return Ok(await _userAppService.GetUsersAsync(input));
         }
+
+        [HttpPost("[action]")]
+        //[Authorize(Policy = DefaultPermissions.PermissionNameForUserAdd)] 
+        public async Task<ActionResult> AddUser([FromBody]CreateOrEditUserInput input)
+        {
+            await _userAppService.AddUserAsync(input);
+
+            return Ok(new { success = true });
+        }
     }
 }

@@ -7,4 +7,11 @@ export default class UserAppService extends BaseAppService {
 
         return this.get<IPagedList<IUserListInput>>('/api/user/getUsers' + query);
     }
+
+    public addUser(input: ICreateOrEditUserInput) {
+        return this.post<void>('/api/user/addUser', input)
+            .then((response) => {
+                return response;
+            });
+    }
 }
