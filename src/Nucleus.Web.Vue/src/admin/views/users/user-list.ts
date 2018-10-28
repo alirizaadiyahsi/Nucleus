@@ -4,6 +4,8 @@ import AppConsts from '@/infrastructure/core/app-consts';
 
 @Component
 export default class UserListComponent extends AppComponentBase {
+    public currentPage = 1;
+
     public pagedListOfUserListDto: IPagedList<IUserListInput> = {
         totalCount: 0,
         items: [],
@@ -16,6 +18,8 @@ export default class UserListComponent extends AppComponentBase {
     public getUsers() {
         const userListInput: IUserListInput = {
             filter: '',
+            pageIndex: this.currentPage - 1,
+            pageSize: 10,
         };
 
         const query = '?' + this.queryString.stringify(userListInput);

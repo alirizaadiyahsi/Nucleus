@@ -7,12 +7,13 @@ import { Component } from 'vue-property-decorator';
     },
 })
 export default class RoleListComponent extends AppComponentBase {
+    public currentPage = 1;
+    public selectedRoleId?: string;
+
     public pagedListOfRoleListDto: IPagedList<IRoleListOutput> = {
         totalCount: 0,
         items: [],
     };
-
-    public selectedRoleId?: string;
 
     public mounted() {
         this.getRoles();
@@ -26,11 +27,16 @@ export default class RoleListComponent extends AppComponentBase {
         }
     }
 
+    public changePage() {
+        this.getRoles();
+    }
+
     public getRoles() {
         const roleListInput: IRoleListInput = {
             filter: '',
+            pageIndex: this.currentPage - 1,
+            pageSize: 10,
         };
-
         const query = '?' + this.queryString.stringify(roleListInput);
         this.appService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
