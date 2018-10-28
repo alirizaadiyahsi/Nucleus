@@ -15,11 +15,11 @@ export default class AppService {
         }
 
         return fetch(AppConsts.baseApiUrl + url,
-            ({
-                method,
-                headers,
-                body,
-            }) as any)
+                ({
+                    method,
+                    headers,
+                    body,
+                }) as any)
             .then((response: any) => {
                 isBadRequest = !response.ok;
                 if (response.status === 401) {
@@ -31,13 +31,13 @@ export default class AppService {
             })
             .then((responseContent: any) => {
                 let content: any;
-                
+
                 try {
                     content = JSON.parse(responseContent);
                 } catch (err) {
                     content = responseContent;
                 }
-                
+
                 const response = {
                     isError: isBadRequest,
                     errors: isBadRequest ? content : null,

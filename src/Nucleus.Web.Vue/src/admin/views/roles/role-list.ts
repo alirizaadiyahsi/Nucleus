@@ -32,7 +32,7 @@ export default class RoleListComponent extends AppComponentBase {
     }
 
     public getRoles() {
-        const roleListInput: IRoleListInput = {
+        const roleListInput: IPagedListInput = {
             filter: '',
             pageIndex: this.currentPage - 1,
             pageSize: 10,
