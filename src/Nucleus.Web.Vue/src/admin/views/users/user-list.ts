@@ -15,6 +15,10 @@ export default class UserListComponent extends AppComponentBase {
         this.getUsers();
     }
 
+    public changePage() {
+        this.getUsers();
+    }
+
     public getUsers() {
         const userListInput: IUserListInput = {
             filter: '',
