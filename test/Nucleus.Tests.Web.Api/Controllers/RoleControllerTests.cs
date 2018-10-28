@@ -102,7 +102,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Update_Role()
         {
-            var testRole = await CreateAndGetTestRole();
+            var testRole = await CreateAndGetTestRoleAsync();
 
             var input = new CreateOrUpdateRoleInput
             {
@@ -129,7 +129,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Delete_Role()
         {
-            var testRole = await CreateAndGetTestRole();
+            var testRole = await CreateAndGetTestRoleAsync();
             var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/deleteRole");
             
@@ -139,7 +139,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
         }
 
-        private async Task<Role> CreateAndGetTestRole()
+        private async Task<Role> CreateAndGetTestRoleAsync()
         {
             var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
             await _dbContext.Roles.AddAsync(testRole);

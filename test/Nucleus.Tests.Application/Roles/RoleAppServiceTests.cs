@@ -50,7 +50,7 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Edit_Role()
         {
-            var testRole = await CreateAndGetTestRole();
+            var testRole = await CreateAndGetTestRoleAsync();
 
             var input = new CreateOrUpdateRoleInput
             {
@@ -71,7 +71,7 @@ namespace Nucleus.Tests.Application.Roles
         [Fact]
         public async void Should_Remove_Role()
         {
-            var testRole = await CreateAndGetTestRole();
+            var testRole = await CreateAndGetTestRoleAsync();
 
             var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
@@ -117,7 +117,7 @@ namespace Nucleus.Tests.Application.Roles
             Assert.False(string.IsNullOrEmpty(role.Role.Name));
         }
 
-        private async Task<Role> CreateAndGetTestRole()
+        private async Task<Role> CreateAndGetTestRoleAsync()
         {
             var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
             await _dbContext.Roles.AddAsync(testRole);
