@@ -68,7 +68,7 @@ namespace Nucleus.Application.Roles
             };
         }
 
-        public async Task AddRoleAsync(CreateOrUpdateRoleInput input)
+        public async Task<IdentityResult> AddRoleAsync(CreateOrUpdateRoleInput input)
         {
             var role = new Role
             {
@@ -81,12 +81,17 @@ namespace Nucleus.Application.Roles
             {
                 GrantPermissionsToRole(input.GrantedPermissionIds, role);
             }
-            //todo: else catch errors
+
+            return createRoleResult;
         }
 
-        public async Task EditRoleAsync(CreateOrUpdateRoleInput input)
+        public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
             var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
+            if (role.Name == input.Role.Name)
+            {
+                throw new Exception("Role name '" + input.Role.Name + "' is already taken.");
+            }
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
             var updateRoleResult = await _roleManager.UpdateAsync(role);
@@ -94,16 +99,17 @@ namespace Nucleus.Application.Roles
             {
                 GrantPermissionsToRole(input.GrantedPermissionIds, role);
             }
-            //todo: else catch errors
+
+            return updateRoleResult;
         }
 
-        public void RemoveRole(Guid id)
+        public async Task<IdentityResult> RemoveRoleAsync(Guid id)
         {
             var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
 
             if (role == null)
             {
-                return;
+                throw new Exception("Role not found!");
             }
 
             if (role.IsSystemDefault)
@@ -111,12 +117,18 @@ namespace Nucleus.Application.Roles
                 throw new Exception("You cannot remove default system roles!");
             }
 
+            var removeRoleResult = await _roleManager.DeleteAsync(role);
+            if (!removeRoleResult.Succeeded)
+            {
+                return removeRoleResult;
+            }
+
             role.RolePermissions.Clear();
             role.UserRoles.Clear();
-            _dbContext.Roles.Remove(role);
+            return removeRoleResult;
         }
 
-        private void GrantPermissionsToRole(List<Guid> grantedPermissionIds, Role role)
+        private void GrantPermissionsToRole(IEnumerable<Guid> grantedPermissionIds, Role role)
         {
             foreach (var permissionId in grantedPermissionIds)
             {

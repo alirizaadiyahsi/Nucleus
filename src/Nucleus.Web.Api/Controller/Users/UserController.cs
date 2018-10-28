@@ -27,10 +27,10 @@ namespace Nucleus.Web.Api.Controller.Users
         }
 
         [HttpDelete("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForUserDelete)] 
-        public ActionResult DeleteUser(Guid id)
+        [Authorize(Policy = DefaultPermissions.PermissionNameForUserDelete)]
+        public async Task<ActionResult> DeleteUser(Guid id)
         {
-            _userAppService.RemoveUser(id);
+            await _userAppService.RemoveUserAsync(id);
 
             return Ok();
         }

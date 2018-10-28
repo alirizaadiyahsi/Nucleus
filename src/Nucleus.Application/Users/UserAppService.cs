@@ -46,13 +46,13 @@ namespace Nucleus.Application.Users
             return userListDtos.ToPagedList(usersCount);
         }
 
-        public void RemoveUser(Guid id)
+        public async Task<IdentityResult> RemoveUserAsync(Guid id)
         {
             var user = _userManager.Users.FirstOrDefault(r => r.Id == id);
 
             if (user == null)
             {
-                return;
+                throw new Exception("User not found!");
             }
 
             if (user.UserName == DefaultUsers.Admin.UserName)
@@ -60,8 +60,14 @@ namespace Nucleus.Application.Users
                 throw new Exception("You cannot remove admin user!");
             }
 
+            var removeUserResult = await _userManager.DeleteAsync(user);
+            if (!removeUserResult.Succeeded)
+            {
+                return removeUserResult;
+            }
+
             user.UserRoles.Clear();
-            _dbContext.Users.Remove(user);
+            return removeUserResult;
         }
     }
 }

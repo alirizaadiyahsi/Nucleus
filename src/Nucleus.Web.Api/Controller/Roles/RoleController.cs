@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Nucleus.Application.Dto;
 using Nucleus.Application.Permissions;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Roles.Dto;
@@ -21,12 +24,12 @@ namespace Nucleus.Web.Api.Controller.Roles
         }
 
         [HttpGet("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleRead)] 
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleRead)]
         public async Task<ActionResult<IPagedList<RoleListOutput>>> GetRoles(RoleListInput input)
         {
             return Ok(await _roleAppService.GetRolesAsync(input));
         }
-        
+
         [HttpGet("[action]")]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)]
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleUpdate)]
@@ -38,26 +41,32 @@ namespace Nucleus.Web.Api.Controller.Roles
         }
 
         [HttpPost("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)] 
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleCreate)]
         public async Task<ActionResult> CreateOrUpdateRole([FromBody]CreateOrUpdateRoleInput input)
         {
+            IdentityResult identityResult;
             if (input.Role.Id == Guid.Empty)
             {
-                await _roleAppService.AddRoleAsync(input);
+                identityResult = await _roleAppService.AddRoleAsync(input);
             }
             else
             {
-                await _roleAppService.EditRoleAsync(input);
+                identityResult = await _roleAppService.EditRoleAsync(input);
             }
-            
-            return Ok();
+
+            if (identityResult.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest(identityResult.Errors.Select(e => new NameValueDto(e.Code, e.Description)));
         }
 
         [HttpDelete("[action]")]
-        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleDelete)] 
-        public ActionResult DeleteRole(Guid id)
+        [Authorize(Policy = DefaultPermissions.PermissionNameForRoleDelete)]
+        public async Task<ActionResult> DeleteRole(Guid id)
         {
-            _roleAppService.RemoveRole(id);
+            await _roleAppService.RemoveRoleAsync(id);
 
             return Ok();
         }

@@ -45,13 +45,12 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Delete_User()
         {
             var testUser = await CreateAndGetTestUser();
-
             var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/user/deleteUser");
+            
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = new { id = testUser.Id }.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
-
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
         }
 
