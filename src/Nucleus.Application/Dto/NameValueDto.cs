@@ -1,4 +1,6 @@
-﻿namespace Nucleus.Application.Dto
+﻿using Newtonsoft.Json;
+
+namespace Nucleus.Application.Dto
 {
     public class NameValueDto
     {
@@ -10,5 +12,10 @@
 
         public string Name { get; set; }
         public string Value { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

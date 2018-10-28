@@ -87,11 +87,15 @@ namespace Nucleus.Application.Roles
 
         public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
-            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
-            if (role.Name == input.Role.Name)
+            if (await _roleManager.RoleExistsAsync(input.Role.Name))
             {
-                throw new Exception("Role name '" + input.Role.Name + "' is already taken.");
+                return IdentityResult.Failed(new IdentityError()
+                {
+                    Code = "RoleNameAlreadyExist",
+                    Description = "Role name '" + input.Role.Name + "' is already taken!"
+                });
             }
+            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
             var updateRoleResult = await _roleManager.UpdateAsync(role);
@@ -109,12 +113,20 @@ namespace Nucleus.Application.Roles
 
             if (role == null)
             {
-                throw new Exception("Role not found!");
+                return IdentityResult.Failed(new IdentityError()
+                {
+                    Code = "RoleNotFound",
+                    Description = "Role not found!"
+                });
             }
 
             if (role.IsSystemDefault)
             {
-                throw new Exception("You cannot remove default system roles!");
+                return IdentityResult.Failed(new IdentityError()
+                {
+                    Code = "CannotRemoveSystemRole",
+                    Description = "You cannot remove default system roles!"
+                });
             }
 
             var removeRoleResult = await _roleManager.DeleteAsync(role);

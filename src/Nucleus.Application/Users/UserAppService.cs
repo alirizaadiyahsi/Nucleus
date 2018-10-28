@@ -17,7 +17,6 @@ namespace Nucleus.Application.Users
 {
     public class UserAppService : IUserAppService
     {
-        private readonly NucleusDbContext _dbContext;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
@@ -26,7 +25,6 @@ namespace Nucleus.Application.Users
             IMapper mapper, 
             UserManager<User> userManager)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
             _userManager = userManager;
         }
@@ -52,12 +50,20 @@ namespace Nucleus.Application.Users
 
             if (user == null)
             {
-                throw new Exception("User not found!");
+                return IdentityResult.Failed(new IdentityError()
+                {
+                    Code = "UserNotFound",
+                    Description = "User not found!"
+                });
             }
 
             if (user.UserName == DefaultUsers.Admin.UserName)
             {
-                throw new Exception("You cannot remove admin user!");
+                return IdentityResult.Failed(new IdentityError()
+                {
+                    Code = "CannotRemoveAdminUser",
+                    Description = "You cannot remove admin user!"
+                });
             }
 
             var removeUserResult = await _userManager.DeleteAsync(user);

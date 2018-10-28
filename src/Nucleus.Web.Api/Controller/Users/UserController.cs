@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nucleus.Application.Dto;
 using Nucleus.Application.Users;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Permissions;
@@ -30,9 +32,14 @@ namespace Nucleus.Web.Api.Controller.Users
         [Authorize(Policy = DefaultPermissions.PermissionNameForUserDelete)]
         public async Task<ActionResult> DeleteUser(Guid id)
         {
-            await _userAppService.RemoveUserAsync(id);
+            var identityResult = await _userAppService.RemoveUserAsync(id);
 
-            return Ok();
+            if (identityResult.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest(identityResult.Errors.Select(e => new NameValueDto(e.Code, e.Description)));
         }
     }
 }

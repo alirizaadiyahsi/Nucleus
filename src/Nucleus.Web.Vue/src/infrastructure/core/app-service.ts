@@ -31,13 +31,13 @@ export default class AppService {
             })
             .then((responseContent: any) => {
                 let content: any;
-
+                
                 try {
                     content = JSON.parse(responseContent);
                 } catch (err) {
                     content = responseContent;
                 }
-
+                
                 const response = {
                     isError: isBadRequest,
                     errors: isBadRequest ? content : null,

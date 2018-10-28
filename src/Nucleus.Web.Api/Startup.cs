@@ -54,7 +54,7 @@ namespace Nucleus.Web.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kodkod API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nucleus API V1");
             });
 
             app.UseCors(_configuration["App:CorsOriginPolicyName"]);

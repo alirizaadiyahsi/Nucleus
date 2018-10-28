@@ -66,9 +66,14 @@ namespace Nucleus.Web.Api.Controller.Roles
         [Authorize(Policy = DefaultPermissions.PermissionNameForRoleDelete)]
         public async Task<ActionResult> DeleteRole(Guid id)
         {
-            await _roleAppService.RemoveRoleAsync(id);
+            var identityResult = await _roleAppService.RemoveRoleAsync(id);
 
-            return Ok();
+            if (identityResult.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest(identityResult.Errors.Select(e => new NameValueDto(e.Code, e.Description)));
         }
     }
 }
