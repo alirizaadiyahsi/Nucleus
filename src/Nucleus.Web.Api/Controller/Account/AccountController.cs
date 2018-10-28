@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -34,8 +35,10 @@ namespace Nucleus.Web.Api.Controller.Account
             var userToVerify = await CreateClaimsIdentityAsync(loginViewModel.UserNameOrEmail, loginViewModel.Password);
             if (userToVerify == null)
             {
-                return BadRequest(
-                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect."));
+                return BadRequest(new List<NameValueDto>
+                {
+                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect.")
+                });
             }
 
             var token = new JwtSecurityToken
@@ -57,7 +60,10 @@ namespace Nucleus.Web.Api.Controller.Account
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
-                return BadRequest(new NameValueDto("EmailAlreadyExist", "This email already exists!"));
+                return BadRequest(new List<NameValueDto>
+                {
+                    new NameValueDto("EmailAlreadyExist", "This email already exists!")
+                });
             }
 
             var applicationUser = new User
