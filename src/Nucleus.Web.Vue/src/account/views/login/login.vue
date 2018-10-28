@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="row justify-content-center">
-        <div class="col-4">
+        <div class="col-sm-8 col-md-6 col-lg-4">
             <div class="login-form">
                 <form v-on:submit.prevent="onSubmit">
                     <h2 class="text-center">Login</h2>
