@@ -21,8 +21,8 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
+                    <p class="text-center">If you already have an account please <router-link to="/account/login">login</router-link> to continue</p>
                 </form>
-                <p class="text-center"><router-link to="/account/login">Login</router-link></p>
             </div>
 
             <div v-else class="register-form">

@@ -18,8 +18,8 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
+                    <p class="text-center">If you don't have an account please <router-link to="/account/register">register</router-link></p>
                 </form>
-                <p class="text-center"><router-link to="/account/register">Register</router-link></p>
             </div>
         </div>
     </div>
