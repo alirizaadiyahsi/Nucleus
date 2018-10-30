@@ -8,18 +8,26 @@ export default class LoginComponent extends AppComponentBase {
     public usernameoremail = '';
     public password = '';
     public errors: INameValueDto[] = [];
+    public nameRules = [
+        (v: any) => !!v || 'User name or email is required'
+    ];
+    public passwordRules = [
+        (v: any) => !!v || 'Password is required'
+    ];
 
     public onSubmit() {
-        const loginInput: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };
+        if (this.$refs.form.validate()) {
+            const loginInput: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };
 
-        this.appService.post<ILoginOutput>('/api/account/login', loginInput)
-            .then((response) => {
-                if (!response.isError) {
-                    AuthStore.setToken(response.content.token);
-                    this.$router.push({ path: '/admin/home' });
-                } else {
-                    this.errors = response.errors;
-                }
-            });
+            this.appService.post<ILoginOutput>('/api/account/login', loginInput)
+                .then((response) => {
+                    if (!response.isError) {
+                        AuthStore.setToken(response.content.token);
+                        this.$router.push({ path: '/admin/home' });
+                    } else {
+                        this.errors = response.errors;
+                    }
+                });
+        }
     }
 }
