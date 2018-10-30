@@ -5,18 +5,19 @@ import AuthStore from '@/stores/auth-store';
 @Component
 export default class LoginComponent extends AppComponentBase {
 
+    public refs = this.$refs as any;
     public usernameoremail = '';
     public password = '';
     public errors: INameValueDto[] = [];
     public nameRules = [
-        (v: any) => !!v || 'User name or email is required'
+        (v: any) => !!v || 'User name or email is required',
     ];
     public passwordRules = [
-        (v: any) => !!v || 'Password is required'
+        (v: any) => !!v || 'Password is required',
     ];
 
     public onSubmit() {
-        if (this.$refs.form.validate()) {
+        if (this.refs.form.validate()) {
             const loginInput: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };
 
             this.appService.post<ILoginOutput>('/api/account/login', loginInput)

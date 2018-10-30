@@ -4,6 +4,7 @@ import AppComponentBase from '@/infrastructure/core/app-component-base';
 @Component
 export default class RegisterComponent extends AppComponentBase {
 
+    public refs = this.$refs as any;
     public username = '';
     public email = '';
     public password = '';
@@ -11,18 +12,18 @@ export default class RegisterComponent extends AppComponentBase {
     public resultMessage: string | undefined;
     public registerComplete = false;
     public nameRules = [
-        (v: any) => !!v || 'User name or email is required'
+        (v: any) => !!v || 'User name or email is required',
     ];
-    emailRules = [
+    public emailRules = [
         (v: any) => !!v || 'E-mail is required',
-        (v: any) => /.+@.+/.test(v) || 'E-mail must be valid'
+        (v: any) => /.+@.+/.test(v) || 'E-mail must be valid',
     ];
     public passwordRules = [
-        (v: any) => !!v || 'Password is required'
+        (v: any) => !!v || 'Password is required',
     ];
 
     public onSubmit() {
-        if (this.$refs.form.validate()) {
+        if (this.refs.form.validate()) {
             const registerInput: IRegisterInput = {
                 userName: this.username,
                 email: this.email,
