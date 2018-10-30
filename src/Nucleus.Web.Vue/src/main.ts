@@ -1,13 +1,12 @@
 import './assets/sass/site.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import '@fortawesome/fontawesome-free/css/all.css';
+import 'vuetify/dist/vuetify.min.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 import router from '@/router';
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
+import Vuetify from 'vuetify';
 
-Vue.use(BootstrapVue);
+Vue.use(Vuetify);
 
 const vue = new Vue({
     el: '#app-root',
