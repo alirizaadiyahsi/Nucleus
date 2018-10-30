@@ -131,7 +131,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         {
             var testRole = await CreateAndGetTestRoleAsync();
             var token = await LoginAsAdminUserAndGetTokenAsync();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/deleteRole");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/deleteRole?id=" + testRole.Id);
             
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = new { id = testRole.Id }.ToStringContent(Encoding.UTF8, "application/json");

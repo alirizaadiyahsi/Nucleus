@@ -70,7 +70,7 @@ namespace Nucleus.Tests.Application.Users
             await _dbContext.UserRoles.AddAsync(new UserRole
             {
                 UserId = testUser.Id,
-                RoleId = DefaultRoles.Member.Id
+                RoleId = DefaultRoles.Admin.Id
             });
             await _dbContext.SaveChangesAsync();
             return testUser;

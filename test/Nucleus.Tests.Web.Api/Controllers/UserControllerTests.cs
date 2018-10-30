@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Nucleus.Tests.Web.Api.Controllers
 {
-    public class UserControllerTests: ApiTestBase
+    public class UserControllerTests : ApiTestBase
     {
         private readonly NucleusDbContext _dbContext;
 
@@ -46,10 +46,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         {
             var testUser = await CreateAndGetTestUser();
             var token = await LoginAsAdminUserAndGetTokenAsync();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/user/deleteUser");
-            
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/user/deleteUser?id=" + testUser.Id);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            requestMessage.Content = new { id = testUser.Id }.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
         }
@@ -58,16 +56,16 @@ namespace Nucleus.Tests.Web.Api.Controllers
         {
             var testUser = new User
             {
-                Id = Guid.NewGuid(), 
+                Id = Guid.NewGuid(),
                 UserName = "TestUserName_" + Guid.NewGuid(),
-                Email =  "TestUserEmail_" + Guid.NewGuid(),
+                Email = "TestUserEmail_" + Guid.NewGuid(),
                 PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
             };
             await _dbContext.Users.AddAsync(testUser);
             await _dbContext.UserRoles.AddAsync(new UserRole
             {
                 UserId = testUser.Id,
-                RoleId = DefaultRoles.Member.Id
+                RoleId = DefaultRoles.Admin.Id
             });
             await _dbContext.SaveChangesAsync();
             return testUser;
