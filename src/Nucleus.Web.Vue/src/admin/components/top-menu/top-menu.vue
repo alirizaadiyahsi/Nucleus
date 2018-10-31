@@ -1,21 +1,14 @@
 <template>
-    <b-navbar toggleable="md" type="dark" variant="info">
-        <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-        <router-link to="/admin/home" :exact="true" class="navbar-brand">
-            <span class="glyphicon glyphicon-home"></span> Nucleus Vue
-        </router-link>
-        <b-collapse is-nav id="nav_collapse">
-
-            <b-navbar-nav class="ml-auto">
-                <li class="nav-item">
-                    <router-link to="#" v-on:click.native="logOut" active-class="active" class="nav-link">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </router-link>
-                </li>
-            </b-navbar-nav>
-
-        </b-collapse>
-    </b-navbar>
+    <v-toolbar color="red" dense fixed clipped-left app>
+        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title>
+            <span class="title">Nucleus Vue</span>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon v-on:click.native="logOut">
+            <v-icon>exit_to_app</v-icon>
+        </v-btn>
+    </v-toolbar>
 </template>
 
 <style src="./top-menu.css"></style>

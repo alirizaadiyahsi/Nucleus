@@ -9,4 +9,5 @@ import { Component } from 'vue-property-decorator';
 })
 
 export default class AdminLayoutComponent extends AppComponentBase {
+    public drawer = true;
 }

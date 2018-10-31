@@ -1,15 +1,13 @@
 ﻿<template>
-    <div>
+    <v-app id="inspire" dark>
+        <side-menu-component />
         <top-menu-component />
-        <div class="container-fluid">
-            <div class="row">
-                <side-menu-component />
-                <div class="col-sm-12 col-md-9 mt-3">
-                    <router-view></router-view>
-                </div>
-            </div>
-        </div>
-    </div>
+        <v-content>
+            <v-container>
+                <router-view></router-view>
+            </v-container>
+        </v-content>
+    </v-app>
 </template>
 
 <script src="./admin-layout.ts"></script>
