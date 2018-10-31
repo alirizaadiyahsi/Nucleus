@@ -9,13 +9,6 @@ export default class LoginComponent extends AppComponentBase {
     public usernameoremail = '';
     public password = '';
     public errors: INameValueDto[] = [];
-    //todo: move these rules to a shared class
-    public nameRules = [
-        (v: any) => !!v || 'User name or email is required'
-    ];
-    public passwordRules = [
-        (v: any) => !!v || 'Password is required'
-    ];
 
     public onSubmit() {
         if (this.refs.form.validate()) {
