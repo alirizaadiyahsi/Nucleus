@@ -1,6 +1,5 @@
 import AppComponentBase from '@/infrastructure/core/app-component-base';
 import { Component } from 'vue-property-decorator';
-import AppConsts from '@/infrastructure/core/app-consts';
 
 @Component
 export default class UserListComponent extends AppComponentBase {
@@ -52,6 +51,6 @@ export default class UserListComponent extends AppComponentBase {
     }
 
     public isAdminUser(userName: string) {
-        return userName === AppConsts.userManagement.adminUserName;
+        return userName === this.appConsts.userManagement.adminUserName;
     }
 }
