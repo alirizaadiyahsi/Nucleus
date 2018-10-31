@@ -13,8 +13,8 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
         role: {
             id: '',
             name: '',
-            isSystemDefault: false,
-        } as IRoleDto,
+            isSystemDefault: false
+        } as IRoleDto
     } as ICreateOrUpdateRoleInput;
     public errors: INameValueDto[] = [];
 
@@ -27,7 +27,7 @@ export default class CreateOrUpdateRoleModalComponent extends AppComponentBase {
                 this.getRoleForCreateOrUpdateOutput = result;
                 this.createOrUpdateRoleInput = {
                     grantedPermissionIds: result.grantedPermissionIds,
-                    role: result.role,
+                    role: result.role
                 };
             });
     }

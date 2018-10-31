@@ -11,15 +11,16 @@ export default class RegisterComponent extends AppComponentBase {
     public errors: INameValueDto[] = [];
     public resultMessage: string | undefined;
     public registerComplete = false;
+    //todo: move these rules to a shared class
     public nameRules = [
-        (v: any) => !!v || 'User name or email is required',
+        (v: any) => !!v || 'User name or email is required'
     ];
     public emailRules = [
         (v: any) => !!v || 'E-mail is required',
-        (v: any) => /.+@.+/.test(v) || 'E-mail must be valid',
+        (v: any) => /.+@.+/.test(v) || 'E-mail must be valid'
     ];
     public passwordRules = [
-        (v: any) => !!v || 'Password is required',
+        (v: any) => !!v || 'Password is required'
     ];
 
     public onSubmit() {
@@ -27,7 +28,7 @@ export default class RegisterComponent extends AppComponentBase {
             const registerInput: IRegisterInput = {
                 userName: this.username,
                 email: this.email,
-                password: this.password,
+                password: this.password
             };
 
             this.appService.post<IRegisterOutput>('/api/account/register', registerInput)

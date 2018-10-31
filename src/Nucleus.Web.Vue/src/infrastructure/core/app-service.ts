@@ -6,7 +6,7 @@ export default class AppService {
         let isBadRequest = false;
         let body = data === '' ? null : data;
         const headers: { [key: string]: string } = {
-            Authorization: `Bearer ${AuthStore.getToken()}`,
+            Authorization: `Bearer ${AuthStore.getToken()}`
         };
 
         if (data) {
@@ -18,7 +18,7 @@ export default class AppService {
                 ({
                     method,
                     headers,
-                    body,
+                    body
                 }) as any)
             .then((response: any) => {
                 isBadRequest = !response.ok;
@@ -41,7 +41,7 @@ export default class AppService {
                 const response = {
                     isError: isBadRequest,
                     errors: isBadRequest ? content : null,
-                    content: isBadRequest ? null : content,
+                    content: isBadRequest ? null : content
                 } as IRestResponseDto<T>;
 
                 return response;

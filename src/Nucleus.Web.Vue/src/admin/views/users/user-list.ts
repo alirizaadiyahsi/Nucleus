@@ -8,7 +8,7 @@ export default class UserListComponent extends AppComponentBase {
 
     public pagedListOfUserListDto: IPagedList<IUserListInput> = {
         totalCount: 0,
-        items: [],
+        items: []
     };
 
     public mounted() {
@@ -23,7 +23,7 @@ export default class UserListComponent extends AppComponentBase {
         const userListInput: IUserListInput = {
             filter: '',
             pageIndex: this.currentPage - 1,
-            pageSize: 10,
+            pageSize: 10
         };
 
         const query = '?' + this.queryString.stringify(userListInput);

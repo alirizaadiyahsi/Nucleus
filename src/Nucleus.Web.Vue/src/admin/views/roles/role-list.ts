@@ -3,8 +3,8 @@ import { Component } from 'vue-property-decorator';
 
 @Component({
     components: {
-        CreateOrUpdateRoleModalComponent: require('./create-or-update-role-modal.vue').default,
-    },
+        CreateOrUpdateRoleModalComponent: require('./create-or-update-role-modal.vue').default
+    }
 })
 export default class RoleListComponent extends AppComponentBase {
     public currentPage = 1;
@@ -12,7 +12,7 @@ export default class RoleListComponent extends AppComponentBase {
 
     public pagedListOfRoleListDto: IPagedList<IRoleListOutput> = {
         totalCount: 0,
-        items: [],
+        items: []
     };
 
     public mounted() {
@@ -35,7 +35,7 @@ export default class RoleListComponent extends AppComponentBase {
         const roleListInput: IPagedListInput = {
             filter: '',
             pageIndex: this.currentPage - 1,
-            pageSize: 10,
+            pageSize: 10
         };
         const query = '?' + this.queryString.stringify(roleListInput);
         this.appService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {

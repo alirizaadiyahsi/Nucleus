@@ -16,7 +16,7 @@ export default class AppComponentBase extends Vue {
             showConfirmButton: false,
             timer: duration,
             type,
-            title,
+            title
         } as any);
     }
 
@@ -26,7 +26,7 @@ export default class AppComponentBase extends Vue {
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
+            cancelButtonText: 'No'
         } as any);
     }
 
@@ -34,7 +34,7 @@ export default class AppComponentBase extends Vue {
         swal({
             html,
             type,
-            showConfirmButton: false,
+            showConfirmButton: false
         } as any);
     }
 }

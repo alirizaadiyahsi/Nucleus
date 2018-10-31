@@ -11,5 +11,5 @@ Vue.use(Vuetify);
 const vue = new Vue({
     el: '#app-root',
     router,
-    render: (h: any) => h(require('./App.vue').default),
+    render: (h: any) => h(require('./App.vue').default)
 });

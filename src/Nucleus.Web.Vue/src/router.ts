@@ -15,8 +15,8 @@ const router = new VueRouter({
             component: accountLayout,
             children: [
                 { path: 'login', component: require('./account/views/login/login.vue').default },
-                { path: 'register', component: require('./account/views/register/register.vue').default },
-            ],
+                { path: 'register', component: require('./account/views/register/register.vue').default }
+            ]
         },
         {
             path: '/admin',
@@ -26,10 +26,10 @@ const router = new VueRouter({
                 { path: 'home', component: require('./admin/views/home/home.vue').default },
                 { path: 'counter', component: require('./admin/views/counter/counter.vue').default },
                 { path: 'user-list', component: require('./admin/views/users/user-list.vue').default },
-                { path: 'role-list', component: require('./admin/views/roles/role-list.vue').default },
-            ],
-        },
-    ],
+                { path: 'role-list', component: require('./admin/views/roles/role-list.vue').default }
+            ]
+        }
+    ]
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
@@ -39,7 +39,7 @@ router.beforeEach((to: any, from: any, next: any) => {
         if (!AuthStore.isSignedIn()) {
             next({
                 path: '/account/login',
-                query: { redirect: to.fullPath },
+                query: { redirect: to.fullPath }
             });
         }
     }
