@@ -2,7 +2,7 @@
     <div v-if="!registerComplete">
         <v-card class="elevation-12">
             <v-toolbar dark color="primary">
-                <v-toolbar-title>Register form</v-toolbar-title>
+                <v-toolbar-title>Register</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
                 <div v-for="error in errors" :key="error.name">

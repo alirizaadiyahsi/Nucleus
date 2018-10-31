@@ -10,6 +10,7 @@ export default class LoginComponent extends AppComponentBase {
     public password = '';
     public errors: INameValueDto[] = [];
 
+    // todo: handle when press 'enter'
     public onSubmit() {
         if (this.refs.form.validate()) {
             const loginInput: ILoginInput = { userNameOrEmail: this.usernameoremail, password: this.password };

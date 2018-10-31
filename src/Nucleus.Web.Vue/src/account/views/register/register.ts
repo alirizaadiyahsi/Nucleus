@@ -12,6 +12,7 @@ export default class RegisterComponent extends AppComponentBase {
     public resultMessage: string | undefined;
     public registerComplete = false;
 
+    // todo: handle when press 'enter'
     public onSubmit() {
         if (this.refs.form.validate()) {
             const registerInput: IRegisterInput = {
