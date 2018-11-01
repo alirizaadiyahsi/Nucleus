@@ -10,6 +10,7 @@
 
         public string Filter { get; set; }
 
+        // todo: change prop name to sortBy
         public string Sorting { get; set; }
 
         public int PageIndex { get; set; }

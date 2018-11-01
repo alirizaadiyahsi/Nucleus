@@ -7,7 +7,7 @@ import { Component } from 'vue-property-decorator';
         TopMenuComponent: require('./components/top-menu/top-menu.vue').default
     }
 })
-
 export default class AdminLayoutComponent extends AppComponentBase {
+    // todo: change this from children components
     public drawer = true;
 }

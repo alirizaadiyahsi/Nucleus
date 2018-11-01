@@ -1,5 +1,5 @@
 ﻿<template>
-    <v-app id="inspire" dark>
+    <v-app>
         <side-menu-component />
         <top-menu-component />
         <v-content>

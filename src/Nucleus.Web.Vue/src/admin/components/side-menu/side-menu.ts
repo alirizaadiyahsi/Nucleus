@@ -3,7 +3,8 @@ import AppComponentBase from '@/infrastructure/core/app-component-base';
 
 @Component
 export default class SideMenuComponent extends AppComponentBase {
-
+    // todo: use drawer in parent
+    public drawer = true;
     public mainMenuItems = [
         { icon: 'home', text: 'Home', link: '/admin/home' },
         { icon: 'apps', text: 'Counter', link: '/admin/counter' }

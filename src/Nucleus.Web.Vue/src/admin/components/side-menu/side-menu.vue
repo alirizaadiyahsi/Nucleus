@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" fixed clipped app>
+    <v-navigation-drawer v-model="drawer" fixed clipped app dark>
         <v-list dense>
             <v-list-tile v-for="item in mainMenuItems" :key="item.link" :to="item.link">
                 <v-list-tile-action>

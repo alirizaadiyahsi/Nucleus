@@ -1,6 +1,7 @@
 import AppComponentBase from '@/infrastructure/core/app-component-base';
 import { Component } from 'vue-property-decorator';
 
+// todo: convert this component to vuetify
 @Component
 export default class UserListComponent extends AppComponentBase {
     public currentPage = 1;
