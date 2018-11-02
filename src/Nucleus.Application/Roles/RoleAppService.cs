@@ -87,16 +87,15 @@ namespace Nucleus.Application.Roles
 
         public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
-            // todo: check if ids are the same, if yes than do not give failed result
-            if (await _roleManager.RoleExistsAsync(input.Role.Name))
+            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
+            if (await _roleManager.RoleExistsAsync(input.Role.Name) && role.Id != input.Role.Id)
             {
-                return IdentityResult.Failed(new IdentityError()
+                return IdentityResult.Failed(new IdentityError
                 {
                     Code = "RoleNameAlreadyExist",
                     Description = "Role name '" + input.Role.Name + "' is already taken!"
                 });
             }
-            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
             var updateRoleResult = await _roleManager.UpdateAsync(role);

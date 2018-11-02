@@ -3,7 +3,7 @@ import { Component } from 'vue-property-decorator';
 import AppService from '@/infrastructure/core/app-service';
 import QueryString from 'query-string';
 import AppConsts from '@/infrastructure/core/app-consts';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2'; // todo: use another lib that is suitable with vuetify and material design
 
 @Component
 export default class AppComponentBase extends Vue {
