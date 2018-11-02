@@ -1,7 +1,7 @@
 import AppComponentBase from '@/infrastructure/core/app-component-base';
 import { Component, Watch } from 'vue-property-decorator';
 
-@Component()
+@Component
 export default class RoleListComponent extends AppComponentBase {
     public allPermissions: IPermissionDto[] = [];
     public errors: INameValueDto[] = [];
@@ -29,7 +29,7 @@ export default class RoleListComponent extends AppComponentBase {
     };
 
     @Watch('pagination')
-    onPaginationChanged() {
+    public onPaginationChanged() {
         this.getRoles();
     }
 
@@ -39,7 +39,7 @@ export default class RoleListComponent extends AppComponentBase {
 
     public editItem(id: string) {
         this.dialog = true;
-        this.formTitle = id ? "Edit Role" : "Create Role";
+        this.formTitle = id ? 'Edit Role' : 'Create Role';
         this.errors = [];
         this.appService.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' + id)
             .then((response) => {
