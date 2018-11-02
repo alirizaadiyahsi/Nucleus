@@ -1,9 +1,9 @@
 ﻿import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import swal from 'sweetalert2';
 import AppService from '@/infrastructure/core/app-service';
 import QueryString from 'query-string';
 import AppConsts from '@/infrastructure/core/app-consts';
+import swal from 'sweetalert2';
 
 @Component
 export default class AppComponentBase extends Vue {

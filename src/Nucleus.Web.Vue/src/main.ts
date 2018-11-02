@@ -1,6 +1,6 @@
-import './assets/sass/site.css';
-import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import 'vuetify/dist/vuetify.min.css';
+import './assets/sass/site.css';
 
 import router from '@/router';
 import Vue from 'vue';

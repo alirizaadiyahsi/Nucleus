@@ -87,6 +87,7 @@ namespace Nucleus.Application.Roles
 
         public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
+            // todo: check if ids are the same, if yes than do not give failed result
             if (await _roleManager.RoleExistsAsync(input.Role.Name))
             {
                 return IdentityResult.Failed(new IdentityError()
