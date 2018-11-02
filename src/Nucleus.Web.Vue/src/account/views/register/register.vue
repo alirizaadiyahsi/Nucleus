@@ -11,9 +11,9 @@
                     </v-alert>
                 </div>
                 <v-form ref="form">
-                    <v-text-field name="username" label="User name" type="text" v-model="username" :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="email" label="E-mail address" type="text" v-model="email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
-                    <v-text-field name="password" label="Password" type="password" v-model="password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                    <v-text-field name="userName" label="User name" type="text" v-model="registerInput.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
+                    <v-text-field name="email" label="E-mail address" type="text" v-model="registerInput.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
+                    <v-text-field name="password" label="Password" type="password" v-model="registerInput.password" :rules="[appConsts.validationRules.required]"></v-text-field>
                 </v-form>
             </v-card-text>
             <v-card-actions>
