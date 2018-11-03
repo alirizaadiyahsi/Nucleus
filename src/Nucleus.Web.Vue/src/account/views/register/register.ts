@@ -10,7 +10,6 @@ export default class RegisterComponent extends AppComponentBase {
     public resultMessage: string | undefined;
     public registerComplete = false;
 
-    // todo: handle when press 'enter'
     public onSubmit() {
         if (this.refs.form.validate()) {
             this.appService.post<IRegisterOutput>('/api/account/register', this.registerInput)

@@ -9,7 +9,6 @@ export default class LoginComponent extends AppComponentBase {
     public loginInput = {} as ILoginInput;
     public errors: INameValueDto[] = [];
 
-    // todo: handle when press 'enter'
     public onSubmit() {
         if (this.refs.form.validate()) {
             this.appService.post<ILoginOutput>('/api/account/login', this.loginInput)

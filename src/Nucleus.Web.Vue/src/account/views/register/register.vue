@@ -1,6 +1,6 @@
 ﻿<template>
     <div v-if="!registerComplete">
-        <v-card class="elevation-12">
+        <v-card class="elevation-12" @keyup.enter="onSubmit">
             <v-toolbar dark color="primary">
                 <v-toolbar-title>Register</v-toolbar-title>
             </v-toolbar>
