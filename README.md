@@ -54,6 +54,5 @@ Web API startup template with a Vue Client demo.
 - Exception Handling & Logging
 - Vue
 - Vue Router
-- Bootstrap & bootstrap-vue
 - Microsoft.CodeCoverage
 - Vuetify
