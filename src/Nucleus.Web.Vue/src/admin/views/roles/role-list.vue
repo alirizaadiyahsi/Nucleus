@@ -6,7 +6,7 @@
                        inset
                        vertical></v-divider>
             <v-spacer></v-spacer>
-            <v-btn @click="editItem()" color="primary" dark class="mb-2">Create Role</v-btn>
+            <v-btn @click="editRole()" color="primary" dark class="mb-2">Create Role</v-btn>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                     <v-card-title>
@@ -50,11 +50,11 @@
                 <td class="justify-center layout px-0">
                     <v-icon v-if="!props.item.isSystemDefault" small
                             class="mr-2"
-                            @click="editItem(props.item.id)">
+                            @click="editRole(props.item.id)">
                         edit
                     </v-icon>
                     <v-icon v-if="!props.item.isSystemDefault" small
-                            @click="deleteItem(props.item.id)">
+                            @click="deleteRole(props.item.id)">
                         delete
                     </v-icon>
                 </td>

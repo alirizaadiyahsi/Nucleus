@@ -8,7 +8,6 @@ using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Identity;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
-using Nucleus.EntityFramework;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
@@ -20,9 +19,7 @@ namespace Nucleus.Application.Users
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
-        public UserAppService(
-            NucleusDbContext dbContext,
-            IMapper mapper, 
+        public UserAppService(IMapper mapper, 
             UserManager<User> userManager)
         {
             _mapper = mapper;

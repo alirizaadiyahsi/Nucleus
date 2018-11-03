@@ -1,41 +1,35 @@
 <template>
     <div>
-        <h1>Users</h1>
+        <v-toolbar flat color="white">
+            <v-toolbar-title>Users</v-toolbar-title>
+            <v-divider class="mx-2"
+                       inset
+                       vertical></v-divider>
+            <v-spacer></v-spacer>
+        </v-toolbar>
 
-        <div v-if="pagedListOfUserListDto.totalCount">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Actions</th>
-                        <th>User Name</th>
-                        <th>E-Mail</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in pagedListOfUserListDto.items" :key="item.id">
-                        <td>
-                            <div class="btn-group">
-                                <button v-if="!isAdminUser(item.userName)"
-                                        v-on:click="remove(item.id)"
-                                        class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td>{{ item.userName }}</td>
-                        <td>{{ item.email }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <b-pagination align="right"
-                          :total-rows="pagedListOfUserListDto.totalCount"
-                          v-model="currentPage"
-                          :per-page="10"
-                          @input="changePage">
-            </b-pagination>
-        </div>
-
-        <p v-else><em>Loading...</em></p>
+        <v-data-table :headers="headers"
+                      :items="pagedListOfUserListDto.items"
+                      :pagination.sync="pagination"
+                      :total-items="pagedListOfUserListDto.totalCount"
+                      :loading="loading"
+                      class="elevation-1">
+            <template slot="items" slot-scope="props">
+                <td>{{ props.item.userName }}</td>
+                <td>{{ props.item.email }}</td>
+                <td class="justify-center layout px-0">
+                    <v-icon v-if="!isAdminUser(props.item.userName)" small
+                            @click="deleteRole(props.item.id)">
+                        delete
+                    </v-icon>
+                </td>
+            </template>
+            <template slot="no-data">
+                <v-alert :value="true" color="error" icon="warning">
+                    Sorry, nothing to display here :(
+                </v-alert>
+            </template>
+        </v-data-table>
     </div>
 </template>
 

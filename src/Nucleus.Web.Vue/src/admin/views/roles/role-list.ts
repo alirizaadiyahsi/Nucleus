@@ -11,7 +11,7 @@ export default class RoleListComponent extends AppComponentBase {
     public pagination = {};
     public headers = [
         { text: 'Role Name', value: 'name' },
-        { text: 'Actions', value: 'name', sortable: false }
+        { text: 'Actions', value: '', sortable: false }
     ];
 
     public createOrUpdateRoleInput = {
@@ -37,7 +37,7 @@ export default class RoleListComponent extends AppComponentBase {
         this.getRoles();
     }
 
-    public editItem(id: string) {
+    public editRole(id: string) {
         this.dialog = true;
         this.formTitle = id ? 'Edit Role' : 'Create Role';
         this.errors = [];
@@ -52,7 +52,7 @@ export default class RoleListComponent extends AppComponentBase {
             });
     }
 
-    public deleteItem(id: string) {
+    public deleteRole(id: string) {
         this.swalConfirm('Are you sure you want to delete this item?')
             .then((result) => {
                 if (result.value) {
@@ -60,7 +60,7 @@ export default class RoleListComponent extends AppComponentBase {
                     this.appService.delete('/api/role/deleteRole' + query)
                         .then((response) => {
                             if (!response.isError) {
-                                this.swalToast(2000, 'success', 'Successfully deleted!');
+                                this.swalToast(2000, 'success', 'Successful!');
                                 this.getRoles();
                             } else {
                                 this.swalAlert('error', response.errors.join('<br>'));
@@ -89,7 +89,7 @@ export default class RoleListComponent extends AppComponentBase {
         this.loading = true;
         const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
         const roleListInput: IPagedListInput = {
-            filter: '',
+            filter: '', // todo: add search to grid
             pageIndex: page - 1,
             pageSize: rowsPerPage
         };
