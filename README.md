@@ -16,11 +16,19 @@ Web API startup template with a Vue Client demo.
 
 ### Login Page
 
-<img src="_images/vue-client-login.png" alt="Vue Client Demo" class="img-thumbnail" />
+<img src="_images/_login.png" alt="Vue Client Demo" class="img-thumbnail" />
 
-### Admin Page
+### Register Page
 
-<img src="_images/vue-client.png" alt="Vue Client Demo" class="img-thumbnail" />
+<img src="_images/_register.png" alt="Vue Client Demo" class="img-thumbnail" />
+
+### List Pages
+
+<img src="_images/_roles.png" alt="Vue Client Demo" class="img-thumbnail" />
+
+### Create/Edit Pages
+
+<img src="_images/_addRole.png" alt="Vue Client Demo" class="img-thumbnail" />
 
 ## ASP.NET Core Web API 
 
@@ -48,3 +56,4 @@ Web API startup template with a Vue Client demo.
 - Vue Router
 - Bootstrap & bootstrap-vue
 - Microsoft.CodeCoverage
+- Vuetify
