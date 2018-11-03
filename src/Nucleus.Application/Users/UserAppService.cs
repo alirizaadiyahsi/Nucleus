@@ -35,7 +35,7 @@ namespace Nucleus.Application.Users
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.UserName.ToLowerInvariant().Contains(input.Filter) ||
                                  predicate.Email.Contains(input.Filter))
-                .OrderBy(input.Sorting);
+                .OrderBy(input.SortBy);
 
             var usersCount = await query.CountAsync();
             var users = query.PagedBy(input.PageIndex, input.PageSize).ToList();

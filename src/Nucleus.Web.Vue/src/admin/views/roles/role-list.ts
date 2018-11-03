@@ -95,7 +95,7 @@ export default class RoleListComponent extends AppComponentBase {
         };
 
         if (sortBy) {
-            roleListInput.sorting = sortBy + (descending ? ' desc' : '');
+            roleListInput.sortBy = sortBy + (descending ? ' desc' : '');
         }
         const query = '?' + this.queryString.stringify(roleListInput);
         this.appService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {

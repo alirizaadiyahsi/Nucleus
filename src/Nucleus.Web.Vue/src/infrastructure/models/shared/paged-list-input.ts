@@ -1,7 +1,6 @@
 ﻿interface IPagedListInput {
     filter?: string;
-    // todo: change prop name to sortBy
-    sorting?: string;
+    sortBy?: string;
     pageIndex?: number;
     pageSize?: number;
 }

@@ -34,7 +34,7 @@ namespace Nucleus.Application.Roles
             var query = _roleManager.Roles.Where(
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.Name.ToLowerInvariant().Contains(input.Filter))
-                .OrderBy(input.Sorting);
+                .OrderBy(input.SortBy);
 
             var rolesCount = await query.CountAsync();
             var roles = query.PagedBy(input.PageIndex, input.PageSize).ToList();
