@@ -27,7 +27,7 @@
                 </v-list>
             </v-list>
         </v-navigation-drawer>
-        <v-toolbar color="red" dense fixed clipped-left app>
+        <v-toolbar color="blue darken-3" dense fixed clipped-left app dark>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>
                 <span class="title">Nucleus Vue</span>
