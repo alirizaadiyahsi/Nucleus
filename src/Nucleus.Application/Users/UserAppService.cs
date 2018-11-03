@@ -30,7 +30,7 @@ namespace Nucleus.Application.Users
         {
             var query = _userManager.Users.Where(
                     !input.Filter.IsNullOrEmpty(),
-                    predicate => predicate.UserName.ToLowerInvariant().Contains(input.Filter) ||
+                    predicate => predicate.UserName.Contains(input.Filter) ||
                                  predicate.Email.Contains(input.Filter))
                 .OrderBy(input.SortBy);
 

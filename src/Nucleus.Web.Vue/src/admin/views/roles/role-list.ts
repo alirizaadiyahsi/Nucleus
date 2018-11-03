@@ -9,6 +9,7 @@ export default class RoleListComponent extends AppComponentBase {
     public dialog = false;
     public formTitle = '';
     public pagination = {};
+    public search = '';
     public headers = [
         { text: 'Role Name', value: 'name' },
         { text: 'Actions', value: '', sortable: false }
@@ -89,7 +90,7 @@ export default class RoleListComponent extends AppComponentBase {
         this.loading = true;
         const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
         const roleListInput: IPagedListInput = {
-            filter: '', // todo: add search to grid
+            filter: this.search, // todo: add search to grid
             pageIndex: page - 1,
             pageSize: rowsPerPage
         };

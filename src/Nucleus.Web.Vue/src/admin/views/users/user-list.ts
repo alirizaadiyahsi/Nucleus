@@ -5,6 +5,7 @@ import { Component, Watch } from 'vue-property-decorator';
 export default class UserListComponent extends AppComponentBase {
     public loading = true;
     public pagination = {};
+    public search = '';
 
     public headers = [
         { text: 'User Name', value: 'userName' },
@@ -30,7 +31,7 @@ export default class UserListComponent extends AppComponentBase {
         this.loading = true;
         const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
         const userListInput: IUserListInput = {
-            filter: '',
+            filter: this.search,
             pageIndex: page - 1,
             pageSize: rowsPerPage
         };

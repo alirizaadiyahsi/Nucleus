@@ -4,7 +4,15 @@
             <v-toolbar-title>Roles</v-toolbar-title>
             <v-divider class="mx-2"
                        inset
-                       vertical></v-divider>
+                       vertical>
+            </v-divider>
+            <v-spacer></v-spacer>
+            <v-text-field v-model="search"
+                          append-icon="search"
+                          label="Search"
+                          single-line
+                          hide-details>
+            </v-text-field>
             <v-spacer></v-spacer>
             <v-btn @click="editRole()" color="primary" dark class="mb-2">Create Role</v-btn>
             <v-dialog v-model="dialog" max-width="500px">
@@ -42,6 +50,7 @@
         <v-data-table :headers="headers"
                       :items="pagedListOfRoleListDto.items"
                       :pagination.sync="pagination"
+                      :search="search"
                       :total-items="pagedListOfRoleListDto.totalCount"
                       :loading="loading"
                       class="elevation-1">
@@ -59,7 +68,7 @@
                     </v-icon>
                 </td>
             </template>
-            <template slot="no-data">
+            <template slot="no-data" v-if="!loading">
                 <v-alert :value="true" color="error" icon="warning">
                     Sorry, nothing to display here :(
                 </v-alert>

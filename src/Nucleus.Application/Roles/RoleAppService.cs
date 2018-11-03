@@ -33,7 +33,7 @@ namespace Nucleus.Application.Roles
         {
             var query = _roleManager.Roles.Where(
                     !input.Filter.IsNullOrEmpty(),
-                    predicate => predicate.Name.ToLowerInvariant().Contains(input.Filter))
+                    predicate => predicate.Name.Contains(input.Filter))
                 .OrderBy(input.SortBy);
 
             var rolesCount = await query.CountAsync();
