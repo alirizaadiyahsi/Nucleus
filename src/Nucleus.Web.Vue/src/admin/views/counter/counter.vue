@@ -6,7 +6,7 @@
 
         <p>Current count: <strong>{{ currentcount }}</strong></p>
 
-        <button @click="incrementCounter">Increment</button>
+        <v-btn color="primary" @click="incrementCounter">Increment</v-btn>
     </div>
 </template>
 
