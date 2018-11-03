@@ -34,7 +34,7 @@ namespace Nucleus.Application.Roles
             var query = _roleManager.Roles.Where(
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.Name.ToLowerInvariant().Contains(input.Filter))
-                .OrderBy(input.Sorting);
+                .OrderBy(input.SortBy);
 
             var rolesCount = await query.CountAsync();
             var roles = query.PagedBy(input.PageIndex, input.PageSize).ToList();
@@ -87,15 +87,15 @@ namespace Nucleus.Application.Roles
 
         public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
-            if (await _roleManager.RoleExistsAsync(input.Role.Name))
+            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
+            if (await _roleManager.RoleExistsAsync(input.Role.Name) && role.Id != input.Role.Id)
             {
-                return IdentityResult.Failed(new IdentityError()
+                return IdentityResult.Failed(new IdentityError
                 {
                     Code = "RoleNameAlreadyExist",
                     Description = "Role name '" + input.Role.Name + "' is already taken!"
                 });
             }
-            var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
             var updateRoleResult = await _roleManager.UpdateAsync(role);

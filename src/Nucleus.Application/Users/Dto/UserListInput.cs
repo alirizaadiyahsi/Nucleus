@@ -6,7 +6,7 @@ namespace Nucleus.Application.Users.Dto
     {
         public UserListInput()
         {
-            Sorting = "UserName";
+            SortBy = "UserName";
         }
     }
 }

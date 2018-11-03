@@ -1,13 +1,15 @@
 ﻿import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import swal from 'sweetalert2';
 import AppService from '@/infrastructure/core/app-service';
 import QueryString from 'query-string';
+import AppConsts from '@/infrastructure/core/app-consts';
+import swal from 'sweetalert2'; // todo: use another lib that is suitable with vuetify and material design
 
 @Component
 export default class AppComponentBase extends Vue {
     protected appService: AppService = new AppService();
     protected queryString = QueryString;
+    protected appConsts = AppConsts;
 
     protected swalToast(duration: number, type: string, title: string) {
         swal({
@@ -16,7 +18,7 @@ export default class AppComponentBase extends Vue {
             showConfirmButton: false,
             timer: duration,
             type,
-            title,
+            title
         } as any);
     }
 
@@ -26,7 +28,7 @@ export default class AppComponentBase extends Vue {
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
+            cancelButtonText: 'No'
         } as any);
     }
 
@@ -34,7 +36,7 @@ export default class AppComponentBase extends Vue {
         swal({
             html,
             type,
-            showConfirmButton: false,
+            showConfirmButton: false
         } as any);
     }
 }

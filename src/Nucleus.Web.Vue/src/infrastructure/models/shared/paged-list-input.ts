@@ -1,6 +1,6 @@
 ﻿interface IPagedListInput {
     filter?: string;
-    sorting?: string;
+    sortBy?: string;
     pageIndex?: number;
     pageSize?: number;
 }

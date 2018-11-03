@@ -4,28 +4,23 @@ import AppComponentBase from '@/infrastructure/core/app-component-base';
 @Component
 export default class RegisterComponent extends AppComponentBase {
 
-    public username = '';
-    public email = '';
-    public password = '';
+    public refs = this.$refs as any;
+    public registerInput = {} as IRegisterInput;
     public errors: INameValueDto[] = [];
     public resultMessage: string | undefined;
     public registerComplete = false;
 
     public onSubmit() {
-        const registerInput: IRegisterInput = {
-            userName: this.username,
-            email: this.email,
-            password: this.password,
-        };
-
-        this.appService.post<IRegisterOutput>('/api/account/register', registerInput)
-            .then((response) => {
-                if (!response.isError) {
-                    this.resultMessage = 'Your account has been successfully created.';
-                    this.registerComplete = true;
-                } else {
-                    this.errors = response.errors;
-                }
-            });
+        if (this.refs.form.validate()) {
+            this.appService.post<IRegisterOutput>('/api/account/register', this.registerInput)
+                .then((response) => {
+                    if (!response.isError) {
+                        this.resultMessage = 'Your account has been successfully created.';
+                        this.registerComplete = true;
+                    } else {
+                        this.errors = response.errors;
+                    }
+                });
+        }
     }
 }

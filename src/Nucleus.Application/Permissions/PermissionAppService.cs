@@ -43,7 +43,7 @@ namespace Nucleus.Application.Permissions
                     !input.Filter.IsNullOrEmpty(),
                     predicate => predicate.Name.Contains(input.Filter) ||
                                  predicate.DisplayName.Contains(input.Filter))
-                .OrderBy(input.Sorting);
+                .OrderBy(input.SortBy);
 
             var permissionsCount = await query.CountAsync();
             var permissions = query.PagedBy(input.PageIndex, input.PageSize).ToList();

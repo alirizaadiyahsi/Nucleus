@@ -6,7 +6,7 @@ namespace Nucleus.Application.Roles.Dto
     {
         public RoleListInput()
         {
-            Sorting = "Name";
+            SortBy = "Name";
         }
     }
 }

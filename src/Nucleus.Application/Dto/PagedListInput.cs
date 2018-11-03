@@ -10,7 +10,7 @@
 
         public string Filter { get; set; }
 
-        public string Sorting { get; set; }
+        public string SortBy { get; set; }
 
         public int PageIndex { get; set; }
 

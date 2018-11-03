@@ -6,7 +6,7 @@ namespace Nucleus.Application.Permissions.Dto
     {
         public PermissionListInput()
         {
-            Sorting = "Name";
+            SortBy = "Name";
         }
     }
 }
