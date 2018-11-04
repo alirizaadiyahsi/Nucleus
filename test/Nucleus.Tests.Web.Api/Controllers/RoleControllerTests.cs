@@ -37,10 +37,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getroles");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+            var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
 
-            var roles = await responseGetUsers.Content.ReadAsAsync<PagedList<RoleListOutput>>();
+            var roles = await responseGetRoles.Content.ReadAsAsync<PagedList<RoleListOutput>>();
             Assert.True(roles.Items.Any());
         }
 
@@ -53,10 +53,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + Guid.Empty);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+            var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
 
-            var role = await responseGetUsers.Content.ReadAsAsync<GetRoleForCreateOrUpdateOutput>();
+            var role = await responseGetRoles.Content.ReadAsAsync<GetRoleForCreateOrUpdateOutput>();
             Assert.True(string.IsNullOrEmpty(role.Role.Name));
         }
 
@@ -69,10 +69,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + DefaultRoles.Member.Id);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+            var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
 
-            var role = await responseGetUsers.Content.ReadAsAsync<GetRoleForCreateOrUpdateOutput>();
+            var role = await responseGetRoles.Content.ReadAsAsync<GetRoleForCreateOrUpdateOutput>();
             Assert.False(string.IsNullOrEmpty(role.Role.Name));
         }
 
@@ -83,7 +83,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             {
                 Role = new RoleDto
                 {
-                    Name = "TestRole_" + Guid.NewGuid()
+                    Name = "TestRoleName_" + Guid.NewGuid()
                 },
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };

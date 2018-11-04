@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;
+using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
 using Nucleus.EntityFramework;
@@ -42,9 +46,93 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
+        public async Task Should_Get_User_For_Create()
+        {
+            var responseLogin = await LoginAsAdminUserAsync();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
+            var token = responseContent.Token;
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUserForCreateOrUpdate?id=" + Guid.Empty);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+
+            var user = await responseGetUsers.Content.ReadAsAsync<GetUserForCreateOrUpdateOutput>();
+            Assert.True(string.IsNullOrEmpty(user.User.UserName));
+        }
+
+        [Fact]
+        public async Task Should_Get_User_For_Update()
+        {
+            var responseLogin = await LoginAsAdminUserAsync();
+            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
+            var token = responseContent.Token;
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUserForCreateOrUpdate?id=" + DefaultUsers.Member.Id);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
+
+            var user = await responseGetUsers.Content.ReadAsAsync<GetUserForCreateOrUpdateOutput>();
+            Assert.False(string.IsNullOrEmpty(user.User.UserName));
+        }
+
+        [Fact]
+        public async Task Should_Create_User()
+        {
+            var input = new CreateOrUpdateUserInput
+            {
+                User = new UserDto
+                {
+                    UserName  = "TestUserName_" + Guid.NewGuid(),
+                    Email  = "TestUserEmail_" + Guid.NewGuid(),
+                    Password = "aA!121212"
+                },
+                GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
+            };
+
+            var token = await LoginAsAdminUserAndGetTokenAsync();
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/user/createOrUpdateUser");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
+            var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
+
+            var insertedUser = await _dbContext.Users.FirstAsync(u => u.UserName == input.User.UserName);
+            Assert.NotNull(insertedUser);
+        }
+
+        [Fact]
+        public async Task Should_Update_User()
+        {
+            var testUser = await CreateAndGetTestUserAsync();
+
+            var input = new CreateOrUpdateUserInput
+            {
+                User = new UserDto
+                {
+                    Id = testUser.Id,
+                    UserName = "TestUserName_Edited_" + Guid.NewGuid()
+                },
+                GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
+            };
+
+            var token = await LoginAsAdminUserAndGetTokenAsync();
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/user/createOrUpdateUser");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
+            var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
+
+            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>(); 
+            var editedTestUser = await dbContextFromAnotherScope.Users.FindAsync(testUser.Id);
+            Assert.Contains(editedTestUser.UserRoles, ur => ur.RoleId == DefaultRoles.Member.Id);
+        }
+
+        [Fact]
         public async Task Should_Delete_User()
         {
-            var testUser = await CreateAndGetTestUser();
+            var testUser = await CreateAndGetTestUserAsync();
             var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/user/deleteUser?id=" + testUser.Id);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -52,7 +140,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
         }
 
-        private async Task<User> CreateAndGetTestUser()
+        private async Task<User> CreateAndGetTestUserAsync()
         {
             var testUser = new User
             {
