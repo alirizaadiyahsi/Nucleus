@@ -88,7 +88,7 @@ namespace Nucleus.Application.Roles
         public async Task<IdentityResult> EditRoleAsync(CreateOrUpdateRoleInput input)
         {
             var role = await _roleManager.FindByIdAsync(input.Role.Id.ToString());
-            if (await _roleManager.RoleExistsAsync(input.Role.Name) && role.Id != input.Role.Id)
+            if (role.Name == input.Role.Name && role.Id != input.Role.Id)
             {
                 return IdentityResult.Failed(new IdentityError
                 {
