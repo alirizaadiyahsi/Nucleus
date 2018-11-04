@@ -90,7 +90,7 @@ export default class RoleListComponent extends AppComponentBase {
         this.loading = true;
         const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
         const roleListInput: IPagedListInput = {
-            filter: this.search, // todo: add search to grid
+            filter: this.search,
             pageIndex: page - 1,
             pageSize: rowsPerPage
         };
