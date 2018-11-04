@@ -10,6 +10,7 @@ export default class UserListComponent extends AppComponentBase {
     public formTitle = '';
     public errors: INameValueDto[] = [];
     public allRoles: IRoleDto[] = [];
+    public isEdit = false;
 
     public headers = [
         { text: 'User Name', value: 'userName' },
@@ -17,7 +18,17 @@ export default class UserListComponent extends AppComponentBase {
         { text: 'Actions', value: '', sortable: false }
     ];
 
-    public pagedListOfUserListDto: IPagedList<IUserListInput> = {
+    public createOrUpdateUserInput = {
+        grantedRoleIds: [],
+        user: {
+            id: '',
+            userName: '',
+            email: '',
+            password: ''
+        } as IUserDto
+    } as ICreateOrUpdateUserInput;
+
+    public pagedListOfUserListDto: IPagedList<IPagedListInput> = {
         totalCount: 0,
         items: []
     };
@@ -34,11 +45,12 @@ export default class UserListComponent extends AppComponentBase {
     public editUser(id: string) {
         this.dialog = true;
         this.formTitle = id ? 'Edit User' : 'Create User';
+        this.isEdit = id ? false : true;
         this.errors = [];
         this.appService.get<IGetUserForCreateOrUpdateOutput>('/api/user/GetUserForCreateOrUpdate?id=' + id)
             .then((response) => {
                 const result = response.content as IGetUserForCreateOrUpdateOutput;
-                this.allRoles = result.allPermissions;
+                this.allRoles = result.allRoles;
                 this.createOrUpdateUserInput = {
                     grantedRoleIds: result.grantedRoleIds,
                     user: result.user
@@ -55,7 +67,7 @@ export default class UserListComponent extends AppComponentBase {
                     this.appService.delete('/api/user/deleteUser' + query)
                         .then((response) => {
                             if (!response.isError) {
-                                this.swalToast(2000, 'success', 'Successfully deleted!');
+                                this.swalToast(2000, 'success', 'Successful!');
                                 this.getUsers();
                             } else {
                                 this.swalAlert('error', response.errors.join('<br>'));
@@ -68,7 +80,7 @@ export default class UserListComponent extends AppComponentBase {
     public save() {
         this.errors = [];
         this.appService.post<void>('/api/user/createOrUpdateUser',
-                this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
+            this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
             .then((response) => {
                 if (!response.isError) {
                     this.swalToast(2000, 'success', 'Successful!');
@@ -83,7 +95,7 @@ export default class UserListComponent extends AppComponentBase {
     public getUsers() {
         this.loading = true;
         const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
-        const userListInput: IUserListInput = {
+        const userListInput: IPagedListInput = {
             filter: this.search,
             pageIndex: page - 1,
             pageSize: rowsPerPage
@@ -94,8 +106,8 @@ export default class UserListComponent extends AppComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(userListInput);
-        this.appService.get<IPagedList<IUserListInput>>('/api/user/getUsers' + query).then((response) => {
-            this.pagedListOfUserListDto = response.content as IPagedList<IUserListInput>;
+        this.appService.get<IPagedList<IPagedListInput>>('/api/user/getUsers' + query).then((response) => {
+            this.pagedListOfUserListDto = response.content as IPagedList<IPagedListInput>;
             this.loading = false;
         });
     }

@@ -27,9 +27,9 @@
                                 {{error.value}}
                             </v-alert>
                         </div>
-                        <v-text-field name="userName" label="User name" type="text" v-model="createOrUpdateUserInput.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
-                        <v-text-field name="email" label="E-mail address" type="text" v-model="createOrUpdateUserInput.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
-                        <v-text-field name="password" label="Password" type="password" v-model="createOrUpdateUserInput.password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                        <v-text-field name="userName" label="User name" type="text" v-model="createOrUpdateUserInput.user.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
+                        <v-text-field name="email" label="E-mail address" type="text" v-model="createOrUpdateUserInput.user.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
+                        <v-text-field v-if="isEdit" name="password" label="Password" type="password" v-model="createOrUpdateUserInput.user.password" :rules="[appConsts.validationRules.required]"></v-text-field>
                         <v-list dense subheader>
                             <v-subheader>Select Roles</v-subheader>
                             <v-list-tile v-for="item in allRoles" :key="item.id">
@@ -60,7 +60,7 @@
                 <td>{{ props.item.userName }}</td>
                 <td>{{ props.item.email }}</td>
                 <td class="justify-center layout px-0">
-                    <v-icon v-if="!props.item.isSystemDefault" small
+                    <v-icon v-if="!isAdminUser(props.item.userName)" small
                             class="mr-2"
                             @click="editUser(props.item.id)">
                         edit
