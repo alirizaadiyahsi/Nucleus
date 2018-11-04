@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions;
 using Nucleus.Application.Roles;
 using Nucleus.Application.Users;
+using Nucleus.Application.Users.Dto;
+using Nucleus.Core.Users;
 
 namespace Nucleus.Application
 {
@@ -19,6 +21,15 @@ namespace Nucleus.Application
             services.AddTransient<IRoleAppService, RoleAppService>();
 
             return services;
+        }
+    }
+
+    public class ApplicationServiceAutoMapperProfile : Profile
+    {
+        public ApplicationServiceAutoMapperProfile()
+        {
+            CreateMap<User, UserDto>()
+                .ForMember(u => u.Password, opt => opt.Ignore());
         }
     }
 }

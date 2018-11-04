@@ -48,7 +48,7 @@ namespace Nucleus.Application.Users
 
         public async Task<GetUserForCreateOrUpdateOutput> GetUserForCreateOrUpdateAsync(Guid id)
         {
-            var allRoles = _mapper.Map<List<RoleDto>>(_dbContext.Roles).OrderBy(r => r.DisplayName).ToList();
+            var allRoles = _mapper.Map<List<RoleDto>>(_dbContext.Roles).OrderBy(r => r.Name).ToList();
             var getUserForCreateOrUpdateOutput = new GetUserForCreateOrUpdateOutput
             {
                 AllRoles = allRoles
@@ -103,6 +103,7 @@ namespace Nucleus.Application.Users
             user.UserName = input.User.UserName;
             user.Email = input.User.Email;
             user.UserRoles.Clear();
+            user.SecurityStamp = Guid.NewGuid().ToString();
             var updateUserResult = await _userManager.UpdateAsync(user);
             if (updateUserResult.Succeeded)
             {
