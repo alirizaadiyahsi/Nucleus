@@ -50,7 +50,6 @@
         <v-data-table :headers="headers"
                       :items="pagedListOfRoleListDto.items"
                       :pagination.sync="pagination"
-                      :search="search"
                       :total-items="pagedListOfRoleListDto.totalCount"
                       :loading="loading"
                       class="elevation-1">

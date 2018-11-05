@@ -52,7 +52,6 @@
         <v-data-table :headers="headers"
                       :items="pagedListOfUserListDto.items"
                       :pagination.sync="pagination"
-                      :search="search"
                       :total-items="pagedListOfUserListDto.totalCount"
                       :loading="loading"
                       class="elevation-1">

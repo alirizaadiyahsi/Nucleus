@@ -38,6 +38,11 @@ export default class UserListComponent extends AppComponentBase {
         this.getUsers();
     }
 
+    @Watch('search')
+    public onSearchChanged() {
+        this.getUsers();
+    }
+
     public mounted() {
         this.getUsers();
     }

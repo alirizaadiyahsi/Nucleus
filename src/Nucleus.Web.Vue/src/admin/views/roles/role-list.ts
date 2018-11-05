@@ -34,6 +34,11 @@ export default class RoleListComponent extends AppComponentBase {
         this.getRoles();
     }
 
+    @Watch('search')
+    public onSearchChanged() {
+        this.getRoles();
+    }
+
     public mounted() {
         this.getRoles();
     }
