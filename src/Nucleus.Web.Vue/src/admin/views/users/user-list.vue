@@ -27,23 +27,25 @@
                                 {{error.value}}
                             </v-alert>
                         </div>
-                        <v-text-field name="userName" label="User name" type="text" v-model="createOrUpdateUserInput.user.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
-                        <v-text-field name="email" label="E-mail address" type="text" v-model="createOrUpdateUserInput.user.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
-                        <v-text-field v-if="isEdit" name="password" label="Password" type="password" v-model="createOrUpdateUserInput.user.password" :rules="[appConsts.validationRules.required]"></v-text-field>
-                        <v-list dense subheader>
-                            <v-subheader>Select Roles</v-subheader>
-                            <v-list-tile v-for="item in allRoles" :key="item.id">
-                                <v-list-tile-content>
-                                    <v-checkbox v-model="createOrUpdateUserInput.grantedRoleIds" :label="item.name" :value="item.id"></v-checkbox>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list>
+                        <v-form ref="form">
+                            <v-text-field name="userName" label="User name" type="text" v-model="createOrUpdateUserInput.user.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
+                            <v-text-field name="email" label="E-mail address" type="text" v-model="createOrUpdateUserInput.user.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
+                            <v-text-field v-if="isEdit" name="password" label="Password" type="password" v-model="createOrUpdateUserInput.user.password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                            <v-list dense subheader>
+                                <v-subheader>Select Roles</v-subheader>
+                                <v-list-tile v-for="item in allRoles" :key="item.id">
+                                    <v-list-tile-content>
+                                        <v-checkbox v-model="createOrUpdateUserInput.grantedRoleIds" :label="item.name" :value="item.id"></v-checkbox>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+                        </v-form>
                     </v-card-text>
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="dialog = false">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+                        <v-btn color="blue darken-1" flat @click="dialog = false">Cancel</v-btn>
+                        <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>

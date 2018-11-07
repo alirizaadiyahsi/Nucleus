@@ -4,7 +4,6 @@ import AuthStore from '@/stores/auth-store';
 
 @Component
 export default class LoginComponent extends AppComponentBase {
-
     public refs = this.$refs as any;
     public loginInput = {} as ILoginInput;
     public errors: INameValueDto[] = [];

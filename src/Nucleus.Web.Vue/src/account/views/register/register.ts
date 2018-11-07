@@ -3,7 +3,6 @@ import AppComponentBase from '@/infrastructure/core/app-component-base';
 
 @Component
 export default class RegisterComponent extends AppComponentBase {
-
     public refs = this.$refs as any;
     public registerInput = {} as IRegisterInput;
     public errors: INameValueDto[] = [];
