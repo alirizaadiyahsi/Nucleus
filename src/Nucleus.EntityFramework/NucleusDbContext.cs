@@ -8,7 +8,6 @@ using Nucleus.Core.Users;
 
 namespace Nucleus.EntityFramework
 {
-    //todo: remove migrations folder from code coverage radar
     public class NucleusDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         public NucleusDbContext(DbContextOptions options)

@@ -4,8 +4,6 @@ import AuthStore from '@/stores/auth-store';
 
 @Component
 export default class TopMenuComponent extends AppComponentBase {
-    // todo: add profile dropdown menu to toolbar and show user name as menu name
-    // todo: add components for each profile menu item
     public refs = this.$refs as any;
     public drawer = true;
     public dialog = false;
