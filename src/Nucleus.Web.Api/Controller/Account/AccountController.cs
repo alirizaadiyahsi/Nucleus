@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -30,9 +31,9 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<LoginOutput>> Login([FromBody]LoginInput loginViewModel)
+        public async Task<ActionResult<LoginOutput>> Login([FromBody]LoginInput input)
         {
-            var userToVerify = await CreateClaimsIdentityAsync(loginViewModel.UserNameOrEmail, loginViewModel.Password);
+            var userToVerify = await CreateClaimsIdentityAsync(input.UserNameOrEmail, input.Password);
             if (userToVerify == null)
             {
                 return BadRequest(new List<NameValueDto>
@@ -55,9 +56,9 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult> Register([FromBody]RegisterInput model)
+        public async Task<ActionResult> Register([FromBody]RegisterInput input)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(input.Email);
             if (user != null)
             {
                 return BadRequest(new List<NameValueDto>
@@ -68,12 +69,35 @@ namespace Nucleus.Web.Api.Controller.Account
 
             var applicationUser = new User
             {
-                UserName = model.UserName,
-                Email = model.Email,
+                UserName = input.UserName,
+                Email = input.Email,
                 EmailConfirmed = true
             };
 
-            var result = await _userManager.CreateAsync(applicationUser, model.Password);
+            var result = await _userManager.CreateAsync(applicationUser, input.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList());
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("[action]")]
+        [Authorize]
+        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordInput input)
+        {
+            if (input.NewPassword != input.PasswordRepeat)
+            {
+                return BadRequest(new List<NameValueDto>
+                {
+                    new NameValueDto("PasswordsDoesNotMatch", "Passwords doesn't match!")
+                });
+            }
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var result = await _userManager.ChangePasswordAsync(user, input.CurrentPassword, input.NewPassword);
 
             if (!result.Succeeded)
             {

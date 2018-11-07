@@ -3,6 +3,7 @@ import { Component, Watch } from 'vue-property-decorator';
 
 @Component
 export default class RoleListComponent extends AppComponentBase {
+    public refs = this.$refs as any;
     public allPermissions: IPermissionDto[] = [];
     public errors: INameValueDto[] = [];
     public loading = true;
@@ -17,11 +18,7 @@ export default class RoleListComponent extends AppComponentBase {
 
     public createOrUpdateRoleInput = {
         grantedPermissionIds: [],
-        role: {
-            id: '',
-            name: '',
-            isSystemDefault: false
-        } as IRoleDto
+        role: {} as IRoleDto
     } as ICreateOrUpdateRoleInput;
 
     public pagedListOfRoleListDto: IPagedList<IRoleListOutput> = {
@@ -77,18 +74,20 @@ export default class RoleListComponent extends AppComponentBase {
     }
 
     public save() {
-        this.errors = [];
-        this.appService.post<void>('/api/role/createOrUpdateRole',
-            this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
-            .then((response) => {
-                if (!response.isError) {
-                    this.swalToast(2000, 'success', 'Successful!');
-                    this.dialog = false;
-                    this.getRoles();
-                } else {
-                    this.errors = response.errors;
-                }
-            });
+        if (this.refs.form.validate()) {
+            this.errors = [];
+            this.appService.post<void>('/api/role/createOrUpdateRole',
+                this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
+                .then((response) => {
+                    if (!response.isError) {
+                        this.swalToast(2000, 'success', 'Successful!');
+                        this.dialog = false;
+                        this.getRoles();
+                    } else {
+                        this.errors = response.errors;
+                    }
+                });
+        }
     }
 
     public getRoles() {

@@ -3,6 +3,7 @@ import { Component, Watch } from 'vue-property-decorator';
 
 @Component
 export default class UserListComponent extends AppComponentBase {
+    public refs = this.$refs as any;
     public loading = true;
     public pagination = {};
     public search = '';
@@ -20,12 +21,7 @@ export default class UserListComponent extends AppComponentBase {
 
     public createOrUpdateUserInput = {
         grantedRoleIds: [],
-        user: {
-            id: '',
-            userName: '',
-            email: '',
-            password: ''
-        } as IUserDto
+        user: {} as IUserDto
     } as ICreateOrUpdateUserInput;
 
     public pagedListOfUserListDto: IPagedList<IPagedListInput> = {
@@ -83,18 +79,20 @@ export default class UserListComponent extends AppComponentBase {
     }
 
     public save() {
-        this.errors = [];
-        this.appService.post<void>('/api/user/createOrUpdateUser',
-            this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
-            .then((response) => {
-                if (!response.isError) {
-                    this.swalToast(2000, 'success', 'Successful!');
-                    this.dialog = false;
-                    this.getUsers();
-                } else {
-                    this.errors = response.errors;
-                }
-            });
+        if (this.refs.form.validate()) {
+            this.errors = [];
+            this.appService.post<void>('/api/user/createOrUpdateUser',
+                this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
+                .then((response) => {
+                    if (!response.isError) {
+                        this.swalToast(2000, 'success', 'Successful!');
+                        this.dialog = false;
+                        this.getUsers();
+                    } else {
+                        this.errors = response.errors;
+                    }
+                });
+        }
     }
 
     public getUsers() {
