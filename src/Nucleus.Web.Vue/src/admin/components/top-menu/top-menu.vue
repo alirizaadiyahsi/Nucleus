@@ -7,7 +7,7 @@
         <v-spacer></v-spacer>
         <v-menu>
             <v-toolbar-title slot="activator">
-                <span>Profile</span>
+                <span>{{authStore.getTokenData().sub}}</span>
                 <v-icon dark>arrow_drop_down</v-icon>
             </v-toolbar-title>
 

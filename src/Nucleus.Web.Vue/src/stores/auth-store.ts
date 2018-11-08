@@ -16,4 +16,14 @@
     public static isSignedIn(): boolean {
         return !!AuthStore.getToken();
     }
+
+
+    public static getTokenData() {
+        let token = AuthStore.getToken();
+        if (token) {
+            return JSON.parse(atob(token.split('.')[1]));
+        }
+
+        return {};
+    }
 }

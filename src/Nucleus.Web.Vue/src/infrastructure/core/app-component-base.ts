@@ -4,12 +4,14 @@ import AppService from '@/infrastructure/core/app-service';
 import QueryString from 'query-string';
 import AppConsts from '@/infrastructure/core/app-consts';
 import swal from 'sweetalert2';
+import AuthStore from '@/stores/auth-store';
 
 @Component
 export default class AppComponentBase extends Vue {
     protected appService: AppService = new AppService();
     protected queryString = QueryString;
     protected appConsts = AppConsts;
+    protected authStore = AuthStore;
 
     protected swalToast(duration: number, type: string, title: string) {
         swal({
