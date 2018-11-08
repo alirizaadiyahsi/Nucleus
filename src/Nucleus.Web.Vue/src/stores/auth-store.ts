@@ -19,7 +19,7 @@
 
 
     public static getTokenData() {
-        let token = AuthStore.getToken();
+        const token = AuthStore.getToken();
         if (token) {
             return JSON.parse(atob(token.split('.')[1]));
         }
