@@ -9,6 +9,12 @@ export default class RegisterComponent extends AppComponentBase {
     public resultMessage: string | undefined;
     public registerComplete = false;
 
+    public passwordMatchError() {
+        return (this.registerInput.password === this.registerInput.passwordRepeat)
+            ? ''
+            : 'Passwords must match';
+    }
+
     public onSubmit() {
         if (this.refs.form.validate()) {
             this.appService.post<IRegisterOutput>('/api/account/register', this.registerInput)

@@ -35,9 +35,10 @@
                         </v-alert>
                     </div>
                     <v-form ref="form">
-                        <v-text-field v-model="changePasswordInput.currentPassword" type="password" autocomplete="current-password" label="Current password" :rules="[appConsts.validationRules.required]"></v-text-field>
-                        <v-text-field v-model="changePasswordInput.newPassword" type="password" autocomplete="current-password" label="New password" :rules="[appConsts.validationRules.required]"></v-text-field>
-                        <v-text-field v-model="changePasswordInput.passwordRepeat" type="password" autocomplete="current-password" label="Password repeat" :rules="[appConsts.validationRules.required]" :error-messages='passwordMatchError()'></v-text-field>
+                        <input name="userName" type="text" value="username" autocomplete="username" v-show="false" />
+                        <v-text-field name="currentPassword" v-model="changePasswordInput.currentPassword" type="password" autocomplete="current-password" label="Current password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                        <v-text-field name="newPassword" v-model="changePasswordInput.newPassword" type="password" autocomplete="current-password" label="New password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                        <v-text-field name="passwordRepeat" v-model="changePasswordInput.passwordRepeat" type="password" autocomplete="current-password" label="Password repeat" :rules="[appConsts.validationRules.required]" :error-messages='passwordMatchError()'></v-text-field>
                     </v-form>
                 </v-card-text>
 

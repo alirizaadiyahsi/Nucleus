@@ -14,6 +14,7 @@
                     <v-text-field name="userName" autocomplete="username" label="User name" type="text" v-model="registerInput.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
                     <v-text-field name="email" autocomplete="email" label="E-mail address" type="text" v-model="registerInput.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
                     <v-text-field name="password" autocomplete="current-password" label="Password" type="password" v-model="registerInput.password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                    <v-text-field name="passwordRepeat" autocomplete="current-password" label="Password repeat" v-model="registerInput.passwordRepeat" type="password" :rules="[appConsts.validationRules.required]" :error-messages='passwordMatchError()'></v-text-field>
                 </v-form>
             </v-card-text>
             <v-card-actions>
