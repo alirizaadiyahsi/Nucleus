@@ -10,8 +10,8 @@
                 </v-alert>
             </div>
             <v-form ref="form">
-                <v-text-field prepend-icon="person" name="userNameOrEmail" label="User name or e-mail address" type="text" v-model="loginInput.userNameOrEmail" :rules="[appConsts.validationRules.required]"></v-text-field>
-                <v-text-field prepend-icon="lock" name="password" label="Password" type="password" v-model="loginInput.password" :rules="[appConsts.validationRules.required]"></v-text-field>
+                <v-text-field prepend-icon="person" autocomplete="username" name="userNameOrEmail" label="User name or e-mail address" type="text" v-model="loginInput.userNameOrEmail" :rules="[appConsts.validationRules.required]"></v-text-field>
+                <v-text-field prepend-icon="lock" autocomplete="current-password" name="password" label="Password" type="password" v-model="loginInput.password" :rules="[appConsts.validationRules.required]"></v-text-field>
             </v-form>
         </v-card-text>
         <v-card-actions>
