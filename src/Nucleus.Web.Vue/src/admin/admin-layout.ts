@@ -3,8 +3,8 @@ import { Component } from 'vue-property-decorator';
 
 @Component({
     components: {
-        AsideMenu: require('./components/aside-menu/aside-menu.vue').default,
-        TopMenu: require('./components/top-menu/top-menu.vue').default
+        AsideMenu: require('@/admin/components/aside-menu/aside-menu.vue').default,
+        TopMenu: require('@/admin/components/top-menu/top-menu.vue').default
     }
 })
 export default class AdminLayoutComponent extends AppComponentBase {

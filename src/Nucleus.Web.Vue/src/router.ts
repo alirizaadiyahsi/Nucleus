@@ -14,8 +14,8 @@ const router = new VueRouter({
             path: '/account',
             component: accountLayout,
             children: [
-                { path: 'login', component: require('./account/views/login/login.vue').default },
-                { path: 'register', component: require('./account/views/register/register.vue').default }
+                { path: 'login', component: require('@/account/views/login/login.vue').default },
+                { path: 'register', component: require('@/account/views/register/register.vue').default }
             ]
         },
         {
@@ -23,10 +23,10 @@ const router = new VueRouter({
             component: adminLayout,
             meta: { requiresAuth: true },
             children: [
-                { path: 'home', component: require('./admin/views/home/home.vue').default },
-                { path: 'counter', component: require('./admin/views/counter/counter.vue').default },
-                { path: 'user-list', component: require('./admin/views/users/user-list.vue').default },
-                { path: 'role-list', component: require('./admin/views/roles/role-list.vue').default }
+                { path: 'home', component: require('@/admin/views/home/home.vue').default },
+                { path: 'counter', component: require('@/admin/views/counter/counter.vue').default },
+                { path: 'user-list', component: require('@/admin/views/users/user-list.vue').default },
+                { path: 'role-list', component: require('@/admin/views/roles/role-list.vue').default }
             ]
         }
     ]
