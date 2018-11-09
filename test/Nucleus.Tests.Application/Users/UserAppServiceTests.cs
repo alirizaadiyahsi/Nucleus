@@ -59,7 +59,7 @@ namespace Nucleus.Tests.Application.Users
                 {
                     Id = Guid.NewGuid(),
                     UserName = "TestUserName_" + Guid.NewGuid(),
-                    Email = "TestEmail_" + Guid.NewGuid(),
+                    Email = "TestEmail_" + Guid.NewGuid() + "@mail.com",
                     Password = "aA!121212"
                 },
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
@@ -86,7 +86,7 @@ namespace Nucleus.Tests.Application.Users
                 {
                     Id = testUser.Id,
                     UserName = "TestUserName_Edited_" + Guid.NewGuid(),
-                    Email = "TestEmail_" + Guid.NewGuid()
+                    Email = "TestEmail_" + Guid.NewGuid() + "@mail.com"
                 },
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
