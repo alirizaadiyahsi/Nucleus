@@ -43,7 +43,7 @@ export default class AppComponentBase extends Vue {
     }
 
     protected passwordMatchError(password: string, passwordRepeat: string) {
-        return (password === passwordRepeat)
+        return (password == passwordRepeat)
             ? ''
             : 'Passwords must match';
     }

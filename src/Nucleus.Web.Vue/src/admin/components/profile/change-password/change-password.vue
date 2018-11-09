@@ -12,14 +12,14 @@
                     </v-alert>
                 </div>
                 <v-form ref="form">
-                    <input name="userName" type="text" value="username" autocomplete="username" v-show="false" />
-                    <v-text-field name="currentPassword" type="password" autocomplete="current-password" label="Current password" 
+                    <input name="userName" type="text" value="username" v-show="false" />
+                    <v-text-field name="currentPassword" type="password" label="Current password" 
                                    v-model="changePasswordInput.currentPassword"
                                   :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="newPassword" type="password" autocomplete="new-password" label="New password" 
+                    <v-text-field name="newPassword" type="password" label="New password" 
                                    v-model="changePasswordInput.newPassword"
                                   :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="passwordRepeat" type="password" autocomplete="new-password" label="Password repeat" 
+                    <v-text-field name="passwordRepeat" type="password" label="Password repeat" 
                                   v-model="changePasswordInput.passwordRepeat"
                                   :rules="[appConsts.validationRules.required]" 
                                   :error-messages="passwordMatchError(changePasswordInput.password,changePasswordInput.passwordRepeat)"></v-text-field>
