@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;
@@ -73,6 +74,15 @@ namespace Nucleus.Application.Users
 
         public async Task<IdentityResult> AddUserAsync(CreateOrUpdateUserInput input)
         {
+            if (input.User.Password != input.User.PasswordRepeat)
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Code = "PasswordsDoesNotMatch",
+                    Description = "Passwords doesn't match!"
+                });
+            }
+
             var user = new User
             {
                 Id = input.User.Id,
@@ -91,6 +101,15 @@ namespace Nucleus.Application.Users
 
         public async Task<IdentityResult> EditUserAsync(CreateOrUpdateUserInput input)
         {
+            if (input.User.Password != input.User.PasswordRepeat)
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Code = "PasswordsDoesNotMatch",
+                    Description = "Passwords doesn't match!"
+                });
+            }
+
             var user = await _userManager.FindByIdAsync(input.User.Id.ToString());
             if (user.UserName == input.User.UserName && user.Id != input.User.Id)
             {
@@ -100,17 +119,17 @@ namespace Nucleus.Application.Users
                     Description = "User name '" + input.User.UserName + "' is already taken!"
                 });
             }
-            user.UserName = input.User.UserName;
-            user.Email = input.User.Email;
-            user.UserRoles.Clear();
-            user.SecurityStamp = Guid.NewGuid().ToString();
-            var updateUserResult = await _userManager.UpdateAsync(user);
-            if (updateUserResult.Succeeded)
+
+            if (!input.User.Password.IsNullOrEmpty())
             {
-                GrantRolesToUser(input.GrantedRoleIds, user);
+                var changePasswordResult = await ChangePassword(user, input.User.Password);
+                if (!changePasswordResult.Succeeded)
+                {
+                    return changePasswordResult;
+                }
             }
 
-            return updateUserResult;
+            return await UpdateUser(input, user);
         }
 
         public async Task<IdentityResult> RemoveUserAsync(Guid id)
@@ -155,6 +174,33 @@ namespace Nucleus.Application.Users
                     UserId = user.Id
                 });
             }
+        }
+
+        private async Task<IdentityResult> ChangePassword(User user, string password)
+        {
+            var changePasswordResult = await _userManager.RemovePasswordAsync(user);
+            if (changePasswordResult.Succeeded)
+            {
+                changePasswordResult = await _userManager.AddPasswordAsync(user, password);
+            }
+
+            return changePasswordResult;
+        }
+
+        private async Task<IdentityResult> UpdateUser(CreateOrUpdateUserInput input, User user)
+        {
+            user.UserName = input.User.UserName;
+            user.Email = input.User.Email;
+            user.UserRoles.Clear();
+            user.SecurityStamp = Guid.NewGuid().ToString();
+
+            var updateUserResult = await _userManager.UpdateAsync(user);
+            if (updateUserResult.Succeeded)
+            {
+                GrantRolesToUser(input.GrantedRoleIds, user);
+            }
+
+            return updateUserResult;
         }
     }
 }

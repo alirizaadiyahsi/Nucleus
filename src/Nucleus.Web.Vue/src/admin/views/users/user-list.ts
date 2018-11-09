@@ -46,7 +46,7 @@ export default class UserListComponent extends AppComponentBase {
     public editUser(id: string) {
         this.dialog = true;
         this.formTitle = id ? 'Edit User' : 'Create User';
-        this.isEdit = id ? false : true;
+        this.isEdit = id ? true : false;
         this.errors = [];
         this.appService.get<IGetUserForCreateOrUpdateOutput>('/api/user/GetUserForCreateOrUpdate?id=' + id)
             .then((response) => {
@@ -117,5 +117,11 @@ export default class UserListComponent extends AppComponentBase {
 
     public isAdminUser(userName: string) {
         return userName.includes(this.appConsts.userManagement.adminUserName);
+    }
+
+    public passwordMatchError() {
+        return (this.createOrUpdateUserInput.user.password === this.createOrUpdateUserInput.user.passwordRepeat)
+            ? ''
+            : 'Passwords must match';
     }
 }
