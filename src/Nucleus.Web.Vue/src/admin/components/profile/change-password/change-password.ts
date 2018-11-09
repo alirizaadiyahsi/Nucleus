@@ -3,8 +3,8 @@ import { Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class ChangePasswordComponent extends AppComponentBase {
-    @Prop() changePasswordDialog!: boolean;
-    @Prop() logOut: any;
+    @Prop() public changePasswordDialog!: boolean;
+    @Prop() public logOut: any;
     public refs = this.$refs as any;
     public errors: INameValueDto[] = [];
     public changePasswordInput = {} as IChangePasswordInput;
