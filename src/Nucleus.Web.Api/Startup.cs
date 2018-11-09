@@ -43,7 +43,10 @@ namespace Nucleus.Web.Api
         {
             if (env.IsDevelopment())
             {
-                //UpdateDatabase(app);
+                if (env.EnvironmentName != "Test")
+                {
+                    UpdateDatabase(app);
+                }
                 app.UseDeveloperExceptionPage();
             }
             else
