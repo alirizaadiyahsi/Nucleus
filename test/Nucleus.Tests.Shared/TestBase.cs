@@ -24,6 +24,7 @@ namespace Nucleus.Tests.Shared
         protected TestServer TestServer => new TestServer(
             new WebHostBuilder()
                 .UseStartup<Startup>()
+                .UseEnvironment("Test")
                 .ConfigureAppConfiguration(config =>
                 {
                     config.SetBasePath(Path.Combine(Path.GetFullPath(@"../../../.."), "Nucleus.Tests.Shared"));

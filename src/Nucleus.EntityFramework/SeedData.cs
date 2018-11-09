@@ -28,6 +28,11 @@ namespace Nucleus.EntityFramework
                     RoleId = DefaultRoles.Admin.Id,
                     UserId = DefaultUsers.Admin.Id
                 },
+                new UserRole
+                {
+                    RoleId = DefaultRoles.Admin.Id,
+                    UserId = DefaultUsers.TestAdmin.Id
+                },
                 //member role to member user
                 new UserRole
                 {

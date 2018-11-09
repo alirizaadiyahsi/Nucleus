@@ -84,7 +84,6 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok();
         }
 
-        // todo: write test for this action
         [HttpPost("[action]")]
         [Authorize]
         public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordInput input)

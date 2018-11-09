@@ -112,7 +112,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 User = new UserDto
                 {
                     Id = testUser.Id,
-                    UserName = "TestUserName_Edited_" + Guid.NewGuid()
+                    UserName = "TestUserName_Edited_" + Guid.NewGuid(),
+                    Email = testUser.Email
                 },
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };

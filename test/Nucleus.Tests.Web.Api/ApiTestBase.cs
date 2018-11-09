@@ -12,7 +12,7 @@ namespace Nucleus.Tests.Web.Api
     {
         private static readonly LoginInput AdminUserLoginViewModel = new LoginInput
         {
-            UserNameOrEmail = DefaultUsers.Admin.Email,
+            UserNameOrEmail = DefaultUsers.TestAdmin.Email,
             Password = "123qwe"
         };
 
@@ -37,8 +37,12 @@ namespace Nucleus.Tests.Web.Api
         protected async Task<string> LoginAsAdminUserAndGetTokenAsync()
         {
             var responseLogin = await LoginAsAdminUserAsync();
-            var loginResult = await responseLogin.Content.ReadAsAsync<LoginOutput>();
+            if (!responseLogin.IsSuccessStatusCode)
+            {
+                return null;
+            }
 
+            var loginResult = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             return loginResult.Token;
         }
     }

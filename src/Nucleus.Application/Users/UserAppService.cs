@@ -119,14 +119,14 @@ namespace Nucleus.Application.Users
 
             if (user == null)
             {
-                return IdentityResult.Failed(new IdentityError()
+                return IdentityResult.Failed(new IdentityError
                 {
                     Code = "UserNotFound",
                     Description = "User not found!"
                 });
             }
 
-            if (user.UserName == DefaultUsers.Admin.UserName)
+            if (user.UserName.Contains(DefaultUsers.Admin.UserName))
             {
                 return IdentityResult.Failed(new IdentityError()
                 {

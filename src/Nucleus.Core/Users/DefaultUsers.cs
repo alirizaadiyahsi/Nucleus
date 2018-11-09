@@ -11,7 +11,8 @@ namespace Nucleus.Core.Users
             return new List<User>
             {
                 Admin,
-                Member
+                Member,
+                TestAdmin
             };
         }
 
@@ -39,10 +40,24 @@ namespace Nucleus.Core.Users
             PasswordHash = PasswordHashFor123Qwe
         };
 
+        public static readonly User TestAdmin = new User
+        {
+            Id = new Guid("4B6D9E45-626D-489A-A8CF-D32D36583AF4"),
+            UserName = TestAdminUserName,
+            Email = TestAdminUserEmail,
+            EmailConfirmed = true,
+            NormalizedEmail = TestAdminUserEmail.ToUpper(CultureInfo.InvariantCulture),
+            NormalizedUserName = TestAdminUserName.ToUpper(CultureInfo.InvariantCulture),
+            AccessFailedCount = 5,
+            PasswordHash = PasswordHashFor123Qwe
+        };
+
         private const string AdminUserName = "admin";
         private const string AdminUserEmail = "admin@mail.com";
         private const string PasswordHashFor123Qwe = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw=="; //123qwe
         private const string MemberUserName = "memberuser";
         private const string MemberUserEmail = "memberuser@mail.com";
+        private const string TestAdminUserName = "testadmin";
+        private const string TestAdminUserEmail = "testadmin@mail.com";
     }
 }

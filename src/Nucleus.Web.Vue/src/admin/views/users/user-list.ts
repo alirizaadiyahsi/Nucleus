@@ -116,6 +116,6 @@ export default class UserListComponent extends AppComponentBase {
     }
 
     public isAdminUser(userName: string) {
-        return userName === this.appConsts.userManagement.adminUserName;
+        return userName.includes(this.appConsts.userManagement.adminUserName);
     }
 }
