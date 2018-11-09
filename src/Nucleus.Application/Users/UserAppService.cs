@@ -74,15 +74,6 @@ namespace Nucleus.Application.Users
 
         public async Task<IdentityResult> AddUserAsync(CreateOrUpdateUserInput input)
         {
-            if (input.User.Password != input.User.PasswordRepeat)
-            {
-                return IdentityResult.Failed(new IdentityError
-                {
-                    Code = "PasswordsDoesNotMatch",
-                    Description = "Passwords doesn't match!"
-                });
-            }
-
             var user = new User
             {
                 Id = input.User.Id,
@@ -101,15 +92,6 @@ namespace Nucleus.Application.Users
 
         public async Task<IdentityResult> EditUserAsync(CreateOrUpdateUserInput input)
         {
-            if (input.User.Password != input.User.PasswordRepeat)
-            {
-                return IdentityResult.Failed(new IdentityError
-                {
-                    Code = "PasswordsDoesNotMatch",
-                    Description = "Passwords doesn't match!"
-                });
-            }
-
             var user = await _userManager.FindByIdAsync(input.User.Id.ToString());
             if (user.UserName == input.User.UserName && user.Id != input.User.Id)
             {

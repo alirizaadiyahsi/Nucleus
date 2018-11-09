@@ -41,4 +41,10 @@ export default class AppComponentBase extends Vue {
             showConfirmButton: false
         } as any);
     }
+
+    protected passwordMatchError(password: string, passwordRepeat: string) {
+        return (password === passwordRepeat)
+            ? ''
+            : 'Passwords must match';
+    }
 }

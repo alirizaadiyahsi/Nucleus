@@ -118,10 +118,4 @@ export default class UserListComponent extends AppComponentBase {
     public isAdminUser(userName: string) {
         return userName.includes(this.appConsts.userManagement.adminUserName);
     }
-
-    public passwordMatchError() {
-        return (this.createOrUpdateUserInput.user.password === this.createOrUpdateUserInput.user.passwordRepeat)
-            ? ''
-            : 'Passwords must match';
-    }
 }

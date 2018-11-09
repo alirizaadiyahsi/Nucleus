@@ -17,12 +17,6 @@ export default class ChangePasswordComponent extends AppComponentBase {
             });
     }
 
-    public passwordMatchError() {
-        return (this.changePasswordInput.newPassword === this.changePasswordInput.passwordRepeat)
-            ? ''
-            : 'Passwords must match';
-    }
-
     public save() {
         if (this.refs.form.validate()) {
             this.appService.post<ILoginOutput>('/api/account/changePassword', this.changePasswordInput)
