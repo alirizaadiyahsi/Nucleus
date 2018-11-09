@@ -217,8 +217,8 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "IsSystemDefault", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "466e5608-353f-403a-a57c-919cce39940b", true, "Admin", "ADMIN" },
-                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "1e26c2c9-aacb-4acd-a079-53bd77d84b89", true, "Member", "MEMBER" }
+                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "ee74b5ba-4147-4114-8573-e1cda562d882", true, "Admin", "ADMIN" },
+                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "bf5a66a5-8e05-436d-b064-ed1957bb5002", true, "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -226,8 +226,9 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "a5680b58-c81a-4ce8-be81-3c7aea190403", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
-                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "8e035482-e6b4-452b-b6e8-f759ba4d7316", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" }
+                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "e763da6f-16f7-45e1-a0f2-d60ee3ddae4a", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
+                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "99e2faec-c41b-4e81-98a8-91cffdb531c5", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" },
+                    { new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"), 5, "d3ffa8e2-0447-4ec0-9cbd-8d2fb624adbf", "testadmin@mail.com", true, false, null, "TESTADMIN@MAIL.COM", "TESTADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "testadmin" }
                 });
 
             migrationBuilder.InsertData(
@@ -254,7 +255,8 @@ namespace Nucleus.EntityFramework.Migrations
                 values: new object[,]
                 {
                     { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263") },
-                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce") }
+                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce") },
+                    { new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"), new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263") }
                 });
 
             migrationBuilder.CreateIndex(

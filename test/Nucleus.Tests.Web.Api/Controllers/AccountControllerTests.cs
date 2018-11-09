@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -61,7 +60,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Register()
         {
-            var registerViewModel = new RegisterInput
+            var registerInput = new RegisterInput
             {
                 Email = "TestUserEmail_" + Guid.NewGuid() + "@mail.com",
                 UserName = "TestUserName_" + Guid.NewGuid(),
@@ -69,7 +68,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             };
 
             var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-                registerViewModel.ToStringContent(Encoding.UTF8, "application/json"));
+                registerInput.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.OK, responseRegister.StatusCode);
         }
@@ -77,7 +76,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Register_With_Existing_User()
         {
-            var registerViewModel = new RegisterInput
+            var registerInput = new RegisterInput
             {
                 Email = DefaultUsers.TestAdmin.Email,
                 UserName = DefaultUsers.TestAdmin.UserName,
@@ -85,7 +84,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             };
 
             var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-                registerViewModel.ToStringContent(Encoding.UTF8, "application/json"));
+                registerInput.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
         }
@@ -93,7 +92,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Register_With_Invalid_User()
         {
-            var registerViewModel = new RegisterInput
+            var registerInput = new RegisterInput
             {
                 Email = new string('*', 300),
                 UserName = new string('*', 300),
@@ -101,25 +100,9 @@ namespace Nucleus.Tests.Web.Api.Controllers
             };
 
             var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-                registerViewModel.ToStringContent(Encoding.UTF8, "application/json"));
+                registerInput.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
         }
-
-        //[Fact]
-        //public async Task Should_Change_Password()
-        //{
-        //    var registerViewModel = new RegisterInput
-        //    {
-        //        Email = "TestUserEmail_" + Guid.NewGuid() + "@mail.com",
-        //        UserName = "TestUserName_" + Guid.NewGuid(),
-        //        Password = "aA!121212"
-        //    };
-
-        //    var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-        //        registerViewModel.ToStringContent(Encoding.UTF8, "application/json"));
-
-        //    Assert.Equal(HttpStatusCode.OK, responseRegister.StatusCode);
-        //}
     }
 }

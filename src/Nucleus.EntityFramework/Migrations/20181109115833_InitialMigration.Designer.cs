@@ -10,7 +10,7 @@ using Nucleus.EntityFramework;
 namespace Nucleus.EntityFramework.Migrations
 {
     [DbContext(typeof(NucleusDbContext))]
-    [Migration("20181017205829_InitialMigration")]
+    [Migration("20181109115833_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,8 +82,8 @@ namespace Nucleus.EntityFramework.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), ConcurrencyStamp = "466e5608-353f-403a-a57c-919cce39940b", IsSystemDefault = true, Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), ConcurrencyStamp = "1e26c2c9-aacb-4acd-a079-53bd77d84b89", IsSystemDefault = true, Name = "Member", NormalizedName = "MEMBER" }
+                        new { Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), ConcurrencyStamp = "ee74b5ba-4147-4114-8573-e1cda562d882", IsSystemDefault = true, Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), ConcurrencyStamp = "bf5a66a5-8e05-436d-b064-ed1957bb5002", IsSystemDefault = true, Name = "Member", NormalizedName = "MEMBER" }
                     );
                 });
 
@@ -184,8 +184,9 @@ namespace Nucleus.EntityFramework.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), AccessFailedCount = 5, ConcurrencyStamp = "a5680b58-c81a-4ce8-be81-3c7aea190403", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "admin" },
-                        new { Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), AccessFailedCount = 5, ConcurrencyStamp = "8e035482-e6b4-452b-b6e8-f759ba4d7316", Email = "memberuser@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "MEMBERUSER@MAIL.COM", NormalizedUserName = "MEMBERUSER", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "memberuser" }
+                        new { Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), AccessFailedCount = 5, ConcurrencyStamp = "e763da6f-16f7-45e1-a0f2-d60ee3ddae4a", Email = "admin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@MAIL.COM", NormalizedUserName = "ADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "admin" },
+                        new { Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), AccessFailedCount = 5, ConcurrencyStamp = "99e2faec-c41b-4e81-98a8-91cffdb531c5", Email = "memberuser@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "MEMBERUSER@MAIL.COM", NormalizedUserName = "MEMBERUSER", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "memberuser" },
+                        new { Id = new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"), AccessFailedCount = 5, ConcurrencyStamp = "d3ffa8e2-0447-4ec0-9cbd-8d2fb624adbf", Email = "testadmin@mail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "TESTADMIN@MAIL.COM", NormalizedUserName = "TESTADMIN", PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, UserName = "testadmin" }
                     );
                 });
 
@@ -239,6 +240,7 @@ namespace Nucleus.EntityFramework.Migrations
 
                     b.HasData(
                         new { UserId = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263") },
+                        new { UserId = new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"), RoleId = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263") },
                         new { UserId = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), RoleId = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce") }
                     );
                 });

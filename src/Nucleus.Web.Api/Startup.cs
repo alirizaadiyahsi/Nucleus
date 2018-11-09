@@ -7,7 +7,6 @@ using Nucleus.Application;
 using Nucleus.EntityFramework;
 using Nucleus.Web.Core.ActionFilters;
 using Nucleus.Web.Core.Extensions;
-using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Nucleus.Web.Api
@@ -42,7 +41,6 @@ namespace Nucleus.Web.Api
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            Log.Fatal(env.EnvironmentName);
             if (env.IsDevelopment())
             {
                 //UpdateDatabase(app);
