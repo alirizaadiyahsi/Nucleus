@@ -15,6 +15,13 @@ namespace Nucleus.Tests.Web.Api.Controllers
 {
     public class AccountControllerTests : ApiTestBase
     {
+        private readonly string _token;
+
+        public AccountControllerTests()
+        {
+            _token = LoginAsAdminUserAndGetTokenAsync().Result;
+        }
+
         [Fact]
         public async Task Should_Not_Access_Authorized_Controller()
         {
@@ -47,9 +54,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Access_Authorized_Controller()
         {
-            var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUsers");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
 

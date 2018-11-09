@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Roles.Dto;
-using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
 using Nucleus.EntityFramework;
@@ -22,21 +21,19 @@ namespace Nucleus.Tests.Web.Api.Controllers
     public class RoleControllerTests : ApiTestBase
     {
         private readonly NucleusDbContext _dbContext;
+        private readonly string _token;
 
         public RoleControllerTests()
         {
             _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 
         [Fact]
         public async Task Should_Get_Roles()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
-            var token = responseContent.Token;
-
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getroles");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoles");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
 
@@ -47,12 +44,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Role_For_Create()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
-            var token = responseContent.Token;
-
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + Guid.Empty);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
 
@@ -63,12 +56,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Role_For_Update()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
-            var token = responseContent.Token;
-
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + DefaultRoles.Member.Id);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
 
@@ -88,9 +77,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
-            var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createOrUpdateRole");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
@@ -114,14 +102,13 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
-            var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createOrUpdateRole");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
 
-            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>(); 
+            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             var editedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
             Assert.Contains(editedTestRole.RolePermissions, rp => rp.PermissionId == DefaultPermissions.MemberAccess.Id);
         }
@@ -130,10 +117,9 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Delete_Role()
         {
             var testRole = await CreateAndGetTestRoleAsync();
-            var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/deleteRole?id=" + testRole.Id);
-            
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = new { id = testRole.Id }.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);

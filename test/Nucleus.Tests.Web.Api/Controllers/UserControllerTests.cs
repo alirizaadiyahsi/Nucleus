@@ -8,9 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;
-using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
 using Nucleus.EntityFramework;
@@ -23,21 +21,19 @@ namespace Nucleus.Tests.Web.Api.Controllers
     public class UserControllerTests : ApiTestBase
     {
         private readonly NucleusDbContext _dbContext;
+        private readonly string _token;
 
         public UserControllerTests()
         {
             _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 
         [Fact]
         public async Task Should_Get_Users()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
-            var token = responseContent.Token;
-
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUsers");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
 
@@ -48,12 +44,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_User_For_Create()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
-            var token = responseContent.Token;
-
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUserForCreateOrUpdate?id=" + Guid.Empty);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
 
@@ -64,12 +56,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_User_For_Update()
         {
-            var responseLogin = await LoginAsAdminUserAsync();
-            var responseContent = await responseLogin.Content.ReadAsAsync<LoginOutput>();
-            var token = responseContent.Token;
-
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUserForCreateOrUpdate?id=" + DefaultUsers.Member.Id);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
 
@@ -90,10 +78,9 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 },
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
-
-            var token = await LoginAsAdminUserAndGetTokenAsync();
+            
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/user/createOrUpdateUser");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
@@ -117,10 +104,9 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 },
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
-
-            var token = await LoginAsAdminUserAndGetTokenAsync();
+            
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/user/createOrUpdateUser");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
@@ -134,9 +120,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Delete_User()
         {
             var testUser = await CreateAndGetTestUserAsync();
-            var token = await LoginAsAdminUserAndGetTokenAsync();
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/user/deleteUser?id=" + testUser.Id);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
         }
