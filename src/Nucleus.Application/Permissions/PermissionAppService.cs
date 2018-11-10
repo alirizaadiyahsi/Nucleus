@@ -47,9 +47,9 @@ namespace Nucleus.Application.Permissions
 
             var permissionsCount = await query.CountAsync();
             var permissions = query.PagedBy(input.PageIndex, input.PageSize).ToList();
-            var permissionListDtos = _mapper.Map<List<PermissionListOutput>>(permissions);
+            var permissionListOutput = _mapper.Map<List<PermissionListOutput>>(permissions);
 
-            return permissionListDtos.ToPagedList(permissionsCount);
+            return permissionListOutput.ToPagedList(permissionsCount);
         }
 
         public async Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, Guid permissionId)

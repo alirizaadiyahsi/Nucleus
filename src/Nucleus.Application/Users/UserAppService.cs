@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
-using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;
@@ -42,9 +41,9 @@ namespace Nucleus.Application.Users
 
             var usersCount = await query.CountAsync();
             var users = query.PagedBy(input.PageIndex, input.PageSize).ToList();
-            var userListDtos = _mapper.Map<List<UserListOutput>>(users);
+            var userListOutput = _mapper.Map<List<UserListOutput>>(users);
 
-            return userListDtos.ToPagedList(usersCount);
+            return userListOutput.ToPagedList(usersCount);
         }
 
         public async Task<GetUserForCreateOrUpdateOutput> GetUserForCreateOrUpdateAsync(Guid id)
@@ -60,16 +59,7 @@ namespace Nucleus.Application.Users
                 return getUserForCreateOrUpdateOutput;
             }
 
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            var userDto = _mapper.Map<UserDto>(user);
-            var grantedRoles = user.UserRoles.Select(ur => ur.Role);
-
-            return new GetUserForCreateOrUpdateOutput
-            {
-                User = userDto,
-                AllRoles = allRoles,
-                GrantedRoleIds = grantedRoles.Select(r => r.Id).ToList()
-            };
+            return await GetUserForCreateOrUpdateOutputAsync(id, allRoles);
         }
 
         public async Task<IdentityResult> AddUserAsync(CreateOrUpdateUserInput input)
@@ -183,6 +173,20 @@ namespace Nucleus.Application.Users
             }
 
             return updateUserResult;
+        }
+
+        private async Task<GetUserForCreateOrUpdateOutput> GetUserForCreateOrUpdateOutputAsync(Guid id, List<RoleDto> allRoles)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            var userDto = _mapper.Map<UserDto>(user);
+            var grantedRoles = user.UserRoles.Select(ur => ur.Role);
+
+            return new GetUserForCreateOrUpdateOutput
+            {
+                User = userDto,
+                AllRoles = allRoles,
+                GrantedRoleIds = grantedRoles.Select(r => r.Id).ToList()
+            };
         }
     }
 }

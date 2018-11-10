@@ -38,9 +38,9 @@ namespace Nucleus.Application.Roles
 
             var rolesCount = await query.CountAsync();
             var roles = query.PagedBy(input.PageIndex, input.PageSize).ToList();
-            var roleListDtos = _mapper.Map<List<RoleListOutput>>(roles);
+            var roleListOutput = _mapper.Map<List<RoleListOutput>>(roles);
 
-            return roleListDtos.ToPagedList(rolesCount);
+            return roleListOutput.ToPagedList(rolesCount);
         }
 
         public async Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateAsync(Guid id)
@@ -56,16 +56,7 @@ namespace Nucleus.Application.Roles
                 return getRoleForCreateOrUpdateOutput;
             }
 
-            var role = await _roleManager.FindByIdAsync(id.ToString());
-            var roleDto = _mapper.Map<RoleDto>(role);
-            var grantedPermissions = role.RolePermissions.Select(rp => rp.Permission);
-
-            return new GetRoleForCreateOrUpdateOutput
-            {
-                Role = roleDto,
-                AllPermissions = allPermissions,
-                GrantedPermissionIds = grantedPermissions.Select(p => p.Id).ToList()
-            };
+            return await GetRoleForCreateOrUpdateOutputAsync(id, allPermissions);
         }
 
         public async Task<IdentityResult> AddRoleAsync(CreateOrUpdateRoleInput input)
@@ -150,6 +141,20 @@ namespace Nucleus.Application.Roles
                     RoleId = role.Id
                 });
             }
+        }
+
+        private async Task<GetRoleForCreateOrUpdateOutput> GetRoleForCreateOrUpdateOutputAsync(Guid id, List<PermissionDto> allPermissions)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            var roleDto = _mapper.Map<RoleDto>(role);
+            var grantedPermissions = role.RolePermissions.Select(rp => rp.Permission);
+
+            return new GetRoleForCreateOrUpdateOutput
+            {
+                Role = roleDto,
+                AllPermissions = allPermissions,
+                GrantedPermissionIds = grantedPermissions.Select(p => p.Id).ToList()
+            };
         }
     }
 }

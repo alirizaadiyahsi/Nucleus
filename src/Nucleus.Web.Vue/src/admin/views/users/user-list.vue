@@ -28,8 +28,12 @@
                             </v-alert>
                         </div>
                         <v-form ref="form">
-                            <v-text-field name="userName" label="User name" type="text" v-model="createOrUpdateUserInput.user.userName" :rules="[appConsts.validationRules.required]"></v-text-field>
-                            <v-text-field name="email" label="E-mail address" type="text" v-model="createOrUpdateUserInput.user.email" :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
+                            <v-text-field name="userName" label="User name" type="text" 
+                                          v-model="createOrUpdateUserInput.user.userName" 
+                                          :rules="[appConsts.validationRules.required]"></v-text-field>
+                            <v-text-field name="email" label="E-mail address" type="text" 
+                                          v-model="createOrUpdateUserInput.user.email" 
+                                          :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
                             <v-text-field v-if="!isEdit" name="password" label="Password" type="password" 
                                           v-model="createOrUpdateUserInput.user.password" 
                                           :rules="[appConsts.validationRules.required]"></v-text-field>
