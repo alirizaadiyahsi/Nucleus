@@ -5,10 +5,23 @@ import './assets/sass/site.css';
 import router from '@/router';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueI18n from 'vue-i18n';
 
+Vue.use(VueI18n);
 Vue.use(Vuetify);
 
+const locales = {
+    en: require('@/assets/js/locales/en.json'),
+    tr: require('@/assets/js/locales/tr.json')
+};
+
+const i18n = new VueI18n({
+    locale: 'en',
+    messages: locales
+});
+
 const vue = new Vue({
+    i18n,
     el: '#app-root',
     router,
     render: (h: any) => h(require('./App.vue').default)
