@@ -29,7 +29,7 @@ namespace Nucleus.Tests.Application.Users
         {
             var userListInput = new UserListInput();
             var userList = await _userAppService.GetUsersAsync(userListInput);
-            Assert.True(userList.Items.Count >= 0);
+            Assert.True(userList.Items.Count > 0);
 
             userListInput.Filter = ".!1Aa_";
             var usersListEmpty = await _userAppService.GetUsersAsync(userListInput);

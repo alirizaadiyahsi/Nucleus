@@ -22,7 +22,7 @@ namespace Nucleus.Tests.Application.Permissions
         {
             var permissionListInput = new PermissionListInput();
             var permissionList = await _permissionAppService.GetPermissionsAsync(permissionListInput);
-            Assert.True(permissionList.Items.Count >= 0);
+            Assert.True(permissionList.Items.Count > 0);
         }
 
         [Fact]

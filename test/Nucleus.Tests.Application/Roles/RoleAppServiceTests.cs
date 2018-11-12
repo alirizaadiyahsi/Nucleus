@@ -96,7 +96,7 @@ namespace Nucleus.Tests.Application.Roles
         {
             var roleListInput = new RoleListInput();
             var roleList = await _roleAppService.GetRolesAsync(roleListInput);
-            Assert.True(roleList.Items.Count >= 0);
+            Assert.True(roleList.Items.Count > 0);
 
             roleListInput.Filter = ".!1Aa_";
             var rolesListEmpty = await _roleAppService.GetRolesAsync(roleListInput);
