@@ -16,7 +16,7 @@ const locales = {
 };
 
 const i18n = new VueI18n({
-    locale: 'en',
+    locale: 'tr',
     messages: locales
 });
 
