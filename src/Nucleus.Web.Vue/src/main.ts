@@ -1,6 +1,7 @@
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'vuetify/dist/vuetify.min.css';
 import './assets/sass/site.css';
+import LanguageStore from '@/stores/language-store';
 
 import router from '@/router';
 import Vue from 'vue';
@@ -16,7 +17,7 @@ const locales = {
 };
 
 const i18n = new VueI18n({
-    locale: 'tr',
+    locale: LanguageStore.getLanguage().language,
     messages: locales
 });
 

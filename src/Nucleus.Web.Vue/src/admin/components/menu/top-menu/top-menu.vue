@@ -18,6 +18,21 @@
                 </v-list-tile>
             </v-list>
         </v-menu>
+        <v-menu>
+            <v-toolbar-title slot="activator">
+                <span>{{selectedLanguage.languageName}}</span>
+                <v-icon dark>arrow_drop_down</v-icon>
+            </v-toolbar-title>
+
+            <v-list>
+                <v-list-tile @click="changeLanguage('en', 'English')">
+                    <v-list-tile-title>English</v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
+                    <v-list-tile-title>Türkçe</v-list-tile-title>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
         <v-btn icon v-on:click.native="logOut">
             <v-icon>exit_to_app</v-icon>
         </v-btn>
