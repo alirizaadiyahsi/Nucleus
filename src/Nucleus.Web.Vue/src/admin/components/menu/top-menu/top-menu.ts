@@ -9,10 +9,10 @@ import LanguageStore from '@/stores/language-store';
 })
 export default class TopMenuComponent extends AppComponentBase {
     public drawer = true;
-    public selectedLanguage = {} as ILanguageDto;
+    public selectedLanguageName = '';
 
     public mounted() {
-        this.selectedLanguage = LanguageStore.getLanguage();
+        this.selectedLanguageName = LanguageStore.getLanguage().languageName;
     }
 
     public changePasswordDialogChanged(dialog: boolean) {
@@ -23,12 +23,14 @@ export default class TopMenuComponent extends AppComponentBase {
         this.$root.$emit('drawerChanged');
     }
 
-    public changeLanguage(language: string, languageName: string) {
+    public changeLanguage(languageCode: string, languageName: string) {
+        this.$i18n.locale = languageCode;
+        this.selectedLanguageName = languageName;
+
         LanguageStore.setLanguage({
-            language: language,
-            languageName: languageName
+            languageCode,
+            languageName
         } as any);
-        window.location.reload();
     }
 
     public logOut() {

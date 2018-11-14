@@ -1,4 +1,4 @@
 ﻿interface ILanguageDto {
-    language: string;
+    languageCode: string;
     languageName: string;
 }

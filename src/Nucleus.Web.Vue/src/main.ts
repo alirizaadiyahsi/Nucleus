@@ -17,7 +17,8 @@ const locales = {
 };
 
 const i18n = new VueI18n({
-    locale: LanguageStore.getLanguage().language,
+    locale: LanguageStore.getLanguage().languageCode,
+    fallbackLocale: 'en',
     messages: locales
 });
 

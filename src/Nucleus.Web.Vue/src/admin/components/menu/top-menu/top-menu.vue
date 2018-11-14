@@ -20,7 +20,7 @@
         </v-menu>
         <v-menu>
             <v-toolbar-title slot="activator">
-                <span>{{selectedLanguage.languageName}}</span>
+                <span>{{selectedLanguageName}}</span>
                 <v-icon dark>arrow_drop_down</v-icon>
             </v-toolbar-title>
 

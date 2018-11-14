@@ -2,7 +2,8 @@
     public static storageKey: string = 'language';
 
     public static getLanguage(): ILanguageDto {
-        return JSON.parse(localStorage.getItem(LanguageStore.storageKey) as string) || { language: 'en', languageName: 'English' };
+        return JSON.parse(localStorage.getItem(LanguageStore.storageKey) as string) ||
+            ({ languageCode: 'en', languageName: 'English' } as ILanguageDto);
     }
 
     public static setLanguage(input: ILanguageDto) {
