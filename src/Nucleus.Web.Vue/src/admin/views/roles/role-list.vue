@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-toolbar flat color="white">
-            <v-toolbar-title>Roles</v-toolbar-title>
+            <v-toolbar-title>{{$t('Roles')}}</v-toolbar-title>
             <v-divider class="mx-2"
                        inset
                        vertical>
@@ -9,12 +9,12 @@
             <v-spacer></v-spacer>
             <v-text-field v-model="search"
                           append-icon="search"
-                          label="Search"
+                          :label="$t('Search')"
                           single-line
                           hide-details>
             </v-text-field>
             <v-spacer></v-spacer>
-            <v-btn @click="editRole()" color="primary" dark class="mb-2">Create Role</v-btn>
+            <v-btn @click="editRole()" color="primary" dark class="mb-2">{{$t('NewRole')}}</v-btn>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                     <v-card-title>
@@ -28,9 +28,9 @@
                             </v-alert>
                         </div>
                         <v-form ref="form">
-                            <v-text-field v-model="createOrUpdateRoleInput.role.name" label="Role name" :rules="[appConsts.validationRules.required]"></v-text-field>
+                            <v-text-field v-model="createOrUpdateRoleInput.role.name" :label="$t('RoleName')" :rules="[appConsts.validationRules.required]"></v-text-field>
                             <v-list dense subheader>
-                                <v-subheader>Select Permissions</v-subheader>
+                                <v-subheader>{{$t('SelectPermissions')}}</v-subheader>
                                 <v-list-tile v-for="item in allPermissions" :key="item.id">
                                     <v-list-tile-content>
                                         <v-checkbox v-model="createOrUpdateRoleInput.grantedPermissionIds" :label="item.displayName" :value="item.id"></v-checkbox>
@@ -42,8 +42,8 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click="dialog = false">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                        <v-btn color="blue darken-1" flat @click="dialog = false">{{$t('Cancel')}}</v-btn>
+                        <v-btn color="blue darken-1" flat @click="save">{{$t('Save')}}</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -71,7 +71,7 @@
             </template>
             <template slot="no-data" v-if="!loading">
                 <v-alert :value="true" color="error" icon="warning">
-                    Sorry, nothing to display here :(
+                    {{$t('NothingToDisplay')}}
                 </v-alert>
             </template>
         </v-data-table>

@@ -14,7 +14,7 @@
             <v-list>
                 <v-list-tile @click="changePasswordDialogChanged(true)">
                     <v-icon>lock</v-icon>
-                    <v-list-tile-title>Change password</v-list-tile-title>
+                    <v-list-tile-title>{{$t('ChangePassword')}}</v-list-tile-title>
                 </v-list-tile>
             </v-list>
         </v-menu>

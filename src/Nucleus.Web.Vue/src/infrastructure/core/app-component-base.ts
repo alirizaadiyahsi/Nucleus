@@ -29,8 +29,8 @@ export default class AppComponentBase extends Vue {
             title,
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
+            confirmButtonText: this.$t('Yes').toString(),
+            cancelButtonText: this.$t('No').toString()
         } as any);
     }
 
@@ -45,6 +45,6 @@ export default class AppComponentBase extends Vue {
     protected passwordMatchError(password: string, passwordRepeat: string) {
         return (password == passwordRepeat)
             ? ''
-            : 'Passwords must match';
+            : this.$t('PasswordsMustMatch').toString();
     }
 }

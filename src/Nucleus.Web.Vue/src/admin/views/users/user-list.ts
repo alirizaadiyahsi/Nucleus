@@ -13,11 +13,13 @@ export default class UserListComponent extends AppComponentBase {
     public allRoles: IRoleDto[] = [];
     public isEdit = false;
 
-    public headers = [
-        { text: 'User Name', value: 'userName' },
-        { text: 'E-Mail', value: 'email' },
-        { text: 'Actions', value: '', sortable: false }
-    ];
+    get headers() {
+        return [
+            { text: this.$t('UserName'), value: 'userName' },
+            { text: this.$t('Email'), value: 'email' },
+            { text: this.$t('Actions'), value: '', sortable: false }
+        ];
+    }
 
     public createOrUpdateUserInput = {
         grantedRoleIds: [],
@@ -45,7 +47,7 @@ export default class UserListComponent extends AppComponentBase {
 
     public editUser(id: string) {
         this.dialog = true;
-        this.formTitle = id ? 'Edit User' : 'Create User';
+        this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
         this.errors = [];
         this.appService.get<IGetUserForCreateOrUpdateOutput>('/api/user/GetUserForCreateOrUpdate?id=' + id)
@@ -60,7 +62,7 @@ export default class UserListComponent extends AppComponentBase {
     }
 
     public deleteUser(id: string) {
-        this.swalConfirm('Are you sure want to delete?')
+        this.swalConfirm(this.$t('AreYouSureToDelete').toString())
             .then((result) => {
                 if (result.value) {
                     const query = '?id=' + id;
@@ -68,7 +70,7 @@ export default class UserListComponent extends AppComponentBase {
                     this.appService.delete('/api/user/deleteUser' + query)
                         .then((response) => {
                             if (!response.isError) {
-                                this.swalToast(2000, 'success', 'Successful!');
+                                this.swalToast(2000, 'success', this.$t('Successful').toString());
                                 this.getUsers();
                             } else {
                                 this.swalAlert('error', response.errors.join('<br>'));
@@ -85,7 +87,7 @@ export default class UserListComponent extends AppComponentBase {
                 this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
                 .then((response) => {
                     if (!response.isError) {
-                        this.swalToast(2000, 'success', 'Successful!');
+                        this.swalToast(2000, 'success', this.$t('Successful').toString());
                         this.dialog = false;
                         this.getUsers();
                     } else {

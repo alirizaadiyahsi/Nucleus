@@ -2,7 +2,7 @@
     <v-dialog v-model="dialog" max-width="500px">
         <v-card>
             <v-card-title>
-                <span class="headline">Change Password</span>
+                <span class="headline">{{$t('ChangePassword')}}</span>
             </v-card-title>
 
             <v-card-text>
@@ -12,14 +12,13 @@
                     </v-alert>
                 </div>
                 <v-form ref="form">
-                    <input name="userName" type="text" value="username" v-show="false" />
-                    <v-text-field name="currentPassword" type="password" label="Current password" 
+                    <v-text-field name="currentPassword" type="password" :label="$t('ChangePassword')" 
                                    v-model="changePasswordInput.currentPassword"
                                   :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="newPassword" type="password" label="New password" 
+                    <v-text-field name="newPassword" type="password" :label="$t('NewPassword')" 
                                    v-model="changePasswordInput.newPassword"
                                   :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="passwordRepeat" type="password" label="Password repeat" 
+                    <v-text-field name="passwordRepeat" type="password" :label="$t('PasswordRepeat')" 
                                   v-model="changePasswordInput.passwordRepeat"
                                   :rules="[appConsts.validationRules.required]" 
                                   :error-messages="passwordMatchError(changePasswordInput.password,changePasswordInput.passwordRepeat)"></v-text-field>
@@ -28,8 +27,8 @@
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click="dialog = false">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="dialog = false">{{$t('Cancel')}}</v-btn>
+                <v-btn color="blue darken-1" flat @click="save">{{$t('Save')}}</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>

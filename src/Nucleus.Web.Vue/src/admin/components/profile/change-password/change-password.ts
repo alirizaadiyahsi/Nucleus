@@ -23,7 +23,7 @@ export default class ChangePasswordComponent extends AppComponentBase {
                 .then((response) => {
                     if (!response.isError) {
                         this.dialog = false;
-                        this.swalToast(2000, 'success', 'Successful!');
+                        this.swalToast(2000, 'success', this.$t('Successful').toString());
                         this.logOut();
                     } else {
                         this.errors = response.errors;

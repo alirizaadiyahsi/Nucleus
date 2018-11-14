@@ -14,7 +14,7 @@ export default class RegisterComponent extends AppComponentBase {
             this.appService.post<IRegisterOutput>('/api/account/register', this.registerInput)
                 .then((response) => {
                     if (!response.isError) {
-                        this.resultMessage = 'Your account has been successfully created.';
+                        this.resultMessage = this.$t('AccountCreationSuccessful').toString();
                         this.registerComplete = true;
                     } else {
                         this.errors = response.errors;

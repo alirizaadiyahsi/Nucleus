@@ -5,15 +5,18 @@ import { Component } from 'vue-property-decorator';
 export default class AsideMenuComponent extends AppComponentBase {
     public drawer = true;
 
-    public mainMenuItems = [
-        { icon: 'home', text: 'Home', link: '/admin/home' },
-        { icon: 'apps', text: 'Counter', link: '/admin/counter' }
-    ];
+    get mainMenuItems() {
+        return [
+            { icon: 'home', text: this.$t('Home'), link: '/admin/home' }
+        ];
+    }
 
-    public adminMenuItems = [
-        { icon: 'people', text: 'Users', link: '/admin/user-list' },
-        { icon: 'work', text: 'Roles', link: '/admin/role-list' }
-    ];
+    get adminMenuItems() {
+        return [
+            { icon: 'people', text: this.$t('Users'), link: '/admin/user-list' },
+            { icon: 'work', text: this.$t('Roles'), link: '/admin/role-list' }
+        ];
+    }
 
     public mounted() {
         this.$root.$on('drawerChanged',

@@ -11,10 +11,13 @@ export default class RoleListComponent extends AppComponentBase {
     public formTitle = '';
     public pagination = {};
     public search = '';
-    public headers = [
-        { text: 'Role Name', value: 'name' },
-        { text: 'Actions', value: '', sortable: false }
-    ];
+
+    get headers() {
+        return [
+            { text: this.$t('RoleName'), value: 'name' },
+            { text: this.$t('Actions'), value: '', sortable: false }
+        ];
+    }
 
     public createOrUpdateRoleInput = {
         grantedPermissionIds: [],
@@ -42,7 +45,7 @@ export default class RoleListComponent extends AppComponentBase {
 
     public editRole(id: string) {
         this.dialog = true;
-        this.formTitle = id ? 'Edit Role' : 'Create Role';
+        this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
         this.appService.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' + id)
             .then((response) => {
@@ -56,14 +59,14 @@ export default class RoleListComponent extends AppComponentBase {
     }
 
     public deleteRole(id: string) {
-        this.swalConfirm('Are you sure you want to delete this item?')
+        this.swalConfirm(this.$t('AreYouSureToDelete').toString())
             .then((result) => {
                 if (result.value) {
                     const query = '?id=' + id;
                     this.appService.delete('/api/role/deleteRole' + query)
                         .then((response) => {
                             if (!response.isError) {
-                                this.swalToast(2000, 'success', 'Successful!');
+                                this.swalToast(2000, 'success', this.$t('Successful').toString());
                                 this.getRoles();
                             } else {
                                 this.swalAlert('error', response.errors.join('<br>'));
@@ -80,7 +83,7 @@ export default class RoleListComponent extends AppComponentBase {
                 this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
                 .then((response) => {
                     if (!response.isError) {
-                        this.swalToast(2000, 'success', 'Successful!');
+                        this.swalToast(2000, 'success', this.$t('Successful').toString());
                         this.dialog = false;
                         this.getRoles();
                     } else {

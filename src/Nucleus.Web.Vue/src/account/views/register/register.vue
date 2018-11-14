@@ -2,7 +2,7 @@
     <div v-if="!registerComplete">
         <v-card class="elevation-12" @keyup.enter="onSubmit">
             <v-toolbar dark color="primary">
-                <v-toolbar-title>Register</v-toolbar-title>
+                <v-toolbar-title>{{$t('Login')}}</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
                 <div v-for="error in errors" :key="error.name">
@@ -11,16 +11,16 @@
                     </v-alert>
                 </div>
                 <v-form ref="form">
-                    <v-text-field name="userName" label="User name" type="text"
+                    <v-text-field name="userName" :label="$t('UserName')" type="text"
                                   v-model="registerInput.userName"
                                   :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="email" label="E-mail address" type="text"
+                    <v-text-field name="email" :label="$t('EmailAddress')" type="text"
                                   v-model="registerInput.email"
                                   :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
-                    <v-text-field name="password" label="Password" type="password"
+                    <v-text-field name="password" :label="$t('Password')" type="password"
                                   v-model="registerInput.password"
                                   :rules="[appConsts.validationRules.required]"></v-text-field>
-                    <v-text-field name="passwordRepeat" label="Password repeat"
+                    <v-text-field name="passwordRepeat" :label="$t('PasswordRepeat')"
                                   v-model="registerInput.passwordRepeat" type="password"
                                   :rules="[appConsts.validationRules.required]"
                                   :error-messages="passwordMatchError(registerInput.password,registerInput.passwordRepeat)"></v-text-field>
@@ -28,15 +28,15 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn to="/account/login">Login</v-btn>
-                <v-btn color="primary" @click="onSubmit">Register</v-btn>
+                <v-btn to="/account/login">{{$t('Login')}}</v-btn>
+                <v-btn color="primary" @click="onSubmit">{{$t('Register')}}</v-btn>
             </v-card-actions>
         </v-card>
     </div>
     <div v-else>
         <v-card class="elevation-12">
             <v-toolbar dark color="primary">
-                <v-toolbar-title>Registration successful</v-toolbar-title>
+                <v-toolbar-title>{{$t('RegistrationSuccessful')}}</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
                 <v-alert :value="true" type="success">
@@ -45,7 +45,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn to="/account/login">Login</v-btn>
+                <v-btn to="/account/login">{{$t('Login')}}</v-btn>
             </v-card-actions>
         </v-card>
     </div>
