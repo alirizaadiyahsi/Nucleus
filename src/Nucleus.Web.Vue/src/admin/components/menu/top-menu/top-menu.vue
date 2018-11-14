@@ -6,10 +6,10 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-menu>
-            <v-toolbar-title slot="activator">
-                <span>{{authStore.getTokenData().sub}}</span>
-                <v-icon dark>arrow_drop_down</v-icon>
-            </v-toolbar-title>
+            <v-btn slot="activator" color="primary">
+                {{authStore.getTokenData().sub}}
+                <v-icon dark class="ml-3">arrow_drop_down</v-icon>
+            </v-btn>
 
             <v-list>
                 <v-list-tile @click="changePasswordDialogChanged(true)">
@@ -19,10 +19,10 @@
             </v-list>
         </v-menu>
         <v-menu>
-            <v-toolbar-title slot="activator">
-                <span>{{selectedLanguageName}}</span>
-                <v-icon dark>arrow_drop_down</v-icon>
-            </v-toolbar-title>
+            <v-btn slot="activator" color="primary">
+                {{selectedLanguageName}}
+                <v-icon dark class="ml-3">arrow_drop_down</v-icon>
+            </v-btn>
 
             <v-list>
                 <v-list-tile @click="changeLanguage('en', 'English')">
@@ -33,7 +33,7 @@
                 </v-list-tile>
             </v-list>
         </v-menu>
-        <v-btn icon v-on:click.native="logOut">
+        <v-btn icon @click="logOut">
             <v-icon>exit_to_app</v-icon>
         </v-btn>
 
