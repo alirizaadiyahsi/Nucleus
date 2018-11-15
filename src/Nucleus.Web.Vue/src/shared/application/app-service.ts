@@ -1,5 +1,5 @@
 ﻿import AuthStore from '@/stores/auth-store';
-import AppConsts from '@/infrastructure/core/app-consts';
+import AppConsts from '@/shared/application/app-consts';
 
 export default class AppService {
     private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponseDto<T>> {

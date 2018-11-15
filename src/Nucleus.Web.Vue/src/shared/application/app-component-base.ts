@@ -1,8 +1,8 @@
 ﻿import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import AppService from '@/infrastructure/core/app-service';
+import AppService from '@/shared/application/app-service';
 import QueryString from 'query-string';
-import AppConsts from '@/infrastructure/core/app-consts';
+import AppConsts from '@/shared/application/app-consts';
 import swal from 'sweetalert2';
 import AuthStore from '@/stores/auth-store';
 

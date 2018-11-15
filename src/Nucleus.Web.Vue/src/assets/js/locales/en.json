@@ -20,7 +20,7 @@
   "Cancel": "Cancel",
   "Save": "Save",
   "Actions": "Actions",
-  "RoleName": "Rol adý",
+  "RoleName": "Role name",
   "EditRole": "Edit role",
   "CreateRole": "Create role",
   "AreYouSureToDelete": "Are you sure you want to delete?",
@@ -31,7 +31,7 @@
   "EditUser": "Edit user",
   "NewUser": "New user",
   "SelectRoles": "Select roles",
-  "Yes": "Evet",
-  "No": "Hayýr",
+  "Yes": "Yes",
+  "No": "No",
   "PasswordsMustMatch": "Passwords must match!"
 }

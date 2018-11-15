@@ -1,5 +1,5 @@
 ﻿import { Component } from 'vue-property-decorator';
-import AppComponentBase from '@/infrastructure/core/app-component-base';
+import AppComponentBase from '@/shared/application/app-component-base';
 
 @Component
 export default class RegisterComponent extends AppComponentBase {
