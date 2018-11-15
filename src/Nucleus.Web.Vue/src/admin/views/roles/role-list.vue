@@ -28,7 +28,9 @@
                             </v-alert>
                         </div>
                         <v-form ref="form">
-                            <v-text-field v-model="createOrUpdateRoleInput.role.name" :label="$t('RoleName')" :rules="[appConsts.validationRules.required]"></v-text-field>
+                            <v-text-field v-model="createOrUpdateRoleInput.role.name" 
+                                          :label="$t('RoleName')" 
+                                          :rules="[requiredError]"></v-text-field>
                             <v-list dense subheader>
                                 <v-subheader>{{$t('SelectPermissions')}}</v-subheader>
                                 <v-list-tile v-for="item in allPermissions" :key="item.id">

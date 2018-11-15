@@ -1,9 +1,10 @@
 {
-  "HelloWorld": "Merhaba dünya!", 
+  "HelloWorld": "Merhaba dünya!",
   "UserNameOrEmailAddress": "Kullanýcý adý veya e-posta adresi",
   "Login": "Giriþ",
   "Password": "Þifre",
   "RequiredField": "Bu alan gerekli!",
+  "EmailValidationError": "Geçerli bir e-posta adresi girin!",
   "Register": "Kayýt",
   "AccountCreationSuccessful": "Hesabýnýz baþarýlý ile oluþturuldu!",
   "UserName": "Kullanýcý adý",

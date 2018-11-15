@@ -14,13 +14,13 @@
                 <v-form ref="form">
                     <v-text-field name="currentPassword" type="password" :label="$t('ChangePassword')" 
                                    v-model="changePasswordInput.currentPassword"
-                                  :rules="[appConsts.validationRules.required]"></v-text-field>
+                                  :rules="[requiredError]"></v-text-field>
                     <v-text-field name="newPassword" type="password" :label="$t('NewPassword')" 
                                    v-model="changePasswordInput.newPassword"
-                                  :rules="[appConsts.validationRules.required]"></v-text-field>
+                                  :rules="[requiredError]"></v-text-field>
                     <v-text-field name="passwordRepeat" type="password" :label="$t('PasswordRepeat')" 
                                   v-model="changePasswordInput.passwordRepeat"
-                                  :rules="[appConsts.validationRules.required]" 
+                                  :rules="[requiredError]" 
                                   :error-messages="passwordMatchError(changePasswordInput.password,changePasswordInput.passwordRepeat)"></v-text-field>
                 </v-form>
             </v-card-text>

@@ -13,16 +13,16 @@
                 <v-form ref="form">
                     <v-text-field name="userName" :label="$t('UserName')" type="text"
                                   v-model="registerInput.userName"
-                                  :rules="[appConsts.validationRules.required]"></v-text-field>
+                                  :rules="[requiredError]"></v-text-field>
                     <v-text-field name="email" :label="$t('EmailAddress')" type="text"
                                   v-model="registerInput.email"
-                                  :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
+                                  :rules="[requiredError,emailError]"></v-text-field>
                     <v-text-field name="password" :label="$t('Password')" type="password"
                                   v-model="registerInput.password"
-                                  :rules="[appConsts.validationRules.required]"></v-text-field>
+                                  :rules="[requiredError]"></v-text-field>
                     <v-text-field name="passwordRepeat" :label="$t('PasswordRepeat')"
                                   v-model="registerInput.passwordRepeat" type="password"
-                                  :rules="[appConsts.validationRules.required]"
+                                  :rules="[requiredError]"
                                   :error-messages="passwordMatchError(registerInput.password,registerInput.passwordRepeat)"></v-text-field>
                 </v-form>
             </v-card-text>

@@ -13,6 +13,10 @@ export default class AppComponentBase extends Vue {
     protected appConsts = AppConsts;
     protected authStore = AuthStore;
 
+    public mounted() {
+
+    }
+
     protected swalToast(duration: number, type: string, title: string) {
         swal({
             toast: true,
@@ -46,5 +50,12 @@ export default class AppComponentBase extends Vue {
         return (password == passwordRepeat)
             ? ''
             : this.$t('PasswordsMustMatch').toString();
+    }
+
+    protected requiredError = (v: any) => !!v || this.t('RequiredField');
+    protected emailError = (v: any) => /.+@.+/.test(v) || this.t('EmailValidationError');
+
+    private t(key: string):string {
+        return this.$t(key).toString();
     }
 }

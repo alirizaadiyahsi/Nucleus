@@ -4,6 +4,7 @@
   "Login": "Login",
   "Password": "Password",
   "RequiredField": "This field is required!",
+  "EmailValidationError": "E-mail must be valid!",
   "Register": "Register",
   "AccountCreationSuccessful": "Your account has been successfully created!",
   "UserName": "User name",

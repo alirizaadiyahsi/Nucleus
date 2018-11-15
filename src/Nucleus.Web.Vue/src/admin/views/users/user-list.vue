@@ -30,19 +30,19 @@
                         <v-form ref="form">
                             <v-text-field name="userName" :label="$t('UserName')" type="text" 
                                           v-model="createOrUpdateUserInput.user.userName" 
-                                          :rules="[appConsts.validationRules.required]"></v-text-field>
+                                          :rules="[requiredError]"></v-text-field>
                             <v-text-field name="email" :label="$t('EmailAddress')" type="text" 
                                           v-model="createOrUpdateUserInput.user.email" 
-                                          :rules="[appConsts.validationRules.required,appConsts.validationRules.email]"></v-text-field>
+                                          :rules="[requiredError,emailError]"></v-text-field>
                             <v-text-field v-if="!isEdit" name="password" :label="$t('Password')" type="password" 
                                           v-model="createOrUpdateUserInput.user.password" 
-                                          :rules="[appConsts.validationRules.required]"></v-text-field>
+                                          :rules="[requiredError]"></v-text-field>
                             <v-text-field v-if="isEdit" name="password" :label="$t('Password')" type="password" 
                                           v-model="createOrUpdateUserInput.user.password"></v-text-field>
                             <v-text-field v-if="!isEdit" name="passwordRepeat" :label="$t('PasswordRepeat')" type="password"
                                           v-model="createOrUpdateUserInput.user.passwordRepeat" 
                                           :error-messages='passwordMatchError(createOrUpdateUserInput.user.password,createOrUpdateUserInput.user.passwordRepeat)' 
-                                          :rules="[appConsts.validationRules.required]"></v-text-field>
+                                          :rules="[requiredError]"></v-text-field>
                             <v-text-field v-if="isEdit" name="passwordRepeat" :label="$t('PasswordRepeat')" type="password"
                                           v-model="createOrUpdateUserInput.user.passwordRepeat" 
                                           :error-messages='passwordMatchError(createOrUpdateUserInput.user.password,createOrUpdateUserInput.user.passwordRepeat)'></v-text-field>
