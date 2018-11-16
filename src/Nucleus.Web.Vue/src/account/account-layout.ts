@@ -4,15 +4,15 @@ import LanguageStore from '@/stores/language-store';
 
 @Component
 export default class AccountLayoutComponent extends AppComponentBase {
-    public selectedLanguageName = '';
+    public selectedLanguage = {} as ILanguageDto;
 
     public mounted() {
-        this.selectedLanguageName = LanguageStore.getLanguage().languageName;
+        this.selectedLanguage = LanguageStore.getLanguage();
     }
 
     public changeLanguage(languageCode: string, languageName: string) {
         this.$i18n.locale = languageCode;
-        this.selectedLanguageName = languageName;
+        this.selectedLanguage = { languageName, languageCode } as ILanguageDto;
 
         LanguageStore.setLanguage({
             languageCode,

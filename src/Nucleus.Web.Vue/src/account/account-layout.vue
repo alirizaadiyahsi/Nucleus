@@ -7,15 +7,18 @@
                     <v-layout align-center justify-center row fill-height>
                         <v-menu class="mt-3">
                             <v-btn slot="activator" color="primary" dark outline round>
-                                {{selectedLanguageName}}
+                                <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
+                                {{selectedLanguage.languageName}}
                                 <v-icon dark class="ml-3">arrow_drop_down</v-icon>
                             </v-btn>
 
                             <v-list>
                                 <v-list-tile @click="changeLanguage('en', 'English')">
+                                    <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
                                     <v-list-tile-title>English</v-list-tile-title>
                                 </v-list-tile>
                                 <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
+                                    <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
                                     <v-list-tile-title>Türkçe</v-list-tile-title>
                                 </v-list-tile>
                             </v-list>

@@ -9,10 +9,10 @@ import LanguageStore from '@/stores/language-store';
 })
 export default class TopMenuComponent extends AppComponentBase {
     public drawer = true;
-    public selectedLanguageName = '';
+    public selectedLanguage = {} as ILanguageDto;
 
     public mounted() {
-        this.selectedLanguageName = LanguageStore.getLanguage().languageName;
+        this.selectedLanguage = LanguageStore.getLanguage();
     }
 
     public changePasswordDialogChanged(dialog: boolean) {
@@ -25,7 +25,7 @@ export default class TopMenuComponent extends AppComponentBase {
 
     public changeLanguage(languageCode: string, languageName: string) {
         this.$i18n.locale = languageCode;
-        this.selectedLanguageName = languageName;
+        this.selectedLanguage = { languageName, languageCode } as ILanguageDto;
 
         LanguageStore.setLanguage({
             languageCode,
