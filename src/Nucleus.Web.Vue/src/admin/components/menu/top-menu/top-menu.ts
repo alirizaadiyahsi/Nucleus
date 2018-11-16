@@ -11,7 +11,7 @@ export default class TopMenuComponent extends AppComponentBase {
     public drawer = true;
     public selectedLanguage = {} as ILanguageDto;
 
-    public mounted() {
+    public beforeMount() {
         this.selectedLanguage = LanguageStore.getLanguage();
     }
 

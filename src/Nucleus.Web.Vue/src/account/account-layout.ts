@@ -6,7 +6,7 @@ import LanguageStore from '@/stores/language-store';
 export default class AccountLayoutComponent extends AppComponentBase {
     public selectedLanguage = {} as ILanguageDto;
 
-    public mounted() {
+    public beforeMount() {
         this.selectedLanguage = LanguageStore.getLanguage();
     }
 
