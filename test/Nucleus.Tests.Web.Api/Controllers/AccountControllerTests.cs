@@ -5,8 +5,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Users.Dto;
+using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
+using Nucleus.EntityFramework;
 using Nucleus.Utilities.Collections;
 using Nucleus.Utilities.Extensions.PrimitiveTypes;
 using Xunit;
@@ -15,10 +18,12 @@ namespace Nucleus.Tests.Web.Api.Controllers
 {
     public class AccountControllerTests : ApiTestBase
     {
+        private readonly NucleusDbContext _dbContext;
         private readonly string _token;
 
         public AccountControllerTests()
         {
+            _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 
@@ -98,17 +103,58 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Register_With_Invalid_User()
         {
-            var registerInput = new RegisterInput
+            var input = new RegisterInput
             {
                 Email = new string('*', 300),
                 UserName = new string('*', 300),
                 Password = "aA!121212"
             };
 
-            var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
-                registerInput.ToStringContent(Encoding.UTF8, "application/json"));
+            var response = await TestServer.CreateClient().PostAsync("/api/account/register",
+                input.ToStringContent(Encoding.UTF8, "application/json"));
 
-            Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_Change_Password()
+        {
+            var testUser = await CreateAndGetTestUserAsync();
+            var token = await LoginAndGetTokenAsync(testUser.UserName, "123qwe");
+            var input = new ChangePasswordInput
+            {
+                CurrentPassword = "123qwe",
+                NewPassword = "aA!121212",
+                PasswordRepeat = "aA!121212"
+            };
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/account/changePassword");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
+            var response = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        private async Task<User> CreateAndGetTestUserAsync()
+        {
+            var testUser = new User
+            {
+                Id = Guid.NewGuid(),
+                UserName = "TestUserName_" + Guid.NewGuid(),
+                Email = "TestUserEmail_" + Guid.NewGuid(),
+                PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
+            };
+            testUser.NormalizedEmail = testUser.Email.Normalize();
+            testUser.NormalizedUserName = testUser.UserName.Normalize();
+
+            await _dbContext.Users.AddAsync(testUser);
+            await _dbContext.UserRoles.AddAsync(new UserRole
+            {
+                UserId = testUser.Id,
+                RoleId = DefaultRoles.Admin.Id
+            });
+            await _dbContext.SaveChangesAsync();
+            return testUser;
         }
     }
 }

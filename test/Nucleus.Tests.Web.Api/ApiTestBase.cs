@@ -45,5 +45,17 @@ namespace Nucleus.Tests.Web.Api
             var loginResult = await responseLogin.Content.ReadAsAsync<LoginOutput>();
             return loginResult.Token;
         }
+
+        protected async Task<string> LoginAndGetTokenAsync(string userNameOrEmail, string password)
+        {
+            var responseLogin = await LoginAsync(userNameOrEmail, password);
+            if (!responseLogin.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var loginResult = await responseLogin.Content.ReadAsAsync<LoginOutput>();
+            return loginResult.Token;
+        }
     }
 }
