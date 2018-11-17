@@ -7,9 +7,7 @@ import router from '@/router';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueI18n from 'vue-i18n';
-
 Vue.use(VueI18n);
-Vue.use(Vuetify);
 
 const locales = {
     en: require('@/assets/js/locales/en.json'),
@@ -20,6 +18,13 @@ const i18n = new VueI18n({
     locale: LanguageStore.getLanguage().languageCode,
     fallbackLocale: 'en',
     messages: locales
+});
+
+
+Vue.use(Vuetify, {
+    lang: {
+        t: (key: any, ...params: any[]) => i18n.t(key, params)
+    }
 });
 
 const vue = new Vue({

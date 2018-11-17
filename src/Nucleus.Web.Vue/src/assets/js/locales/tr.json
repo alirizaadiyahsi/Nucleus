@@ -34,5 +34,19 @@
   "SelectRoles": "Rol seçin",
   "Yes": "Evet",
   "No": "Hayýr",
-  "PasswordsMustMatch": "Þifreler eþleþmeli!"
+  "PasswordsMustMatch": "Þifreler eþleþmeli!",
+  "$vuetify": {
+    "dataIterator": {
+      "rowsPerPageText": "Kayýt sayýsý:",
+      "rowsPerPageAll": "Hepsi",
+      "pageText": "{0}-{1} / {2}",
+      "noResultsText": "Eþleþen kayýt bulunamadý",
+      "nextPage": "Sonraki sayfa",
+      "prevPage": "Önceki sayfa"
+    },
+    "dataTable": {
+      "rowsPerPageText": "Satýr sayýsý:"
+    },
+    "noDataText": "Kayýt býlunamadý"
+  }
 }
