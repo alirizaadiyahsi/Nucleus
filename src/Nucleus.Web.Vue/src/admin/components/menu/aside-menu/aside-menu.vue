@@ -11,8 +11,8 @@
                     </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
-            <v-subheader class="mt-3 grey--text text--darken-1">{{$t('Administration').toUpperCase()}}</v-subheader>
-            <v-list>
+            <v-subheader v-show="isAdmin" class="mt-3 grey--text text--darken-1">{{$t('Administration').toUpperCase()}}</v-subheader>
+            <v-list v-show="isAdmin">
                 <v-list-tile v-for="item in adminMenuItems" :key="item.link" :to="item.link">
                     <v-list-tile-action>
                         <v-icon>{{ item.icon }}</v-icon>

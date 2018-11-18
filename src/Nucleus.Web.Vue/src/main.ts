@@ -20,7 +20,6 @@ const i18n = new VueI18n({
     messages: locales
 });
 
-
 Vue.use(Vuetify, {
     lang: {
         t: (key: any, ...params: any[]) => i18n.t(key, params)

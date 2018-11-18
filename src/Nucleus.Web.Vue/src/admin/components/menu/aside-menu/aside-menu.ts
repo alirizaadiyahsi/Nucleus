@@ -4,6 +4,7 @@ import { Component } from 'vue-property-decorator';
 @Component
 export default class AsideMenuComponent extends AppComponentBase {
     public drawer = true;
+    public isAdmin = false;
 
     get mainMenuItems() {
         return [
@@ -19,6 +20,16 @@ export default class AsideMenuComponent extends AppComponentBase {
     }
 
     public mounted() {
+        const input: IIsUserInRoleInput = {
+            userNameOrEmail: this.authStore.getTokenData().sub,
+            roleName: 'Admin'
+        };
+        const query = '?' + this.queryString.stringify(input);
+        this.appService.get<boolean>('/api/account/isUserInRole' + query)
+            .then((response) => {
+                this.isAdmin = response.content;
+            });
+
         this.$root.$on('drawerChanged',
             () => {
                 this.drawer = !this.drawer;
