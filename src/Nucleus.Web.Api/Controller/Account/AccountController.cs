@@ -107,6 +107,20 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok();
         }
 
+        [HttpGet("[action]")]
+        public async Task<bool> IsUserInRole(IsUserInRoleInput input)
+        {
+            var user = await _userManager.FindByNameAsync(input.UserNameOrEmail) ??
+                       await _userManager.FindByEmailAsync(input.UserNameOrEmail);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            return await _userManager.IsInRoleAsync(user, input.RoleName);
+        }
+
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
         {
             if (string.IsNullOrEmpty(userNameOrEmail) || string.IsNullOrEmpty(password))
@@ -114,7 +128,8 @@ namespace Nucleus.Web.Api.Controller.Account
                 return null;
             }
 
-            var userToVerify = await _userManager.FindByEmailAsync(userNameOrEmail) ?? await _userManager.FindByNameAsync(userNameOrEmail);
+            var userToVerify = await _userManager.FindByNameAsync(userNameOrEmail) ??
+                               await _userManager.FindByEmailAsync(userNameOrEmail);
 
             if (userToVerify == null)
             {
