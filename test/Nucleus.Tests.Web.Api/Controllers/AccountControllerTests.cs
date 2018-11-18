@@ -135,6 +135,23 @@ namespace Nucleus.Tests.Web.Api.Controllers
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
+        [Fact]
+        public async Task Should_User_Is_In_Role()
+        {
+            var input = new IsUserInRoleInput
+            {
+                UserNameOrEmail = DefaultUsers.TestAdmin.UserName,
+                RoleName = DefaultRoles.RoleNameForAdmin
+            };
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/isUserInRole?" + input.ToQueryString());
+            var response = await TestServer.CreateClient().SendAsync(requestMessage);
+            var isUserInRole = await response.Content.ReadAsAsync<bool>();
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.True(isUserInRole);
+        }
+
         private async Task<User> CreateAndGetTestUserAsync()
         {
             var testUser = new User
