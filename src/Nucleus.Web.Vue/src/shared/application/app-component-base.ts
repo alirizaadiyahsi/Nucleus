@@ -1,12 +1,10 @@
 ﻿import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
 import AppService from '@/shared/application/app-service';
 import QueryString from 'query-string';
 import AppConsts from '@/shared/application/app-consts';
 import swal from 'sweetalert2';
 import AuthStore from '@/stores/auth-store';
 
-@Component
 export default class AppComponentBase extends Vue {
     protected appService: AppService = new AppService();
     protected queryString = QueryString;
