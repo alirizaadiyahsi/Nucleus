@@ -10,6 +10,8 @@ export default class AppComponentBase extends Vue {
     protected queryString = QueryString;
     protected appConsts = AppConsts;
     protected authStore = AuthStore;
+    protected requiredError = (v: any) => !!v || this.t('RequiredField');
+    protected emailError = (v: any) => /.+@.+/.test(v) || this.t('EmailValidationError');
 
     protected swalToast(duration: number, type: string, title: string) {
         swal({
@@ -46,8 +48,9 @@ export default class AppComponentBase extends Vue {
             : this.$t('PasswordsMustMatch').toString();
     }
 
-    protected requiredError = (v: any) => !!v || this.t('RequiredField');
-    protected emailError = (v: any) => /.+@.+/.test(v) || this.t('EmailValidationError');
+    protected isGrantedToPermission() {
+
+    }
 
     private t(key: string): string {
         return this.$t(key).toString();

@@ -10,8 +10,8 @@ namespace Nucleus.Application.Permissions
     {
         Task<IPagedList<PermissionListOutput>> GetPermissionsAsync(PermissionListInput input);
 
-        Task<bool> IsUserGrantToPermissionAsync(string userNameOrEmail, string permissionName);
+        Task<bool> IsUserGrantedToPermissionAsync(string userNameOrEmail, string permissionName);
 
-        Task<bool> IsRoleGrantToPermissionAsync(Role role, Permission permission);
+        Task<bool> IsRoleGrantedToPermissionAsync(Role role, Permission permission);
     }
 }

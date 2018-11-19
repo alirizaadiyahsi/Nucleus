@@ -128,9 +128,9 @@ namespace Nucleus.Web.Api.Controller.Account
 
         [HttpGet("[action]")]
         [Authorize]
-        public async Task<bool> IsUserGrantToPermissionAsync(IsUserGrantToPermissionInput input)
+        public async Task<bool> IsUserGrantedToPermissionAsync(IsUserGrantToPermissionInput input)
         {
-            return await _permissionAppService.IsUserGrantToPermissionAsync(input.UserNameOrEmail, input.PermissionName);
+            return await _permissionAppService.IsUserGrantedToPermissionAsync(input.UserNameOrEmail, input.PermissionName);
         }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)

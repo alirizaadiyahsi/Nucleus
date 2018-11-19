@@ -167,7 +167,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 PermissionName = DefaultPermissions.PermissionNameForAdministration
             };
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/IsUserGrantToPermissionAsync?" + input.ToQueryString());
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/IsUserGrantedToPermissionAsync?" + input.ToQueryString());
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await TestServer.CreateClient().SendAsync(requestMessage);
             var isUserGrantToPermissionAsync = await response.Content.ReadAsAsync<bool>();
