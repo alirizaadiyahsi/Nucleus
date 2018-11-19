@@ -52,7 +52,7 @@ namespace Nucleus.Application.Permissions
             return permissionListOutput.ToPagedList(permissionsCount);
         }
 
-        public async Task<bool> IsPermissionGrantedToUserAsync(string userNameOrEmail, string permissionName)
+        public async Task<bool> IsUserGrantToPermissionAsync(string userNameOrEmail, string permissionName)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u =>
                 u.UserName == userNameOrEmail || u.Email == userNameOrEmail);
@@ -69,7 +69,7 @@ namespace Nucleus.Application.Permissions
             return grantedPermissions.Any(p => p.Name == permissionName);
         }
 
-        public async Task<bool> IsPermissionGrantedToRoleAsync(Role role, Permission permission)
+        public async Task<bool> IsRoleGrantToPermissionAsync(Role role, Permission permission)
         {
             var existingRole = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Id == role.Id);
             if (existingRole == null)

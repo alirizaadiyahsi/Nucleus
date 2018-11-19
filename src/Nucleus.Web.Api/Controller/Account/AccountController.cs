@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
+using Nucleus.Application.Permissions;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
 using Nucleus.Web.Core.Authentication;
@@ -21,13 +22,16 @@ namespace Nucleus.Web.Api.Controller.Account
     {
         private readonly UserManager<User> _userManager;
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
+        private readonly IPermissionAppService _permissionAppService;
 
         public AccountController(
             UserManager<User> userManager,
-            IOptions<JwtTokenConfiguration> jwtTokenConfiguration)
+            IOptions<JwtTokenConfiguration> jwtTokenConfiguration, 
+            IPermissionAppService permissionAppService)
         {
             _userManager = userManager;
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
+            _permissionAppService = permissionAppService;
         }
 
         [HttpPost("[action]")]
@@ -108,6 +112,7 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpGet("[action]")]
+        [Authorize]
         public async Task<bool> IsUserInRole(IsUserInRoleInput input)
         {
             var user = await _userManager.FindByNameAsync(input.UserNameOrEmail) ??
@@ -119,6 +124,13 @@ namespace Nucleus.Web.Api.Controller.Account
             }
 
             return await _userManager.IsInRoleAsync(user, input.RoleName);
+        }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<bool> IsUserGrantToPermissionAsync(IsUserGrantToPermissionInput input)
+        {
+            return await _permissionAppService.IsUserGrantToPermissionAsync(input.UserNameOrEmail, input.PermissionName);
         }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)

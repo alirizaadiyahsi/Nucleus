@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Users.Dto;
+using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
 using Nucleus.EntityFramework;
@@ -138,6 +139,8 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_User_Is_In_Role()
         {
+            var testUser = await CreateAndGetTestUserAsync();
+            var token = await LoginAndGetTokenAsync(testUser.UserName, "123qwe");
             var input = new IsUserInRoleInput
             {
                 UserNameOrEmail = DefaultUsers.TestAdmin.UserName,
@@ -145,11 +148,32 @@ namespace Nucleus.Tests.Web.Api.Controllers
             };
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/isUserInRole?" + input.ToQueryString());
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await TestServer.CreateClient().SendAsync(requestMessage);
             var isUserInRole = await response.Content.ReadAsAsync<bool>();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.True(isUserInRole);
+        }
+
+        [Fact]
+        public async Task Should_User_Grant_To_Permission()
+        {
+            var testUser = await CreateAndGetTestUserAsync();
+            var token = await LoginAndGetTokenAsync(testUser.UserName, "123qwe");
+            var input = new IsUserGrantToPermissionInput
+            {
+                UserNameOrEmail = DefaultUsers.TestAdmin.UserName,
+                PermissionName = DefaultPermissions.PermissionNameForAdministration
+            };
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/IsUserGrantToPermissionAsync?" + input.ToQueryString());
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await TestServer.CreateClient().SendAsync(requestMessage);
+            var isUserGrantToPermissionAsync = await response.Content.ReadAsAsync<bool>();
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.True(isUserGrantToPermissionAsync);
         }
 
         private async Task<User> CreateAndGetTestUserAsync()

@@ -37,7 +37,7 @@ namespace Nucleus.Tests.Application.Permissions
         public async Task Should_Permission_Granted_To_User()
         {
             var isPermissionGranted =
-                await _permissionAppService.IsPermissionGrantedToUserAsync(ContextUser.Identity.Name, DefaultPermissions.MemberAccess.Id);
+                await _permissionAppService.IsUserGrantToPermissionAsync(ContextUser.Identity.Name, DefaultPermissions.MemberAccess.Name);
 
             Assert.True(isPermissionGranted);
         }
@@ -46,7 +46,7 @@ namespace Nucleus.Tests.Application.Permissions
         public async Task Should_Not_Permission_Granted_To_User()
         {
             var isPermissionNotGranted =
-                await _permissionAppService.IsPermissionGrantedToUserAsync(null, DefaultPermissions.MemberAccess.Id);
+                await _permissionAppService.IsUserGrantToPermissionAsync(null, DefaultPermissions.MemberAccess.Name);
 
             Assert.False(isPermissionNotGranted);
         }
@@ -55,7 +55,7 @@ namespace Nucleus.Tests.Application.Permissions
         public async Task Should_Permission_Granted_To_Role()
         {
             var isPermissionGranted =
-                await _permissionAppService.IsPermissionGrantedToRoleAsync(DefaultRoles.Member, DefaultPermissions.MemberAccess);
+                await _permissionAppService.IsRoleGrantToPermissionAsync(DefaultRoles.Member, DefaultPermissions.MemberAccess);
 
             Assert.True(isPermissionGranted);
         }
@@ -64,7 +64,7 @@ namespace Nucleus.Tests.Application.Permissions
         public async Task Should_Not_Permission_Granted_To_Role()
         {
             var isPermissionNotGranted =
-                await _permissionAppService.IsPermissionGrantedToRoleAsync(new Role(), DefaultPermissions.AdministrationAccess);
+                await _permissionAppService.IsRoleGrantToPermissionAsync(new Role(), DefaultPermissions.AdministrationAccess);
 
             Assert.False(isPermissionNotGranted);
         }

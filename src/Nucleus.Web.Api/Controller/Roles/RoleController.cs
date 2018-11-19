@@ -18,7 +18,7 @@ namespace Nucleus.Web.Api.Controller.Roles
     {
         private readonly IRoleAppService _roleAppService;
 
-        public RoleController(IRoleAppService roleAppService, IPermissionAppService permissionAppService)
+        public RoleController(IRoleAppService roleAppService)
         {
             _roleAppService = roleAppService;
         }
