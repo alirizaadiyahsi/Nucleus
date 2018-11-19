@@ -21,7 +21,7 @@ namespace Nucleus.Web.Core.Authentication
                 return;
             }
 
-            var hasPermission = await _permissionApp.IsPermissionGrantedToUserAsync(context.User.Identity.Name, requirement.Permission.Id);
+            var hasPermission = await _permissionApp.IsPermissionGrantedToUserAsync(context.User.Identity.Name, requirement.Permission.Name);
             if (hasPermission)
             {
                 context.Succeed(requirement);
