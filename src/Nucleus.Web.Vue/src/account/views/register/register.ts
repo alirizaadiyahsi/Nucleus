@@ -1,8 +1,8 @@
 ﻿import { Component } from 'vue-property-decorator';
-import AppComponentBase from '@/shared/application/app-component-base';
+import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 
 @Component
-export default class RegisterComponent extends AppComponentBase {
+export default class RegisterComponent extends NucleusComponentBase {
     public refs = this.$refs as any;
     public registerInput = {} as IRegisterInput;
     public errors: INameValueDto[] = [];
@@ -11,7 +11,7 @@ export default class RegisterComponent extends AppComponentBase {
 
     public onSubmit() {
         if (this.refs.form.validate()) {
-            this.appService.post<IRegisterOutput>('/api/account/register', this.registerInput)
+            this.nucleusService.post<IRegisterOutput>('/api/account/register', this.registerInput)
                 .then((response) => {
                     if (!response.isError) {
                         this.resultMessage = this.$t('AccountCreationSuccessful').toString();

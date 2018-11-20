@@ -1,4 +1,4 @@
-﻿import AppComponentBase from '@/shared/application/app-component-base';
+﻿import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component } from 'vue-property-decorator';
 import LanguageStore from '@/stores/language-store';
 
@@ -7,7 +7,7 @@ import LanguageStore from '@/stores/language-store';
         ChangePassword: require('@/admin/components/profile/change-password/change-password.vue').default
     }
 })
-export default class TopMenuComponent extends AppComponentBase {
+export default class TopMenuComponent extends NucleusComponentBase {
     public drawer = true;
     public selectedLanguage = {} as ILanguageDto;
 

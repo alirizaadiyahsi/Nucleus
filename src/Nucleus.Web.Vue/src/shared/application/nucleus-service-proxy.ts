@@ -1,7 +1,7 @@
 ﻿import AuthStore from '@/stores/auth-store';
-import AppConsts from '@/shared/application/app-consts';
+import AppConsts from '@/shared/application/nucleus';
 
-export default class AppService {
+export default class NucleusService {
     private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponseDto<T>> {
         let isBadRequest = false;
         let body = data === '' ? null : data;
@@ -49,18 +49,18 @@ export default class AppService {
     }
 
     public get<T>(url: string): Promise<IRestResponseDto<T>> {
-        return AppService.request<T>('GET', url);
+        return NucleusService.request<T>('GET', url);
     }
 
     public delete(url: string): Promise<IRestResponseDto<void>> {
-        return AppService.request<void>('DELETE', url);
+        return NucleusService.request<void>('DELETE', url);
     }
 
     public put<T>(url: string, data: object | string): Promise<IRestResponseDto<T>> {
-        return AppService.request<T>('PUT', url, data);
+        return NucleusService.request<T>('PUT', url, data);
     }
 
     public post<T>(url: string, data: object | string): Promise<IRestResponseDto<T>> {
-        return AppService.request<T>('POST', url, data);
+        return NucleusService.request<T>('POST', url, data);
     }
 }

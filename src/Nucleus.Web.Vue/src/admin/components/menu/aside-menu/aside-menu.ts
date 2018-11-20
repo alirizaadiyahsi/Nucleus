@@ -1,8 +1,8 @@
-﻿import AppComponentBase from '@/shared/application/app-component-base';
+﻿import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component } from 'vue-property-decorator';
 
 @Component
-export default class AsideMenuComponent extends AppComponentBase {
+export default class AsideMenuComponent extends NucleusComponentBase {
     public drawer = true;
     public isAdmin = false;
 
@@ -20,16 +20,6 @@ export default class AsideMenuComponent extends AppComponentBase {
     }
 
     public mounted() {
-        const input: IIsUserInRoleInput = {
-            userNameOrEmail: this.authStore.getTokenData().sub,
-            roleName: 'Admin'
-        };
-        const query = '?' + this.queryString.stringify(input);
-        this.appService.get<boolean>('/api/account/isUserInRole' + query)
-            .then((response) => {
-                this.isAdmin = response.content;
-            });
-
         this.$root.$on('drawerChanged',
             () => {
                 this.drawer = !this.drawer;

@@ -1,8 +1,8 @@
-﻿import AppComponentBase from '@/shared/application/app-component-base';
+﻿import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class ChangePasswordComponent extends AppComponentBase {
+export default class ChangePasswordComponent extends NucleusComponentBase {
     @Prop() public changePasswordDialog!: boolean;
     @Prop() public logOut: any;
     public refs = this.$refs as any;
@@ -19,7 +19,7 @@ export default class ChangePasswordComponent extends AppComponentBase {
 
     public save() {
         if (this.refs.form.validate()) {
-            this.appService.post<ILoginOutput>('/api/account/changePassword', this.changePasswordInput)
+            this.nucleusService.post<ILoginOutput>('/api/account/changePassword', this.changePasswordInput)
                 .then((response) => {
                     if (!response.isError) {
                         this.dialog = false;

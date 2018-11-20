@@ -1,10 +1,15 @@
 ﻿import { Component } from 'vue-property-decorator';
-import AppComponentBase from '@/shared/application/app-component-base';
+import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import LanguageStore from '@/stores/language-store';
 
 @Component
-export default class AccountLayoutComponent extends AppComponentBase {
+export default class AccountLayoutComponent extends NucleusComponentBase {
     public selectedLanguage = {} as ILanguageDto;
+
+    public created() {
+        this.nucleus.auth.removeProps();
+        console.log(this.nucleus.auth);
+    }
 
     public beforeMount() {
         this.selectedLanguage = LanguageStore.getLanguage();

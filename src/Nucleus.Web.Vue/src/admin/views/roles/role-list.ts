@@ -1,8 +1,8 @@
-import AppComponentBase from '@/shared/application/app-component-base';
+import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component
-export default class RoleListComponent extends AppComponentBase {
+export default class RoleListComponent extends NucleusComponentBase {
     public refs = this.$refs as any;
     public allPermissions: IPermissionDto[] = [];
     public errors: INameValueDto[] = [];
@@ -47,7 +47,7 @@ export default class RoleListComponent extends AppComponentBase {
         this.dialog = true;
         this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
-        this.appService.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' + id)
+        this.nucleusService.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' + id)
             .then((response) => {
                 const result = response.content as IGetRoleForCreateOrUpdateOutput;
                 this.allPermissions = result.allPermissions;
@@ -63,7 +63,7 @@ export default class RoleListComponent extends AppComponentBase {
             .then((result) => {
                 if (result.value) {
                     const query = '?id=' + id;
-                    this.appService.delete('/api/role/deleteRole' + query)
+                    this.nucleusService.delete('/api/role/deleteRole' + query)
                         .then((response) => {
                             if (!response.isError) {
                                 this.swalToast(2000, 'success', this.$t('Successful').toString());
@@ -79,7 +79,7 @@ export default class RoleListComponent extends AppComponentBase {
     public save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            this.appService.post<void>('/api/role/createOrUpdateRole',
+            this.nucleusService.post<void>('/api/role/createOrUpdateRole',
                 this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
                 .then((response) => {
                     if (!response.isError) {
@@ -107,7 +107,7 @@ export default class RoleListComponent extends AppComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(roleListInput);
-        this.appService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {
+        this.nucleusService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
             this.loading = false;
         });

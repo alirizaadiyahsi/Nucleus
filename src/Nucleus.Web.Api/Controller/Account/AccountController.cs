@@ -111,28 +111,6 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok();
         }
 
-        [HttpGet("[action]")]
-        [Authorize]
-        public async Task<bool> IsUserInRole(IsUserInRoleInput input)
-        {
-            var user = await _userManager.FindByNameAsync(input.UserNameOrEmail) ??
-                       await _userManager.FindByEmailAsync(input.UserNameOrEmail);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            return await _userManager.IsInRoleAsync(user, input.RoleName);
-        }
-
-        [HttpGet("[action]")]
-        [Authorize]
-        public async Task<bool> IsUserGrantedToPermissionAsync(IsUserGrantToPermissionInput input)
-        {
-            return await _permissionAppService.IsUserGrantedToPermissionAsync(input.UserNameOrEmail, input.PermissionName);
-        }
-
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
         {
             if (string.IsNullOrEmpty(userNameOrEmail) || string.IsNullOrEmpty(password))

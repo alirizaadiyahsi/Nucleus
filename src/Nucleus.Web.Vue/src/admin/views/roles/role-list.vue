@@ -28,8 +28,8 @@
                             </v-alert>
                         </div>
                         <v-form ref="form">
-                            <v-text-field v-model="createOrUpdateRoleInput.role.name" 
-                                          :label="$t('RoleName')" 
+                            <v-text-field v-model="createOrUpdateRoleInput.role.name"
+                                          :label="$t('RoleName')"
                                           :rules="[requiredError]"></v-text-field>
                             <v-list dense subheader>
                                 <v-subheader>{{$t('SelectPermissions')}}</v-subheader>

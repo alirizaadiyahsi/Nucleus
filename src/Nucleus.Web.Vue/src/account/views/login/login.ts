@@ -1,15 +1,15 @@
 ﻿import { Component } from 'vue-property-decorator';
-import AppComponentBase from '@/shared/application/app-component-base';
+import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 
 @Component
-export default class LoginComponent extends AppComponentBase {
+export default class LoginComponent extends NucleusComponentBase {
     public refs = this.$refs as any;
     public loginInput = {} as ILoginInput;
     public errors: INameValueDto[] = [];
 
     public onSubmit() {
         if (this.refs.form.validate()) {
-            this.appService.post<ILoginOutput>('/api/account/login', this.loginInput)
+            this.nucleusService.post<ILoginOutput>('/api/account/login', this.loginInput)
                 .then((response) => {
                     if (!response.isError) {
                         this.authStore.setToken(response.content.token);

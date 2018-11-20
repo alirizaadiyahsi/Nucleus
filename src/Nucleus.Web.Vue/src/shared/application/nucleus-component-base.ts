@@ -1,14 +1,16 @@
 ﻿import Vue from 'vue';
-import AppService from '@/shared/application/app-service';
+import NucleusService from '@/shared/application/nucleus-service-proxy';
 import QueryString from 'query-string';
-import AppConsts from '@/shared/application/app-consts';
+import Nucleus from '@/shared/application/nucleus';
 import swal from 'sweetalert2';
 import AuthStore from '@/stores/auth-store';
+import { Component } from 'vue-property-decorator';
 
-export default class AppComponentBase extends Vue {
-    protected appService: AppService = new AppService();
+@Component
+export default class NucleusComponentBase extends Vue {
+    protected nucleusService: NucleusService = new NucleusService();
     protected queryString = QueryString;
-    protected appConsts = AppConsts;
+    protected nucleus = Nucleus;
     protected authStore = AuthStore;
     protected requiredError = (v: any) => !!v || this.t('RequiredField');
     protected emailError = (v: any) => /.+@.+/.test(v) || this.t('EmailValidationError');
@@ -46,10 +48,6 @@ export default class AppComponentBase extends Vue {
         return (password == passwordRepeat)
             ? ''
             : this.$t('PasswordsMustMatch').toString();
-    }
-
-    protected isGrantedToPermission() {
-
     }
 
     private t(key: string): string {

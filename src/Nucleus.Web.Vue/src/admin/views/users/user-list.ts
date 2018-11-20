@@ -1,8 +1,8 @@
-import AppComponentBase from '@/shared/application/app-component-base';
+import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component
-export default class UserListComponent extends AppComponentBase {
+export default class UserListComponent extends NucleusComponentBase {
     public refs = this.$refs as any;
     public loading = true;
     public pagination = {};
@@ -50,7 +50,7 @@ export default class UserListComponent extends AppComponentBase {
         this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
         this.errors = [];
-        this.appService.get<IGetUserForCreateOrUpdateOutput>('/api/user/GetUserForCreateOrUpdate?id=' + id)
+        this.nucleusService.get<IGetUserForCreateOrUpdateOutput>('/api/user/GetUserForCreateOrUpdate?id=' + id)
             .then((response) => {
                 const result = response.content as IGetUserForCreateOrUpdateOutput;
                 this.allRoles = result.allRoles;
@@ -67,7 +67,7 @@ export default class UserListComponent extends AppComponentBase {
                 if (result.value) {
                     const query = '?id=' + id;
 
-                    this.appService.delete('/api/user/deleteUser' + query)
+                    this.nucleusService.delete('/api/user/deleteUser' + query)
                         .then((response) => {
                             if (!response.isError) {
                                 this.swalToast(2000, 'success', this.$t('Successful').toString());
@@ -83,7 +83,7 @@ export default class UserListComponent extends AppComponentBase {
     public save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            this.appService.post<void>('/api/user/createOrUpdateUser',
+            this.nucleusService.post<void>('/api/user/createOrUpdateUser',
                 this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
                 .then((response) => {
                     if (!response.isError) {
@@ -111,13 +111,9 @@ export default class UserListComponent extends AppComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(userListInput);
-        this.appService.get<IPagedList<IPagedListInput>>('/api/user/getUsers' + query).then((response) => {
+        this.nucleusService.get<IPagedList<IPagedListInput>>('/api/user/getUsers' + query).then((response) => {
             this.pagedListOfUserListDto = response.content as IPagedList<IPagedListInput>;
             this.loading = false;
         });
-    }
-
-    public isAdminUser(userName: string) {
-        return userName.includes(this.appConsts.userManagement.adminUserName);
     }
 }
