@@ -21,7 +21,7 @@ namespace Nucleus.Tests.Application.Permissions
         public async void Should_Get_Permissions()
         {
             var permissionListInput = new PermissionListInput();
-            var permissionList = await _permissionAppService.GetPermissionsAsync(permissionListInput);
+            var permissionList = await _permissionAppService.GetAllPermissionsAsync(permissionListInput);
             Assert.True(permissionList.Items.Count > 0);
         }
 
@@ -29,7 +29,7 @@ namespace Nucleus.Tests.Application.Permissions
         public async void Should_Not_Get_Permissions()
         {
             var permissionListInput = new PermissionListInput { Filter = DefaultPermissions.PermissionNameForAdministration };
-            var permissionListEmpty = await _permissionAppService.GetPermissionsAsync(permissionListInput);
+            var permissionListEmpty = await _permissionAppService.GetAllPermissionsAsync(permissionListInput);
             Assert.Equal(1, permissionListEmpty.Items.Count);
         }
 
@@ -47,24 +47,6 @@ namespace Nucleus.Tests.Application.Permissions
         {
             var isPermissionNotGranted =
                 await _permissionAppService.IsUserGrantedToPermissionAsync(null, DefaultPermissions.MemberAccess.Name);
-
-            Assert.False(isPermissionNotGranted);
-        }
-
-        [Fact]
-        public async Task Should_Permission_Granted_To_Role()
-        {
-            var isPermissionGranted =
-                await _permissionAppService.IsRoleGrantedToPermissionAsync(DefaultRoles.Member, DefaultPermissions.MemberAccess);
-
-            Assert.True(isPermissionGranted);
-        }
-
-        [Fact]
-        public async Task Should_Not_Permission_Granted_To_Role()
-        {
-            var isPermissionNotGranted =
-                await _permissionAppService.IsRoleGrantedToPermissionAsync(new Role(), DefaultPermissions.AdministrationAccess);
 
             Assert.False(isPermissionNotGranted);
         }

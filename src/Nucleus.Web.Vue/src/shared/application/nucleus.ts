@@ -19,7 +19,7 @@ const nucleus = {
 
             const query = '?' + QueryString.stringify(roleListInput);
             let nucleusService = new NucleusService();
-            nucleusService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {
+            nucleusService.get<IPagedList<IRoleListOutput>>('/api/configurations/getAll' + query).then((response) => {
                 let result = response.content as IPagedList<IRoleListOutput>;
                 this.grantedPermissions = result.items as any;
             });

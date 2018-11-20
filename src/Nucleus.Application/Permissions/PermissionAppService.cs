@@ -37,7 +37,7 @@ namespace Nucleus.Application.Permissions
             _mapper = mapper;
         }
 
-        public async Task<IPagedList<PermissionListOutput>> GetPermissionsAsync(PermissionListInput input)
+        public async Task<IPagedList<PermissionListOutput>> GetAllPermissionsAsync(PermissionListInput input)
         {
             var query = _dbContext.Permissions.Where(
                     !input.Filter.IsNullOrEmpty(),
@@ -67,20 +67,6 @@ namespace Nucleus.Application.Permissions
                 .Select(rp => rp.Permission);
 
             return grantedPermissions.Any(p => p.Name == permissionName);
-        }
-
-        public async Task<bool> IsRoleGrantedToPermissionAsync(Role role, Permission permission)
-        {
-            var existingRole = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Id == role.Id);
-            if (existingRole == null)
-            {
-                return false;
-            }
-
-            var grantedPermissions = existingRole.RolePermissions
-                .Select(rp => rp.Permission);
-
-            return grantedPermissions.Any(p => p.Name == permission.Name);
         }
     }
 }

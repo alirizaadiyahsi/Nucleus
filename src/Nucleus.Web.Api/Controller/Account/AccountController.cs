@@ -111,6 +111,13 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok();
         }
 
+        //[HttpGet("[action]")]
+        //[Authorize]
+        //public async Task<ActionResult<>> GetPermissions()
+        //{
+        //    return Ok(await _permissionAppService.GetAllPermissionsAsync());
+        //}
+
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
         {
             if (string.IsNullOrEmpty(userNameOrEmail) || string.IsNullOrEmpty(password))
