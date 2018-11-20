@@ -19,37 +19,29 @@ namespace Nucleus.Application.Permissions
 {
     public class PermissionAppService : IPermissionAppService
     {
-        private readonly NucleusDbContext _dbContext;
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<Role> _roleManager;
         private readonly IMapper _mapper;
 
         public PermissionAppService(
-            NucleusDbContext dbContext,
             UserManager<User> userManager,
-            RoleManager<Role> roleManager,
             IMapper mapper
             )
         {
-            _dbContext = dbContext;
             _userManager = userManager;
-            _roleManager = roleManager;
             _mapper = mapper;
         }
 
-        public async Task<IPagedList<PermissionListOutput>> GetAllPermissionsAsync(PermissionListInput input)
+        public async Task<IEnumerable<PermissionDto>> GetGrantedPermissionsAsync(string userNameOrEmail)
         {
-            var query = _dbContext.Permissions.Where(
-                    !input.Filter.IsNullOrEmpty(),
-                    predicate => predicate.Name.Contains(input.Filter) ||
-                                 predicate.DisplayName.Contains(input.Filter))
-                .OrderBy(input.SortBy);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u =>
+                u.UserName == userNameOrEmail || u.Email == userNameOrEmail);
 
-            var permissionsCount = await query.CountAsync();
-            var permissions = query.PagedBy(input.PageIndex, input.PageSize).ToList();
-            var permissionListOutput = _mapper.Map<List<PermissionListOutput>>(permissions);
+            var grantedPermissions = user?.UserRoles
+                .Select(ur => ur.Role)
+                .SelectMany(r => r.RolePermissions)
+                .Select(rp => rp.Permission);
 
-            return permissionListOutput.ToPagedList(permissionsCount);
+            return _mapper.Map<IEnumerable<PermissionDto>>(grantedPermissions);
         }
 
         public async Task<bool> IsUserGrantedToPermissionAsync(string userNameOrEmail, string permissionName)

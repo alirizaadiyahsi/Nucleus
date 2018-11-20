@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
 using Nucleus.Application.Permissions;
+using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
 using Nucleus.Web.Core.Authentication;
@@ -111,12 +112,12 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok();
         }
 
-        //[HttpGet("[action]")]
-        //[Authorize]
-        //public async Task<ActionResult<>> GetPermissions()
-        //{
-        //    return Ok(await _permissionAppService.GetAllPermissionsAsync());
-        //}
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<PermissionDto>>> GetAllPermissions(string userNameOrEmail)
+        {
+            return Ok(await _permissionAppService.GetGrantedPermissionsAsync(userNameOrEmail));
+        }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
         {

@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Nucleus.Application.Permissions.Dto;
-using Nucleus.Utilities.Collections;
 
 namespace Nucleus.Application.Permissions
 {
     public interface IPermissionAppService
     {
-        Task<IPagedList<PermissionListOutput>> GetAllPermissionsAsync(PermissionListInput input);
+        Task<IEnumerable<PermissionDto>> GetGrantedPermissionsAsync(string userNameOrEmail);
 
         Task<bool> IsUserGrantedToPermissionAsync(string userNameOrEmail, string permissionName);
     }
