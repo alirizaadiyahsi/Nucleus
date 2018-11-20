@@ -10,6 +10,5 @@ import { Component } from 'vue-property-decorator';
 export default class AdminLayoutComponent extends NucleusComponentBase {
     public created() {
         this.nucleus.auth.fillProps();
-        console.log(this.nucleus.auth);
     }
 }

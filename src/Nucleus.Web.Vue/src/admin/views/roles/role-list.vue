@@ -14,7 +14,7 @@
                           hide-details>
             </v-text-field>
             <v-spacer></v-spacer>
-            <v-btn @click="editRole()" color="primary" dark class="mb-2">{{$t('NewRole')}}</v-btn>
+            <v-btn v-if="nucleus.auth.isGranted('Permissions_Role_Create')" @click="editRole()" color="primary" dark class="mb-2">{{$t('NewRole')}}</v-btn>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                     <v-card-title>
@@ -60,12 +60,12 @@
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.name }}</td>
                 <td class="justify-center layout px-0">
-                    <v-icon v-if="!props.item.isSystemDefault" small
+                    <v-icon v-if="!props.item.isSystemDefault && nucleus.auth.isGranted('Permissions_Role_Update')" small
                             class="mr-2"
                             @click="editRole(props.item.id)">
                         edit
                     </v-icon>
-                    <v-icon v-if="!props.item.isSystemDefault" small
+                    <v-icon v-if="!props.item.isSystemDefault && nucleus.auth.isGranted('Permissions_Role_Delete')" small
                             @click="deleteRole(props.item.id)">
                         delete
                     </v-icon>

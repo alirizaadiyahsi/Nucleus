@@ -14,7 +14,7 @@
                           hide-details>
             </v-text-field>
             <v-spacer></v-spacer>
-            <v-btn @click="editUser()" color="primary" dark class="mb-2">{{$t('NewUser')}}</v-btn>
+            <v-btn v-if="nucleus.auth.isGranted('Permissions_User_Create')" @click="editUser()" color="primary" dark class="mb-2">{{$t('NewUser')}}</v-btn>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                     <v-card-title>
@@ -76,12 +76,12 @@
                 <td>{{ props.item.userName }}</td>
                 <td>{{ props.item.email }}</td>
                 <td class="justify-center layout px-0">
-                    <v-icon v-if="!isAdminUser(props.item.userName)" small
+                    <v-icon v-if="!isAdminUser(props.item.userName) && nucleus.auth.isGranted('Permissions_User_Update')" small
                             class="mr-2"
                             @click="editUser(props.item.id)">
                         edit
                     </v-icon>
-                    <v-icon v-if="!isAdminUser(props.item.userName)" small
+                    <v-icon v-if="!isAdminUser(props.item.userName) && nucleus.auth.isGranted('Permissions_User_Delete')" small
                             @click="deleteUser(props.item.id)">
                         delete
                     </v-icon>

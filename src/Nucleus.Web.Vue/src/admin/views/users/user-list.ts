@@ -116,4 +116,8 @@ export default class UserListComponent extends NucleusComponentBase {
             this.loading = false;
         });
     }
+
+    public isAdminUser(userName: string) {
+        return userName.includes('admin');
+    }
 }

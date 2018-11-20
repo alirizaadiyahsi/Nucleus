@@ -8,7 +8,6 @@ export default class AccountLayoutComponent extends NucleusComponentBase {
 
     public created() {
         this.nucleus.auth.removeProps();
-        console.log(this.nucleus.auth);
     }
 
     public beforeMount() {
