@@ -12,41 +12,41 @@ using Xunit;
 
 namespace Nucleus.Tests.Application.Users
 {
-    public class UserNucleusServiceTests : ApplicationTestBase
+    public class UserAppServiceTests : ApplicationTestBase
     {
         private readonly NucleusDbContext _dbContext;
-        private readonly IUserNucleusService _userNucleusService;
+        private readonly IUserAppService _userAppService;
 
-        public UserNucleusServiceTests()
+        public UserAppServiceTests()
         {
             var serviceProvider = TestServer.Host.Services.CreateScope().ServiceProvider;
             _dbContext = serviceProvider.GetRequiredService<NucleusDbContext>();
-            _userNucleusService = serviceProvider.GetRequiredService<IUserNucleusService>();
+            _userAppService = serviceProvider.GetRequiredService<IUserAppService>();
         }
 
         [Fact]
         public async void Should_Get_Users()
         {
             var userListInput = new UserListInput();
-            var userList = await _userNucleusService.GetUsersAsync(userListInput);
+            var userList = await _userAppService.GetUsersAsync(userListInput);
             Assert.True(userList.Items.Count > 0);
 
             userListInput.Filter = ".!1Aa_";
-            var usersListEmpty = await _userNucleusService.GetUsersAsync(userListInput);
+            var usersListEmpty = await _userAppService.GetUsersAsync(userListInput);
             Assert.True(usersListEmpty.Items.Count == 0);
         }
 
         [Fact]
         public async void Should_Get_User_For_Create()
         {
-            var user = await _userNucleusService.GetUserForCreateOrUpdateAsync(Guid.Empty);
+            var user = await _userAppService.GetUserForCreateOrUpdateAsync(Guid.Empty);
             Assert.True(string.IsNullOrEmpty(user.User.UserName));
         }
 
         [Fact]
         public async void Should_Get_User_For_Update()
         {
-            var user = await _userNucleusService.GetUserForCreateOrUpdateAsync(DefaultUsers.Member.Id);
+            var user = await _userAppService.GetUserForCreateOrUpdateAsync(DefaultUsers.Member.Id);
             Assert.False(string.IsNullOrEmpty(user.User.UserName));
         }
 
@@ -65,7 +65,7 @@ namespace Nucleus.Tests.Application.Users
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
 
-            await _userNucleusService.AddUserAsync(input);
+            await _userAppService.AddUserAsync(input);
             await _dbContext.SaveChangesAsync();
 
             var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
@@ -90,7 +90,7 @@ namespace Nucleus.Tests.Application.Users
                 },
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
-            await _userNucleusService.EditUserAsync(input);
+            await _userAppService.EditUserAsync(input);
             var editedTestUser = await _dbContext.Users.FindAsync(testUser.Id);
 
             Assert.Contains("TestUserName_Edited_", editedTestUser.UserName);
@@ -108,7 +108,7 @@ namespace Nucleus.Tests.Application.Users
             Assert.NotNull(insertedTestUser);
             Assert.Equal(1, insertedTestUser.UserRoles.Count);
 
-            await _userNucleusService.RemoveUserAsync(insertedTestUser.Id);
+            await _userAppService.RemoveUserAsync(insertedTestUser.Id);
             _dbContext.SaveChanges();
 
             dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
