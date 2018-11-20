@@ -7,16 +7,19 @@ const nucleus = {
     auth: {
         grantedPermissions: [] as IPermissionDto[],
         isGranted(permissionName: string) {
-            return this.grantedPermissions.filter(p => p.name == permissionName).length > 0;
+            return this.grantedPermissions.filter((p) => p.name == permissionName).length > 0;
         },
         removeProps() {
             this.grantedPermissions = [];
         },
         fillProps() {
-            let nucleusService = new NucleusService();
-            nucleusService.get<IPermissionDto[]>('/api/account/GetGrantedPermissionsAsync?userNameOrEmail=' + AuthStore.getTokenData().sub).then((response) => {
-                this.grantedPermissions = response.content as IPermissionDto[];
-            });
+            const nucleusService = new NucleusService();
+            nucleusService.get<IPermissionDto[]>(
+                    '/api/account/GetGrantedPermissionsAsync?userNameOrEmail=' + AuthStore.getTokenData().sub
+                )
+                .then((response) => {
+                    this.grantedPermissions = response.content as IPermissionDto[];
+                });
         }
     }
 };

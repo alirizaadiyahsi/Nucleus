@@ -1,9 +1,9 @@
-<template>
+ï»¿<template>
     <div>
         <h1>{{$t("HelloWorld")}}</h1>
         <h3>Is user {{authStore.getTokenData().sub}} has Permissions_Not_In_Stored : {{nucleus.auth.isGranted('Permissions_Not_In_Stored')}}</h3>
         <h3>Is user {{authStore.getTokenData().sub}} has Permissions_Administration : {{nucleus.auth.isGranted('Permissions_Administration')}}</h3>
-        <p>Welcome to your new single-page application, built with: üðþçöý</p>
+        <p>Welcome to your new single-page application, built with: Ã¼ÄŸÅŸÃ§Ã¶Ä±</p>
         <ul>
             <li><a href="https://get.asp.net/">ASP.NET Core</a> and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a> for cross-platform server-side code</li>
             <li><a href="https://vuejs.org/">Vue.js</a> and <a href="http://www.typescriptlang.org/">TypeScript</a> for client-side code</li>
