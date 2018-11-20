@@ -114,7 +114,7 @@ namespace Nucleus.Web.Api.Controller.Account
 
         [HttpGet("[action]")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<PermissionDto>>> GetAllPermissions(string userNameOrEmail)
+        public async Task<ActionResult<IEnumerable<PermissionDto>>> GetGrantedPermissionsAsync(string userNameOrEmail)
         {
             return Ok(await _permissionAppService.GetGrantedPermissionsAsync(userNameOrEmail));
         }

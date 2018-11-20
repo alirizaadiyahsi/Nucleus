@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Core.Permissions;
 using Nucleus.Core.Roles;
+using Nucleus.Core.Users;
 using Xunit;
 
 namespace Nucleus.Tests.Application.Permissions
@@ -33,6 +35,15 @@ namespace Nucleus.Tests.Application.Permissions
                 await _permissionAppService.IsUserGrantedToPermissionAsync(null, DefaultPermissions.MemberAccess.Name);
 
             Assert.False(isPermissionNotGranted);
+        }
+
+        [Fact]
+        public async Task Should_Get_Granted_Permissions()
+        {
+            var grantedPermissions =
+                await _permissionAppService.GetGrantedPermissionsAsync(DefaultUsers.TestAdmin.UserName);
+
+            Assert.True(grantedPermissions.Any());
         }
     }
 }

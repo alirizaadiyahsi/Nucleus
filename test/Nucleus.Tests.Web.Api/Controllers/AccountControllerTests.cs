@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -6,6 +7,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Nucleus.Application.Permissions.Dto;
+using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
@@ -133,6 +136,18 @@ namespace Nucleus.Tests.Web.Api.Controllers
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var response = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_Get_Granted_Permissions()
+        {
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/getGrantedPermissionsAsync?userNameOrEmail=" + DefaultUsers.TestAdmin.UserName);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+            var response = await TestServer.CreateClient().SendAsync(requestMessage);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var permissions = await response.Content.ReadAsAsync<IEnumerable<PermissionDto>>();
+            Assert.True(permissions.Any());
         }
 
         private async Task<User> CreateAndGetTestUserAsync()
