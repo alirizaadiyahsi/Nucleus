@@ -1,4 +1,4 @@
-﻿{
+{
   "$vuetify": {
     "dataIterator": {
       "nextPage": "Sonraki sayfa",
@@ -11,7 +11,7 @@
     "dataTable": {
       "rowsPerPageText": "Satır sayısı:"
     },
-    "noDataText": "Kayıt bılunamadı"
+    "noDataText": "Kayıt bulunamadı"
   },
   "AccountCreationSuccessful": "Hesabınız başarılı ile oluşturuldu!",
   "Actions": "İşlemler",
