@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{51A63C9A-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CBE903BE-AD0D-4857-98E4-CCA1AD73902E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{47DBDDFE-C870-4057-8312-219461BA268C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Application", "src\Nucleus.Application\Nucleus.Application.csproj", "{788EBFEF-7A50-4AB7-807A-4147D49E237E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.EntityFramework", "src\Nucleus.EntityFramework\Nucleus.EntityFramework.csproj", "{73195EBE-BDE4-428C-865D-E7F589F3DD52}"
@@ -27,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Web.Api", "test\Nucleus.Tests.Web.Api\Nucleus.Tests.Web.Api.csproj", "{E36E92AC-E12D-4B70-A355-6CBC1AFDAB43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Web.Vue", "src\Nucleus.Web.Vue\Nucleus.Web.Vue.csproj", "{3979C24B-DFE1-4090-9743-8DFA9C52878E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Web.Vue", "src\Nucleus.Web.Vue\Nucleus.Web.Vue.csproj", "{3979C24B-DFE1-4090-9743-8DFA9C52878E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
