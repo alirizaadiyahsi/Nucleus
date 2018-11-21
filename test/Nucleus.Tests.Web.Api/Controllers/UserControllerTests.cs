@@ -144,5 +144,9 @@ namespace Nucleus.Tests.Web.Api.Controllers
             await _dbContext.SaveChangesAsync();
             return testUser;
         }
+        private async Task<User> DummyCreateAndGetTestUserAsync()
+        {
+            return null;
+        }
     }
 }
