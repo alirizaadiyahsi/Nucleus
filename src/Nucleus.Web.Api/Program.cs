@@ -1,6 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Nucleus.Application.Permissions;
+using Nucleus.Core.Permissions;
 using Serilog;
 using Serilog.Events;
 
@@ -26,7 +29,16 @@ namespace Nucleus.Web.Api
             try
             {
                 Log.Information("Starting web host");
-                BuildWebHost(args).Run();
+
+                Log.Information("Starting web host");
+                var host = BuildWebHost(args);
+                using (var scope = host.Services.CreateScope())
+                {
+                    var permissionAppService = scope.ServiceProvider.GetRequiredService<IPermissionAppService>();
+                    permissionAppService.InitializePermissions(DefaultPermissions.All());
+                }
+
+                host.Run();
                 return 0;
             }
             catch (Exception ex)

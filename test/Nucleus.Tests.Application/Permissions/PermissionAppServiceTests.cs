@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Application.Permissions;
-using Nucleus.Application.Permissions.Dto;
 using Nucleus.Core.Permissions;
-using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
 using Xunit;
 
