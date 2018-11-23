@@ -27,7 +27,7 @@
                                 {{error.value}}
                             </v-alert>
                         </div>
-                        <v-form ref="form">
+                        <v-form ref="form" @submit.prevent="save">
                             <v-text-field v-model="createOrUpdateRoleInput.role.name"
                                           :label="$t('RoleName')"
                                           :rules="[requiredError]"></v-text-field>

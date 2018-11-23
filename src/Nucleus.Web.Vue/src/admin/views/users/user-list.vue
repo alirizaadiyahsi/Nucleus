@@ -27,7 +27,7 @@
                                 {{error.value}}
                             </v-alert>
                         </div>
-                        <v-form ref="form">
+                        <v-form ref="form" @keyup.native.enter="save">
                             <v-text-field name="userName" :label="$t('UserName')" type="text" 
                                           v-model="createOrUpdateUserInput.user.userName" 
                                           :rules="[requiredError]"></v-text-field>
