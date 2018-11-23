@@ -34,7 +34,7 @@ namespace Nucleus.Web.Core.Extensions
                 .AddEntityFrameworkStores<NucleusDbContext>()
                 .AddDefaultTokenProviders();
 
-            JwtTokenAuthConfigurer.Configure(services, configuration);
+            JwtTokenAuthConfigure.Configure(services, configuration);
 
             services.AddAuthorization(options =>
             {
