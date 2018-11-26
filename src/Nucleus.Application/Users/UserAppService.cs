@@ -107,7 +107,6 @@ namespace Nucleus.Application.Users
         public async Task<IdentityResult> RemoveUserAsync(Guid id)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
-
             if (user == null)
             {
                 return IdentityResult.Failed(new IdentityError
@@ -133,6 +132,7 @@ namespace Nucleus.Application.Users
             }
 
             user.UserRoles.Clear();
+
             return removeUserResult;
         }
 
