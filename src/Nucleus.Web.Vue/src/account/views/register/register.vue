@@ -1,6 +1,6 @@
 ﻿<template>
     <div v-if="!registerComplete">
-        <v-card class="elevation-12" @keyup.enter="onSubmit">
+        <v-card class="elevation-12">
             <v-toolbar dark color="primary">
                 <v-toolbar-title>{{$t('Login')}}</v-toolbar-title>
             </v-toolbar>
@@ -10,7 +10,7 @@
                         {{error.value}}
                     </v-alert>
                 </div>
-                <v-form ref="form">
+                <v-form ref="form" @keyup.native.enter="onSubmit">
                     <v-text-field name="userName" :label="$t('UserName')" type="text"
                                   v-model="registerInput.userName"
                                   :rules="[requiredError]"></v-text-field>

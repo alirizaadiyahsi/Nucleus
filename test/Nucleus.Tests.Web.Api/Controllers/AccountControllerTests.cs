@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Nucleus.Application.Account.Dto;
 using Nucleus.Application.Permissions.Dto;
 using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;

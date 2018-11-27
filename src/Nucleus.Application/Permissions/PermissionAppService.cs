@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Nucleus.Application.Permissions.Dto;
-using Nucleus.Core.Permissions;
-using Nucleus.Core.Roles;
-using Nucleus.EntityFramework;
-using Nucleus.Utilities.Collections;
-using Nucleus.Utilities.Extensions.Collections;
-using Nucleus.Utilities.Extensions.PrimitiveTypes;
-using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Nucleus.Core.Permissions;
+using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
+using Nucleus.EntityFramework;
 
 namespace Nucleus.Application.Permissions
 {
@@ -21,14 +16,16 @@ namespace Nucleus.Application.Permissions
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private readonly NucleusDbContext _dbContext;
 
         public PermissionAppService(
             UserManager<User> userManager,
-            IMapper mapper
-            )
+            IMapper mapper,
+            NucleusDbContext dbContext)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<PermissionDto>> GetGrantedPermissionsAsync(string userNameOrEmail)
@@ -59,6 +56,31 @@ namespace Nucleus.Application.Permissions
                 .Select(rp => rp.Permission);
 
             return grantedPermissions.Any(p => p.Name == permissionName);
+        }
+
+        public void InitializePermissions(List<Permission> permissions)
+        {
+            _dbContext.RolePermissions.RemoveRange(_dbContext.RolePermissions.Where(rp => rp.RoleId == DefaultRoles.Admin.Id));
+            _dbContext.SaveChanges();
+
+            _dbContext.Permissions.RemoveRange(_dbContext.Permissions);
+            _dbContext.SaveChanges();
+
+            _dbContext.AddRange(permissions);
+            GrantAllPermissionsToAdminRole(permissions);
+            _dbContext.SaveChanges();
+        }
+
+        private void GrantAllPermissionsToAdminRole(List<Permission> permissions)
+        {
+            foreach (var permission in permissions)
+            {
+                _dbContext.RolePermissions.Add(new RolePermission
+                {
+                    PermissionId = permission.Id,
+                    RoleId = DefaultRoles.Admin.Id
+                });
+            }
         }
     }
 }

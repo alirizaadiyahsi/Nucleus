@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Nucleus.Application.Account.Dto;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Users;
 using Nucleus.Tests.Shared;

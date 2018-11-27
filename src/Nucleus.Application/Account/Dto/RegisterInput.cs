@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Application.Users.Dto
+﻿namespace Nucleus.Application.Account.Dto
 {
     public class RegisterInput
     {
