@@ -31,8 +31,8 @@
                             <v-text-field v-model="createOrUpdateRoleInput.role.name"
                                           :label="$t('RoleName')"
                                           :rules="[requiredError]"></v-text-field>
-                            <v-list dense subheader>
-                                <v-subheader>{{$t('SelectPermissions')}}</v-subheader>
+                            <v-list dense>
+                                <v-checkbox v-model="selectAll" :label="$t('SelectPermissions')" @click="selectAllPermissions"></v-checkbox>
                                 <v-list-tile v-for="item in allPermissions" :key="item.id">
                                     <v-list-tile-content>
                                         <v-checkbox v-model="createOrUpdateRoleInput.grantedPermissionIds" :label="item.displayName" :value="item.id"></v-checkbox>
