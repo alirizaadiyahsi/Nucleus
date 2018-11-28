@@ -11,6 +11,7 @@ export default class RoleListComponent extends NucleusComponentBase {
     public formTitle = '';
     public pagination = {};
     public search = '';
+    public selectAll = false;
 
     get headers() {
         return [
@@ -111,5 +112,12 @@ export default class RoleListComponent extends NucleusComponentBase {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
             this.loading = false;
         });
+    }
+
+    public selectAllPermissions() {
+        this.createOrUpdateRoleInput.grantedPermissionIds = [];
+        if (this.selectAll) {
+            this.createOrUpdateRoleInput.grantedPermissionIds = ((this.allPermissions.map(permissions => permissions.id)) as string[]);
+        }
     }
 }
