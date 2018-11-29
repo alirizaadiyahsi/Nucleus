@@ -24,7 +24,7 @@
                     <v-card-text>
                         <div v-for="error in errors" :key="error.name">
                             <v-alert :value="true" type="error">
-                                {{error.value}}
+                                {{$t(error.name)}}
                             </v-alert>
                         </div>
                         <v-form ref="form" @submit.prevent="save">
