@@ -117,7 +117,8 @@ export default class RoleListComponent extends NucleusComponentBase {
     public selectAllPermissions() {
         this.createOrUpdateRoleInput.grantedPermissionIds = [];
         if (this.selectAll) {
-            this.createOrUpdateRoleInput.grantedPermissionIds = ((this.allPermissions.map(permissions => permissions.id)) as string[]);
+            this.createOrUpdateRoleInput.grantedPermissionIds =
+                ((this.allPermissions.map((permissions) => permissions.id)) as string[]);
         }
     }
 }

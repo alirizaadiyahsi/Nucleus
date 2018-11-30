@@ -126,7 +126,7 @@ export default class UserListComponent extends NucleusComponentBase {
     public selectAllRoles() {
         this.createOrUpdateUserInput.grantedRoleIds = [];
         if (this.selectAll) {
-            this.createOrUpdateUserInput.grantedRoleIds = ((this.allRoles.map(roles => roles.id)) as string[]);
+            this.createOrUpdateUserInput.grantedRoleIds = ((this.allRoles.map((roles) => roles.id)) as string[]);
         }
     }
 }
