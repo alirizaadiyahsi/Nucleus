@@ -76,12 +76,12 @@
                 <td>{{ props.item.userName }}</td>
                 <td>{{ props.item.email }}</td>
                 <td class="justify-center layout px-0">
-                    <v-icon v-if="!isAdminUser(props.item.userName) && nucleus.auth.isGranted('Permissions_User_Update')" small
+                    <v-icon v-if="nucleus.auth.isGranted('Permissions_User_Update')" small
                             class="mr-2"
                             @click="editUser(props.item.id)">
                         edit
                     </v-icon>
-                    <v-icon v-if="!isAdminUser(props.item.userName) && nucleus.auth.isGranted('Permissions_User_Delete')" small
+                    <v-icon v-if="nucleus.auth.isGranted('Permissions_User_Delete')" small
                             @click="deleteUser(props.item.id)">
                         delete
                     </v-icon>

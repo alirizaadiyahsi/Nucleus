@@ -118,11 +118,6 @@ export default class UserListComponent extends NucleusComponentBase {
         });
     }
 
-    public isAdminUser(userName: string) {
-        // todo: this is a temp solution, should check if user is in admin role
-        return userName.includes('admin');
-    }
-
     public selectAllRoles() {
         this.createOrUpdateUserInput.grantedRoleIds = [];
         if (this.selectAll) {
