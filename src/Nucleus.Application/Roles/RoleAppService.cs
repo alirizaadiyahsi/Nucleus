@@ -84,7 +84,7 @@ namespace Nucleus.Application.Roles
                 return IdentityResult.Failed(new IdentityError
                 {
                     Code = "RoleNameAlreadyExist",
-                    Description = "Role name '" + input.Role.Name + "' is already taken!"
+                    Description = "This role name is already exists!"
                 });
             }
             role.Name = input.Role.Name;

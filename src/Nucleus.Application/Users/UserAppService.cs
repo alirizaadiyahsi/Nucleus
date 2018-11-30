@@ -88,7 +88,7 @@ namespace Nucleus.Application.Users
                 return IdentityResult.Failed(new IdentityError
                 {
                     Code = "UserNameAlreadyExist",
-                    Description = "User name '" + input.User.UserName + "' is already taken!"
+                    Description = "This user name is already exist!"
                 });
             }
 
