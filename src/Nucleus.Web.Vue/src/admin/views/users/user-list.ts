@@ -12,6 +12,7 @@ export default class UserListComponent extends NucleusComponentBase {
     public errors: INameValueDto[] = [];
     public allRoles: IRoleDto[] = [];
     public isEdit = false;
+    public selectAll = false;
 
     get headers() {
         return [
@@ -117,7 +118,10 @@ export default class UserListComponent extends NucleusComponentBase {
         });
     }
 
-    public isAdminUser(userName: string) {
-        return userName.includes('admin');
+    public selectAllRoles() {
+        this.createOrUpdateUserInput.grantedRoleIds = [];
+        if (this.selectAll) {
+            this.createOrUpdateUserInput.grantedRoleIds = ((this.allRoles.map((roles) => roles.id)) as string[]);
+        }
     }
 }

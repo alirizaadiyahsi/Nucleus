@@ -44,7 +44,7 @@ namespace Nucleus.Web.Api.Controller.Account
             {
                 return BadRequest(new List<NameValueDto>
                 {
-                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect.")
+                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect!")
                 });
             }
 
