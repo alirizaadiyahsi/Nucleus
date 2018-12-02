@@ -1,5 +1,5 @@
 ﻿<template>
-    <v-app>
+    <div>
         <aside-menu>
         </aside-menu>
         <top-menu>
@@ -9,7 +9,10 @@
                 <router-view></router-view>
             </v-container>
         </v-content>
-    </v-app>
+        <v-footer app fixed dark>
+            <span>&copy; Version: {{nucleus.appVersion}}</span>
+        </v-footer>
+    </div>
 </template>
 
 <script src="./admin-layout.ts"></script>
