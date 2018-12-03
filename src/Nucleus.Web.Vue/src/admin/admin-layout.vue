@@ -5,7 +5,7 @@
         <top-menu>
         </top-menu>
         <v-content>
-            <v-container>
+            <v-container grid-list-md class="px-0">
                 <router-view></router-view>
             </v-container>
         </v-content>

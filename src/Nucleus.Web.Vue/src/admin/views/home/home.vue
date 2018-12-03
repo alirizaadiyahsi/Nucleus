@@ -1,23 +1,40 @@
 ﻿<template>
-    <div>
-        <h1>{{$t("HelloWorld")}}</h1>
-        <h3>Is user {{authStore.getTokenData().sub}} has Permissions_Not_In_Stored : {{nucleus.auth.isGranted('Permissions_Not_In_Stored')}}</h3>
-        <h3>Is user {{authStore.getTokenData().sub}} has Permissions_Administration : {{nucleus.auth.isGranted('Permissions_Administration')}}</h3>
-        <p>Welcome to your new single-page application, built with: üğşçöı</p>
-        <ul>
-            <li><a href="https://get.asp.net/">ASP.NET Core</a> and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a> for cross-platform server-side code</li>
-            <li><a href="https://vuejs.org/">Vue.js</a> and <a href="http://www.typescriptlang.org/">TypeScript</a> for client-side code</li>
-            <li><a href="https://webpack.github.io/">Webpack</a> for building and bundling client-side resources</li>
-            <li><a href="http://getbootstrap.com/">Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-            <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-            <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>
-            <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Vue app will be rebuilt and a new instance injected is into the page.</li>
-            <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-        </ul>
-    </div>
+    <v-layout row>
+        <v-flex md6>
+            <v-card>
+                <v-card-title>
+                    <div class="headline">
+                        Line Chart
+                    </div>
+                </v-card-title>
+                <v-sparkline :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
+                             :type="'trend'"
+                             :gradient="['#42b3f4']"
+                             :smooth="10"
+                             :padding="8"
+                             :line-width="2"
+                             :stroke-linecap="'round'"
+                             auto-draw></v-sparkline>
+            </v-card>
+        </v-flex>
+        <v-flex md6>
+            <v-card>
+                <v-card-title>
+                    <div class="headline">
+                        Bar Chart
+                    </div>
+                </v-card-title>
+                <v-sparkline :data="[0, 2, 5, 9, 5, 10, 3, 5, 6, 7, 1, 8, 2, 9, 0]"
+                             :type="'bar'"
+                             :gradient="['#42b3f4']"
+                             :smooth="1"
+                             :padding="8"
+                             :line-width="7"
+                             :stroke-linecap="'round'"
+                             auto-draw></v-sparkline>
+            </v-card>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script src="./home.ts"></script>
