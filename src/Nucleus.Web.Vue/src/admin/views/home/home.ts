@@ -68,4 +68,29 @@ export default class HomeComponent extends NucleusComponentBase {
             }
         ];
     }
+
+    public get years() {
+        return [
+            {
+                color: 'cyan',
+                year: '1960'
+            },
+            {
+                color: 'green',
+                year: '1970'
+            },
+            {
+                color: 'pink',
+                year: '1980'
+            },
+            {
+                color: 'amber',
+                year: '1990'
+            },
+            {
+                color: 'orange',
+                year: '2000'
+            }
+        ];
+    }
 }

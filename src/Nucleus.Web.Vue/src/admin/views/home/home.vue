@@ -76,81 +76,108 @@
                 </v-list>
             </v-card>
         </v-flex>
-        <v-flex md4>
-            <v-data-iterator :items="dataIteratorItems"
-                             :rows-per-page-items="rowsPerPageItems"
-                             :pagination.sync="pagination"
-                             content-tag="v-layout"
-                             hide-actions
-                             row
-                             wrap>
-                <v-toolbar slot="header"
-                           class="mb-2"
-                           color="indigo darken-5"
-                           dark
-                           flat>
-                    <v-toolbar-title>This is a header</v-toolbar-title>
-                </v-toolbar>
+        <v-flex md8>
+            <v-card>
+                <v-data-iterator :items="dataIteratorItems"
+                                 :rows-per-page-items="rowsPerPageItems"
+                                 :pagination.sync="pagination"
+                                 content-tag="v-layout"
+                                 hide-actions
+                                 row
+                                 wrap>
+                    <v-toolbar slot="header"
+                               class="mb-2"
+                               color="indigo darken-5"
+                               dark
+                               flat>
+                        <v-toolbar-title>This is a header</v-toolbar-title>
+                    </v-toolbar>
 
-                <v-flex slot="item"
-                        slot-scope="props"
-                        xs12
-                        sm6>
-                    <v-card>
-                        <v-card-title class="subheading font-weight-bold">{{ props.item.name }}</v-card-title>
+                    <v-flex slot="item"
+                            slot-scope="props"
+                            xs12
+                            sm6>
+                        <v-card>
+                            <v-card-title class="subheading font-weight-bold">{{ props.item.name }}</v-card-title>
 
-                        <v-divider></v-divider>
+                            <v-divider></v-divider>
 
-                        <v-list dense>
-                            <v-list-tile>
-                                <v-list-tile-content>Calories:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>
-                            </v-list-tile>
+                            <v-list dense>
+                                <v-list-tile>
+                                    <v-list-tile-content>Calories:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>
+                                </v-list-tile>
 
-                            <v-list-tile>
-                                <v-list-tile-content>Fat:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
-                            </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Fat:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
+                                </v-list-tile>
 
-                            <v-list-tile>
-                                <v-list-tile-content>Carbs:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
-                            </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Carbs:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
+                                </v-list-tile>
 
-                            <v-list-tile>
-                                <v-list-tile-content>Protein:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
-                            </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Protein:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
+                                </v-list-tile>
 
-                            <v-list-tile>
-                                <v-list-tile-content>Sodium:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
-                            </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Sodium:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
+                                </v-list-tile>
 
-                            <v-list-tile>
-                                <v-list-tile-content>Calcium:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
-                            </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Calcium:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
+                                </v-list-tile>
 
-                            <v-list-tile>
-                                <v-list-tile-content>Iron:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ props.item.iron }}</v-list-tile-content>
-                            </v-list-tile>
-                        </v-list>
-                    </v-card>
-                </v-flex>
+                                <v-list-tile>
+                                    <v-list-tile-content>Iron:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.iron }}</v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+                        </v-card>
+                    </v-flex>
 
-                <v-toolbar slot="footer"
-                           class="mt-2"
-                           color="indigo"
-                           dark
-                           dense
-                           flat>
-                    <v-toolbar-title class="subheading">This is a footer</v-toolbar-title>
-                </v-toolbar>
-            </v-data-iterator>
+                    <v-toolbar slot="footer"
+                               class="mt-2"
+                               color="indigo"
+                               dark
+                               dense
+                               flat>
+                        <v-toolbar-title class="subheading">This is a footer</v-toolbar-title>
+                    </v-toolbar>
+                </v-data-iterator>
+            </v-card>
         </v-flex>
-        <v-flex md4></v-flex>
+        <v-flex md12>
+            <v-card class="px-4">
+                <v-card-title>
+                    <div class="headline">
+                        This is a header
+                    </div>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-timeline>
+                    <v-timeline-item v-for="(year, i) in years"
+                                     :color="year.color"
+                                     :key="i"
+                                     small>
+                        <span slot="opposite"
+                              :class="`headline font-weight-bold ${year.color}--text`"
+                              v-text="year.year"></span>
+                        <div class="py-3">
+                            <h2 :class="`headline font-weight-light mb-3 ${year.color}--text`">Lorem ipsum</h2>
+                            <div>
+                                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
+                            </div>
+                        </div>
+                    </v-timeline-item>
+                </v-timeline>
+            </v-card>
+        </v-flex>
     </v-layout>
 </template>
 
