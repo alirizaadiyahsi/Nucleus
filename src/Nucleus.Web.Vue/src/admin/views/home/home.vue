@@ -76,7 +76,80 @@
                 </v-list>
             </v-card>
         </v-flex>
-        <v-flex md4></v-flex>
+        <v-flex md4>
+            <v-data-iterator :items="dataIteratorItems"
+                             :rows-per-page-items="rowsPerPageItems"
+                             :pagination.sync="pagination"
+                             content-tag="v-layout"
+                             hide-actions
+                             row
+                             wrap>
+                <v-toolbar slot="header"
+                           class="mb-2"
+                           color="indigo darken-5"
+                           dark
+                           flat>
+                    <v-toolbar-title>This is a header</v-toolbar-title>
+                </v-toolbar>
+
+                <v-flex slot="item"
+                        slot-scope="props"
+                        xs12
+                        sm6>
+                    <v-card>
+                        <v-card-title class="subheading font-weight-bold">{{ props.item.name }}</v-card-title>
+
+                        <v-divider></v-divider>
+
+                        <v-list dense>
+                            <v-list-tile>
+                                <v-list-tile-content>Calories:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-list-tile>
+                                <v-list-tile-content>Fat:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-list-tile>
+                                <v-list-tile-content>Carbs:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-list-tile>
+                                <v-list-tile-content>Protein:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-list-tile>
+                                <v-list-tile-content>Sodium:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-list-tile>
+                                <v-list-tile-content>Calcium:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-list-tile>
+                                <v-list-tile-content>Iron:</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ props.item.iron }}</v-list-tile-content>
+                            </v-list-tile>
+                        </v-list>
+                    </v-card>
+                </v-flex>
+
+                <v-toolbar slot="footer"
+                           class="mt-2"
+                           color="indigo"
+                           dark
+                           dense
+                           flat>
+                    <v-toolbar-title class="subheading">This is a footer</v-toolbar-title>
+                </v-toolbar>
+            </v-data-iterator>
+        </v-flex>
         <v-flex md4></v-flex>
     </v-layout>
 </template>
