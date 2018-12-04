@@ -1,23 +1,184 @@
 ﻿<template>
-    <div>
-        <h1>{{$t("HelloWorld")}}</h1>
-        <h3>Is user {{authStore.getTokenData().sub}} has Permissions_Not_In_Stored : {{nucleus.auth.isGranted('Permissions_Not_In_Stored')}}</h3>
-        <h3>Is user {{authStore.getTokenData().sub}} has Permissions_Administration : {{nucleus.auth.isGranted('Permissions_Administration')}}</h3>
-        <p>Welcome to your new single-page application, built with: üğşçöı</p>
-        <ul>
-            <li><a href="https://get.asp.net/">ASP.NET Core</a> and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a> for cross-platform server-side code</li>
-            <li><a href="https://vuejs.org/">Vue.js</a> and <a href="http://www.typescriptlang.org/">TypeScript</a> for client-side code</li>
-            <li><a href="https://webpack.github.io/">Webpack</a> for building and bundling client-side resources</li>
-            <li><a href="http://getbootstrap.com/">Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-            <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-            <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>
-            <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Vue app will be rebuilt and a new instance injected is into the page.</li>
-            <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-        </ul>
-    </div>
+    <v-layout row wrap>
+        <v-flex md6>
+            <v-card>
+                <v-card-title>
+                    <div class="headline">
+                        Line Chart
+                    </div>
+                </v-card-title>
+                <v-sparkline :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
+                             :type="'trend'"
+                             :gradient="['#42b3f4', '#42b3f4']"
+                             :smooth="10"
+                             :padding="8"
+                             :line-width="2"
+                             :stroke-linecap="'round'"
+                             auto-draw></v-sparkline>
+            </v-card>
+        </v-flex>
+        <v-flex md6>
+            <v-card>
+                <v-card-title>
+                    <div class="headline">
+                        Bar Chart
+                    </div>
+                </v-card-title>
+                <v-sparkline :data="[0, 2, 5, 9, 5, 10, 3, 5, 6, 7, 1, 8, 2, 9, 0]"
+                             :type="'bar'"
+                             :gradient="['#42b3f4', '#42b3f4']"
+                             :smooth="1"
+                             :padding="8"
+                             :line-width="7"
+                             :stroke-linecap="'round'"
+                             auto-draw></v-sparkline>
+            </v-card>
+        </v-flex>
+        <v-flex md4>
+            <v-card>
+                <v-toolbar color="cyan" dark>
+                    <v-toolbar-side-icon></v-toolbar-side-icon>
+
+                    <v-toolbar-title>Inbox</v-toolbar-title>
+
+                    <v-spacer></v-spacer>
+
+                    <v-btn icon>
+                        <v-icon>search</v-icon>
+                    </v-btn>
+                </v-toolbar>
+
+                <v-list two-line>
+                    <template v-for="(item, index) in items">
+                        <v-subheader v-if="item.header"
+                                     :key="item.header">
+                            {{ item.header }}
+                        </v-subheader>
+
+                        <v-divider v-else-if="item.divider"
+                                   :inset="item.inset"
+                                   :key="index"></v-divider>
+
+                        <v-list-tile v-else
+                                     :key="item.title"
+                                     avatar
+                                     @click="">
+                            <v-list-tile-avatar>
+                                <img :src="item.avatar">
+                            </v-list-tile-avatar>
+
+                            <v-list-tile-content>
+                                <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </template>
+                </v-list>
+            </v-card>
+        </v-flex>
+        <v-flex md8>
+            <v-card>
+                <v-data-iterator :items="dataIteratorItems"
+                                 :rows-per-page-items="rowsPerPageItems"
+                                 :pagination.sync="pagination"
+                                 content-tag="v-layout"
+                                 hide-actions
+                                 row
+                                 wrap>
+                    <v-toolbar slot="header"
+                               class="mb-2"
+                               color="indigo darken-5"
+                               dark
+                               flat>
+                        <v-toolbar-title>This is a header</v-toolbar-title>
+                    </v-toolbar>
+
+                    <v-flex slot="item"
+                            slot-scope="props"
+                            xs12
+                            sm6>
+                        <v-card>
+                            <v-card-title class="subheading font-weight-bold">{{ props.item.name }}</v-card-title>
+
+                            <v-divider></v-divider>
+
+                            <v-list dense>
+                                <v-list-tile>
+                                    <v-list-tile-content>Calories:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-list-tile-content>Fat:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-list-tile-content>Carbs:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-list-tile-content>Protein:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-list-tile-content>Sodium:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-list-tile-content>Calcium:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                    <v-list-tile-content>Iron:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.iron }}</v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+                        </v-card>
+                    </v-flex>
+
+                    <v-toolbar slot="footer"
+                               class="mt-2"
+                               color="indigo"
+                               dark
+                               dense
+                               flat>
+                        <v-toolbar-title class="subheading">This is a footer</v-toolbar-title>
+                    </v-toolbar>
+                </v-data-iterator>
+            </v-card>
+        </v-flex>
+        <v-flex md12>
+            <v-card class="px-4">
+                <v-card-title>
+                    <div class="headline">
+                        This is a header
+                    </div>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-timeline>
+                    <v-timeline-item v-for="(year, i) in years"
+                                     :color="year.color"
+                                     :key="i"
+                                     small>
+                        <span slot="opposite"
+                              :class="`headline font-weight-bold ${year.color}--text`"
+                              v-text="year.year"></span>
+                        <div class="py-3">
+                            <h2 :class="`headline font-weight-light mb-3 ${year.color}--text`">Lorem ipsum</h2>
+                            <div>
+                                Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
+                            </div>
+                        </div>
+                    </v-timeline-item>
+                </v-timeline>
+            </v-card>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script src="./home.ts"></script>

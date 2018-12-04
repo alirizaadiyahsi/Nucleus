@@ -30,7 +30,7 @@ namespace Nucleus.Web.Api
             services.AddMvc(setup =>
             {
                 setup.Filters.AddService<UnitOfWorkActionFilter>();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            });
 
             services.AddSwaggerGen(c =>
             {
