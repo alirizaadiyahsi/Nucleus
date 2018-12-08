@@ -29,7 +29,7 @@
     "@types/query-string": "^6.1.1",
     "chai": "^4.2.0",
     "typescript": "^3.2.1",
-    "vue-template-compiler": "^2.5.17",
+    "vue-template-compiler": "^2.5.18",
     "query-string": "^6.2.0"
   }
 }
