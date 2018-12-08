@@ -15,7 +15,7 @@
     "vue-router": "^3.0.2",
     "vuetify": "^1.4.0-alpha.0",
     "material-design-icons-iconfont": "^4.0.3",
-    "sweetalert2": "^7.29.2",
+    "sweetalert2": "^7.31.1",
     "vue-i18n": "^8.4.0"
   },
   "devDependencies": {

@@ -39,7 +39,7 @@
                 <v-toolbar color="cyan" dark>
                     <v-toolbar-side-icon></v-toolbar-side-icon>
 
-                    <v-toolbar-title>Inbox</v-toolbar-title>
+                    <v-toolbar-title>This is a header</v-toolbar-title>
 
                     <v-spacer></v-spacer>
 
