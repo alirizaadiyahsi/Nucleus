@@ -13,7 +13,7 @@ namespace Nucleus.Application
             services.AddAutoMapper(typeof(ApplicationServiceCollectionExtensions));
 
             services.RegisterAssemblyPublicNonGenericClasses(Assembly.GetExecutingAssembly())
-                .Where(c => c.Name.EndsWith("Service"))
+                .Where(c => c.Name.EndsWith("AppService"))
                 .AsPublicImplementedInterfaces();
 
             return services;
