@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Nucleus.Utilities.Extensions.Collections
 {
-    // todo: refactor this class
     /// <summary>
     /// This contains the extension methods for registering classes automatically
     /// https://github.com/JonPSmith/NetCore.AutoRegisterDi
@@ -20,7 +19,9 @@ namespace Nucleus.Utilities.Extensions.Collections
         /// <param name="services">the NET Core dependency injection service</param>
         /// <param name="assemblies">Each assembly you want scanned </param>
         /// <returns></returns>
-        public static AutoRegisterData RegisterAssemblyPublicNonGenericClasses(this IServiceCollection services, params Assembly[] assemblies)
+        public static AutoRegisterData RegisterAssemblyPublicNonGenericClasses(
+            this IServiceCollection services, 
+            params Assembly[] assemblies)
         {
             var allPublicTypes = assemblies.SelectMany(x =>
                 x.GetExportedTypes().Where(y => y.IsClass && !y.IsAbstract && !y.IsGenericType && !y.IsNested));
@@ -32,47 +33,51 @@ namespace Nucleus.Utilities.Extensions.Collections
         /// This allows you to filter the classes in some way.
         /// For instance <code>Where(c =\> c.Name.EndsWith("Service")</code> would only register classes who's name ended in "Service"
         /// </summary>
-        /// <param name="autoRegData"></param>
+        /// <param name="autoRegisterData"></param>
         /// <param name="predicate">A function that will take a type and return true if that type should be included</param>
         /// <returns></returns>
-        public static AutoRegisterData Where(this AutoRegisterData autoRegData, Func<Type, bool> predicate)
+        public static AutoRegisterData Where(this AutoRegisterData autoRegisterData, Func<Type, bool> predicate)
         {
-            if (autoRegData == null)
+            if (autoRegisterData == null)
             {
-                throw new ArgumentNullException(nameof(autoRegData));
+                throw new ArgumentNullException(nameof(autoRegisterData));
             }
-            autoRegData.TypeFilter = predicate;
+            autoRegisterData.TypeFilter = predicate;
 
-            return new AutoRegisterData(autoRegData.Services, autoRegData.TypesToConsider.Where(predicate));
+            return new AutoRegisterData(autoRegisterData.Services, autoRegisterData.TypesToConsider.Where(predicate));
         }
 
         /// <summary>
         /// This registers the classes against any public interfaces (other than IDisposable) implemented by the class
         /// </summary>
-        /// <param name="autoRegData">AutoRegister data produced by <see cref="RegisterAssemblyPublicNonGenericClasses"/></param> method
+        /// <param name="autoRegisterData">AutoRegister data produced by <see cref="RegisterAssemblyPublicNonGenericClasses"/></param> method
         /// <param name="lifetime">Allows you to define the lifetime of the service - defaults to ServiceLifetime.Transient</param>
         /// <returns></returns>
-        public static IServiceCollection AsPublicImplementedInterfaces(this AutoRegisterData autoRegData, 
+        public static IServiceCollection AsPublicImplementedInterfaces(
+            this AutoRegisterData autoRegisterData, 
             ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
-            if (autoRegData == null)
+            if (autoRegisterData == null)
             {
-                throw new ArgumentNullException(nameof(autoRegData));
+                throw new ArgumentNullException(nameof(autoRegisterData));
             }
 
-            foreach (var classType in (autoRegData.TypeFilter == null 
-                ? autoRegData.TypesToConsider 
-                : autoRegData.TypesToConsider.Where(autoRegData.TypeFilter)))
+            var classTypes = autoRegisterData.TypeFilter == null
+                ? autoRegisterData.TypesToConsider
+                : autoRegisterData.TypesToConsider.Where(autoRegisterData.TypeFilter);
+
+            foreach (var classType in classTypes)
             {
                 var interfaces = classType.GetTypeInfo().ImplementedInterfaces
-                    .Where(i => i != typeof(IDisposable) && (i.IsPublic));
+                    .Where(i => i != typeof(IDisposable) && i.IsPublic);
+
                 foreach (var interInterface in interfaces)
                 {
-                    autoRegData.Services.Add(new ServiceDescriptor(interInterface, classType, lifetime));
+                    autoRegisterData.Services.Add(new ServiceDescriptor(interInterface, classType, lifetime));
                 }
             }
 
-            return autoRegData.Services;
+            return autoRegisterData.Services;
         }
     }
 
