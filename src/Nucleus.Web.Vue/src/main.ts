@@ -1,12 +1,13 @@
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'vuetify/dist/vuetify.min.css';
 import './assets/sass/site.css';
-import LanguageStore from '@/stores/language-store';
 
+import LanguageStore from '@/stores/language-store';
 import router from '@/router';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueI18n from 'vue-i18n';
+
 Vue.use(VueI18n);
 
 const locales = {
