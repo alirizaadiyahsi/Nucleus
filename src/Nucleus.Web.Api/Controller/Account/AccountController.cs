@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Nucleus.Application.Account.Dto;
 using Nucleus.Application.Dto;
 using Nucleus.Application.Permissions;
 using Nucleus.Application.Permissions.Dto;
@@ -43,7 +44,7 @@ namespace Nucleus.Web.Api.Controller.Account
             {
                 return BadRequest(new List<NameValueDto>
                 {
-                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect.")
+                    new NameValueDto("UserNameOrPasswordIncorrect", "The user name or password is incorrect!")
                 });
             }
 

@@ -84,11 +84,12 @@ namespace Nucleus.Application.Roles
                 return IdentityResult.Failed(new IdentityError
                 {
                     Code = "RoleNameAlreadyExist",
-                    Description = "Role name '" + input.Role.Name + "' is already taken!"
+                    Description = "This role name is already exists!"
                 });
             }
             role.Name = input.Role.Name;
             role.RolePermissions.Clear();
+
             var updateRoleResult = await _roleManager.UpdateAsync(role);
             if (updateRoleResult.Succeeded)
             {
@@ -101,7 +102,6 @@ namespace Nucleus.Application.Roles
         public async Task<IdentityResult> RemoveRoleAsync(Guid id)
         {
             var role = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
-
             if (role == null)
             {
                 return IdentityResult.Failed(new IdentityError()
@@ -128,6 +128,7 @@ namespace Nucleus.Application.Roles
 
             role.RolePermissions.Clear();
             role.UserRoles.Clear();
+
             return removeRoleResult;
         }
 

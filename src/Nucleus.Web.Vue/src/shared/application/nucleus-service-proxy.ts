@@ -1,5 +1,6 @@
 ﻿import AuthStore from '@/stores/auth-store';
 import AppConsts from '@/shared/application/nucleus';
+import Nucleus from '@/shared/application/nucleus';
 
 export default class NucleusService {
     private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponseDto<T>> {
@@ -14,12 +15,14 @@ export default class NucleusService {
             body = JSON.stringify(data);
         }
 
+        Nucleus.isLoading = true;
+
         return fetch(AppConsts.baseApiUrl + url,
-                ({
-                    method,
-                    headers,
-                    body
-                }) as any)
+            ({
+                method,
+                headers,
+                body
+            }) as any)
             .then((response: any) => {
                 isBadRequest = !response.ok;
                 if (response.status === 401) {
@@ -45,6 +48,8 @@ export default class NucleusService {
                 } as IRestResponseDto<T>;
 
                 return response;
+            }).finally(() => {
+                Nucleus.isLoading = false;
             });
     }
 

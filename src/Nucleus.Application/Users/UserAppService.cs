@@ -88,7 +88,7 @@ namespace Nucleus.Application.Users
                 return IdentityResult.Failed(new IdentityError
                 {
                     Code = "UserNameAlreadyExist",
-                    Description = "User name '" + input.User.UserName + "' is already taken!"
+                    Description = "This user name is already exist!"
                 });
             }
 
@@ -107,7 +107,6 @@ namespace Nucleus.Application.Users
         public async Task<IdentityResult> RemoveUserAsync(Guid id)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
-
             if (user == null)
             {
                 return IdentityResult.Failed(new IdentityError
@@ -133,6 +132,7 @@ namespace Nucleus.Application.Users
             }
 
             user.UserRoles.Clear();
+
             return removeUserResult;
         }
 

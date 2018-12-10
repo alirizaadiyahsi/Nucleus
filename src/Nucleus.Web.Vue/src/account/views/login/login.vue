@@ -1,15 +1,15 @@
 ﻿<template>
-    <v-card class="elevation-12" @keyup.enter="onSubmit">
+    <v-card class="elevation-12">
         <v-toolbar dark color="primary">
             <v-toolbar-title>{{$t('Login')}}</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
             <div v-for="error in errors" :key="error.name">
                 <v-alert :value="true" type="error">
-                    {{error.value}}
+                    {{$t(error.name)}}
                 </v-alert>
             </div>
-            <v-form ref="form">
+            <v-form ref="form" @keyup.native.enter="onSubmit">
                 <v-text-field prepend-icon="person" name="userNameOrEmail" type="text"
                               :label="$t('UserNameOrEmailAddress')" 
                               v-model="loginInput.userNameOrEmail" 

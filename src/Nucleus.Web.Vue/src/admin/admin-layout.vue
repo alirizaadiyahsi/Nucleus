@@ -1,15 +1,18 @@
 ﻿<template>
-    <v-app>
+    <div>
         <aside-menu>
         </aside-menu>
         <top-menu>
         </top-menu>
         <v-content>
-            <v-container>
+            <v-container grid-list-md class="px-0">
                 <router-view></router-view>
             </v-container>
         </v-content>
-    </v-app>
+        <v-footer app fixed dark>
+            <span>&copy; Version: {{nucleus.appVersion}}</span>
+        </v-footer>
+    </div>
 </template>
 
 <script src="./admin-layout.ts"></script>

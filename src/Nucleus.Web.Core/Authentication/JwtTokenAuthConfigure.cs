@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Nucleus.Web.Core.Authentication
 {
-    public static class JwtTokenAuthConfigurer
+    public static class JwtTokenAuthConfigure
     {
         private static SymmetricSecurityKey _signingKey;
         private static JwtTokenConfiguration _jwtTokenConfiguration;
