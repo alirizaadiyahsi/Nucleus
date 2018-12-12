@@ -751,9 +751,9 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@vue/preload-webpack-plugin/-/preload-webpack-plugin-1.1.0.tgz#d768dba004261c029b53a77c5ea2d5f9ee4f3cce"
 
-"@vue/test-utils@^1.0.0-beta.26":
-  version "1.0.0-beta.26"
-  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.26.tgz#1ae7e1dc2bef4f49f9dbfdfecad342d17d6c5c88"
+"@vue/test-utils@^1.0.0-beta.27":
+  version "1.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.27.tgz#7e5f7b7180c00e28a4ca55c0ff0a7e754377fdb2"
   dependencies:
     dom-event-types "^1.0.0"
     lodash "^4.17.4"
@@ -6153,9 +6153,9 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sweetalert2@^7.31.1:
-  version "7.32.0"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.32.0.tgz#8bfb9d04aefc3c74bb8cf59c484a75317e4263ad"
+sweetalert2@^7.32.2:
+  version "7.32.2"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.32.2.tgz#bda42fe8a50f5f6445a1684ed80f87840e0f5dd1"
 
 symbol-tree@^3.2.2:
   version "3.2.2"
@@ -6608,9 +6608,9 @@ vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
 
-vuetify@^1.4.0-alpha.0:
-  version "1.4.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.0-alpha.0.tgz#6d208ab6faaa5e3ac9f054b3a7554fd39a7beec6"
+vuetify@^1.4.0-alpha.1:
+  version "1.4.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.0-alpha.1.tgz#bf54d20528cfbb2ec4c6ef60601ff633aac0bfa5"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
