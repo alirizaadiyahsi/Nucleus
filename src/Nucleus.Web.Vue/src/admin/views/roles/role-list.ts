@@ -108,7 +108,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(roleListInput);
-        this.nucleusService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query).then((response) => {
+        this.nucleusService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query, false).then((response) => {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
             this.loading = false;
         });

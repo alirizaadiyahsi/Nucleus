@@ -112,7 +112,7 @@ export default class UserListComponent extends NucleusComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(userListInput);
-        this.nucleusService.get<IPagedList<IPagedListInput>>('/api/user/getUsers' + query).then((response) => {
+        this.nucleusService.get<IPagedList<IPagedListInput>>('/api/user/getUsers' + query, false).then((response) => {
             this.pagedListOfUserListDto = response.content as IPagedList<IPagedListInput>;
             this.loading = false;
         });

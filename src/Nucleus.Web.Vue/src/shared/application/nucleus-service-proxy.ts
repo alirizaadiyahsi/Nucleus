@@ -3,7 +3,7 @@ import AppConsts from '@/shared/application/nucleus';
 import Nucleus from '@/shared/application/nucleus';
 
 export default class NucleusService {
-    private static request<T>(method: string, url: string, data: object | string = ''): Promise<IRestResponseDto<T>> {
+    private static request<T>(method: string, url: string, data: object | string = '', loadingEnabled = true): Promise<IRestResponseDto<T>> {
         let isBadRequest = false;
         let body = data === '' ? null : data;
         const headers: { [key: string]: string } = {
@@ -15,7 +15,9 @@ export default class NucleusService {
             body = JSON.stringify(data);
         }
 
-        Nucleus.isLoading = true;
+        if (loadingEnabled) {
+            Nucleus.isLoading = true;
+        }
 
         return fetch(AppConsts.baseApiUrl + url,
             ({
@@ -53,8 +55,8 @@ export default class NucleusService {
             });
     }
 
-    public get<T>(url: string): Promise<IRestResponseDto<T>> {
-        return NucleusService.request<T>('GET', url);
+    public get<T>(url: string, loadingEnabled = true): Promise<IRestResponseDto<T>> {
+        return NucleusService.request<T>('GET', url, '', loadingEnabled);
     }
 
     public delete(url: string): Promise<IRestResponseDto<void>> {
