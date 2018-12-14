@@ -23,8 +23,10 @@ namespace Nucleus.Utilities.Extensions.Collections
             this IServiceCollection services, 
             params Assembly[] assemblies)
         {
-            var allPublicTypes = assemblies.SelectMany(x =>
-                x.GetExportedTypes().Where(y => y.IsClass && !y.IsAbstract && !y.IsGenericType && !y.IsNested));
+            var allPublicTypes = assemblies
+                .SelectMany(x =>
+                    x.GetExportedTypes()
+                        .Where(y => y.IsClass && !y.IsAbstract && !y.IsGenericType && !y.IsNested));
 
             return new AutoRegisterData(services, allPublicTypes);
         }
