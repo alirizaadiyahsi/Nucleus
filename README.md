@@ -119,3 +119,7 @@ Web API startup template with a Vue Client demo.
 - [Vue Router](https://router.vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/en/)
 - [Vue i18n](https://kazupon.github.io/vue-i18n/)
+
+## Lincense
+
+[MIT License](https://github.com/alirizaadiyahsi/Nucleus/blob/dev/LICENSE)
