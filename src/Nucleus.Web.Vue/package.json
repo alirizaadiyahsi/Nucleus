@@ -13,7 +13,7 @@
     "vue-class-component": "^6.3.2",
     "vue-property-decorator": "^7.2.0",
     "vue-router": "^3.0.2",
-    "vuetify": "^1.4.0-alpha.1",
+    "vuetify": "^1.4.0-beta.0",
     "material-design-icons-iconfont": "^4.0.3",
     "sweetalert2": "^7.32.4",
     "vue-i18n": "^8.4.0"

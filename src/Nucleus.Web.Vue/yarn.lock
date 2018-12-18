@@ -6608,9 +6608,9 @@ vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
 
-vuetify@^1.4.0-alpha.1:
-  version "1.4.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.0-alpha.1.tgz#bf54d20528cfbb2ec4c6ef60601ff633aac0bfa5"
+vuetify@^1.4.0-beta.0:
+  version "1.4.0-beta.0"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.0-beta.0.tgz#2eabaa0a4fcd8f9a521e70f79e48d66e15a5e798"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
