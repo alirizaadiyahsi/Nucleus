@@ -23,6 +23,7 @@ namespace Nucleus.Web.Api
         {
             services.ConfigureDbContext(_configuration);
             services.ConfigureAuthentication(_configuration);
+            services.ConfigureJwtTokenAuth(_configuration);
             services.ConfigureCors(_configuration);
             services.ConfigureDependencyInjection();
             services.ConfigureNucleusApplication();
