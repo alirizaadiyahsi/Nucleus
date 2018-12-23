@@ -33,7 +33,9 @@ Web API startup template with a Vue Client demo.
 
 ### List Pages
 
-<img src="_images/_users.png" alt="Vue Client Demo" class="img-thumbnail" /Dashboard### Create/Edit Pages
+<img src="_images/_users.png" alt="Vue Client Demo" class="img-thumbnail" />
+
+### Create/Edit Pages
 
 <img src="_images/_addUser.png" alt="Vue Client Demo" class="img-thumbnail" />
 
