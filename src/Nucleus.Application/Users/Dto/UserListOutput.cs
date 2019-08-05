@@ -2,7 +2,7 @@
 
 namespace Nucleus.Application.Users.Dto
 {
-    public class UserListOutput: PagedListOutput
+    public class UserListOutput : PagedListOutput
     {
         public string UserName { get; set; }
 

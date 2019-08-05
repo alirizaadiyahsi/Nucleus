@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nucleus.Application.Dto;
 
 namespace Nucleus.Application.Roles.Dto
 {

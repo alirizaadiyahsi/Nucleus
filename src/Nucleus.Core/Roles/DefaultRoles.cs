@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Nucleus.Core.Roles
 {
-    public class DefaultRoles
+    public static class DefaultRoles
     {
         public static List<Role> All()
         {
@@ -31,7 +31,7 @@ namespace Nucleus.Core.Roles
             IsSystemDefault = true
         };
 
-        public const string RoleNameForAdmin = "Admin";
-        public const string RoleNameForMember = "Member";
+        private const string RoleNameForAdmin = "Admin";
+        private const string RoleNameForMember = "Member";
     }
 }

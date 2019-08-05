@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Nucleus.Application.Permissions;
 using Nucleus.Core.Permissions;
 using Serilog;
@@ -9,7 +10,7 @@ using Serilog.Events;
 
 namespace Nucleus.Web.Api
 {
-    public class Program
+    public static class Program
     {
         public static int Main(string[] args)
         {
@@ -31,7 +32,7 @@ namespace Nucleus.Web.Api
                 Log.Information("Starting web host");
 
                 Log.Information("Starting web host");
-                var host = BuildWebHost(args);
+                var host = CreateHostBuilder(args).Build();
                 using (var scope = host.Services.CreateScope())
                 {
                     var permissionAppService = scope.ServiceProvider.GetRequiredService<IPermissionAppService>();
@@ -52,10 +53,12 @@ namespace Nucleus.Web.Api
             }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseSerilog()
-                .Build();
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseSerilog();
+                });
     }
 }

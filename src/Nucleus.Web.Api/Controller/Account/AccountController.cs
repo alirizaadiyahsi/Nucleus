@@ -9,11 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Nucleus.Application.Account.Dto;
 using Nucleus.Application.Dto;
-using Nucleus.Application.Permissions;
-using Nucleus.Application.Permissions.Dto;
-using Nucleus.Application.Users.Dto;
+using Nucleus.Application.Dto.Account;
+using Nucleus.Core.Permissions;
 using Nucleus.Core.Users;
 using Nucleus.Web.Core.Authentication;
 using Nucleus.Web.Core.Controllers;
@@ -24,19 +22,16 @@ namespace Nucleus.Web.Api.Controller.Account
     {
         private readonly UserManager<User> _userManager;
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
-        private readonly IPermissionAppService _permissionAppService;
-
+        
         public AccountController(
             UserManager<User> userManager,
-            IOptions<JwtTokenConfiguration> jwtTokenConfiguration, 
-            IPermissionAppService permissionAppService)
+            IOptions<JwtTokenConfiguration> jwtTokenConfiguration)
         {
             _userManager = userManager;
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
-            _permissionAppService = permissionAppService;
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("/api/[action]")]
         public async Task<ActionResult<LoginOutput>> Login([FromBody]LoginInput input)
         {
             var userToVerify = await CreateClaimsIdentityAsync(input.UserNameOrEmail, input.Password);
@@ -61,7 +56,7 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok(new LoginOutput { Token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("/api/[action]")]
         public async Task<ActionResult> Register([FromBody]RegisterInput input)
         {
             var user = await _userManager.FindByEmailAsync(input.Email);
@@ -90,8 +85,8 @@ namespace Nucleus.Web.Api.Controller.Account
             return Ok();
         }
 
-        [HttpPost("[action]")]
-        [Authorize]
+        [HttpPost("/api/[action]")]
+        [Authorize(Policy = DefaultPermissions.PermissionNameForMemberAccess)]
         public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordInput input)
         {
             if (input.NewPassword != input.PasswordRepeat)
@@ -111,13 +106,6 @@ namespace Nucleus.Web.Api.Controller.Account
             }
 
             return Ok();
-        }
-
-        [HttpGet("[action]")]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<PermissionDto>>> GetGrantedPermissionsAsync(string userNameOrEmail)
-        {
-            return Ok(await _permissionAppService.GetGrantedPermissionsAsync(userNameOrEmail));
         }
 
         private async Task<ClaimsIdentity> CreateClaimsIdentityAsync(string userNameOrEmail, string password)
