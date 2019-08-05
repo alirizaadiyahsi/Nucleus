@@ -1,4 +1,4 @@
-# nucleus-web-vue
+# Nucleus Web Vue Client
 
 ## Project setup
 ```
