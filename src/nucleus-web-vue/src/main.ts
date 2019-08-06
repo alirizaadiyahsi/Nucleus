@@ -5,6 +5,7 @@ import App from './App.vue';
 import router from './router';
 import vuetify from './plugins/vuetify';
 import VueI18n from 'vue-i18n';
+import LanguageStore from '@/stores/language-store';
 
 Vue.use(VueI18n);
 
@@ -14,7 +15,7 @@ const locales = {
 };
 
 const i18n = new VueI18n({
-    locale: 'en',//LanguageStore.getLanguage().languageCode,
+    locale: LanguageStore.getLanguage().languageCode,
     fallbackLocale: 'en',
     messages: locales
 });
@@ -26,4 +27,4 @@ new Vue({
     router,
     vuetify,
     render: h => h(App)
-}).$mount("#app");
+}).$mount('#app');
