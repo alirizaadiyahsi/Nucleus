@@ -43,6 +43,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "nucleus-web-vue", "src\nucl
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "49375"
+		SlnRelativePath = "src\nucleus-web-vue\"
 	EndProjectSection
 EndProject
 Global

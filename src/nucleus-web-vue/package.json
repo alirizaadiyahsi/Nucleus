@@ -13,7 +13,9 @@
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
-    "vuetify": "^2.0.0"
+    "vuetify": "^2.0.0",
+    "sweetalert2": "^8.14.1",
+    "vue-i18n": "^8.12.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
@@ -22,6 +24,7 @@
     "@vue/cli-service": "^3.10.0",
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
+    "@types/query-string": "^6.3.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.0",
@@ -31,9 +34,10 @@
     "prettier": "^1.18.2",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
-    "typescript": "^3.4.3",
+    "typescript": "^3.5.3",
     "vue-cli-plugin-vuetify": "^0.6.1",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.2.2"
+    "vuetify-loader": "^1.2.2",
+    "query-string": "^6.3.0" 
   }
 }
