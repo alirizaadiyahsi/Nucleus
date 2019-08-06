@@ -1,7 +1,9 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import vuetify from "./plugins/vuetify";
+import './assets/sass/site.css';
+
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import vuetify from './plugins/vuetify';
 import VueI18n from 'vue-i18n';
 
 Vue.use(VueI18n);
