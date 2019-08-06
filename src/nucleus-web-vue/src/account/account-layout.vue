@@ -10,7 +10,7 @@
                                 <v-btn color="primary" dark outlined rounded v-on="on">
                                     <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
                                     {{selectedLanguage.languageName}}
-                                    <v-icon dark class="ml-3">arrow_drop_down</v-icon>
+                                <v-icon dark class="ml-3">mdi-menu-down</v-icon>
                                 </v-btn>
                             </template>
 

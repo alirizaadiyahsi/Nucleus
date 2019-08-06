@@ -10,11 +10,11 @@
                 </v-alert>
             </div>
             <v-form ref="form" @keyup.native.enter="onSubmit">
-                <v-text-field prepend-icon="person" name="userNameOrEmail" type="text"
+                <v-text-field prepend-icon="mdi-account" name="userNameOrEmail" type="text"
                               :label="$t('UserNameOrEmailAddress')" 
                               v-model="loginInput.userNameOrEmail" 
                               :rules="[requiredError]"></v-text-field>
-                <v-text-field prepend-icon="lock" name="password" type="password"
+                <v-text-field prepend-icon="mdi-lock" name="password" type="password"
                               :label="$t('Password')" 
                               v-model="loginInput.password" 
                               :rules="[requiredError]"></v-text-field>
