@@ -1,3 +1,0 @@
-﻿interface IEntityDto {
-    id?: string;
-}
