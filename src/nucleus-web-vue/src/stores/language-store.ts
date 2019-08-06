@@ -11,6 +11,6 @@
     }
 
     public static removeLanguage(): void {
-        window.localStorage.removeItem(LanguageStore.storageKey);
+        localStorage.removeItem(LanguageStore.storageKey);
     }
 }

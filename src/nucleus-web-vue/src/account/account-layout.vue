@@ -6,7 +6,7 @@
                     <router-view></router-view>
                     <v-layout align-center justify-center row fill-height>
                         <v-menu class="mt-3">
-                            <v-btn slot="activator" color="primary" dark outline round>
+                            <v-btn v-slot:activator="{ on }" color="primary" dark outlined rounded>
                                 <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
                                 {{selectedLanguage.languageName}}
                                 <v-icon dark class="ml-3">arrow_drop_down</v-icon>
