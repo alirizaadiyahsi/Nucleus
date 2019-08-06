@@ -1,36 +1,17 @@
 <template>
-  <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+    <v-app>
+        <router-view></router-view>
+        <v-layout row justify-center>
+            <v-dialog v-model="nucleus.isLoading" persistent content content-class="centered-dialog">
+                <v-container fill-height>
+                    <v-layout column justify-center align-center>
+                        <v-progress-circular indeterminate :size="70" :width="7" :color="'purple'"></v-progress-circular>
+                        <h1>Loading...</h1>
+                    </v-layout>
+                </v-container>
+            </v-dialog>
+        </v-layout>
+    </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld';
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-  },
-  data: () => ({
-    //
-  }),
-};
-</script>
+<script src="./App.ts"></script>
