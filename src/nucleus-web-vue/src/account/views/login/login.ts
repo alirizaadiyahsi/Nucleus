@@ -9,7 +9,7 @@ export default class LoginComponent extends NucleusComponentBase {
 
     public onSubmit() {
         if (this.refs.form.validate()) {
-            this.nucleusService.post<ILoginOutput>('/api/account/login', this.loginInput)
+            this.nucleusService.post<ILoginOutput>('/api/login', this.loginInput)
                 .then((response) => {
                     if (!response.isError) {
                         this.authStore.setToken(response.content.token);

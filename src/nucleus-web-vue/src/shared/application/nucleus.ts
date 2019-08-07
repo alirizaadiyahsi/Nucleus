@@ -2,7 +2,7 @@
 import AuthStore from '@/stores/auth-store';
 
 const nucleus = {
-    baseApiUrl: 'https://localhost:44339',
+    baseApiUrl: 'https://localhost:44313',
     baseClientUrl: 'http://localhost:8080',
     isLoading: false,
     appVersion: '0.4.0',

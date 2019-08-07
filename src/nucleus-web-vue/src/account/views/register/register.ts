@@ -11,7 +11,7 @@ export default class RegisterComponent extends NucleusComponentBase {
 
     public onSubmit() {
         if (this.refs.form.validate()) {
-            this.nucleusService.post<IRegisterOutput>('/api/account/register', this.registerInput)
+            this.nucleusService.post<IRegisterOutput>('/api/register', this.registerInput)
                 .then((response) => {
                     if (!response.isError) {
                         this.resultMessage = this.$t('AccountCreationSuccessful').toString();

@@ -51,7 +51,7 @@ export default class UserListComponent extends NucleusComponentBase {
         this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
         this.errors = [];
-        this.nucleusService.get<IGetUserForCreateOrUpdateOutput>('/api/user/GetUserForCreateOrUpdate?id=' + id)
+        this.nucleusService.get<IGetUserForCreateOrUpdateOutput>('/api/users/id=' + id)
             .then((response) => {
                 const result = response.content as IGetUserForCreateOrUpdateOutput;
                 this.allRoles = result.allRoles;
@@ -66,9 +66,7 @@ export default class UserListComponent extends NucleusComponentBase {
         this.swalConfirm(this.$t('AreYouSureToDelete').toString())
             .then((result) => {
                 if (result.value) {
-                    const query = '?id=' + id;
-
-                    this.nucleusService.delete('/api/user/deleteUser' + query)
+                    this.nucleusService.delete('/api/users?id=' + id)
                         .then((response) => {
                             if (!response.isError) {
                                 this.swalToast(2000, 'success', this.$t('Successful').toString());
@@ -84,7 +82,7 @@ export default class UserListComponent extends NucleusComponentBase {
     public save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            this.nucleusService.post<void>('/api/user/createOrUpdateUser',
+            this.nucleusService.post<void>('/api/users',
                 this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
                 .then((response) => {
                     if (!response.isError) {
@@ -112,7 +110,7 @@ export default class UserListComponent extends NucleusComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(userListInput);
-        this.nucleusService.get<IPagedList<IPagedListInput>>('/api/user/getUsers' + query, false).then((response) => {
+        this.nucleusService.get<IPagedList<IPagedListInput>>('/api/users' + query, false).then((response) => {
             this.pagedListOfUserListDto = response.content as IPagedList<IPagedListInput>;
             this.loading = false;
         });

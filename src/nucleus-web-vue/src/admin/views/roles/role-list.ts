@@ -48,7 +48,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         this.dialog = true;
         this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
-        this.nucleusService.get<IGetRoleForCreateOrUpdateOutput>('/api/role/GetRoleForCreateOrUpdate?id=' + id)
+        this.nucleusService.get<IGetRoleForCreateOrUpdateOutput>('/api/roles/id=' + id)
             .then((response) => {
                 const result = response.content as IGetRoleForCreateOrUpdateOutput;
                 this.allPermissions = result.allPermissions;
@@ -63,8 +63,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         this.swalConfirm(this.$t('AreYouSureToDelete').toString())
             .then((result) => {
                 if (result.value) {
-                    const query = '?id=' + id;
-                    this.nucleusService.delete('/api/role/deleteRole' + query)
+                    this.nucleusService.delete('/api/roles?id=' + id)
                         .then((response) => {
                             if (!response.isError) {
                                 this.swalToast(2000, 'success', this.$t('Successful').toString());
@@ -80,7 +79,7 @@ export default class RoleListComponent extends NucleusComponentBase {
     public save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            this.nucleusService.post<void>('/api/role/createOrUpdateRole',
+            this.nucleusService.post<void>('/api/roles',
                 this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
                 .then((response) => {
                     if (!response.isError) {
@@ -108,7 +107,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         }
 
         const query = '?' + this.queryString.stringify(roleListInput);
-        this.nucleusService.get<IPagedList<IRoleListOutput>>('/api/role/getRoles' + query, false).then((response) => {
+        this.nucleusService.get<IPagedList<IRoleListOutput>>('/api/roles' + query, false).then((response) => {
             this.pagedListOfRoleListDto = response.content as IPagedList<IRoleListOutput>;
             this.loading = false;
         });
