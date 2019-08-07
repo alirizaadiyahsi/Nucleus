@@ -32,7 +32,7 @@ namespace Nucleus.Web.Api
             services.AddControllers(setup =>
             {
                 setup.Filters.AddService<UnitOfWorkActionFilter>();
-            });
+            }).AddNewtonsoftJson();
 
             services.AddSwaggerGen(options =>
             {
