@@ -7,6 +7,7 @@
   "CannotRemoveAdminUser": "You cannot remove admin user!",
   "CannotRemoveSystemRole": "You cannot remove default system roles!",
   "ChangePassword": "Change password",
+  "CurrentPassword": "Current password",
   "EditRole": "Edit role",
   "EditUser": "Edit user",
   "Email": "E-mail",

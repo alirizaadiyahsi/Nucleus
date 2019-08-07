@@ -12,7 +12,7 @@
                     </v-alert>
                 </div>
                 <v-form ref="form">
-                    <v-text-field name="currentPassword" type="password" :label="$t('ChangePassword')" 
+                    <v-text-field name="currentPassword" type="password" :label="$t('CurrentPassword')" 
                                    v-model="changePasswordInput.currentPassword"
                                   :rules="[requiredError]"></v-text-field>
                     <v-text-field name="newPassword" type="password" :label="$t('NewPassword')" 
@@ -21,7 +21,7 @@
                     <v-text-field name="passwordRepeat" type="password" :label="$t('PasswordRepeat')" 
                                   v-model="changePasswordInput.passwordRepeat"
                                   :rules="[requiredError]" 
-                                  :error-messages="passwordMatchError(changePasswordInput.password,changePasswordInput.passwordRepeat)"></v-text-field>
+                                  :error-messages="passwordMatchError(changePasswordInput.newPassword,changePasswordInput.passwordRepeat)"></v-text-field>
                 </v-form>
             </v-card-text>
 
