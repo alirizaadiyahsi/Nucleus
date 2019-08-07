@@ -1,5 +1,6 @@
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
+import Guid from '@/shared/helpers/guid-helper';
 
 @Component
 export default class RoleListComponent extends NucleusComponentBase {
@@ -9,14 +10,14 @@ export default class RoleListComponent extends NucleusComponentBase {
     public loading = true;
     public dialog = false;
     public formTitle = '';
-    public pagination = {};
+    public options = {};
     public search = '';
     public selectAll = false;
 
     get headers() {
         return [
             { text: this.$t('RoleName'), value: 'name' },
-            { text: this.$t('Actions'), value: '', sortable: false }
+            { text: this.$t('Actions'), value: 'action', sortable: false }
         ];
     }
 
@@ -30,7 +31,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         items: []
     };
 
-    @Watch('pagination')
+    @Watch('options')
     public onPaginationChanged() {
         this.getRoles();
     }
@@ -48,7 +49,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         this.dialog = true;
         this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
-        this.nucleusService.get<IGetRoleForCreateOrUpdateOutput>('/api/roles/id=' + id)
+        this.nucleusService.get<IGetRoleForCreateOrUpdateOutput>('/api/roles/' + (id ? id : Guid.empty))
             .then((response) => {
                 const result = response.content as IGetRoleForCreateOrUpdateOutput;
                 this.allPermissions = result.allPermissions;
@@ -79,31 +80,45 @@ export default class RoleListComponent extends NucleusComponentBase {
     public save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            this.nucleusService.post<void>('/api/roles',
-                this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
-                .then((response) => {
-                    if (!response.isError) {
-                        this.swalToast(2000, 'success', this.$t('Successful').toString());
-                        this.dialog = false;
-                        this.getRoles();
-                    } else {
-                        this.errors = response.errors;
-                    }
-                });
+            if (this.createOrUpdateRoleInput.role.id === Guid.empty) {
+                this.nucleusService.post<void>('/api/roles',
+                        this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
+                    .then((response) => {
+                        if (!response.isError) {
+                            this.swalToast(2000, 'success', this.$t('Successful').toString());
+                            this.dialog = false;
+                            this.getRoles();
+                        } else {
+                            this.errors = response.errors;
+                        }
+                    });
+            } else {
+                this.nucleusService.put<void>('/api/roles',
+                        this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
+                    .then((response) => {
+                        if (!response.isError) {
+                            this.swalToast(2000, 'success', this.$t('Successful').toString());
+                            this.dialog = false;
+                            this.getRoles();
+                        } else {
+                            this.errors = response.errors;
+                        }
+                    });
+            }
         }
     }
 
     public getRoles() {
         this.loading = true;
-        const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
+        const { sortBy, sortDesc, page, itemsPerPage }: any = this.options;
         const roleListInput: IPagedListInput = {
             filter: this.search,
             pageIndex: page - 1,
-            pageSize: rowsPerPage
+            pageSize: itemsPerPage
         };
 
-        if (sortBy) {
-            roleListInput.sortBy = sortBy + (descending ? ' desc' : '');
+        if (sortBy.length > 0 && sortBy[0]) {
+            roleListInput.sortBy = sortBy + ((sortDesc.length > 0 && sortDesc[0]) ? ' desc' : '');
         }
 
         const query = '?' + this.queryString.stringify(roleListInput);

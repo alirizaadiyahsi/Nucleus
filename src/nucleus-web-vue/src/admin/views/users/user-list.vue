@@ -8,7 +8,7 @@
             </v-divider>
             <v-spacer></v-spacer>
             <v-text-field v-model="search"
-                          append-icon="search"
+                          append-icon="mdi-magnify"
                           :label="$t('Search')"
                           single-line
                           hide-details>
@@ -47,20 +47,17 @@
                                           v-model="createOrUpdateUserInput.user.passwordRepeat"
                                           :error-messages='passwordMatchError(createOrUpdateUserInput.user.password,createOrUpdateUserInput.user.passwordRepeat)'></v-text-field>
                             <v-list dense>
-                                <v-checkbox v-model="selectAll" :label="$t('SelectRoles')" @click="selectAllRoles"></v-checkbox>
-                                <v-list-tile v-for="item in allRoles" :key="item.id">
-                                    <v-list-tile-content>
-                                        <v-checkbox v-model="createOrUpdateUserInput.grantedRoleIds" :label="item.name" :value="item.id"></v-checkbox>
-                                    </v-list-tile-content>
-                                </v-list-tile>
+                                <v-list-item v-for="item in allRoles" :key="item.id">
+                                    <v-checkbox v-model="createOrUpdateUserInput.grantedRoleIds" :label="item.name" :value="item.id"></v-checkbox>
+                                </v-list-item>
                             </v-list>
                         </v-form>
                     </v-card-text>
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click="dialog = false">{{$t('Cancel')}}</v-btn>
-                        <v-btn color="blue darken-1" flat @click="save">{{$t('Save')}}</v-btn>
+                        <v-btn color="blue darken-1" text @click="dialog = false">{{$t('Cancel')}}</v-btn>
+                        <v-btn color="blue darken-1" text @click="save">{{$t('Save')}}</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -68,24 +65,22 @@
 
         <v-data-table :headers="headers"
                       :items="pagedListOfUserListDto.items"
-                      :pagination.sync="pagination"
-                      :total-items="pagedListOfUserListDto.totalCount"
+                      :options.sync="options"
+                      :server-items-length="pagedListOfUserListDto.totalCount"
                       :loading="loading"
                       class="elevation-1">
-            <template slot="items" slot-scope="props">
-                <td>{{ props.item.userName }}</td>
-                <td>{{ props.item.email }}</td>
-                <td class="justify-center layout px-0">
-                    <v-icon v-if="nucleus.auth.isGranted('Permissions_User_Update')" small
-                            class="mr-2"
-                            @click="editUser(props.item.id)">
-                        edit
-                    </v-icon>
-                    <v-icon v-if="nucleus.auth.isGranted('Permissions_User_Delete')" small
-                            @click="deleteUser(props.item.id)">
-                        delete
-                    </v-icon>
-                </td>
+            <template v-slot:item.action="{ item }">
+                <v-icon v-if="nucleus.auth.isGranted('Permissions_User_Update')"
+                        small
+                        class="mr-2"
+                        @click="editUser(item.id)">
+                    mdi-pencil
+                </v-icon>
+                <v-icon v-if="nucleus.auth.isGranted('Permissions_User_Delete')"
+                        small
+                        @click="deleteUser(item.id)">
+                    mdi-delete
+                </v-icon>
             </template>
             <template slot="no-data" v-if="!loading">
                 <v-alert :value="true" color="error" icon="warning">

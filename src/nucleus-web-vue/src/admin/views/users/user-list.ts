@@ -1,11 +1,12 @@
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
+import Guid from '@/shared/helpers/guid-helper';
 
 @Component
 export default class UserListComponent extends NucleusComponentBase {
     public refs = this.$refs as any;
     public loading = true;
-    public pagination = {};
+    public options = {};
     public search = '';
     public dialog = false;
     public formTitle = '';
@@ -18,7 +19,7 @@ export default class UserListComponent extends NucleusComponentBase {
         return [
             { text: this.$t('UserName'), value: 'userName' },
             { text: this.$t('Email'), value: 'email' },
-            { text: this.$t('Actions'), value: '', sortable: false }
+            { text: this.$t('Actions'), value: 'action', sortable: false }
         ];
     }
 
@@ -32,7 +33,7 @@ export default class UserListComponent extends NucleusComponentBase {
         items: []
     };
 
-    @Watch('pagination')
+    @Watch('options')
     public onPaginationChanged() {
         this.getUsers();
     }
@@ -51,7 +52,7 @@ export default class UserListComponent extends NucleusComponentBase {
         this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
         this.errors = [];
-        this.nucleusService.get<IGetUserForCreateOrUpdateOutput>('/api/users/id=' + id)
+        this.nucleusService.get<IGetUserForCreateOrUpdateOutput>('/api/users/' + (id ? id : Guid.empty))
             .then((response) => {
                 const result = response.content as IGetUserForCreateOrUpdateOutput;
                 this.allRoles = result.allRoles;
@@ -82,31 +83,45 @@ export default class UserListComponent extends NucleusComponentBase {
     public save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            this.nucleusService.post<void>('/api/users',
-                this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
-                .then((response) => {
-                    if (!response.isError) {
-                        this.swalToast(2000, 'success', this.$t('Successful').toString());
-                        this.dialog = false;
-                        this.getUsers();
-                    } else {
-                        this.errors = response.errors;
-                    }
-                });
+            if (this.createOrUpdateUserInput.user.id === Guid.empty) {
+                this.nucleusService.post<void>('/api/users',
+                        this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
+                    .then((response) => {
+                        if (!response.isError) {
+                            this.swalToast(2000, 'success', this.$t('Successful').toString());
+                            this.dialog = false;
+                            this.getUsers();
+                        } else {
+                            this.errors = response.errors;
+                        }
+                    });
+            } else {
+                this.nucleusService.put<void>('/api/users',
+                        this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
+                    .then((response) => {
+                        if (!response.isError) {
+                            this.swalToast(2000, 'success', this.$t('Successful').toString());
+                            this.dialog = false;
+                            this.getUsers();
+                        } else {
+                            this.errors = response.errors;
+                        }
+                    });
+            }
         }
     }
 
     public getUsers() {
         this.loading = true;
-        const { sortBy, descending, page, rowsPerPage }: any = this.pagination;
+        const { sortBy, sortDesc, page, itemsPerPage }: any = this.options;
         const userListInput: IPagedListInput = {
             filter: this.search,
             pageIndex: page - 1,
-            pageSize: rowsPerPage
+            pageSize: itemsPerPage
         };
 
-        if (sortBy) {
-            userListInput.sortBy = sortBy + (descending ? ' desc' : '');
+        if (sortBy.length > 0 && sortBy[0]) {
+            userListInput.sortBy = sortBy + ((sortDesc.length > 0 && sortDesc[0]) ? ' desc' : '');
         }
 
         const query = '?' + this.queryString.stringify(userListInput);
