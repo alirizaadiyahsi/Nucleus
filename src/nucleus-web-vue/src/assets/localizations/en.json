@@ -1,18 +1,4 @@
 {
-  "$vuetify": {
-    "dataIterator": {
-      "nextPage": "Next page",
-      "noResultsText": "No matching records found",
-      "pageText": "{0}-{1} of {2}",
-      "prevPage": "Previous page",
-      "rowsPerPageAll": "All",
-      "rowsPerPageText": "Items per page:"
-    },
-    "dataTable": {
-      "rowsPerPageText": "Rows per page:"
-    },
-    "noDataText": "No data available"
-  },
   "AccountCreationSuccessful": "Your account has been successfully created!",
   "Actions": "Actions",
   "Administration": "Administration",

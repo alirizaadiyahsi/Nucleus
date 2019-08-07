@@ -10,8 +10,8 @@ import LanguageStore from '@/stores/language-store';
 Vue.use(VueI18n);
 
 const locales = {
-    en: require('@/assets/localization/shared-locales/en.json'),
-    tr: require('@/assets/localization/shared-locales/tr.json')
+    en: require('@/assets/localizations/en.json'),
+    tr: require('@/assets/localizations/tr.json')
 };
 
 const i18n = new VueI18n({

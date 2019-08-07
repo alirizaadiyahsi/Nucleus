@@ -1,18 +1,4 @@
 ﻿{
-  "$vuetify": {
-    "dataIterator": {
-      "nextPage": "Sonraki sayfa",
-      "noResultsText": "Eşleşen kayıt bulunamadı",
-      "pageText": "{0}-{1} / {2}",
-      "prevPage": "Önceki sayfa",
-      "rowsPerPageAll": "Hepsi",
-      "rowsPerPageText": "Kayıt sayısı:"
-    },
-    "dataTable": {
-      "rowsPerPageText": "Satır sayısı:"
-    },
-    "noDataText": "Kayıt bulunamadı"
-  },
   "AccountCreationSuccessful": "Hesabınız başarılı ile oluşturuldu!",
   "Actions": "İşlemler",
   "Administration": "Yönetim",
