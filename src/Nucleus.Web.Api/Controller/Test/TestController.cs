@@ -8,7 +8,7 @@ namespace Nucleus.Web.Api.Controller.Test
         [HttpGet("[action]")]
         public ObjectResult Get(string userNameOrEmail)
         {
-            return Ok(new { asd = "Test success!" });
+            return Ok(new { TestMessage = "Test success!" });
         }
     }
 }
