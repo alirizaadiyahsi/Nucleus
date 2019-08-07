@@ -8,14 +8,14 @@ export default class AsideMenuComponent extends NucleusComponentBase {
 
     get mainMenuItems() {
         return [
-            { icon: 'home', text: this.$t('Home'), link: '/admin/home' }
+            { icon: 'mdi-home', text: this.$t('Home'), link: '/admin/home' }
         ];
     }
 
     get adminMenuItems() {
         return [
-            { icon: 'people', text: this.$t('Users'), link: '/admin/user-list' },
-            { icon: 'work', text: this.$t('Roles'), link: '/admin/role-list' }
+            { icon: 'mdi-account-multiple', text: this.$t('Users'), link: '/admin/user-list' },
+            { icon: 'mdi-briefcase-account', text: this.$t('Roles'), link: '/admin/role-list' }
         ];
     }
 

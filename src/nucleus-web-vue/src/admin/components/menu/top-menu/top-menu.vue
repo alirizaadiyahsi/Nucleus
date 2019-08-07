@@ -1,47 +1,52 @@
 ﻿<template>
-    <v-toolbar color="blue darken-3" dense fixed clipped-left app dark>
-        <v-toolbar-side-icon @click="drawerChanged"></v-toolbar-side-icon>
+    <v-app-bar color="blue darken-3" dense fixed clipped-left app dark>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>
             <span class="title">Nucleus Vue</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-menu>
-            <v-btn slot="activator" color="primary">
-                {{authStore.getTokenData().sub}}
-                <v-icon dark class="ml-3">arrow_drop_down</v-icon>
-            </v-btn>
+            <template v-slot:activator="{ on }">
+                <v-btn color="primary" v-on="on">
+                    <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
+                    {{selectedLanguage.languageName}}
+                    <v-icon dark class="ml-3">mdi-menu-down</v-icon>
+                </v-btn>
+            </template>
 
             <v-list>
-                <v-list-tile @click="changePasswordDialogChanged(true)">
-                    <v-icon>lock</v-icon>
-                    <v-list-tile-title>{{$t('ChangePassword')}}</v-list-tile-title>
-                </v-list-tile>
-            </v-list>
-        </v-menu>
-        <v-menu>
-            <v-btn slot="activator" color="primary">
-                <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2" />
-                {{selectedLanguage.languageName}}
-                <v-icon dark class="ml-3">arrow_drop_down</v-icon>
-            </v-btn>
-
-            <v-list>
-                <v-list-tile @click="changeLanguage('en', 'English')">
+                <v-list-item @click="changeLanguage('en', 'English')">
                     <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
-                    <v-list-tile-title>English</v-list-tile-title>
-                </v-list-tile>
-                <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
+                    <v-list-item-title>English</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="changeLanguage('tr', 'Türkçe')">
                     <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
-                    <v-list-tile-title>Türkçe</v-list-tile-title>
-                </v-list-tile>
+                    <v-list-item-title>Türkçe</v-list-item-title>
+                </v-list-item>
             </v-list>
         </v-menu>
+        <v-menu class="ml-3">
+            <template v-slot:activator="{ on }">
+                <v-btn color="primary" v-on="on">
+                    {{authStore.getTokenData().sub}}
+                    <v-icon dark class="ml-3">mdi-menu-down</v-icon>
+                </v-btn>
+            </template>
+
+            <v-list>
+                <v-list-item @click="changePasswordDialogChanged(true)">
+                    <v-icon>mdi-lock</v-icon>
+                    <v-list-item-title>{{$t('ChangePassword')}}</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
+
         <v-btn icon @click="logOut">
-            <v-icon>exit_to_app</v-icon>
+            <v-icon>mdi-logout-variant</v-icon>
         </v-btn>
 
         <change-password :logOut="logOut"></change-password>
-    </v-toolbar>
+    </v-app-bar>
 </template>
 
 <script src="./top-menu.ts"></script>
