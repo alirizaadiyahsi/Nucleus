@@ -26,6 +26,7 @@ export default class TopMenuComponent extends NucleusComponentBase {
     public changeLanguage(languageCode: string, languageName: string) {
         this.$i18n.locale = languageCode;
         this.selectedLanguage = { languageName, languageCode } as ILanguageDto;
+        this.$vuetify.lang.current = languageCode;
 
         LanguageStore.setLanguage({
             languageCode,
