@@ -4,16 +4,16 @@ import Guid from '@/shared/helpers/guid-helper';
 
 @Component
 export default class UserListComponent extends NucleusComponentBase {
-    public refs = this.$refs as any;
-    public loading = true;
-    public options = {};
-    public search = '';
-    public dialog = false;
-    public formTitle = '';
-    public errors: INameValueDto[] = [];
-    public allRoles: IRoleDto[] = [];
-    public isEdit = false;
-    public selectAll = false;
+    refs = this.$refs as any;
+    loading = true;
+    options = {};
+    search = '';
+    dialog = false;
+    formTitle = '';
+    errors: INameValueDto[] = [];
+    allRoles: IRoleDto[] = [];
+    isEdit = false;
+    selectAll = false;
 
     get headers() {
         return [
@@ -23,31 +23,31 @@ export default class UserListComponent extends NucleusComponentBase {
         ];
     }
 
-    public createOrUpdateUserInput = {
+    createOrUpdateUserInput = {
         grantedRoleIds: [],
         user: {} as IUserDto
     } as ICreateOrUpdateUserInput;
 
-    public pagedListOfUserListDto: IPagedList<IPagedListInput> = {
+    pagedListOfUserListDto: IPagedList<IPagedListInput> = {
         totalCount: 0,
         items: []
     };
 
     @Watch('options')
-    public onPaginationChanged() {
+    onPaginationChanged() {
         this.getUsers();
     }
 
     @Watch('search')
-    public onSearchChanged() {
+    onSearchChanged() {
         this.getUsers();
     }
 
-    public mounted() {
+    mounted() {
         this.getUsers();
     }
 
-    public editUser(id: string) {
+    editUser(id: string) {
         this.dialog = true;
         this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
@@ -63,7 +63,7 @@ export default class UserListComponent extends NucleusComponentBase {
             });
     }
 
-    public deleteUser(id: string) {
+    deleteUser(id: string) {
         this.swalConfirm(this.$t('AreYouSureToDelete').toString())
             .then((result) => {
                 if (result.value) {
@@ -80,7 +80,7 @@ export default class UserListComponent extends NucleusComponentBase {
             });
     }
 
-    public save() {
+    save() {
         if (this.refs.form.validate()) {
             this.errors = [];
             if (this.createOrUpdateUserInput.user.id === Guid.empty) {
@@ -111,7 +111,7 @@ export default class UserListComponent extends NucleusComponentBase {
         }
     }
 
-    public getUsers() {
+    getUsers() {
         this.loading = true;
         const { sortBy, sortDesc, page, itemsPerPage }: any = this.options;
         const userListInput: IPagedListInput = {
@@ -131,7 +131,7 @@ export default class UserListComponent extends NucleusComponentBase {
         });
     }
 
-    public selectAllRoles() {
+    selectAllRoles() {
         this.createOrUpdateUserInput.grantedRoleIds = [];
         if (this.selectAll) {
             this.createOrUpdateUserInput.grantedRoleIds = ((this.allRoles.map((roles) => roles.id)) as string[]);

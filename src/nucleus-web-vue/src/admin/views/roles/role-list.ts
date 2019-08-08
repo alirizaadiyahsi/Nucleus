@@ -4,15 +4,15 @@ import Guid from '@/shared/helpers/guid-helper';
 
 @Component
 export default class RoleListComponent extends NucleusComponentBase {
-    public refs = this.$refs as any;
-    public allPermissions: IPermissionDto[] = [];
-    public errors: INameValueDto[] = [];
-    public loading = true;
-    public dialog = false;
-    public formTitle = '';
-    public options = {};
-    public search = '';
-    public selectAll = false;
+    refs = this.$refs as any;
+    allPermissions: IPermissionDto[] = [];
+    errors: INameValueDto[] = [];
+    loading = true;
+    dialog = false;
+    formTitle = '';
+    options = {};
+    search = '';
+    selectAll = false;
 
     get headers() {
         return [
@@ -21,31 +21,31 @@ export default class RoleListComponent extends NucleusComponentBase {
         ];
     }
 
-    public createOrUpdateRoleInput = {
+    createOrUpdateRoleInput = {
         grantedPermissionIds: [],
         role: {} as IRoleDto
     } as ICreateOrUpdateRoleInput;
 
-    public pagedListOfRoleListDto: IPagedList<IRoleListOutput> = {
+    pagedListOfRoleListDto: IPagedList<IRoleListOutput> = {
         totalCount: 0,
         items: []
     };
 
     @Watch('options')
-    public onPaginationChanged() {
+    onPaginationChanged() {
         this.getRoles();
     }
 
     @Watch('search')
-    public onSearchChanged() {
+    onSearchChanged() {
         this.getRoles();
     }
 
-    public mounted() {
+    mounted() {
         this.getRoles();
     }
 
-    public editRole(id: string) {
+    editRole(id: string) {
         this.dialog = true;
         this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
@@ -60,7 +60,7 @@ export default class RoleListComponent extends NucleusComponentBase {
             });
     }
 
-    public deleteRole(id: string) {
+    deleteRole(id: string) {
         this.swalConfirm(this.$t('AreYouSureToDelete').toString())
             .then((result) => {
                 if (result.value) {
@@ -77,7 +77,7 @@ export default class RoleListComponent extends NucleusComponentBase {
             });
     }
 
-    public save() {
+    save() {
         if (this.refs.form.validate()) {
             this.errors = [];
             if (this.createOrUpdateRoleInput.role.id === Guid.empty) {
@@ -108,7 +108,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         }
     }
 
-    public getRoles() {
+    getRoles() {
         this.loading = true;
         const { sortBy, sortDesc, page, itemsPerPage }: any = this.options;
         const roleListInput: IPagedListInput = {
@@ -128,7 +128,7 @@ export default class RoleListComponent extends NucleusComponentBase {
         });
     }
 
-    public selectAllPermissions() {
+    selectAllPermissions() {
         this.createOrUpdateRoleInput.grantedPermissionIds = [];
         if (this.selectAll) {
             this.createOrUpdateRoleInput.grantedPermissionIds =

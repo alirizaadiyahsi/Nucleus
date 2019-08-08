@@ -3,7 +3,7 @@ import AppConsts from '@/shared/application/nucleus';
 import Nucleus from '@/shared/application/nucleus';
 
 export default class NucleusService {
-    private static request<T>(method: string, url: string, data: object | string = '', loadingEnabled = true):
+    private static request<T>(method: string, url: string, data: any | string = '', loadingEnabled = true):
         Promise<IRestResponseDto<T>> {
         let isBadRequest = false;
         let body = data === '' ? null : data;
@@ -56,19 +56,19 @@ export default class NucleusService {
             });
     }
 
-    public get<T>(url: string, loadingEnabled = true): Promise<IRestResponseDto<T>> {
+    get<T>(url: string, loadingEnabled = true): Promise<IRestResponseDto<T>> {
         return NucleusService.request<T>('GET', url, '', loadingEnabled);
     }
 
-    public delete(url: string): Promise<IRestResponseDto<void>> {
+    delete(url: string): Promise<IRestResponseDto<void>> {
         return NucleusService.request<void>('DELETE', url);
     }
 
-    public put<T>(url: string, data: object | string): Promise<IRestResponseDto<T>> {
+    put<T>(url: string, data: any | string): Promise<IRestResponseDto<T>> {
         return NucleusService.request<T>('PUT', url, data);
     }
 
-    public post<T>(url: string, data: object | string): Promise<IRestResponseDto<T>> {
+    post<T>(url: string, data: any | string): Promise<IRestResponseDto<T>> {
         return NucleusService.request<T>('POST', url, data);
     }
 }
