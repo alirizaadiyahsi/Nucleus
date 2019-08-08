@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/query-string": "^6.3.0",
+    "@types/node": "^12.7.1",
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-plugin-typescript": "^3.10.0",
