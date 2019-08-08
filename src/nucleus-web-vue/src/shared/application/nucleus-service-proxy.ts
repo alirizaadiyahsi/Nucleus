@@ -1,6 +1,7 @@
 ﻿import AuthStore from '@/stores/auth-store';
 import AppConsts from '@/shared/application/nucleus';
 import Nucleus from '@/shared/application/nucleus';
+import Guid from '@/shared/helpers/guid-helper';
 
 export default class NucleusService {
     private static request<T>(method: string, url: string, data: any | string = '', loadingEnabled = true):
@@ -69,6 +70,14 @@ export default class NucleusService {
     }
 
     post<T>(url: string, data: any | string): Promise<IRestResponseDto<T>> {
+        return NucleusService.request<T>('POST', url, data);
+    }
+
+    postOrPut<T>(url: string, data: any | string, id: string | undefined): Promise<IRestResponseDto<T>> {
+        if (id && id !== Guid.empty) {
+            return NucleusService.request<T>('PUT', url, data);
+        }
+
         return NucleusService.request<T>('POST', url, data);
     }
 }

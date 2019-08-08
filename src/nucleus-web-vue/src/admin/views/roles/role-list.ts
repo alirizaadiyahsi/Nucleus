@@ -80,31 +80,18 @@ export default class RoleListComponent extends NucleusComponentBase {
     save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            if (this.createOrUpdateRoleInput.role.id === Guid.empty) {
-                this.nucleusService.post<void>('/api/roles',
-                        this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
-                    .then((response) => {
-                        if (!response.isError) {
-                            this.swalToast(2000, 'success', this.$t('Successful').toString());
-                            this.dialog = false;
-                            this.getRoles();
-                        } else {
-                            this.errors = response.errors;
-                        }
-                    });
-            } else {
-                this.nucleusService.put<void>('/api/roles',
-                        this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput)
-                    .then((response) => {
-                        if (!response.isError) {
-                            this.swalToast(2000, 'success', this.$t('Successful').toString());
-                            this.dialog = false;
-                            this.getRoles();
-                        } else {
-                            this.errors = response.errors;
-                        }
-                    });
-            }
+            this.nucleusService.postOrPut<void>('/api/roles',
+                this.createOrUpdateRoleInput as ICreateOrUpdateRoleInput,
+                this.createOrUpdateRoleInput.role.id)
+                .then((response) => {
+                    if (!response.isError) {
+                        this.swalToast(2000, 'success', this.$t('Successful').toString());
+                        this.dialog = false;
+                        this.getRoles();
+                    } else {
+                        this.errors = response.errors;
+                    }
+                });
         }
     }
 

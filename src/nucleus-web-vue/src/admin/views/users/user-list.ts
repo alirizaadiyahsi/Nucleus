@@ -83,31 +83,18 @@ export default class UserListComponent extends NucleusComponentBase {
     save() {
         if (this.refs.form.validate()) {
             this.errors = [];
-            if (this.createOrUpdateUserInput.user.id === Guid.empty) {
-                this.nucleusService.post<void>('/api/users',
-                        this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
-                    .then((response) => {
-                        if (!response.isError) {
-                            this.swalToast(2000, 'success', this.$t('Successful').toString());
-                            this.dialog = false;
-                            this.getUsers();
-                        } else {
-                            this.errors = response.errors;
-                        }
-                    });
-            } else {
-                this.nucleusService.put<void>('/api/users',
-                        this.createOrUpdateUserInput as ICreateOrUpdateUserInput)
-                    .then((response) => {
-                        if (!response.isError) {
-                            this.swalToast(2000, 'success', this.$t('Successful').toString());
-                            this.dialog = false;
-                            this.getUsers();
-                        } else {
-                            this.errors = response.errors;
-                        }
-                    });
-            }
+            this.nucleusService.postOrPut<void>('/api/users',
+                this.createOrUpdateUserInput as ICreateOrUpdateUserInput,
+                this.createOrUpdateUserInput.user.id)
+                .then((response) => {
+                    if (!response.isError) {
+                        this.swalToast(2000, 'success', this.$t('Successful').toString());
+                        this.dialog = false;
+                        this.getUsers();
+                    } else {
+                        this.errors = response.errors;
+                    }
+                });
         }
     }
 
