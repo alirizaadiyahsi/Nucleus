@@ -27,10 +27,6 @@ Web API startup template with a Vue Client demo.
 
 <img src="_images/_register.png" alt="Vue Client Demo" class="img-thumbnail" />
 
-### Dashboard
-
-<img src="_images/_dashboard.png" alt="Vue Client Demo" class="img-thumbnail" />
-
 ### List Pages
 
 <img src="_images/_users.png" alt="Vue Client Demo" class="img-thumbnail" />
@@ -53,53 +49,57 @@ Web API startup template with a Vue Client demo.
 
 ## Adding New Language
 
-- Add json file to store language keys and values to `Nucleus\src\Nucleus.Web.Vue\src\assets\js\locales\tr.json`
+- Add json file to store language keys and values to `Nucleus\src\Nucleus.Web.Vue\src\assets\localizations\your_language.json`
 - Copy `en.json` content and translate the values to target language.
-- Add country flag to `Nucleus.Web.Vue\src\assets\images\icons\flags\tr.png`. Get images from http://www.iconarchive.com/show/flag-icons-by-gosquared.html
+- Add country flag to `Nucleus.Web.Vue\src\assets\images\icons\flags\your_country.png`. Get images from http://www.iconarchive.com/show/flag-icons-by-gosquared.html
 - Add language to language selection menu in `Nucleus\src\Nucleus.Web.Vue\src\account\account-layout.vue` and `Nucleus\src\Nucleus.Web.Vue\src\admin\components\menu\top-menu\top-menu.vue` like following
 
 **account-layout.vue**
 
 ````html
-<v-layout align-center justify-center row fill-height>
-    <v-menu class="mt-3">
-        <v-btn slot="activator" color="primary" dark outline round>
+<v-menu>
+    <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark outlined rounded v-on="on">
             <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
             {{selectedLanguage.languageName}}
-            <v-icon dark class="ml-3">arrow_drop_down</v-icon>
+        <v-icon dark class="ml-3">mdi-menu-down</v-icon>
         </v-btn>
-        <v-list>
-            <v-list-tile @click="changeLanguage('en', 'English')">
-                <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
-                <v-list-tile-title>English</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
-                <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
-                <v-list-tile-title>Türkçe</v-list-tile-title>
-            </v-list-tile>
-        </v-list>
-    </v-menu>
-</v-layout>
+    </template>
+
+    <v-list>
+        <v-list-item @click="changeLanguage('en', 'English')">
+            <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
+            <v-list-item-title>English</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="changeLanguage('tr', 'Türkçe')">
+            <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
+            <v-list-item-title>Türkçe</v-list-item-title>
+        </v-list-item>
+    </v-list>
+</v-menu>
 ````
 
 **top-menu.vue**
 
 ````html
 <v-menu>
-    <v-btn slot="activator" color="primary">
-        <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2" />
-        {{selectedLanguage.languageName}}
-        <v-icon dark class="ml-3">arrow_drop_down</v-icon>
-    </v-btn>
+    <template v-slot:activator="{ on }">
+        <v-btn color="primary" v-on="on">
+            <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
+            {{selectedLanguage.languageName}}
+            <v-icon dark class="ml-3">mdi-menu-down</v-icon>
+        </v-btn>
+    </template>
+
     <v-list>
-        <v-list-tile @click="changeLanguage('en', 'English')">
+        <v-list-item @click="changeLanguage('en', 'English')">
             <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
-            <v-list-tile-title>English</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
+            <v-list-item-title>English</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="changeLanguage('tr', 'Türkçe')">
             <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
-            <v-list-tile-title>Türkçe</v-list-tile-title>
-        </v-list-tile>
+            <v-list-item-title>Türkçe</v-list-item-title>
+        </v-list-item>
     </v-list>
 </v-menu>
 ````
