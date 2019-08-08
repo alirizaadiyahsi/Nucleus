@@ -20,8 +20,9 @@
                               :rules="[requiredError]"></v-text-field>
             </v-form>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="pa-5">
             <v-spacer></v-spacer>
+            <v-btn to="/account/forgot-password">{{$t('ForgotPassword')}}</v-btn>
             <v-btn to="/account/register">{{$t('Register')}}</v-btn>
             <v-btn color="primary" @click="onSubmit">{{$t('Login')}}</v-btn>
         </v-card-actions>

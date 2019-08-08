@@ -2,20 +2,20 @@
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 
 @Component
-export default class RegisterComponent extends NucleusComponentBase {
+export default class ForgotPasswordComponent extends NucleusComponentBase {
     refs = this.$refs as any;
-    registerInput = {} as IRegisterInput;
+    forgotPasswordInput = {} as IForgotPasswordInput;
     errors: INameValueDto[] = [];
+    isEmailSent = false;
     resultMessage: string | undefined;
-    registerComplete = false;
 
     onSubmit() {
         if (this.refs.form.validate()) {
-            this.nucleusService.post<IRegisterOutput>('/api/register', this.registerInput)
+            this.nucleusService.post<IForgotPasswordOutput>('/api/forgotPassword', this.forgotPasswordInput)
                 .then((response) => {
                     if (!response.isError) {
-                        this.resultMessage = this.$t('AccountCreationSuccessful').toString();
-                        this.registerComplete = true;
+                        this.resultMessage = this.$t('EMailSentSuccessfully').toString();
+                        this.isEmailSent = true;
                     } else {
                         this.errors = response.errors;
                     }
