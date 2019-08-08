@@ -5,7 +5,7 @@ const nucleus = {
     baseApiUrl: 'https://localhost:44313',
     baseClientUrl: 'http://localhost:8080',
     isLoading: false,
-    appVersion: '0.4.0',
+    appVersion: '1.0.0',
     auth: {
         grantedPermissions: [] as IPermissionDto[],
         isGranted(permissionName: string) {
