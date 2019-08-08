@@ -118,7 +118,6 @@ Web API startup template with a Vue Client demo.
 - [ASP.NET Core Test Host](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost)
 - [Authorization & Authentication](https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-2.1)
 - [Exception Handling & Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-2.1)
-- [Microsoft.CodeCoverage](https://docs.microsoft.com/en-us/visualstudio/test/using-code-coverage-to-determine-how-much-code-is-being-tested?view=vs-2017)
 - [Vue.js](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/en/)
