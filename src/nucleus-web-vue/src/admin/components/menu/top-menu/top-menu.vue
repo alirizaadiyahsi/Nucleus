@@ -1,6 +1,6 @@
 ﻿<template>
     <v-app-bar color="blue darken-3" dense fixed clipped-left app dark>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="drawerChanged"></v-app-bar-nav-icon>
         <v-toolbar-title>
             <span class="title">Nucleus Vue</span>
         </v-toolbar-title>

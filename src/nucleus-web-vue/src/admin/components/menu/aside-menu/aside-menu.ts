@@ -3,8 +3,8 @@ import { Component } from 'vue-property-decorator';
 
 @Component
 export default class AsideMenuComponent extends NucleusComponentBase {
-    public drawer = true;
-    public isAdmin = false;
+    drawer = true;
+    isAdmin = false;
 
     get mainMenuItems() {
         return [
@@ -18,8 +18,8 @@ export default class AsideMenuComponent extends NucleusComponentBase {
             { icon: 'mdi-briefcase-account', text: this.$t('Roles'), link: '/admin/role-list' }
         ];
     }
-
-    public mounted() {
+    
+    mounted() {
         this.$root.$on('drawerChanged',
             () => {
                 this.drawer = !this.drawer;
