@@ -15,6 +15,8 @@ using Nucleus.Core.Permissions;
 using Nucleus.Core.Users;
 using Nucleus.Web.Core.Authentication;
 using Nucleus.Web.Core.Controllers;
+using Serilog;
+using Serilog.Core;
 
 namespace Nucleus.Web.Api.Controller.Account
 {
@@ -22,7 +24,7 @@ namespace Nucleus.Web.Api.Controller.Account
     {
         private readonly UserManager<User> _userManager;
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
-        
+
         public AccountController(
             UserManager<User> userManager,
             IOptions<JwtTokenConfiguration> jwtTokenConfiguration)
@@ -99,7 +101,47 @@ namespace Nucleus.Web.Api.Controller.Account
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var result = await _userManager.ChangePasswordAsync(user, input.CurrentPassword, input.NewPassword);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList());
+            }
 
+            return Ok();
+        }
+
+        [HttpPost("/api/[action]")]
+        public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordInput input)
+        {
+            var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
+            if (user == null)
+            {
+                return BadRequest(new List<NameValueDto>
+                {
+                    new NameValueDto("UserNotFound", "User is not found!")
+                });
+            }
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = "account/reset-password?token=" + resetToken;
+            Log.Information(callbackUrl);
+            // TODO: send token via email
+
+            return Ok();
+        }
+
+        [HttpPost("/api/[action]")]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordInput input)
+        {
+            var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
+            if (user == null)
+            {
+                return BadRequest(new List<NameValueDto>
+                {
+                    new NameValueDto("UserNotFound", "User is not found!")
+                });
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, input.Token, input.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors.Select(e => new NameValueDto(e.Code, e.Description)).ToList());
@@ -115,8 +157,7 @@ namespace Nucleus.Web.Api.Controller.Account
                 return null;
             }
 
-            var userToVerify = await _userManager.FindByNameAsync(userNameOrEmail) ??
-                               await _userManager.FindByEmailAsync(userNameOrEmail);
+            var userToVerify = await FindUserByUserNameOrEmail(userNameOrEmail);
 
             if (userToVerify == null)
             {
@@ -133,6 +174,12 @@ namespace Nucleus.Web.Api.Controller.Account
             }
 
             return null;
+        }
+
+        private async Task<User> FindUserByUserNameOrEmail(string userNameOrEmail)
+        {
+            return await _userManager.FindByNameAsync(userNameOrEmail) ??
+                   await _userManager.FindByEmailAsync(userNameOrEmail);
         }
     }
 }

@@ -16,7 +16,8 @@ const router = new VueRouter({
             children: [
                 { path: 'login', component: require('@/account/views/login/login.vue').default },
                 { path: 'register', component: require('@/account/views/register/register.vue').default },
-                { path: 'forgot-password', component: require('@/account/views/manage/forgot-password.vue').default }
+                { path: 'forgot-password', component: require('@/account/views/manage/forgot-password.vue').default },
+                { path: 'reset-password', component: require('@/account/views/manage/reset-password.vue').default }
             ]
         },
         {
