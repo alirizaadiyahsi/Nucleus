@@ -19,7 +19,7 @@ export default class ChangePasswordComponent extends NucleusComponentBase {
 
     public save() {
         if (this.refs.form.validate()) {
-            this.nucleusService.post<ILoginOutput>('/api/changePassword', this.changePasswordInput)
+            this.nucleusService.post<IChangePasswordOutput>('/api/changePassword', this.changePasswordInput)
                 .then((response) => {
                     if (!response.isError) {
                         this.dialog = false;
