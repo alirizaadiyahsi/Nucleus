@@ -23,11 +23,12 @@ namespace Nucleus.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureDbContext(_configuration);
-            services.ConfigureAuthentication(_configuration);
+            services.ConfigureAuthentication();
             services.ConfigureJwtTokenAuth(_configuration);
             services.ConfigureCors(_configuration);
             services.ConfigureDependencyInjection();
             services.ConfigureNucleusApplication();
+            services.ConfigureSmtp(_configuration);
 
             services.AddControllers(setup =>
             {

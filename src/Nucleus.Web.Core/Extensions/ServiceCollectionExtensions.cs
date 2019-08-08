@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -34,7 +36,7 @@ namespace Nucleus.Web.Core.Extensions
             });
         }
 
-        public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureAuthentication(this IServiceCollection services)
         {
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<NucleusDbContext>()
@@ -103,6 +105,17 @@ namespace Nucleus.Web.Core.Extensions
                     ValidAudience = _jwtTokenConfiguration.Audience,
                     IssuerSigningKey = _signingKey
                 };
+            });
+        }
+
+        public static void ConfigureSmtp(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped(serviceProvider => new SmtpClient
+            {
+                Host = configuration["Email:Smtp:Host"],
+                Port = int.Parse(configuration["Email:Smtp:Port"]),
+                Credentials = new NetworkCredential(configuration["Email:Smtp:Username"], configuration["Email:Smtp:Password"]),
+                EnableSsl = bool.Parse(configuration["Email:Smtp:EnableSsl"])
             });
         }
     }

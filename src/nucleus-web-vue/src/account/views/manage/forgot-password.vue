@@ -10,7 +10,7 @@
                         {{$t(error.name)}}
                     </v-alert>
                 </div>
-                <v-form ref="form" @keyup.native.enter="onSubmit">
+                <v-form ref="form" @submit.prevent="onSubmit">
                     <v-text-field prepend-icon="mdi-account" name="userNameOrEmail" type="text"
                                   :label="$t('UserNameOrEmailAddress')"
                                   v-model="forgotPasswordInput.userNameOrEmail"

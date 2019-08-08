@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
 using Nucleus.Application.Dto.Account;
@@ -15,8 +17,6 @@ using Nucleus.Core.Permissions;
 using Nucleus.Core.Users;
 using Nucleus.Web.Core.Authentication;
 using Nucleus.Web.Core.Controllers;
-using Serilog;
-using Serilog.Core;
 
 namespace Nucleus.Web.Api.Controller.Account
 {
@@ -24,12 +24,18 @@ namespace Nucleus.Web.Api.Controller.Account
     {
         private readonly UserManager<User> _userManager;
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
+        private readonly IConfiguration _configuration;
+        private readonly SmtpClient _smtpClient;
 
         public AccountController(
             UserManager<User> userManager,
-            IOptions<JwtTokenConfiguration> jwtTokenConfiguration)
+            IOptions<JwtTokenConfiguration> jwtTokenConfiguration,
+            IConfiguration configuration, 
+            SmtpClient smtpClient)
         {
             _userManager = userManager;
+            _configuration = configuration;
+            _smtpClient = smtpClient;
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
         }
 
@@ -122,9 +128,15 @@ namespace Nucleus.Web.Api.Controller.Account
             }
 
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var callbackUrl = "account/reset-password?token=" + resetToken;
-            Log.Information(callbackUrl);
-            // TODO: send token via email
+            var callbackUrl = _configuration["App:ClientUrl"] + "/account/reset-password?token=" + resetToken;
+            var message = new MailMessage(
+                from: _configuration["Email:Smtp:Username"],
+                to: "alirizaadiyahsi@gmail.com",
+                subject: "Reset your password",
+                body: $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>"
+            );
+            message.IsBodyHtml = true;
+            await _smtpClient.SendMailAsync(message);  
 
             return Ok();
         }
