@@ -7,9 +7,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Nucleus.Application.Account.Dto;
+using Nucleus.Application.Dto.Account;
 using Nucleus.Application.Permissions.Dto;
-using Nucleus.Application.Roles.Dto;
 using Nucleus.Application.Users.Dto;
 using Nucleus.Core.Roles;
 using Nucleus.Core.Users;
@@ -34,7 +33,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Not_Access_Authorized_Controller()
         {
-            var responseUsers = await TestServer.CreateClient().GetAsync("/api/user/getUsers");
+            var responseUsers = await TestServer.CreateClient().GetAsync("/api/users");
             Assert.Equal(HttpStatusCode.Unauthorized, responseUsers.StatusCode);
         }
 
@@ -63,7 +62,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Access_Authorized_Controller()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUsers");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/users");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
@@ -82,7 +81,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 Password = "aA!121212"
             };
 
-            var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
+            var responseRegister = await TestServer.CreateClient().PostAsync("/api/register",
                 registerInput.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.OK, responseRegister.StatusCode);
@@ -98,7 +97,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 Password = "aA!121212"
             };
 
-            var responseRegister = await TestServer.CreateClient().PostAsync("/api/account/register",
+            var responseRegister = await TestServer.CreateClient().PostAsync("/api/register",
                 registerInput.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.BadRequest, responseRegister.StatusCode);
@@ -114,7 +113,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 Password = "aA!121212"
             };
 
-            var response = await TestServer.CreateClient().PostAsync("/api/account/register",
+            var response = await TestServer.CreateClient().PostAsync("/api/register",
                 input.ToStringContent(Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -132,7 +131,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 PasswordRepeat = "aA!121212"
             };
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/account/changePassword");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/changePassword");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var response = await TestServer.CreateClient().SendAsync(requestMessage);
@@ -142,7 +141,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Granted_Permissions()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/account/getGrantedPermissionsAsync?userNameOrEmail=" + DefaultUsers.TestAdmin.UserName);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/permissions?userNameOrEmail=" + DefaultUsers.TestAdmin.UserName);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var response = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -170,6 +169,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 RoleId = DefaultRoles.Admin.Id
             });
             await _dbContext.SaveChangesAsync();
+
             return testUser;
         }
     }

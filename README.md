@@ -27,6 +27,10 @@ Web API startup template with a Vue Client demo.
 
 <img src="_images/_register.png" alt="Vue Client Demo" class="img-thumbnail" />
 
+### Dashboard
+
+<img src="_images/_dashboard.png" alt="Vue Client Demo" class="img-thumbnail" />
+
 ### List Pages
 
 <img src="_images/_users.png" alt="Vue Client Demo" class="img-thumbnail" />
@@ -119,3 +123,7 @@ Web API startup template with a Vue Client demo.
 - [Vue Router](https://router.vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/en/)
 - [Vue i18n](https://kazupon.github.io/vue-i18n/)
+
+## Lincense
+
+[MIT License](https://github.com/alirizaadiyahsi/Nucleus/blob/dev/LICENSE)

@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Nucleus.Application;
 using Nucleus.Web.Core.ActionFilters;
 using Nucleus.Web.Core.Extensions;
-using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Nucleus.Web.Api
 {
@@ -22,23 +23,34 @@ namespace Nucleus.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureDbContext(_configuration);
-            services.ConfigureAuthentication(_configuration);
+            services.ConfigureAuthentication();
+            services.ConfigureJwtTokenAuth(_configuration);
             services.ConfigureCors(_configuration);
             services.ConfigureDependencyInjection();
             services.ConfigureNucleusApplication();
+            services.ConfigureSmtp(_configuration);
 
-            services.AddMvc(setup =>
+            services.AddControllers(setup =>
             {
                 setup.Filters.AddService<UnitOfWorkActionFilter>();
-            });
+            }).AddNewtonsoftJson();
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Nucleus API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Nucleus API", Version = "v1" });
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+ 
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -56,9 +68,14 @@ namespace Nucleus.Web.Api
             });
 
             app.UseCors(_configuration["App:CorsOriginPolicyName"]);
-            app.UseAuthentication();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

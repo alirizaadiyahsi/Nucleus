@@ -32,7 +32,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Roles()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoles");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/roles");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
@@ -44,7 +44,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Role_For_Create()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + Guid.Empty);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/roles/" + Guid.Empty);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
@@ -56,7 +56,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Role_For_Update()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/role/getRoleForCreateOrUpdate?id=" + DefaultRoles.Member.Id);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/roles/" + DefaultRoles.Member.Id);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetRoles = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetRoles.StatusCode);
@@ -77,7 +77,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createOrUpdateRole");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/roles");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
@@ -102,7 +102,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 GrantedPermissionIds = new List<Guid> { DefaultPermissions.MemberAccess.Id }
             };
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/role/createOrUpdateRole");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Put, "/api/roles");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
@@ -117,7 +117,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Delete_Role()
         {
             var testRole = await CreateAndGetTestRoleAsync();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/role/deleteRole?id=" + testRole.Id);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/roles?id=" + testRole.Id);
 
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = new { id = testRole.Id }.ToStringContent(Encoding.UTF8, "application/json");

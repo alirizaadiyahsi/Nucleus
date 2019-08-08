@@ -1,8 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Nucleus.Application.Permissions;
-using Nucleus.Application.Roles;
-using Nucleus.Application.Users;
+using Nucleus.Utilities.Extensions.Collections;
 
 namespace Nucleus.Application
 {
@@ -13,10 +12,9 @@ namespace Nucleus.Application
             // https://github.com/AutoMapper/AutoMapper.Extensions.Microsoft.DependencyInjection/issues/28#issuecomment-339772823
             services.AddAutoMapper(typeof(ApplicationServiceCollectionExtensions));
 
-            ////todo: add conventional registrar
-            services.AddTransient<IUserAppService, UserAppService>();
-            services.AddTransient<IPermissionAppService, PermissionAppService>();
-            services.AddTransient<IRoleAppService, RoleAppService>();
+            services.RegisterAssemblyPublicNonGenericClasses(Assembly.GetExecutingAssembly())
+                .Where(c => c.Name.EndsWith("AppService"))
+                .AsPublicImplementedInterfaces();
 
             return services;
         }

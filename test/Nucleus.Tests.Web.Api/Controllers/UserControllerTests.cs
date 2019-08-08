@@ -32,7 +32,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_Users()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUsers");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/users");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
@@ -44,7 +44,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_User_For_Create()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUserForCreateOrUpdate?id=" + Guid.Empty);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/users/" + Guid.Empty);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
@@ -56,7 +56,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
         [Fact]
         public async Task Should_Get_User_For_Update()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/user/getUserForCreateOrUpdate?id=" + DefaultUsers.Member.Id);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/users/" + DefaultUsers.Member.Id);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseGetUsers = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseGetUsers.StatusCode);
@@ -79,7 +79,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
             
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/user/createOrUpdateUser");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/users");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
@@ -105,7 +105,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
             
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/user/createOrUpdateUser");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Put, "/api/users");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
@@ -120,10 +120,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
         public async Task Should_Delete_User()
         {
             var testUser = await CreateAndGetTestUserAsync();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/user/deleteUser?id=" + testUser.Id);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, "/api/users?id=" + testUser.Id);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, responseAddUser.StatusCode);
         }
 
         private async Task<User> CreateAndGetTestUserAsync()
