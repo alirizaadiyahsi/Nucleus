@@ -19,11 +19,16 @@
                                   :label="$t('Password')"
                                   v-model="resetPasswordInput.password"
                                   :rules="[requiredError]"></v-text-field>
+                    <v-text-field prepend-icon="mdi-repeat" name="passwordRepeat" type="password" :label="$t('PasswordRepeat')"
+                                  v-model="resetPasswordInput.passwordRepeat"
+                                  :rules="[requiredError]"
+                                  :error-messages="passwordMatchError(resetPasswordInput.password,resetPasswordInput.passwordRepeat)"></v-text-field>
+
                 </v-form>
             </v-card-text>
             <v-card-actions class="pa-5">
                 <v-spacer></v-spacer>
-                <v-btn to="/account/login">{{$t('Login')}}</v-btn>
+                <v-btn color="primary" text to="/account/login">{{$t('Login')}}</v-btn>
                 <v-btn color="primary" @click="onSubmit">{{$t('ResetPassword')}}</v-btn>
             </v-card-actions>
         </v-card>
@@ -40,7 +45,7 @@
             </v-card-text>
             <v-card-actions class="pa-5">
                 <v-spacer></v-spacer>
-                <v-btn to="/account/login">{{$t('Login')}}</v-btn>
+                <v-btn color="primary" text to="/account/login">{{$t('Login')}}</v-btn>
             </v-card-actions>
         </v-card>
     </div>

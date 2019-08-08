@@ -19,7 +19,7 @@
             </v-card-text>
             <v-card-actions class="pa-5">
                 <v-spacer></v-spacer>
-                <v-btn to="/account/login">{{$t('Login')}}</v-btn>
+                <v-btn color="primary" text to="/account/login">{{$t('Login')}}</v-btn>
                 <v-btn color="primary" @click="onSubmit">{{$t('SendEmail')}}</v-btn>
             </v-card-actions>
         </v-card>
@@ -36,7 +36,7 @@
             </v-card-text>
             <v-card-actions class="pa-5">
                 <v-spacer></v-spacer>
-                <v-btn to="/account/login">{{$t('Login')}}</v-btn>
+                <v-btn color="primary" text to="/account/login">{{$t('Login')}}</v-btn>
             </v-card-actions>
         </v-card>
     </div>

@@ -11,6 +11,7 @@ export default class ResetPasswordComponent extends NucleusComponentBase {
 
     onSubmit() {
         if (this.refs.form.validate()) {
+            this.resetPasswordInput.token = this.$route.query.token.toString();
             this.nucleusService.post<IResetPasswordOutput>('/api/resetPassword', this.resetPasswordInput)
                 .then((response) => {
                     if (!response.isError) {

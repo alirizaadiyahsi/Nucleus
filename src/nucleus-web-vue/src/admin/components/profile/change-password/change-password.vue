@@ -12,20 +12,20 @@
                     </v-alert>
                 </div>
                 <v-form ref="form">
-                    <v-text-field name="currentPassword" type="password" :label="$t('CurrentPassword')" 
-                                   v-model="changePasswordInput.currentPassword"
+                    <v-text-field name="currentPassword" type="password" :label="$t('CurrentPassword')"
+                                  v-model="changePasswordInput.currentPassword"
                                   :rules="[requiredError]"></v-text-field>
-                    <v-text-field name="newPassword" type="password" :label="$t('NewPassword')" 
-                                   v-model="changePasswordInput.newPassword"
+                    <v-text-field name="newPassword" type="password" :label="$t('NewPassword')"
+                                  v-model="changePasswordInput.newPassword"
                                   :rules="[requiredError]"></v-text-field>
-                    <v-text-field name="passwordRepeat" type="password" :label="$t('PasswordRepeat')" 
+                    <v-text-field name="passwordRepeat" type="password" :label="$t('PasswordRepeat')"
                                   v-model="changePasswordInput.passwordRepeat"
-                                  :rules="[requiredError]" 
+                                  :rules="[requiredError]"
                                   :error-messages="passwordMatchError(changePasswordInput.newPassword,changePasswordInput.passwordRepeat)"></v-text-field>
                 </v-form>
             </v-card-text>
 
-            <v-card-actions>
+            <v-card-actions class="pa-5">
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialog = false">{{$t('Cancel')}}</v-btn>
                 <v-btn color="blue darken-1" text @click="save">{{$t('Save')}}</v-btn>
