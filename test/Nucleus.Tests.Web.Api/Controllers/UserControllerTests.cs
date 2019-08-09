@@ -83,7 +83,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
+            Assert.Equal(HttpStatusCode.Created, responseAddUser.StatusCode);
 
             var insertedUser = await _dbContext.Users.FirstAsync(u => u.UserName == input.User.UserName);
             Assert.NotNull(insertedUser);

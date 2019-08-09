@@ -121,7 +121,7 @@ namespace Nucleus.Web.Api.Controller.Account
             var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
             if (user == null)
             {
-                return BadRequest(new List<NameValueDto>
+                return NotFound(new List<NameValueDto>
                 {
                     new NameValueDto("UserNotFound", "User is not found!")
                 });
@@ -147,7 +147,7 @@ namespace Nucleus.Web.Api.Controller.Account
             var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
             if (user == null)
             {
-                return BadRequest(new List<NameValueDto>
+                return NotFound(new List<NameValueDto>
                 {
                     new NameValueDto("UserNotFound", "User is not found!")
                 });

@@ -81,7 +81,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
+            Assert.Equal(HttpStatusCode.Created, responseAddRole.StatusCode);
 
             var insertedRole = await _dbContext.Roles.FirstAsync(r => r.Name == input.Role.Name);
             Assert.NotNull(insertedRole);
@@ -122,7 +122,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             requestMessage.Content = new { id = testRole.Id }.ToStringContent(Encoding.UTF8, "application/json");
             var responseAddRole = await TestServer.CreateClient().SendAsync(requestMessage);
-            Assert.Equal(HttpStatusCode.OK, responseAddRole.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, responseAddRole.StatusCode);
         }
 
         private async Task<Role> CreateAndGetTestRoleAsync()

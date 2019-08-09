@@ -16,7 +16,9 @@ const nucleus = {
         fillProps() {
             const nucleusService = new NucleusService();
             nucleusService.get('/api/permissions?userNameOrEmail=' + AuthStore.getTokenData().sub).then((response) => {
-                this.grantedPermissions = response.content;
+                if (!response.isError) {
+                    this.grantedPermissions = response.content;
+                }
             });
         }
     }
