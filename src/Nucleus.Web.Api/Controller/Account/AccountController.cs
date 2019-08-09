@@ -30,7 +30,7 @@ namespace Nucleus.Web.Api.Controller.Account
         public AccountController(
             UserManager<User> userManager,
             IOptions<JwtTokenConfiguration> jwtTokenConfiguration,
-            IConfiguration configuration, 
+            IConfiguration configuration,
             SmtpClient smtpClient)
         {
             _userManager = userManager;
@@ -136,7 +136,7 @@ namespace Nucleus.Web.Api.Controller.Account
                 body: $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>"
             );
             message.IsBodyHtml = true;
-            await _smtpClient.SendMailAsync(message);  
+            await _smtpClient.SendMailAsync(message);
 
             return Ok();
         }
@@ -181,7 +181,8 @@ namespace Nucleus.Web.Api.Controller.Account
                 return new ClaimsIdentity(new GenericIdentity(userNameOrEmail, "Token"), new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, userNameOrEmail),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, userToVerify.Id.ToString())
                 });
             }
 
