@@ -27,7 +27,7 @@ namespace Nucleus.Web.Api.Controller.Account
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
         private readonly IConfiguration _configuration;
         private readonly SmtpClient _smtpClient;
-        ILogger<AccountController> _logger;
+        readonly ILogger<AccountController> _logger;
 
 
         public AccountController(
@@ -144,12 +144,12 @@ namespace Nucleus.Web.Api.Controller.Account
 #if !DEBUG
             await _smtpClient.SendMailAsync(message);
 #endif
-            _logger.LogInformation(Environment.NewLine + Environment.NewLine + 
-                                   "******************* Reset Password Link *******************" + 
-                                   Environment.NewLine + Environment.NewLine + 
-                                   callbackUrl + 
-                                   Environment.NewLine + Environment.NewLine + 
-                                   "***********************************************************" + 
+            _logger.LogInformation(Environment.NewLine + Environment.NewLine +
+                                   "******************* Reset Password Link *******************" +
+                                   Environment.NewLine + Environment.NewLine +
+                                   callbackUrl +
+                                   Environment.NewLine + Environment.NewLine +
+                                   "***********************************************************" +
                                    Environment.NewLine);
             return Ok(new ForgotPasswordOutput { ResetToken = resetToken });
         }
