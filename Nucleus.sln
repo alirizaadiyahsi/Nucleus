@@ -25,27 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Web.Api", "test\Nucleus.Tests.Web.Api\Nucleus.Tests.Web.Api.csproj", "{02306886-8DC2-4E72-BF50-CA2EF5626794}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "nucleus-web-vue", "src\nucleus-web-vue\", "{35E30CCF-CC26-4E84-AA31-325042BCBF21}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_49375"
-		Debug.AspNetCompiler.PhysicalPath = "src\nucleus-web-vue\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49375\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_49375"
-		Release.AspNetCompiler.PhysicalPath = "src\nucleus-web-vue\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49375\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "49375"
-		SlnRelativePath = "src\nucleus-web-vue\"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Web.Vue", "src\Nucleus.Web.Vue\Nucleus.Web.Vue.csproj", "{13C2090F-16B5-49DB-86B8-E320FD977FD2}"
 EndProject
 Global
@@ -90,10 +69,6 @@ Global
 		{02306886-8DC2-4E72-BF50-CA2EF5626794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02306886-8DC2-4E72-BF50-CA2EF5626794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02306886-8DC2-4E72-BF50-CA2EF5626794}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35E30CCF-CC26-4E84-AA31-325042BCBF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35E30CCF-CC26-4E84-AA31-325042BCBF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35E30CCF-CC26-4E84-AA31-325042BCBF21}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{35E30CCF-CC26-4E84-AA31-325042BCBF21}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{13C2090F-16B5-49DB-86B8-E320FD977FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13C2090F-16B5-49DB-86B8-E320FD977FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13C2090F-16B5-49DB-86B8-E320FD977FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -112,7 +87,6 @@ Global
 		{114AFE01-0628-451E-AD9A-5FFEA231022B} = {B7A0D987-5893-493C-A60A-8F1818D931E0}
 		{B842DDCA-1842-49FF-BE41-658AF772ED18} = {B7A0D987-5893-493C-A60A-8F1818D931E0}
 		{02306886-8DC2-4E72-BF50-CA2EF5626794} = {B7A0D987-5893-493C-A60A-8F1818D931E0}
-		{35E30CCF-CC26-4E84-AA31-325042BCBF21} = {C243FF0E-FA80-4C4C-8B5E-AD681D54E07A}
 		{13C2090F-16B5-49DB-86B8-E320FD977FD2} = {C243FF0E-FA80-4C4C-8B5E-AD681D54E07A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
