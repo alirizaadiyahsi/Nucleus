@@ -116,7 +116,7 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpPost("/api/[action]")]
-        public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordInput input)
+        public async Task<ActionResult<ForgotPasswordOutput>> ForgotPassword([FromBody] ForgotPasswordInput input)
         {
             var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
             if (user == null)
@@ -136,9 +136,11 @@ namespace Nucleus.Web.Api.Controller.Account
                 body: $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>"
             );
             message.IsBodyHtml = true;
+#if !DEBUG
             await _smtpClient.SendMailAsync(message);
-
-            return Ok();
+#endif
+            // TODO: log message
+            return Ok(new ForgotPasswordOutput { ResetToken = resetToken });
         }
 
         [HttpPost("/api/[action]")]
