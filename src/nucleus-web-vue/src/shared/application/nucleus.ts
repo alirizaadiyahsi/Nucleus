@@ -18,9 +18,8 @@ const nucleus = {
             const nucleusService = new NucleusService();
             nucleusService.get<IPermissionDto[]>(
                 '/api/permissions?userNameOrEmail=' + AuthStore.getTokenData().sub
-            )
-                .then((response) => {
-                    this.grantedPermissions = response.content as IPermissionDto[];
+            ).then((response) => {
+                this.grantedPermissions = response.content as IPermissionDto[];
                 });
         }
     }
