@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
 using Nucleus.Application.Dto.Account;
@@ -26,16 +27,20 @@ namespace Nucleus.Web.Api.Controller.Account
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
         private readonly IConfiguration _configuration;
         private readonly SmtpClient _smtpClient;
+        ILogger<AccountController> _logger;
+
 
         public AccountController(
             UserManager<User> userManager,
             IOptions<JwtTokenConfiguration> jwtTokenConfiguration,
             IConfiguration configuration,
-            SmtpClient smtpClient)
+            SmtpClient smtpClient,
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _configuration = configuration;
             _smtpClient = smtpClient;
+            _logger = logger;
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
         }
 
@@ -139,7 +144,13 @@ namespace Nucleus.Web.Api.Controller.Account
 #if !DEBUG
             await _smtpClient.SendMailAsync(message);
 #endif
-            // TODO: log message
+            _logger.LogInformation(Environment.NewLine + Environment.NewLine + 
+                                   "******************* Reset Password Link *******************" + 
+                                   Environment.NewLine + Environment.NewLine + 
+                                   callbackUrl + 
+                                   Environment.NewLine + Environment.NewLine + 
+                                   "***********************************************************" + 
+                                   Environment.NewLine);
             return Ok(new ForgotPasswordOutput { ResetToken = resetToken });
         }
 
