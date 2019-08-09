@@ -18,12 +18,12 @@ using Xunit;
 
 namespace Nucleus.Tests.Web.Api.Controllers
 {
-    public class RoleControllerTests : ApiTestBase
+    public class RolesControllerTests : ApiTestBase
     {
         private readonly NucleusDbContext _dbContext;
         private readonly string _token;
 
-        public RoleControllerTests()
+        public RolesControllerTests()
         {
             _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             _token = LoginAsAdminUserAndGetTokenAsync().Result;
