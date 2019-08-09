@@ -2,7 +2,7 @@
 
 # Nucleus
 
-Web API startup template with a Vue Client demo.
+Web API startup template with a Vue Client application.
 
 <br/>
 <br/>
