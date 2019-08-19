@@ -11,7 +11,7 @@ namespace Nucleus.Tests.Shared
 {
     public class TestBase
     {
-        protected ClaimsPrincipal ContextUser => new ClaimsPrincipal(
+        protected static ClaimsPrincipal ContextUser => new ClaimsPrincipal(
             new ClaimsIdentity(
                 new List<Claim>
                 {
@@ -21,7 +21,7 @@ namespace Nucleus.Tests.Shared
             )
         );
 
-        protected TestServer TestServer => new TestServer(
+        protected static TestServer TestServer => new TestServer(
             new WebHostBuilder()
                 .UseStartup<Startup>()
                 .UseEnvironment("Test")

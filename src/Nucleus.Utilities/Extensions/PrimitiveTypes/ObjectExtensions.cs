@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Web;
@@ -25,7 +24,7 @@ namespace Nucleus.Utilities.Extensions.PrimitiveTypes
                              where p.GetValue(obj, null) != null
                              select p.Name + "=" + HttpUtility.UrlEncode(p.GetValue(obj, null).ToString());
 
-            return String.Join("&", properties.ToArray());
+            return string.Join("&", properties.ToArray());
         }
     }
 }
