@@ -9,6 +9,8 @@ Web API startup template with a Vue Client application.
 
 ## How to Start?
 
+**NOTE:** Requires Visual Studio 2019 v16.3 or later **for Windows** and Visual Studio 2019 for Mac v8.3 or later **for macOS**.
+
 - Select `Nucleus.Web.Api` project "**Set as Startup Project**" 
 - Open "**Package Manager Console**" and select default project as `src/Nucleus.EntityFramework`
 - Run `update-database` command to create database.
