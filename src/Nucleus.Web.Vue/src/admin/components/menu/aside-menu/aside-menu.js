@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component } from 'vue-property-decorator';
 let AsideMenuComponent = class AsideMenuComponent extends NucleusComponentBase {
@@ -24,7 +24,7 @@ let AsideMenuComponent = class AsideMenuComponent extends NucleusComponentBase {
         });
     }
 };
-AsideMenuComponent = tslib_1.__decorate([
+AsideMenuComponent = __decorate([
     Component
 ], AsideMenuComponent);
 export default AsideMenuComponent;

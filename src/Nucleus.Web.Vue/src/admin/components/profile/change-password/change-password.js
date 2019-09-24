@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Prop } from 'vue-property-decorator';
 let ChangePasswordComponent = class ChangePasswordComponent extends NucleusComponentBase {
@@ -30,13 +30,13 @@ let ChangePasswordComponent = class ChangePasswordComponent extends NucleusCompo
         }
     }
 };
-tslib_1.__decorate([
+__decorate([
     Prop()
 ], ChangePasswordComponent.prototype, "changePasswordDialog", void 0);
-tslib_1.__decorate([
+__decorate([
     Prop()
 ], ChangePasswordComponent.prototype, "logOut", void 0);
-ChangePasswordComponent = tslib_1.__decorate([
+ChangePasswordComponent = __decorate([
     Component
 ], ChangePasswordComponent);
 export default ChangePasswordComponent;

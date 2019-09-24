@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Component } from 'vue-property-decorator';
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 let RegisterComponent = class RegisterComponent extends NucleusComponentBase {
@@ -24,7 +24,7 @@ let RegisterComponent = class RegisterComponent extends NucleusComponentBase {
         }
     }
 };
-RegisterComponent = tslib_1.__decorate([
+RegisterComponent = __decorate([
     Component
 ], RegisterComponent);
 export default RegisterComponent;

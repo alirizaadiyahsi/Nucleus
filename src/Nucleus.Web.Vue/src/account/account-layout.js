@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Component } from 'vue-property-decorator';
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import LanguageStore from '@/stores/language-store';
@@ -23,7 +23,7 @@ let AccountLayoutComponent = class AccountLayoutComponent extends NucleusCompone
         });
     }
 };
-AccountLayoutComponent = tslib_1.__decorate([
+AccountLayoutComponent = __decorate([
     Component
 ], AccountLayoutComponent);
 export default AccountLayoutComponent;

@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
 import Guid from '@/shared/helpers/guid-helper';
@@ -110,13 +110,13 @@ let RoleListComponent = class RoleListComponent extends NucleusComponentBase {
         }
     }
 };
-tslib_1.__decorate([
+__decorate([
     Watch('options')
 ], RoleListComponent.prototype, "onPaginationChanged", null);
-tslib_1.__decorate([
+__decorate([
     Watch('search')
 ], RoleListComponent.prototype, "onSearchChanged", null);
-RoleListComponent = tslib_1.__decorate([
+RoleListComponent = __decorate([
     Component
 ], RoleListComponent);
 export default RoleListComponent;

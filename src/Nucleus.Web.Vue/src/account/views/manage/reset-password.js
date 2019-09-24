@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Component } from 'vue-property-decorator';
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 let ResetPasswordComponent = class ResetPasswordComponent extends NucleusComponentBase {
@@ -25,7 +25,7 @@ let ResetPasswordComponent = class ResetPasswordComponent extends NucleusCompone
         }
     }
 };
-ResetPasswordComponent = tslib_1.__decorate([
+ResetPasswordComponent = __decorate([
     Component
 ], ResetPasswordComponent);
 export default ResetPasswordComponent;

@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import Vue from 'vue';
 import NucleusService from '@/shared/application/nucleus-service-proxy';
 import QueryString from 'query-string';
@@ -51,7 +51,7 @@ let NucleusComponentBase = class NucleusComponentBase extends Vue {
         return this.$t(key).toString();
     }
 };
-NucleusComponentBase = tslib_1.__decorate([
+NucleusComponentBase = __decorate([
     Component
 ], NucleusComponentBase);
 export default NucleusComponentBase;

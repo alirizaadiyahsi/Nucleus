@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
 import Guid from '@/shared/helpers/guid-helper';
@@ -112,13 +112,13 @@ let UserListComponent = class UserListComponent extends NucleusComponentBase {
         }
     }
 };
-tslib_1.__decorate([
+__decorate([
     Watch('options')
 ], UserListComponent.prototype, "onPaginationChanged", null);
-tslib_1.__decorate([
+__decorate([
     Watch('search')
 ], UserListComponent.prototype, "onSearchChanged", null);
-UserListComponent = tslib_1.__decorate([
+UserListComponent = __decorate([
     Component
 ], UserListComponent);
 export default UserListComponent;

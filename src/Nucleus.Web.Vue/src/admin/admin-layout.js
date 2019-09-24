@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component } from 'vue-property-decorator';
 let AdminLayoutComponent = class AdminLayoutComponent extends NucleusComponentBase {
@@ -6,7 +6,7 @@ let AdminLayoutComponent = class AdminLayoutComponent extends NucleusComponentBa
         this.nucleus.auth.fillProps();
     }
 };
-AdminLayoutComponent = tslib_1.__decorate([
+AdminLayoutComponent = __decorate([
     Component({
         components: {
             AsideMenu: require('@/admin/components/menu/aside-menu/aside-menu.vue').default,

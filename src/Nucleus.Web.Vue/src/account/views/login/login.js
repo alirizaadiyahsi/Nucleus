@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Component } from 'vue-property-decorator';
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 let LoginComponent = class LoginComponent extends NucleusComponentBase {
@@ -23,7 +23,7 @@ let LoginComponent = class LoginComponent extends NucleusComponentBase {
         }
     }
 };
-LoginComponent = tslib_1.__decorate([
+LoginComponent = __decorate([
     Component
 ], LoginComponent);
 export default LoginComponent;

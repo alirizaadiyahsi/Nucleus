@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component } from 'vue-property-decorator';
 import LanguageStore from '@/stores/language-store';
@@ -31,7 +31,7 @@ let TopMenuComponent = class TopMenuComponent extends NucleusComponentBase {
         this.$router.push({ path: '/account/login' });
     }
 };
-TopMenuComponent = tslib_1.__decorate([
+TopMenuComponent = __decorate([
     Component({
         components: {
             ChangePassword: require('@/admin/components/profile/change-password/change-password.vue').default
