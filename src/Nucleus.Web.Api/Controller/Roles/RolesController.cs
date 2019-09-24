@@ -46,7 +46,7 @@ namespace Nucleus.Web.Api.Controller.Roles
 
             if (identityResult.Succeeded)
             {
-                return Ok();
+                return Created(Url.Action("PostRoles"), identityResult);
             }
 
             return BadRequest(identityResult.Errors.Select(e => new NameValueDto(e.Code, e.Description)));
@@ -74,7 +74,7 @@ namespace Nucleus.Web.Api.Controller.Roles
 
             if (identityResult.Succeeded)
             {
-                return Ok();
+                return NoContent();
             }
 
             return BadRequest(identityResult.Errors.Select(e => new NameValueDto(e.Code, e.Description)));

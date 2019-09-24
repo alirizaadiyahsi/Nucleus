@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Nucleus.Application.Dto;
 using Nucleus.Application.Dto.Account;
@@ -26,16 +27,20 @@ namespace Nucleus.Web.Api.Controller.Account
         private readonly JwtTokenConfiguration _jwtTokenConfiguration;
         private readonly IConfiguration _configuration;
         private readonly SmtpClient _smtpClient;
+        readonly ILogger<AccountController> _logger;
+
 
         public AccountController(
             UserManager<User> userManager,
             IOptions<JwtTokenConfiguration> jwtTokenConfiguration,
-            IConfiguration configuration, 
-            SmtpClient smtpClient)
+            IConfiguration configuration,
+            SmtpClient smtpClient,
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _configuration = configuration;
             _smtpClient = smtpClient;
+            _logger = logger;
             _jwtTokenConfiguration = jwtTokenConfiguration.Value;
         }
 
@@ -116,12 +121,12 @@ namespace Nucleus.Web.Api.Controller.Account
         }
 
         [HttpPost("/api/[action]")]
-        public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordInput input)
+        public async Task<ActionResult<ForgotPasswordOutput>> ForgotPassword([FromBody] ForgotPasswordInput input)
         {
             var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
             if (user == null)
             {
-                return BadRequest(new List<NameValueDto>
+                return NotFound(new List<NameValueDto>
                 {
                     new NameValueDto("UserNotFound", "User is not found!")
                 });
@@ -136,9 +141,17 @@ namespace Nucleus.Web.Api.Controller.Account
                 body: $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>"
             );
             message.IsBodyHtml = true;
-            await _smtpClient.SendMailAsync(message);  
-
-            return Ok();
+#if !DEBUG
+            await _smtpClient.SendMailAsync(message);
+#endif
+            _logger.LogInformation(Environment.NewLine + Environment.NewLine +
+                                   "******************* Reset Password Link *******************" +
+                                   Environment.NewLine + Environment.NewLine +
+                                   callbackUrl +
+                                   Environment.NewLine + Environment.NewLine +
+                                   "***********************************************************" +
+                                   Environment.NewLine);
+            return Ok(new ForgotPasswordOutput { ResetToken = resetToken });
         }
 
         [HttpPost("/api/[action]")]
@@ -147,7 +160,7 @@ namespace Nucleus.Web.Api.Controller.Account
             var user = await FindUserByUserNameOrEmail(input.UserNameOrEmail);
             if (user == null)
             {
-                return BadRequest(new List<NameValueDto>
+                return NotFound(new List<NameValueDto>
                 {
                     new NameValueDto("UserNotFound", "User is not found!")
                 });
@@ -181,7 +194,8 @@ namespace Nucleus.Web.Api.Controller.Account
                 return new ClaimsIdentity(new GenericIdentity(userNameOrEmail, "Token"), new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, userNameOrEmail),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, userToVerify.Id.ToString())
                 });
             }
 

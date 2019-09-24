@@ -139,15 +139,55 @@ namespace Nucleus.Tests.Web.Api.Controllers
         }
 
         [Fact]
-        public async Task Should_Get_Granted_Permissions()
+        public async Task Should_Get_Password_Reset_Token()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/permissions?userNameOrEmail=" + DefaultUsers.TestAdmin.UserName);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+            var testUser = await CreateAndGetTestUserAsync();
+            var token = await LoginAndGetTokenAsync(testUser.UserName, "123qwe");
+            var input = new ForgotPasswordInput
+            {
+                UserNameOrEmail = testUser.Email
+            };
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/forgotPassword");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
+           
             var response = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var permissions = await response.Content.ReadAsAsync<IEnumerable<PermissionDto>>();
-            Assert.True(permissions.Any());
+            var result = await response.Content.ReadAsAsync<ForgotPasswordOutput>();
+            Assert.NotNull(result.ResetToken);
+        }
+
+        [Fact]
+        public async Task Should_Reset_Password()
+        {
+            var testUser = await CreateAndGetTestUserAsync();
+            var token = await LoginAndGetTokenAsync(testUser.UserName, "123qwe");
+            var input = new ForgotPasswordInput
+            {
+                UserNameOrEmail = testUser.Email
+            };
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/forgotPassword");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Content = input.ToStringContent(Encoding.UTF8, "application/json");
+            var response = await TestServer.CreateClient().SendAsync(requestMessage);
+            var result = await response.Content.ReadAsAsync<ForgotPasswordOutput>();
+
+            var inputResetPassword = new ResetPasswordInput
+            {
+                UserNameOrEmail = testUser.Email,
+                Token = result.ResetToken,
+                Password = "aA!123456_123123"
+            };
+
+            var requestMessageResetPassword = new HttpRequestMessage(HttpMethod.Post, "/api/resetPassword");
+            requestMessageResetPassword.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessageResetPassword.Content = inputResetPassword.ToStringContent(Encoding.UTF8, "application/json");
+            
+            var responseResetPassword = await TestServer.CreateClient().SendAsync(requestMessageResetPassword);
+            Assert.Equal(HttpStatusCode.OK, responseResetPassword.StatusCode);
         }
 
         private async Task<User> CreateAndGetTestUserAsync()

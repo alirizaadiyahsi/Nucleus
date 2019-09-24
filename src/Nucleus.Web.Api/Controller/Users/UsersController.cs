@@ -46,7 +46,7 @@ namespace Nucleus.Web.Api.Controller.Users
 
             if (identityResult.Succeeded)
             {
-                return Ok();
+                return Created(Url.Action("PostUsers"), identityResult);
             }
 
             return BadRequest(identityResult.Errors.Select(e => new NameValueDto(e.Code, e.Description)));

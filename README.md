@@ -2,12 +2,14 @@
 
 # Nucleus
 
-Web API startup template with a Vue Client demo.
+Web API startup template with a Vue Client application.
 
 <br/>
 <br/>
 
 ## How to Start?
+
+**NOTE:** Requires Visual Studio 2019 v16.3 or later **for Windows** and Visual Studio 2019 for Mac v8.3 or later **for macOS**.
 
 - Select `Nucleus.Web.Api` project "**Set as Startup Project**" 
 - Open "**Package Manager Console**" and select default project as `src/Nucleus.EntityFramework`
@@ -26,10 +28,6 @@ Web API startup template with a Vue Client demo.
 ### Register Page
 
 <img src="_images/_register.png" alt="Vue Client Demo" class="img-thumbnail" />
-
-### Dashboard
-
-<img src="_images/_dashboard.png" alt="Vue Client Demo" class="img-thumbnail" />
 
 ### List Pages
 
@@ -53,53 +51,57 @@ Web API startup template with a Vue Client demo.
 
 ## Adding New Language
 
-- Add json file to store language keys and values to `Nucleus\src\Nucleus.Web.Vue\src\assets\js\locales\tr.json`
+- Add json file to store language keys and values to `Nucleus\src\Nucleus.Web.Vue\src\assets\localizations\your_language.json`
 - Copy `en.json` content and translate the values to target language.
-- Add country flag to `Nucleus.Web.Vue\src\assets\images\icons\flags\tr.png`. Get images from http://www.iconarchive.com/show/flag-icons-by-gosquared.html
+- Add country flag to `Nucleus.Web.Vue\src\assets\images\icons\flags\your_country.png`. Get images from http://www.iconarchive.com/show/flag-icons-by-gosquared.html
 - Add language to language selection menu in `Nucleus\src\Nucleus.Web.Vue\src\account\account-layout.vue` and `Nucleus\src\Nucleus.Web.Vue\src\admin\components\menu\top-menu\top-menu.vue` like following
 
 **account-layout.vue**
 
 ````html
-<v-layout align-center justify-center row fill-height>
-    <v-menu class="mt-3">
-        <v-btn slot="activator" color="primary" dark outline round>
+<v-menu>
+    <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark outlined rounded v-on="on">
             <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
             {{selectedLanguage.languageName}}
-            <v-icon dark class="ml-3">arrow_drop_down</v-icon>
+        <v-icon dark class="ml-3">mdi-menu-down</v-icon>
         </v-btn>
-        <v-list>
-            <v-list-tile @click="changeLanguage('en', 'English')">
-                <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
-                <v-list-tile-title>English</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
-                <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
-                <v-list-tile-title>Türkçe</v-list-tile-title>
-            </v-list-tile>
-        </v-list>
-    </v-menu>
-</v-layout>
+    </template>
+
+    <v-list>
+        <v-list-item @click="changeLanguage('en', 'English')">
+            <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
+            <v-list-item-title>English</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="changeLanguage('tr', 'Türkçe')">
+            <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
+            <v-list-item-title>Türkçe</v-list-item-title>
+        </v-list-item>
+    </v-list>
+</v-menu>
 ````
 
 **top-menu.vue**
 
 ````html
 <v-menu>
-    <v-btn slot="activator" color="primary">
-        <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2" />
-        {{selectedLanguage.languageName}}
-        <v-icon dark class="ml-3">arrow_drop_down</v-icon>
-    </v-btn>
+    <template v-slot:activator="{ on }">
+        <v-btn color="primary" v-on="on">
+            <img :src="require('@/assets/images/icons/flags/' + selectedLanguage.languageCode + '.png')" class="mr-2 ml-1" />
+            {{selectedLanguage.languageName}}
+            <v-icon dark class="ml-3">mdi-menu-down</v-icon>
+        </v-btn>
+    </template>
+
     <v-list>
-        <v-list-tile @click="changeLanguage('en', 'English')">
+        <v-list-item @click="changeLanguage('en', 'English')">
             <img src="@/assets/images/icons/flags/en.png" class="mr-2" />
-            <v-list-tile-title>English</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="changeLanguage('tr', 'Türkçe')">
+            <v-list-item-title>English</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="changeLanguage('tr', 'Türkçe')">
             <img src="@/assets/images/icons/flags/tr.png" class="mr-2" />
-            <v-list-tile-title>Türkçe</v-list-tile-title>
-        </v-list-tile>
+            <v-list-item-title>Türkçe</v-list-item-title>
+        </v-list-item>
     </v-list>
 </v-menu>
 ````
@@ -118,7 +120,6 @@ Web API startup template with a Vue Client demo.
 - [ASP.NET Core Test Host](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost)
 - [Authorization & Authentication](https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-2.1)
 - [Exception Handling & Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-2.1)
-- [Microsoft.CodeCoverage](https://docs.microsoft.com/en-us/visualstudio/test/using-code-coverage-to-determine-how-much-code-is-being-tested?view=vs-2017)
 - [Vue.js](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/en/)

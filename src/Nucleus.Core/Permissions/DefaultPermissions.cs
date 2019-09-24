@@ -19,6 +19,8 @@ namespace Nucleus.Core.Permissions
                 RoleCreate,
                 RoleUpdate,
                 RoleDelete
+
+                // add your permission to list
             };
         }
 
@@ -92,6 +94,8 @@ namespace Nucleus.Core.Permissions
             Id = new Guid("8F76DE0B-114A-4DF8-A93D-CEC927D06A3C")
         };
 
+        // add your permissions
+
         // these strings are using on authorize attributes
         public const string PermissionNameForAdministration = "Permissions_Administration";
         public const string PermissionNameForMemberAccess = "Permissions_Member_Access";
@@ -103,5 +107,7 @@ namespace Nucleus.Core.Permissions
         public const string PermissionNameForRoleCreate = "Permissions_Role_Create";
         public const string PermissionNameForRoleUpdate = "Permissions_Role_Update";
         public const string PermissionNameForRoleDelete = "Permissions_Role_Delete";
+
+        // add your permission names
     }
 }
