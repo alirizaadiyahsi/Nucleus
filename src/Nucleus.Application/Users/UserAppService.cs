@@ -116,12 +116,12 @@ namespace Nucleus.Application.Users
                 });
             }
 
-            if (user.UserName.Contains(DefaultUsers.Admin.UserName))
+            if (DefaultUsers.All().Select(u=>u.UserName).Contains(user.UserName))
             {
                 return IdentityResult.Failed(new IdentityError()
                 {
-                    Code = "CannotRemoveAdminUser",
-                    Description = "You cannot remove admin user!"
+                    Code = "CannotRemoveSystemUser",
+                    Description = "You cannot remove system user!"
                 });
             }
 

@@ -70,7 +70,12 @@ export default class RoleListComponent extends NucleusComponentBase {
                                 this.swalToast(2000, 'success', this.$t('Successful').toString());
                                 this.getRoles();
                             } else {
-                                this.swalAlert('error', response.errors.join('<br>'));
+                                var errorText = "";
+                                response.errors.forEach(error => {
+                                    errorText += this.$t(error.name) + '<br>';
+                                });
+
+                                this.swalAlert('error', errorText);
                             }
                         });
                 }
