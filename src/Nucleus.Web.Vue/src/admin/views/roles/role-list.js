@@ -63,7 +63,11 @@ let RoleListComponent = class RoleListComponent extends NucleusComponentBase {
                         this.getRoles();
                     }
                     else {
-                        this.swalAlert('error', response.errors.join('<br>'));
+                        var errorText = "";
+                        response.errors.forEach(error => {
+                            errorText += this.$t(error.name) + '<br>';
+                        });
+                        this.swalAlert('error', errorText);
                     }
                 });
             }

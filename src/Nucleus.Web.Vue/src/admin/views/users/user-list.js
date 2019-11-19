@@ -61,12 +61,17 @@ let UserListComponent = class UserListComponent extends NucleusComponentBase {
             if (result.value) {
                 this.nucleusService.delete('/api/users?id=' + id)
                     .then((response) => {
+                    debugger;
                     if (!response.isError) {
                         this.swalToast(2000, 'success', this.$t('Successful').toString());
                         this.getUsers();
                     }
                     else {
-                        this.swalAlert('error', response.errors.join('<br>'));
+                        var errorText = "";
+                        response.errors.forEach(error => {
+                            errorText += this.$t(error.name) + '<br>';
+                        });
+                        this.swalAlert('error', errorText);
                     }
                 });
             }
