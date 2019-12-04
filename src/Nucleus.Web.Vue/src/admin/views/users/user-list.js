@@ -41,7 +41,6 @@ let UserListComponent = class UserListComponent extends NucleusComponentBase {
         this.getUsers();
     }
     editUser(id) {
-        this.dialog = true;
         this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
         this.errors = [];
@@ -53,6 +52,7 @@ let UserListComponent = class UserListComponent extends NucleusComponentBase {
                 grantedRoleIds: result.grantedRoleIds,
                 user: result.user
             };
+            this.dialog = true;
         });
     }
     deleteUser(id) {

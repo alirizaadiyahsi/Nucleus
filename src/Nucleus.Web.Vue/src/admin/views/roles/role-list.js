@@ -39,7 +39,6 @@ let RoleListComponent = class RoleListComponent extends NucleusComponentBase {
         this.getRoles();
     }
     editRole(id) {
-        this.dialog = true;
         this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
         this.nucleusService.get('/api/roles/' + (id ? id : Guid.empty))
@@ -50,6 +49,7 @@ let RoleListComponent = class RoleListComponent extends NucleusComponentBase {
                 grantedPermissionIds: result.grantedPermissionIds,
                 role: result.role
             };
+            this.dialog = true;
         });
     }
     deleteRole(id) {
