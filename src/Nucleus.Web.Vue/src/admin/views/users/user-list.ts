@@ -48,7 +48,6 @@ export default class UserListComponent extends NucleusComponentBase {
     }
 
     editUser(id: string) {
-        this.dialog = true;
         this.formTitle = id ? this.$t('EditUser').toString() : this.$t('NewUser').toString();
         this.isEdit = id ? true : false;
         this.errors = [];
@@ -60,6 +59,7 @@ export default class UserListComponent extends NucleusComponentBase {
                     grantedRoleIds: result.grantedRoleIds,
                     user: result.user
                 };
+                this.dialog = true;
             });
     }
 

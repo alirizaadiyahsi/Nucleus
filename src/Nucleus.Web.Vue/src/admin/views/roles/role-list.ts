@@ -46,7 +46,6 @@ export default class RoleListComponent extends NucleusComponentBase {
     }
 
     editRole(id: string) {
-        this.dialog = true;
         this.formTitle = id ? this.$t('EditRole').toString() : this.$t('NewRole').toString();
         this.errors = [];
         this.nucleusService.get<IGetRoleForCreateOrUpdateOutput>('/api/roles/' + (id ? id : Guid.empty))
@@ -57,6 +56,7 @@ export default class RoleListComponent extends NucleusComponentBase {
                     grantedPermissionIds: result.grantedPermissionIds,
                     role: result.role
                 };
+                this.dialog = true;
             });
     }
 
