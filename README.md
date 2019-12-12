@@ -58,6 +58,16 @@ Web API startup template with a Vue Client application.
 
 # Document
 
+## Swagger UI Authorize
+
+You can login on swagger ui by using a bearer token. So you can make requests to authorized end-points. Check the following steps.
+
+- In swagger ui, execute `api/login` to get a bearer token.
+- Copy bearer token that is in `api/login` response.
+- Click `Authorize` button in swagger ui page.
+- Enter the token like `Bearer <token>` and click `Authorize`.
+- Now you can make requests to authorized end-points.
+
 ## Adding New Language
 
 - Add json file to store language keys and values to `Nucleus\src\Nucleus.Web.Vue\src\assets\localizations\your_language.json`
