@@ -36,7 +36,7 @@ Web API startup template with a Vue Client application.
 
 ### Forgot Password Page
 
-<img src="_images/_login.png" alt="Vue Client Demo" class="img-thumbnail" />
+<img src="_images/_forgotPassword.png" alt="Vue Client Demo" class="img-thumbnail" />
 
 ### List Pages
 
