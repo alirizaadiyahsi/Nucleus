@@ -34,6 +34,10 @@ Web API startup template with a Vue Client application.
 
 <img src="_images/_register.png" alt="Vue Client Demo" class="img-thumbnail" />
 
+### Forgot Password Page
+
+<img src="_images/_login.png" alt="Vue Client Demo" class="img-thumbnail" />
+
 ### List Pages
 
 <img src="_images/_users.png" alt="Vue Client Demo" class="img-thumbnail" />
