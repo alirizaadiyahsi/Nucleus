@@ -34,6 +34,10 @@ Web API startup template with a Vue Client application.
 
 <img src="_images/_register.png" alt="Vue Client Demo" class="img-thumbnail" />
 
+### Forgot Password Page
+
+<img src="_images/_forgotPassword.png" alt="Vue Client Demo" class="img-thumbnail" />
+
 ### List Pages
 
 <img src="_images/_users.png" alt="Vue Client Demo" class="img-thumbnail" />
@@ -53,6 +57,16 @@ Web API startup template with a Vue Client application.
 <img src="_images/swagger-ui.png" alt="Swagger UI" class="img-thumbnail" />
 
 # Document
+
+## Swagger UI Authorize
+
+You can login on swagger ui by using a bearer token. So you can make requests to authorized end-points. Check the following steps.
+
+- In swagger ui, execute `api/login` to get a bearer token.
+- Copy bearer token that is in `api/login` response.
+- Click `Authorize` button in swagger ui page.
+- Enter the token like `Bearer <token>` and click `Authorize`.
+- Now you can make requests to authorized end-points.
 
 ## Adding New Language
 
