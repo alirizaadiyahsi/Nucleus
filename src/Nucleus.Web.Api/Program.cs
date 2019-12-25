@@ -32,7 +32,7 @@ namespace Nucleus.Web.Api
                 var host = CreateHostBuilder(args).Build();
                 using (var scope = host.Services.CreateScope())
                 {
-                    var permissionAppService = scope.ServiceProvider.GetRequiredService<IPermissionAppService>();
+                    var permissionAppService = scope.ServiceProvider.GetService<IPermissionAppService>();
                     permissionAppService.InitializePermissions(DefaultPermissions.All());
                 }
 

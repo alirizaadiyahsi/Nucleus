@@ -21,7 +21,7 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
 
         public UnitOfWorkFilterTest()
         {
-            _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            _dbContext = ServiceProvider.GetService<NucleusDbContext>();
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
             var actionExecutedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), null);
             await _dbContext.Roles.AddAsync(testRole);
 
-            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            var dbContextFromAnotherScope = GetNewScopeServiceProvider().GetService<NucleusDbContext>();
             var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
             Assert.Null(insertedTestRole);
 
@@ -78,7 +78,7 @@ namespace Nucleus.Tests.Web.Api.ActionFilters
             var actionExecutedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), null);
             await _dbContext.Roles.AddAsync(testRole);
 
-            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            var dbContextFromAnotherScope = GetNewScopeServiceProvider().GetService<NucleusDbContext>();
             var insertedTestRole = await dbContextFromAnotherScope.Roles.FindAsync(testRole.Id);
             Assert.Null(insertedTestRole);
 

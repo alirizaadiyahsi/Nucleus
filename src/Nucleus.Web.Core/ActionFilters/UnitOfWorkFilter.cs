@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using Nucleus.EntityFramework;
 
 namespace Nucleus.Web.Core.ActionFilters
@@ -24,18 +25,17 @@ namespace Nucleus.Web.Core.ActionFilters
                 return;
             }
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using var transaction = _dbContext.Database.BeginTransaction();
+            try
             {
-                try
-                {
-                    _dbContext.SaveChanges();
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    throw;
-                }
+                _dbContext.EnsureAutoHistory();
+                _dbContext.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
             }
         }
     }

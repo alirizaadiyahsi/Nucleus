@@ -14,7 +14,7 @@ namespace Nucleus.Tests.Application.Permissions
 
         public PermissionAppServiceTests()
         {
-            _permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
+            _permissionAppService = ServiceProvider.GetService<IPermissionAppService>();
         }
 
         [Fact]

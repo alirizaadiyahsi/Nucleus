@@ -18,7 +18,6 @@ namespace Nucleus.Tests.Web.Api.Controllers
 
         public PermissionsControllerTests()
         {
-            TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 

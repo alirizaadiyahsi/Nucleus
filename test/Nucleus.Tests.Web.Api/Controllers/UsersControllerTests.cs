@@ -25,7 +25,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
 
         public UsersControllerTests()
         {
-            _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            _dbContext = ServiceProvider.GetService<NucleusDbContext>();
             _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 
@@ -111,7 +111,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.OK, responseAddUser.StatusCode);
 
-            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>(); 
+            var dbContextFromAnotherScope = GetNewScopeServiceProvider().GetService<NucleusDbContext>(); 
             var editedTestUser = await dbContextFromAnotherScope.Users.FindAsync(testUser.Id);
             Assert.Contains(editedTestUser.UserRoles, ur => ur.RoleId == DefaultRoles.Member.Id);
         }
@@ -124,25 +124,6 @@ namespace Nucleus.Tests.Web.Api.Controllers
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.NoContent, responseAddUser.StatusCode);
-        }
-
-        private async Task<User> CreateAndGetTestUserAsync()
-        {
-            var testUser = new User
-            {
-                Id = Guid.NewGuid(),
-                UserName = "TestUserName_" + Guid.NewGuid(),
-                Email = "TestUserEmail_" + Guid.NewGuid(),
-                PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
-            };
-            await _dbContext.Users.AddAsync(testUser);
-            await _dbContext.UserRoles.AddAsync(new UserRole
-            {
-                UserId = testUser.Id,
-                RoleId = DefaultRoles.Admin.Id
-            });
-            await _dbContext.SaveChangesAsync();
-            return testUser;
         }
     }
 }

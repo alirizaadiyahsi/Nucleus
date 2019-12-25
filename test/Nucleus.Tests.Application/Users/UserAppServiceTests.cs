@@ -14,14 +14,11 @@ namespace Nucleus.Tests.Application.Users
 {
     public class UserAppServiceTests : ApplicationTestBase
     {
-        private readonly NucleusDbContext _dbContext;
         private readonly IUserAppService _userAppService;
 
         public UserAppServiceTests()
         {
-            var serviceProvider = TestServer.Host.Services.CreateScope().ServiceProvider;
-            _dbContext = serviceProvider.GetRequiredService<NucleusDbContext>();
-            _userAppService = serviceProvider.GetRequiredService<IUserAppService>();
+            _userAppService = ServiceProvider.GetService<IUserAppService>();
         }
 
         [Fact]
@@ -66,9 +63,9 @@ namespace Nucleus.Tests.Application.Users
             };
 
             await _userAppService.AddUserAsync(input);
-            await _dbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
 
-            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            var dbContextFromAnotherScope = GetNewScopeServiceProvider().GetService<NucleusDbContext>();
             var insertedTestUser = await dbContextFromAnotherScope.Users.FindAsync(input.User.Id);
 
             Assert.NotNull(insertedTestUser);
@@ -91,7 +88,7 @@ namespace Nucleus.Tests.Application.Users
                 GrantedRoleIds = new List<Guid> { DefaultRoles.Member.Id }
             };
             await _userAppService.EditUserAsync(input);
-            var editedTestUser = await _dbContext.Users.FindAsync(testUser.Id);
+            var editedTestUser = await DbContext.Users.FindAsync(testUser.Id);
 
             Assert.Contains("TestUserName_Edited_", editedTestUser.UserName);
             Assert.Contains(editedTestUser.UserRoles, ur => ur.RoleId == DefaultRoles.Member.Id);
@@ -102,40 +99,21 @@ namespace Nucleus.Tests.Application.Users
         {
             var testUser = await CreateAndGetTestUserAsync();
 
-            var dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            var dbContextFromAnotherScope = GetNewScopeServiceProvider().GetService<NucleusDbContext>();
             var insertedTestUser = await dbContextFromAnotherScope.Users.FindAsync(testUser.Id);
 
             Assert.NotNull(insertedTestUser);
             Assert.Equal(1, insertedTestUser.UserRoles.Count);
 
             await _userAppService.RemoveUserAsync(insertedTestUser.Id);
-            _dbContext.SaveChanges();
+            DbContext.SaveChanges();
 
-            dbContextFromAnotherScope = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
+            dbContextFromAnotherScope = GetNewScopeServiceProvider().GetService<NucleusDbContext>();
             var removedTestUser = await dbContextFromAnotherScope.Users.FindAsync(testUser.Id);
             var removedRoleMatches = dbContextFromAnotherScope.UserRoles.Where(rp => rp.UserId == testUser.Id);
 
             Assert.Null(removedTestUser);
             Assert.Equal(0, removedRoleMatches.Count());
-        }
-
-        private async Task<User> CreateAndGetTestUserAsync()
-        {
-            var testUser = new User
-            {
-                Id = Guid.NewGuid(),
-                UserName = "TestUserName_" + Guid.NewGuid(),
-                Email = "TestUserEmail_" + Guid.NewGuid(),
-                PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
-            };
-            await _dbContext.Users.AddAsync(testUser);
-            await _dbContext.UserRoles.AddAsync(new UserRole
-            {
-                UserId = testUser.Id,
-                RoleId = DefaultRoles.Admin.Id
-            });
-            await _dbContext.SaveChangesAsync();
-            return testUser;
         }
     }
 }

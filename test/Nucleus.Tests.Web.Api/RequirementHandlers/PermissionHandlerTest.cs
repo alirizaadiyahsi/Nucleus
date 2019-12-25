@@ -14,7 +14,7 @@ namespace Nucleus.Tests.Web.Api.RequirementHandlers
         [Fact]
         public async Task Should_Handle_Permission()
         {
-            var permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
+            var permissionAppService = ServiceProvider.GetService<IPermissionAppService>();
 
             var requirements = new List<PermissionRequirement>
             {
@@ -30,7 +30,7 @@ namespace Nucleus.Tests.Web.Api.RequirementHandlers
         [Fact]
         public async Task Should_Not_Handle_Permission_With_Null_User()
         {
-            var permissionAppService = TestServer.Host.Services.GetRequiredService<IPermissionAppService>();
+            var permissionAppService = ServiceProvider.GetService<IPermissionAppService>();
 
             var requirements = new List<PermissionRequirement>
             {

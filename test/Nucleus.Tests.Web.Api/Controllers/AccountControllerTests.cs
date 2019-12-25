@@ -21,12 +21,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
 {
     public class AccountControllerTests : ApiTestBase
     {
-        private readonly NucleusDbContext _dbContext;
         private readonly string _token;
 
         public AccountControllerTests()
         {
-            _dbContext = TestServer.Host.Services.GetRequiredService<NucleusDbContext>();
             _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 
@@ -188,29 +186,6 @@ namespace Nucleus.Tests.Web.Api.Controllers
             
             var responseResetPassword = await TestServer.CreateClient().SendAsync(requestMessageResetPassword);
             Assert.Equal(HttpStatusCode.OK, responseResetPassword.StatusCode);
-        }
-
-        private async Task<User> CreateAndGetTestUserAsync()
-        {
-            var testUser = new User
-            {
-                Id = Guid.NewGuid(),
-                UserName = "TestUserName_" + Guid.NewGuid(),
-                Email = "TestUserEmail_" + Guid.NewGuid(),
-                PasswordHash = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
-            };
-            testUser.NormalizedEmail = testUser.Email.Normalize();
-            testUser.NormalizedUserName = testUser.UserName.Normalize();
-
-            await _dbContext.Users.AddAsync(testUser);
-            await _dbContext.UserRoles.AddAsync(new UserRole
-            {
-                UserId = testUser.Id,
-                RoleId = DefaultRoles.Admin.Id
-            });
-            await _dbContext.SaveChangesAsync();
-
-            return testUser;
         }
     }
 }
