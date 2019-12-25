@@ -24,6 +24,8 @@ Web API startup template with a Vue Client application.
 - Run `yarn serve` command to run Vue application.
 - Admin user name and password : `admin/123qwe`
 
+**NOTE:** Tests are using database connection, so you can create a different database for tests. And you can type this database connection string to `appsettings.json` in `Nucleus.Tests.Shared`. Now your test project will use different database than live database.
+
 ## Vue Application Screenshots
 
 ### Login Page
