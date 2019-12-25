@@ -127,6 +127,13 @@ You can login on swagger ui by using a bearer token. So you can make requests to
 </v-menu>
 ````
 
+## Adding New Permission
+
+- All definitions are made in `DefaultPermissions`.
+- First add permission name as const like `public const string PermissionNameABC = "Permissions_ABC";`.
+- Add a permission entity that type `Permission.cs` class and give a hard-coded guid id.
+- Last, add this permission variable to `DefaultPermissions.All()` method.
+
 ###
 
 ### Tags & Technologies
