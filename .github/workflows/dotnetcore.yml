@@ -1,10 +1,12 @@
-name: Nucleus CI
+name: .NET Core
 
 on: [push]
 
 jobs:
-  build_and_test:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v1
     - name: Setup .NET Core
@@ -13,5 +15,3 @@ jobs:
         dotnet-version: 3.1.100
     - name: Build with dotnet
       run: dotnet build --configuration Release
-    - name: Test with dotnet
-      run: dotnet test --configuration Release
