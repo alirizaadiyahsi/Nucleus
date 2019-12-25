@@ -22,8 +22,8 @@ namespace Nucleus.Core.Users
             UserName = AdminUserName,
             Email = AdminUserEmail,
             EmailConfirmed = true,
-            NormalizedEmail = AdminUserEmail.ToUpper(CultureInfo.InvariantCulture),
-            NormalizedUserName = AdminUserName.ToUpper(CultureInfo.InvariantCulture),
+            NormalizedEmail = AdminUserEmail.ToUpper(CultureInfo.GetCultureInfo("en_US")),
+            NormalizedUserName = AdminUserName.ToUpper(CultureInfo.GetCultureInfo("en_US")),
             AccessFailedCount = 5,
             PasswordHash = PasswordHashFor123Qwe
         };
@@ -34,8 +34,8 @@ namespace Nucleus.Core.Users
             UserName = MemberUserName,
             Email = MemberUserEmail,
             EmailConfirmed = true,
-            NormalizedEmail = MemberUserEmail.ToUpper(CultureInfo.InvariantCulture),
-            NormalizedUserName = MemberUserName.ToUpper(CultureInfo.InvariantCulture),
+            NormalizedEmail = MemberUserEmail.ToUpper(CultureInfo.GetCultureInfo("en_US")),
+            NormalizedUserName = MemberUserName.ToUpper(CultureInfo.GetCultureInfo("en_US")),
             AccessFailedCount = 5,
             PasswordHash = PasswordHashFor123Qwe
         };
@@ -46,8 +46,8 @@ namespace Nucleus.Core.Users
             UserName = TestAdminUserName,
             Email = TestAdminUserEmail,
             EmailConfirmed = true,
-            NormalizedEmail = TestAdminUserEmail.ToUpper(CultureInfo.InvariantCulture),
-            NormalizedUserName = TestAdminUserName.ToUpper(CultureInfo.InvariantCulture),
+            NormalizedEmail = TestAdminUserEmail.ToUpper(CultureInfo.GetCultureInfo("en_US")),
+            NormalizedUserName = TestAdminUserName.ToUpper(CultureInfo.GetCultureInfo("en_US")),
             AccessFailedCount = 5,
             PasswordHash = PasswordHashFor123Qwe
         };
