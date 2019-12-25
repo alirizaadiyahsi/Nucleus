@@ -28,7 +28,6 @@ namespace Nucleus.Web.Core.ActionFilters
             using var transaction = _dbContext.Database.BeginTransaction();
             try
             {
-                _dbContext.EnsureAutoHistory();
                 _dbContext.SaveChanges();
                 transaction.Commit();
             }
