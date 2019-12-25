@@ -6,13 +6,13 @@ namespace Nucleus.Core
     {
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public DateTime UpdateDate { get; set; }
+        public DateTime ModificationDate { get; set; }
 
-        public Guid CreateUserId { get; set; }
+        public Guid CreatorId { get; set; }
 
-        public Guid UpdateUserId { get; set; }
+        public Guid ModifierId { get; set; }
 
         protected BaseEntity()
         {

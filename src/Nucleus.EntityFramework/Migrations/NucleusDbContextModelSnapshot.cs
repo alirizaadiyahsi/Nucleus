@@ -15,26 +15,33 @@ namespace Nucleus.EntityFramework.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview7.19362.6")
+                .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Nucleus.Core.Permissions.Permission", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreateUserId");
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("DisplayName");
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name");
+                    b.Property<DateTime>("ModificationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateDate");
+                    b.Property<Guid>("ModifierId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UpdateUserId");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -44,119 +51,124 @@ namespace Nucleus.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "Administration access",
-                            Name = "Permissions_Administration",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_Administration"
                         },
                         new
                         {
                             Id = new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "Member access",
-                            Name = "Permissions_Member_Access",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_Member_Access"
                         },
                         new
                         {
                             Id = new Guid("86d804bd-d022-49a5-821a-d2240478aac4"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "User read",
-                            Name = "Permissions_User_Read",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_User_Read"
                         },
                         new
                         {
                             Id = new Guid("8f3de3ec-3851-4ba9-887a-2119f18ae744"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "User create",
-                            Name = "Permissions_User_Create",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_User_Create"
                         },
                         new
                         {
                             Id = new Guid("068a0171-a141-4eb2-854c-88e43ef9ab7f"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "User update",
-                            Name = "Permissions_User_Update",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_User_Update"
                         },
                         new
                         {
                             Id = new Guid("70b5c5c3-2267-4f7c-b0f9-7ecc952e04a6"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "User delete",
-                            Name = "Permissions_User_Delete",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_User_Delete"
                         },
                         new
                         {
                             Id = new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "Role read",
-                            Name = "Permissions_Role_Read",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_Role_Read"
                         },
                         new
                         {
                             Id = new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "Role create",
-                            Name = "Permissions_Role_Create",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_Role_Create"
                         },
                         new
                         {
                             Id = new Guid("ea003a99-4755-4c19-b126-c5cffbc65088"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "Role update",
-                            Name = "Permissions_Role_Update",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_Role_Update"
                         },
                         new
                         {
                             Id = new Guid("8f76de0b-114a-4df8-a93d-cec927d06a3c"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             DisplayName = "Role delete",
-                            Name = "Permissions_Role_Delete",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifierId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Permissions_Role_Delete"
                         });
                 });
 
             modelBuilder.Entity("Nucleus.Core.Roles.Role", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsSystemDefault");
+                    b.Property<bool>("IsSystemDefault")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -172,7 +184,7 @@ namespace Nucleus.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"),
-                            ConcurrencyStamp = "edf1856c-a593-4c53-9fba-2d3ca6f11a47",
+                            ConcurrencyStamp = "201a7aaf-a820-43e4-8632-bb87c3a13a74",
                             IsSystemDefault = true,
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -180,7 +192,7 @@ namespace Nucleus.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"),
-                            ConcurrencyStamp = "89edf791-bfc9-4f6f-b4e4-38b41af86e3d",
+                            ConcurrencyStamp = "1e5e780c-11a7-4c1d-8af6-51ee5762411e",
                             IsSystemDefault = true,
                             Name = "Member",
                             NormalizedName = "MEMBER"
@@ -191,13 +203,17 @@ namespace Nucleus.EntityFramework.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -208,9 +224,11 @@ namespace Nucleus.EntityFramework.Migrations
 
             modelBuilder.Entity("Nucleus.Core.Roles.RolePermission", b =>
                 {
-                    b.Property<Guid>("RoleId");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PermissionId");
+                    b.Property<Guid>("PermissionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("RoleId", "PermissionId");
 
@@ -279,39 +297,54 @@ namespace Nucleus.EntityFramework.Migrations
             modelBuilder.Entity("Nucleus.Core.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -331,7 +364,7 @@ namespace Nucleus.EntityFramework.Migrations
                         {
                             Id = new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"),
                             AccessFailedCount = 5,
-                            ConcurrencyStamp = "7f5d40fa-45df-4beb-8fa9-b501c42e698f",
+                            ConcurrencyStamp = "29b9e838-e4f7-44b6-88fd-09f45302e2e0",
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -346,7 +379,7 @@ namespace Nucleus.EntityFramework.Migrations
                         {
                             Id = new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"),
                             AccessFailedCount = 5,
-                            ConcurrencyStamp = "1618c2d9-b0da-492a-b355-83f86e5c75a6",
+                            ConcurrencyStamp = "bccbbab3-c18c-4319-b423-67f904551097",
                             Email = "memberuser@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -361,7 +394,7 @@ namespace Nucleus.EntityFramework.Migrations
                         {
                             Id = new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"),
                             AccessFailedCount = 5,
-                            ConcurrencyStamp = "951407b0-50d8-47d1-a556-11a42cc0a7b6",
+                            ConcurrencyStamp = "0c579812-66c6-4746-bd9b-e0112f3c146b",
                             Email = "testadmin@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -378,13 +411,17 @@ namespace Nucleus.EntityFramework.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -395,13 +432,17 @@ namespace Nucleus.EntityFramework.Migrations
 
             modelBuilder.Entity("Nucleus.Core.Users.UserLogin", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderDisplayName");
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -412,9 +453,11 @@ namespace Nucleus.EntityFramework.Migrations
 
             modelBuilder.Entity("Nucleus.Core.Users.UserRole", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -442,13 +485,17 @@ namespace Nucleus.EntityFramework.Migrations
 
             modelBuilder.Entity("Nucleus.Core.Users.UserToken", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 

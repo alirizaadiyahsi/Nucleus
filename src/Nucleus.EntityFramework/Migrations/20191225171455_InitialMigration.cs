@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Nucleus.EntityFramework.Migrations
@@ -13,10 +12,10 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    UpdateDate = table.Column<DateTime>(nullable: false),
-                    CreateUserId = table.Column<Guid>(nullable: false),
-                    UpdateUserId = table.Column<Guid>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    ModificationDate = table.Column<DateTime>(nullable: false),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true)
                 },
@@ -70,7 +69,7 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<Guid>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -115,7 +114,7 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<Guid>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -197,19 +196,19 @@ namespace Nucleus.EntityFramework.Migrations
 
             migrationBuilder.InsertData(
                 table: "Permission",
-                columns: new[] { "Id", "CreateDate", "CreateUserId", "DisplayName", "Name", "UpdateDate", "UpdateUserId" },
+                columns: new[] { "Id", "CreationDate", "CreatorId", "DisplayName", "ModificationDate", "ModifierId", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Administration access", "Permissions_Administration", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Member access", "Permissions_Member_Access", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("86d804bd-d022-49a5-821a-d2240478aac4"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User read", "Permissions_User_Read", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("8f3de3ec-3851-4ba9-887a-2119f18ae744"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User create", "Permissions_User_Create", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("068a0171-a141-4eb2-854c-88e43ef9ab7f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User update", "Permissions_User_Update", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("70b5c5c3-2267-4f7c-b0f9-7ecc952e04a6"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User delete", "Permissions_User_Delete", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role read", "Permissions_Role_Read", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role create", "Permissions_Role_Create", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("ea003a99-4755-4c19-b126-c5cffbc65088"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role update", "Permissions_Role_Update", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("8f76de0b-114a-4df8-a93d-cec927d06a3c"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role delete", "Permissions_Role_Delete", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000") }
+                    { new Guid("2a1ccb43-fa4f-48ce-b601-d3ab4d611b32"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Administration access", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_Administration" },
+                    { new Guid("28126ffd-51c2-4201-939c-b64e3df43b9d"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Member access", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_Member_Access" },
+                    { new Guid("86d804bd-d022-49a5-821a-d2240478aac4"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User read", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_User_Read" },
+                    { new Guid("8f3de3ec-3851-4ba9-887a-2119f18ae744"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User create", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_User_Create" },
+                    { new Guid("068a0171-a141-4eb2-854c-88e43ef9ab7f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User update", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_User_Update" },
+                    { new Guid("70b5c5c3-2267-4f7c-b0f9-7ecc952e04a6"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "User delete", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_User_Delete" },
+                    { new Guid("80562f50-8a7d-4bcd-8971-6d856bbcbb7f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role read", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_Role_Read" },
+                    { new Guid("d4d7c0e3-efcf-4dd2-86e7-17d69fda8c75"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role create", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_Role_Create" },
+                    { new Guid("ea003a99-4755-4c19-b126-c5cffbc65088"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role update", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_Role_Update" },
+                    { new Guid("8f76de0b-114a-4df8-a93d-cec927d06a3c"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Role delete", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Permissions_Role_Delete" }
                 });
 
             migrationBuilder.InsertData(
@@ -217,8 +216,8 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "IsSystemDefault", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "edf1856c-a593-4c53-9fba-2d3ca6f11a47", true, "Admin", "ADMIN" },
-                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "89edf791-bfc9-4f6f-b4e4-38b41af86e3d", true, "Member", "MEMBER" }
+                    { new Guid("f22bce18-06ec-474a-b9af-a9de2a7b8263"), "201a7aaf-a820-43e4-8632-bb87c3a13a74", true, "Admin", "ADMIN" },
+                    { new Guid("11d14a89-3a93-4d39-a94f-82b823f0d4ce"), "1e5e780c-11a7-4c1d-8af6-51ee5762411e", true, "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -226,9 +225,9 @@ namespace Nucleus.EntityFramework.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "7f5d40fa-45df-4beb-8fa9-b501c42e698f", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
-                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "1618c2d9-b0da-492a-b355-83f86e5c75a6", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" },
-                    { new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"), 5, "951407b0-50d8-47d1-a556-11a42cc0a7b6", "testadmin@mail.com", true, false, null, "TESTADMIN@MAIL.COM", "TESTADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "testadmin" }
+                    { new Guid("c41a7761-6645-4e2c-b99d-f9e767b9ac77"), 5, "29b9e838-e4f7-44b6-88fd-09f45302e2e0", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "admin" },
+                    { new Guid("065e903e-6f7b-42b8-b807-0c4197f9d1bc"), 5, "bccbbab3-c18c-4319-b423-67f904551097", "memberuser@mail.com", true, false, null, "MEMBERUSER@MAIL.COM", "MEMBERUSER", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "memberuser" },
+                    { new Guid("4b6d9e45-626d-489a-a8cf-d32d36583af4"), 5, "0c579812-66c6-4746-bd9b-e0112f3c146b", "testadmin@mail.com", true, false, null, "TESTADMIN@MAIL.COM", "TESTADMIN", "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", null, false, null, false, "testadmin" }
                 });
 
             migrationBuilder.InsertData(
