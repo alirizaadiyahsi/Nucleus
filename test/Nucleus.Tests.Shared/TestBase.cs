@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nucleus.Core.Permissions;
@@ -25,6 +26,7 @@ namespace Nucleus.Tests.Shared
         {
             ServiceProvider = TestServer.Host.Services;
             DbContext = ServiceProvider.GetRequiredService<NucleusDbContext>();
+            DbContext.Database.EnsureCreated();
         }
 
         protected IServiceProvider GetNewScopeServiceProvider()
@@ -46,6 +48,15 @@ namespace Nucleus.Tests.Shared
             new WebHostBuilder()
                 .UseStartup<Startup>()
                 .UseEnvironment("Test")
+                .ConfigureServices(services =>
+                {
+                    services.AddDbContext<NucleusDbContext>(options =>
+                    {
+                        options.UseInMemoryDatabase("NucleusTestDb")
+                            .UseLazyLoadingProxies()
+                            .EnableSensitiveDataLogging();
+                    });
+                })
                 .ConfigureAppConfiguration(config =>
                 {
                     config.SetBasePath(Path.Combine(Path.GetFullPath(@"../../../.."), "Nucleus.Tests.Shared"));

@@ -25,16 +25,14 @@ namespace Nucleus.Web.Core.ActionFilters
                 return;
             }
 
-            using var transaction = _dbContext.Database.BeginTransaction();
             try
             {
                 _dbContext.SaveChanges();
-                transaction.Commit();
             }
-            catch (Exception)
+            catch (DbUpdateConcurrencyException dbUpdateConcurrencyException)
             {
-                transaction.Rollback();
-                throw;
+                dbUpdateConcurrencyException.Entries.Single().Reload();
+                _dbContext.SaveChanges();
             }
         }
     }

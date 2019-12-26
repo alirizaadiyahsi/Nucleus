@@ -20,12 +20,10 @@ namespace Nucleus.Tests.Web.Api.Controllers
 {
     public class UsersControllerTests : ApiTestBase
     {
-        private readonly NucleusDbContext _dbContext;
         private readonly string _token;
 
         public UsersControllerTests()
         {
-            _dbContext = ServiceProvider.GetService<NucleusDbContext>();
             _token = LoginAsAdminUserAndGetTokenAsync().Result;
         }
 
@@ -85,7 +83,7 @@ namespace Nucleus.Tests.Web.Api.Controllers
             var responseAddUser = await TestServer.CreateClient().SendAsync(requestMessage);
             Assert.Equal(HttpStatusCode.Created, responseAddUser.StatusCode);
 
-            var insertedUser = await _dbContext.Users.FirstAsync(u => u.UserName == input.User.UserName);
+            var insertedUser = await DbContext.Users.FirstAsync(u => u.UserName == input.User.UserName);
             Assert.NotNull(insertedUser);
         }
 
