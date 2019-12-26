@@ -15,7 +15,6 @@ namespace Nucleus.Application
             CreateMap<User, UserDto>()
                 .ForMember(u => u.Password, opt => opt.Ignore());
             
-            // TODO: Add automatic mapping instead of mapping one by one
             CreateMap<User, UserListOutput>();
             CreateMap<Permission, PermissionDto>();
             CreateMap<Role, RoleDto>();
