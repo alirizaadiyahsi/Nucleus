@@ -113,18 +113,5 @@ namespace Nucleus.Tests.Application.Roles
             var role = await _roleAppService.GetRoleForCreateOrUpdateAsync(DefaultRoles.Member.Id);
             Assert.False(string.IsNullOrEmpty(role.Role.Name));
         }
-
-        private async Task<Role> CreateAndGetTestRoleAsync()
-        {
-            var testRole = new Role { Id = Guid.NewGuid(), Name = "TestRoleName_" + Guid.NewGuid() };
-            await DbContext.Roles.AddAsync(testRole);
-            await DbContext.RolePermissions.AddAsync(new RolePermission
-            {
-                RoleId = testRole.Id,
-                PermissionId = DefaultPermissions.AdministrationAccess.Id
-            });
-            await DbContext.SaveChangesAsync();
-            return testRole;
-        }
     }
 }
