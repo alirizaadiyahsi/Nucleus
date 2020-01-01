@@ -25,12 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Tests.Web.Api", "test\Nucleus.Tests.Web.Api\Nucleus.Tests.Web.Api.csproj", "{02306886-8DC2-4E72-BF50-CA2EF5626794}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nucleus.Web.Vue", "src\Nucleus.Web.Vue\Nucleus.Web.Vue.csproj", "{13C2090F-16B5-49DB-86B8-E320FD977FD2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-template", "solution-template", "{5B62AE3A-9E3F-47E5-9852-C63D8DC07061}"
-	ProjectSection(SolutionItems) = preProject
-		solution-template\Nucleus.vstemplate = solution-template\Nucleus.vstemplate
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Web.Vue", "src\Nucleus.Web.Vue\Nucleus.Web.Vue.csproj", "{13C2090F-16B5-49DB-86B8-E320FD977FD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
