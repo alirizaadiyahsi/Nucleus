@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "db-migrate": "cd ../Nucleus.EntityFramework/ && dotnet ef migrations --startup-project ../Nucleus.Web.Api/Nucleus.Web.Api.csproj",
+    "db-update": "cd ../Nucleus.EntityFramework/ && dotnet ef database update --startup-project ../Nucleus.Web.Api/Nucleus.Web.Api.csproj"
   },
   "dependencies": {
     "core-js": "^3.6.4",

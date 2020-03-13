@@ -16,13 +16,27 @@ Web API startup template with a Vue Client application.
 
 ## How to Start?
 
-- Select `Nucleus.Web.Api` project "**Set as Startup Project**" 
+### Local Environment
+
+- Select `Nucleus.Web.Api` project "**Set as Startup Project**"
 - Open "**Package Manager Console**" and select default project as `src/Nucleus.EntityFramework`
 - Run `update-database` command to create database.
 - Run(F5 or CTRL+F5) Web API project first 
 - Run `yarn` command at location `src/Nucleus.Web.Vue` to install npm packages.
 - Run `yarn serve` command to run Vue application.
 - Admin user name and password : `admin/123qwe`
+
+### Run with Docker
+
+- Run `docker-compose build` command.
+- Run `docker-compose up -d` command to run application.
+- Go to `http://localhost:36221`
+
+#### To change the environment
+
+- Run `docker-compose -f docker-compose-production.yml build` command.
+- Run `docker-compose -f docker-compose-production.yml up -d` command
+- Go to `http://localhost:36211`
 
 ## Vue Application Screenshots
 

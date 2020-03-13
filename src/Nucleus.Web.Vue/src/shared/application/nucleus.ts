@@ -1,9 +1,10 @@
 ﻿import NucleusService from '@/shared/application/nucleus-service-proxy';
 import AuthStore from '@/stores/auth-store';
+import { appConst } from "../../settings";
 
 const nucleus = {
-    baseApiUrl: 'https://localhost:44313',
-    baseClientUrl: 'http://localhost:8080',
+    baseApiUrl: appConst.webApiUrl,
+    baseClientUrl: appConst.webClientUrl,
     isLoading: false,
     appVersion: '1.0.0',
     auth: {

@@ -1,0 +1,54 @@
+version: "3.4"
+
+networks:
+  nucleus-dev:
+    driver: bridge
+
+services:
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "36210:5432"
+    volumes:
+      - db_volume_nucleus_production:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "nucleususer"
+      POSTGRES_PASSWORD: "nucleususer"
+      POSTGRES_DB: "nucleusdb"
+    networks:
+      - nucleus-dev
+    restart: always  
+  webui:
+    image: webui:latest
+
+    depends_on:
+      - "dockerapi"
+    build:
+      context: .
+      dockerfile: ./src/Nucleus.Web.Vue/Dockerfile
+      args: 
+        environment: production
+    ports:
+      - "36211:80"
+    networks:
+      - nucleus-dev
+    restart: always    
+  dockerapi:
+    image: dockerapi:latest
+
+    depends_on:
+      - "postgres_image"
+    build:
+      context: .
+      dockerfile: ./src/Nucleus.Web.Api/Dockerfile
+    ports:
+      - "36212:80"
+    environment:
+      DB_CONNECTION_STRING: "host=postgres_image;port=5432;database=nucleusdb;username=nucleususer;password=nucleususer"
+      ASPNETCORE_ENVIRONMENT: "Production"
+    networks:
+      - nucleus-dev
+    restart: always  
+
+volumes:
+  db_volume_nucleus_production:
