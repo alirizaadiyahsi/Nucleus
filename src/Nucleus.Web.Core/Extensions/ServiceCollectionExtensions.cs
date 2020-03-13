@@ -54,9 +54,23 @@ namespace Nucleus.Web.Core.Extensions
 
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<NucleusDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-                    .UseLazyLoadingProxies());
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            if (!String.IsNullOrEmpty(connectionString))
+            {
+                services.AddDbContext<NucleusDbContext>(options =>
+                   options.UseNpgsql(
+                       connectionString
+                   )
+                   .UseLazyLoadingProxies()
+                );
+            }
+            else
+            {
+                services.AddDbContext<NucleusDbContext>(options =>
+                   options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                   .UseLazyLoadingProxies()
+                );
+            }
         }
 
         public static void ConfigureDependencyInjection(this IServiceCollection services)
