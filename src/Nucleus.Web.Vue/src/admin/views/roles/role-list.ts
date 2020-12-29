@@ -1,6 +1,7 @@
 import NucleusComponentBase from '@/shared/application/nucleus-component-base';
 import { Component, Watch } from 'vue-property-decorator';
 import Guid from '@/shared/helpers/guid-helper';
+import { stringify } from 'query-string';
 
 @Component
 export default class RoleListComponent extends NucleusComponentBase {
@@ -103,7 +104,7 @@ export default class RoleListComponent extends NucleusComponentBase {
     getRoles() {
         this.loading = true;
         const { sortBy, sortDesc, page, itemsPerPage }: any = this.options;
-        const roleListInput: IPagedListInput = {
+        const roleListInput: IPagedListInput | any = {
             filter: this.search,
             pageIndex: page - 1,
             pageSize: itemsPerPage

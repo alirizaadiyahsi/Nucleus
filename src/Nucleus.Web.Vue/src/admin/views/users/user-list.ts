@@ -107,7 +107,7 @@ export default class UserListComponent extends NucleusComponentBase {
     getUsers() {
         this.loading = true;
         const { sortBy, sortDesc, page, itemsPerPage }: any = this.options;
-        const userListInput: IPagedListInput = {
+        const userListInput: IPagedListInput | any = {
             filter: this.search,
             pageIndex: page - 1,
             pageSize: itemsPerPage
