@@ -58,8 +58,11 @@ namespace Nucleus.Web.Core.Extensions
             if (!String.IsNullOrEmpty(connectionString))
             {
                 services.AddDbContext<NucleusDbContext>(options =>
-                   options.UseNpgsql(
-                       connectionString
+                   options.UseSqlServer(
+                       connectionString, builder =>
+                       {
+                           builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                       }
                    )
                    .UseLazyLoadingProxies()
                 );
@@ -67,7 +70,10 @@ namespace Nucleus.Web.Core.Extensions
             else
             {
                 services.AddDbContext<NucleusDbContext>(options =>
-                   options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                   options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), builder =>
+                       {
+                           builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                       })
                    .UseLazyLoadingProxies()
                 );
             }
