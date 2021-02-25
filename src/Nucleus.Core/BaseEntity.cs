@@ -17,6 +17,7 @@ namespace Nucleus.Core
         protected BaseEntity()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
         }
     }
 }
