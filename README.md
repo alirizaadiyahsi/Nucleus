@@ -20,6 +20,7 @@ Web API startup template with a Vue Client application.
 
 - Select `Nucleus.Web.Api` project "**Set as Startup Project**"
 - Open "**Package Manager Console**" and select default project as `src/Nucleus.EntityFramework`
+- Edit DB connection string in `appsettings.json` --> `Nucleus.Web.Api`
 - Run `update-database` command to create database.
 - Run(F5 or CTRL+F5) Web API project first 
 - Run `yarn` command at location `src/Nucleus.Web.Vue` to install npm packages.
