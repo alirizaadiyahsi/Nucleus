@@ -54,13 +54,22 @@ namespace Nucleus.Web.Core.Extensions
 
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-            if (!String.IsNullOrEmpty(connectionString))
+            var inMemory = configuration.GetValue<bool>("App:InMemory");
+            if (inMemory)
             {
                 services.AddDbContext<NucleusDbContext>(options =>
-                   options.UseNpgsql(
-                       connectionString
-                   )
+                    options.UseInMemoryDatabase("NucleusInMemory")
+                    .UseLazyLoadingProxies()
+                );
+
+                return;
+            }
+
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                services.AddDbContext<NucleusDbContext>(options =>
+                   options.UseNpgsql(connectionString)
                    .UseLazyLoadingProxies()
                 );
             }

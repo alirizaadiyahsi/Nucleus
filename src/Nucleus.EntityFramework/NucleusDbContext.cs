@@ -13,7 +13,7 @@ namespace Nucleus.EntityFramework
         public NucleusDbContext(DbContextOptions options)
             : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Permission> Permissions { get; set; }
