@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        Welcome to Nucleus for Daisy!
+        Welcome to Nucleus!
     </div>
 </template>
 
