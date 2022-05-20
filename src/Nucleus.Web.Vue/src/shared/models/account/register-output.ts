@@ -1,3 +1,0 @@
-﻿interface IRegisterOutput {
-    resultMessage: string;
-}

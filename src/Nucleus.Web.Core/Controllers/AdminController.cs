@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Nucleus.Core.Permissions;
+using Microsoft.AspNetCore.Authorization;
+using Nucleus.Domain.AppConstants;
 
-namespace Nucleus.Web.Core.Controllers
+namespace Nucleus.Web.Core.Controllers;
+
+[Authorize(Policy = AppPermissions.Administration)]
+public class AdminController : ApiControllerBase
 {
-    [Authorize(Policy = DefaultPermissions.PermissionNameForAdministration)]
-    public class AdminController : BaseController
-    {
-
-    }
 }

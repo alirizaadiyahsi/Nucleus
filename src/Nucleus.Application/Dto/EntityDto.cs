@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace Nucleus.Application.Dto;
 
-namespace Nucleus.Application.Dto
+public abstract class EntityDto
 {
-    public class EntityDto
-    {
-        public Guid Id { get; set; }
-    }
+    public virtual Guid Id { get; set; }
 }

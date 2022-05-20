@@ -1,14 +1,11 @@
-﻿import NucleusComponentBase from '@/shared/application/nucleus-component-base';
-import { Component } from 'vue-property-decorator';
+﻿import {defineComponent} from "vue";
+import AsideMenu from "@/admin/components/menu/aside-menu/aside-menu.vue";
+import TopMenu from "@/admin/components/menu/top-menu/top-menu.vue";
 
-@Component({
+export default  defineComponent({
+    name:"AdminLayoutComponent",
     components: {
-        AsideMenu: require('@/admin/components/menu/aside-menu/aside-menu.vue').default,
-        TopMenu: require('@/admin/components/menu/top-menu/top-menu.vue').default
-    }
+        AsideMenu,
+        TopMenu
+    },
 })
-export default class AdminLayoutComponent extends NucleusComponentBase {
-    public created() {
-        this.nucleus.auth.fillProps();
-    }
-}
